@@ -13,7 +13,7 @@ import random
 
 
 class RegisterPage(BasePage):
-    self.patient_id_child
+    patient_id_child = None
     patient_id_bomj = None
     patient_id_foreigner = None
     patient_id_citizen = None
