@@ -1,11 +1,21 @@
-from .pages.register_page import RegisterPage
-from .pages.settings_page import SettingsPage
-from .pages.work_page import WorkPage
-from .pages.login_page import LoginPage
+from pages.register_page import RegisterPage
+# from .pages.settings_page import SettingsPage
+from pages.work_page import WorkPage
+from pages.login_page import LoginPage
 # from .pages.visits_page import VisitsPage
 
 class TestPlhiv():
-    def test_registration_of_child(self, browser):
+    # def test_registration_of_child(self, browser):
+    #     login_url = "https://plhiv-demo.dec.kz/"
+    #     login_page = LoginPage(browser, login_url)
+    #     login_page.open()
+    #     login_page.should_fill_login_form()
+    #     work_page = WorkPage(browser, browser.current_url)
+    #     work_page.should_add_kz_patient()
+    #     register_page = RegisterPage(browser, browser.current_url)
+    #     register_page.register_new_child_and_edit_card()
+
+    def test_family_members_modal(self, browser):
         login_url = "https://plhiv-demo.dec.kz/"
         login_page = LoginPage(browser, login_url)
         login_page.open()
@@ -13,7 +23,8 @@ class TestPlhiv():
         work_page = WorkPage(browser, browser.current_url)
         work_page.should_add_kz_patient()
         register_page = RegisterPage(browser, browser.current_url)
-        register_page.register_new_child_and_edit_card()
+        register_page.register_new_child()
+        register_page.edit_card()
 
     # def test_registration_of_bomj(self, browser):
     #     login_url = "https://plhiv-demo.dec.kz/login?next=%2F"

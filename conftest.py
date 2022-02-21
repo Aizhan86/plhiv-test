@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service
 @pytest.fixture(scope="function")
 def browser():
     print("\nstart browser for test..")
-    s = Service('C:/Users/Aizhan.Orynbayeva/PycharmProjects/PLHIV/venv/Scripts/chromedriver.exe')
+    s = Service('C:/Users/Aizhan.Orynbayeva/PycharmProjects/plhiv-test/chromedriver.exe')
     browser = webdriver.Chrome(service=s)
     yield browser
     print("\nquit browser..")
