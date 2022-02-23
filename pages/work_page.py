@@ -34,7 +34,7 @@ class WorkPage(BasePage):
         today = date.today()
         self.browser.find_element(*WorkJournalLocators.DATE_RANGE_END).send_keys(today.strftime("%d.%m.%y"))
         data_type_choice = random.choice(['1', '2', '3'])
-        self.browser.execute_script(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '{data_type_choice}');")
+        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '{data_type_choice}');")
         self.browser.find_element(*WorkJournalLocators.DATE_RANGE_BTN).click()
         self.browser.find_element(*WorkJournalLocators.EXPORT_REPORT).click()
 

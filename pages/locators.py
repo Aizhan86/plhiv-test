@@ -149,7 +149,7 @@ class PatientCardLocators(object):
     EPID_HISTORY_HIV_ANALYSIS = "$('div[data-field=epid_history_obsled_hiv] .ui.dropdown')"
     EPID_HISTORY_ANALYSIS_YEAR = "$('div[data-field=epid_history_obsled_year] .ui.dropdown')"
     EPID_HISTORY_ANALYSIS_RESULT = "$('div[data-field=epid_history_result] .ui.dropdown')"
-    FAMILY_MEM_ADD = (By.CSS_SELECTOR, '#fam_members_table a[action-type=add]')
+    FAMILY_MEM_ADD = "$('#fam_members_table a[action-type=add]')"
     FAMILY_MEM_LASTNAME = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_last_name_modal] input')
     FAMILY_MEM_NAME = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_name_modal] input')
     FAMILY_MEM_MIDDLE_NAME = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_middle_name_modal] input')
@@ -158,8 +158,8 @@ class PatientCardLocators(object):
     FAMILY_MEM_ADDRESS = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_address_modal] input')
     FAMILY_MEM_HIV_STATUS = "$('#fam_members_modal div[data-field=fam_members_hiv_status_modal] .ui.dropdown')"
     FAMILY_MEM_RELATION = "$('#fam_members_modal div[data-field=fam_members_rod_svyaz_modal] .ui.dropdown')"
-    FAMILY_MEM_SAVE = (By.CSS_SELECTOR, '#fam_members_modal .ui.green.approve.button')
-    EPID_HISTORY_FILLING_DATE = (By.ID, 'epid_history_date_zapolnen')
+    FAMILY_MEM_SAVE = "$('#fam_members_modal .ui.green.approve.button')"
+    EPID_HISTORY_FILLING_DATE = "$('#epid_history_date_zapolnen')"
     EPID_DOCTOR = "$('div[data-field=epid_history_fio_doctor_epidemiolog] .ui.dropdown')"
 
     LUIN_RS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-luin_rs]')"
@@ -192,7 +192,7 @@ class PatientCardLocators(object):
     HOMO_EXP_YEAR = "$('div[data-field=sex_gomosex_twelve_month_modal] .ui.dropdown')"
     HOMO_SEX_PARTNER_NUM = "$('div[data-field=sex_gomosex_count_modal] input')"
     HOMO_SEX_PARTNER_NUM_YEAR = "$('div[data-field=sex_gomosex_twelve_month_modal] input')"
-    COMMERCIAL_HOMO_SEX_PARTNER_YEAR = "$('div[data-field=sex_commercial_gomosex_twelve_month_modal] .ui.dropdown')"
+    COMMERCIAL_HOMO_SEX_PARTNER_YEAR = "$('div[data-field=count_sex_partner_twelve_month_modal] .ui.dropdown')"
     HOMO_SEX_WITH_HIV = "$('div[data-field=sex_sex_with_hiv_modal] .ui.dropdown')"
     HOMO_SEX_WITH_LUIN = "$('div[data-field=sex_sex_with_luin_modal] .ui.dropdown')"
     HOMO_PERMANENT_SEX_PARTNERS = "$('div[data-field=gomo_permanent_live] input')"
