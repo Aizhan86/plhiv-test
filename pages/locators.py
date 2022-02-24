@@ -75,7 +75,7 @@ class RegisterPageLocators(object):
     EDIT_PATIENT_CARD = "$('#registration_address_table a[action-type=edit] .ui.button')"
     REGIS_APT2 = (By.ID, 'registration_address_kvart_modal')
     ERROR_REGIS_ADDRESS_SAVE = (By.CSS_SELECTOR, "#error_address_reg .ui.green.approve.button")
-    PATIENT_CARD_SAVE = (By.ID, 'general_data_save_button')
+    PATIENT_CARD_SAVE = "$('#general_data_save_button')"
 
 class PatientCardLocators(object):
     OPEN_PATIENT_MENU = "$('.basic.segment .ui.sidebar')"
@@ -431,7 +431,7 @@ class PatientCardLocators(object):
 
     HIV_DIAGNOSIS = "$('div[data-field=patient_card_tabs] a[data-tab=patient_card_menu-diagnoz_vich]')"
     HIV_DIAGNOSIS_ADD = "$('#hiv_table  a[action-type=add]')"
-    FORMULATING_CHANGE_DATE = "$('#modal_diagnoz_hiv  .ui.calendar')"
+    FORMULATING_CHANGE_DATE = "$('#diagnoz_hiv_date_izmen_modal')"
     HIV_STAGE = "$('#modal_diagnoz_hiv div[data-field=diagnoz_hiv_stage_hiv_modal] .ui.dropdown')"
     HIV_DIAGNOSIS_SAVE = "$('#modal_diagnoz_hiv .ui.green.approve.button')"
     HIV_RELATED_DISEASE_ADD = "$('#diag_opurt_table  a[action-type=add]')"
@@ -651,7 +651,7 @@ class PatientCardLocators(object):
     CHILDS_BIRTHDAY = "$('#child_date_birth_modal')"
     CHILDS_GENDER = "$('#modal_child_info div[data-field=child_gender_modal] .ui.dropdown')"
     PATHALOGY_AT_BIRTH = "$('#modal_child_info div[data-field=child_potologies_modal] .ui.dropdown')"
-    FEEDING = "$('#modal_child_info div[data-field=child_korm_modal] .ui.dropdown')"
+    CHILDS_FEEDING = "$('#modal_child_info div[data-field=child_korm_modal] .ui.dropdown')"
     FULL_TERM_CHILD = "$('#modal_child_info div[data-field=child_donosh_modal] .ui.dropdown')"
     CHILDS_DEATH_DATE = "$('#child_date_death_modal')"
     INFORMATION_CHILDREN_SAVE = "$('#modal_child_info .ui.green.approve.button')"
@@ -766,8 +766,8 @@ class PatientCardLocators(object):
 
 
 class WorkJournalLocators(object):
-    EDIT_CARD = "$('#gridContainer div[data-name=action_buttons] .list.icon').children()[0]"
-    LIST_BUTTON = "$('#gridContainer div[data-name=action_buttons] .list.icon')"
+    EDIT_CARD = "$('#gridContainer tr:eq(0) td:eq(0) div.dropdown.button i').children()[0]"
+    LIST_BUTTON = "$('#gridContainer tr:eq(0) td:eq(0) div.dropdown.button i')"
     HOME_ICON = "$('.header.item .home.icon')"
     WORK_JOURNAL_MENU = "$('div[data-name=main-menu] .ui.pointing.labeled.dropdown.link.item')"
     BOOK_ICON_MENU = "$('i[class=book icon] .right.menu')"
