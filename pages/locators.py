@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 class LoginPageLocators(object):
-    LOGIN_URL = "https://plhiv-demo.dec.kz/login?next=%2F"
+    LOGIN_URL = "https://plhiv-demo.dec.kz/login?next=%2FF"
     LOGIN_LINK = "https://plhiv-demo.dec.kz/login?next=%2F"
     LOGIN_FORM = (By.CLASS_NAME, 'login_panel_block')
     USER_NAME = (By.ID, "username")
@@ -81,7 +81,7 @@ class PatientCardLocators(object):
     OPEN_PATIENT_MENU = "$('.basic.segment .ui.sidebar')"
     LAB_RESEARCH = "$('a[data-name=lab-research]')"
 
-    IFA_OGC_ADD = (By.ID, 'ifa_ogc_add')
+    IFA_OGC_ADD = "$('#ifa_ogc_add')"
     IFA_MED_ORG = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_naprav_mo_modal] .ui.dropdown')"
     SURNAME_PERSON_MEDORG = (By.CSS_SELECTOR, '#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_fio_otvetstv_lica_mo_modal] input')
     REFERRAL_NO = (By.CSS_SELECTOR, '#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_nomer_napravlen_modal] input')
@@ -103,10 +103,26 @@ class PatientCardLocators(object):
 
     USER_NAME = "$('div[data-name=account-settings]')"
     # PROFILE = "$('div[data-name=account-settings] div.menu').children()[0]')"
-    PROFILE_EDIT = "$('a[href=/user/3/edit]')"
+    PROFILE_EDIT = "document.querySelector('[data-name=account-edit]')"
     MED_ORG = "$('div[data-field=org_id] .ui.dropdown')"
+    MED_ORG_REMOVE = "$('div[data-field=org_id] .remove.icon')"
+    USER_DATA_SAVE = "$('#submit')"
 
-    IB_PCR = "$('div[data-tab=patient_card_menu-ib_pcr]')"
+    IFA_KNCDIZ_ADD = "$('#ifa_rc_add')"
+    SCREANING_NUM = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_numb_issled_modal] input')"
+    SERUM_NUM_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_number_syvorotki_modal] .ui.dropdown')"
+    REFERRAL_NO_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_number_syvorotki_input_modal] input')"
+    RECEIPT_DATE_RC = (By.ID, 'ifa_k_vich_rc_date_postup_modal')
+    PRODUCTION_DATE_RC = (By.ID, 'ifa_k_vich_rc_date_postanov_modal')
+    TEST_SYSTEM_NAME_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_name_test_system_modal] .ui.dropdown')"
+    EXPIRATION_DATE_RC = (By.ID, 'ifa_k_vich_rc_srok_godn_modal')
+    SERIES_NUM_RC = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_serial_number_modal] input')
+    OP_CRITICAL_RC = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_op_critical_modal] input')
+    OP_SERUM_RC = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_op_syvorotki_modal] input')
+    IFA_RESULT_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_result_modal] .ui.dropdown')"
+    IFA_RC_SAVE = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal .ui.green.approve.button')
+
+    IB_PCR = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-ib_pcr]')"
     IB_NUMBER = "$('#ib_modal div[data-field=ib_number_modal] input')"
     IB_SERUM_NUM = "$('#ib_modal div[data-field=ib_number_syvorotki_modal] input')"
     SAMPLE_NUM = "$('#ib_modal div[data-field=ib_number_sample_modal] input')"
@@ -766,8 +782,8 @@ class PatientCardLocators(object):
 
 
 class WorkJournalLocators(object):
-    EDIT_CARD = "$('#gridContainer tr:eq(0) td:eq(0) div.dropdown.button i').children()[0]"
-    LIST_BUTTON = "$('#gridContainer tr:eq(0) td:eq(0) div.dropdown.button i')"
+    EDIT_CARD = "document.querySelector('#gridContainer div.dropdown.button .menu').children[1]"
+    LIST_BUTTON = "document.querySelector('#gridContainer div.dropdown.button')"
     HOME_ICON = "$('.header.item .home.icon')"
     WORK_JOURNAL_MENU = "$('div[data-name=main-menu] .ui.pointing.labeled.dropdown.link.item')"
     BOOK_ICON_MENU = "$('i[class=book icon] .right.menu')"
