@@ -46,6 +46,7 @@ class BasePage(object):
         now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         namefile = f"screenshot-{now}.png"
         self.browser.get_screenshot_as_file(namefile)
+        self.browser.save_screenshot('C:\Work\plhiv-test\screenshots')
         print(f"Taked screenshot: {namefile}")
 
 

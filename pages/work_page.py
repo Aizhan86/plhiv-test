@@ -15,10 +15,9 @@ class WorkPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.ADD_PATIENT).click()
 
     def should_add_foreign_patient(self):
-        # переход на страницу с регистрационной формой для иностранного гражданина
-        assert self.is_element_present(*RegisterPageLocators.ADD_FOREIGN_PATIENT), "Incorrect link to Foreign Patient registration"
+        # переход на страницу с регистрационной формой для казахстанцев
+        assert self.is_element_present(*RegisterPageLocators.ADD_FOREIGN_PATIENT), "Incorrect link to foreign Patient registration"
         self.browser.find_element(*RegisterPageLocators.ADD_FOREIGN_PATIENT).click()
-
 
     def should_generate_sample_work_log(self):
         # проверка объектов на странице рабочего журнала

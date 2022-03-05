@@ -1,6 +1,7 @@
-requests==2.26.0
-selenium==4.1.0
-attrs==21.2.0
-pytest==6.2.5
-pytest-rerunfailures==10.2
-
+requests
+selenium
+attrs
+pytest
+pytest-rerunfailures
+webdriver-manager
+pyvirtualdisplay

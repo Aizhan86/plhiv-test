@@ -21,4 +21,15 @@ class LoginPage(BasePage):
         #     self.browser.find_element(*LoginPageLocators.AGR_BTN).click()
         # self.make("return arguments[0].scrollIntoView(true);", agr_btn)
 
+class OpenPage(BasePage):
+    def open_luin_modal(self):
+        login_url = "https://plhiv-demo.dec.kz/"
+        login_page = LoginPage(browser, login_url)
+        login_page.open()
+        login_page.should_fill_login_form()
+        work_page = WorkPage(browser, browser.current_url)
+        work_page.should_find_patient()
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.should_open_luin_modal
+
 

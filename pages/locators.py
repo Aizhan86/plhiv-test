@@ -43,7 +43,7 @@ class RegisterPageLocators(object):
     EDUCATION = "$('form[name=general-data-form] div[data-field=general_data_education] .ui.dropdown')"
     SOCIAL_STATUS = "$('form[name=general-data-form] div[data-field=genaral_data_soc_state] .ui.dropdown')"
     MED_ORG = "$('form[name=general-data-form] div[data-field=general_data_org_viyav] .ui.dropdown')"
-    BOMJ_CHECKBOX = "$('input[name=general_data_bomj] .checkbox')"
+    HOMELESS = "$('div[data-field=general_data_bomj] .ui.toggle.checkbox')"
     REGIS_AREA = "$('form[name=general-data-form] div[data-field=registration_address_region_name] .ui.dropdown')"
     REGIS_UNIT_AREA = "$('form[name=general-data-form] div[data-field=registration_address_unit_area] .ui.dropdown')"
     REGIS_UNIT_AREA_CLICK = (By.CSS_SELECTOR, 'form[name=general-data-form] div[data-field=registration_address_unit_area] .ui.dropdown')
@@ -53,6 +53,7 @@ class RegisterPageLocators(object):
     REGIS_HOUSE = (By.ID, 'registration_address_house')
     REGIS_APT = (By.ID, 'registration_address_kvart')
     REGIS_PHONE_NO = (By.ID, 'registration_address_telephone')
+    DUPLICATE_REGIS_ADR = "$('#duplicate_to_fact_address_new_patient')"
     RESID_AREA = "$('form[name=general-data-form] div[data-field=fact_address_region_name] .ui.dropdown')"
     RESID_UNIT_AREA = "$('form[name=general-data-form] div[data-field=fact_address_unit_area] .ui.dropdown')"
     RESID_UNIT_AREA_CLICK = (By.CSS_SELECTOR, 'form[name=general-data-form] div[data-field=fact_address_unit_area] .ui.dropdown')
@@ -63,6 +64,7 @@ class RegisterPageLocators(object):
     RESID_APT = (By.ID, 'fact_address_flat')
     RESID_PHONE_NO = (By.ID, 'fact_address_telephone')
     RESID_MED_ORG = "$('form[name=general-data-form] div[data-field=fact_address_pp_name] .ui.dropdown')"
+    DUPLICATE_RESID_ADR = "$('#duplicate_to_reg_address_new_patient')"
     REASON_NOT_EPID = "$('form[name=general-data-form] div[data-field=general_data_reason_not_epid] .ui.dropdown')"
     REASON_NOT_DISP_REG = "$('form[name=general-data-form] div[data-field=general_data_reason_dispuchet] .ui.dropdown')"
     RETROSPECTIVE_CHILD = "$('form[name=general-data-form] div[data-field=general_data_mother_child] .ui.toggle.checkbox')"
@@ -72,10 +74,11 @@ class RegisterPageLocators(object):
     MOTHERS_IB_NO = (By.ID, 'general_data_mother_ib_number')
     IB_NO_DATE = (By.ID, 'general_data_mother_date_ib')
     REGISTER_SAVE_BTN = (By.CSS_SELECTOR, ".ui.bottom.attached.tab.segment.active .right.floated.green.approve.button")
-    EDIT_PATIENT_CARD = "$('#registration_address_table a[action-type=edit] .ui.button')"
+    EDIT_REGIS_ADDRESS = "$('#registration_address_edit_button')"
     REGIS_APT2 = (By.ID, 'registration_address_kvart_modal')
-    ERROR_REGIS_ADDRESS_SAVE = (By.CSS_SELECTOR, "#error_address_reg .ui.green.approve.button")
+    ERROR_REGIS_ADDRESS_SAVE = "$('#modal_registration_address .ui.green.approve.button')"
     PATIENT_CARD_SAVE = "$('#general_data_save_button')"
+
 
 class PatientCardLocators(object):
     OPEN_PATIENT_MENU = "$('.basic.segment .ui.sidebar')"
@@ -428,7 +431,7 @@ class PatientCardLocators(object):
     PERINATAL_SAVE = "$('#modal_perinat_uchet .ui.green.approve.button')"
 
     ARV_PROPHYLAXIS = "$('div[data-field=perinat_uchet_arv_profil] .ui.dropdown')"
-    ARV_START_DATE = "$('div[data-field=perinat_uchet_arv_date_start] .ui.input')"
+    ARV_START_DATE = "$('div[data-field=perinat_uchet_arv_date_start] input')"
     ARV_END_DATE = "$('div[data-field=perinat_uchet_arv_date_end] .ui.input')"
     ARV_MEDICATION = "$('div[data-field=perinat_uchet_preparat] .ui.dropdown')"
     ARV_ISSUANCE = "$('#get_preparat_perenat')"
@@ -792,7 +795,7 @@ class WorkJournalLocators(object):
     DATE_RANGE_START = (By.CSS_SELECTOR, '#dateRangeStart .ui.icon.input')
     DATE_RANGE_END = (By.CSS_SELECTOR, '#dateRangeEnd')
     DATA_TYPE = "$('.ui.two.wide.column.field .ui.selection.dropdown')"
-    DATE_RANGE_BTN = (By.ID, "dateRangeButton")
+    DATE_RANGE_BTN = "$('#dateRangeButton')"
     EXPORT_REPORT = (By.ID, "exportToExcel")
     NOTE_CODE = "$('.dx-show-invalid-badge.dx-numberbox.dx-texteditor.dx-editor-outlined.dx-widget')"
     FILTER_BTN = "$('div[title=Применить фильтр] .dx-apply-button')"
