@@ -3,6 +3,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 
+from pages.locators import PatientCardLocators, WorkJournalLocators
+
+
 class BasePage(object):
 
     # Мы создаем конструктор, в котором передаются тело браузера и ссылка для дальнейшего использования
@@ -16,18 +19,18 @@ class BasePage(object):
     def open(self):
         self.browser.get(self.url)
 
-    def is_element_present(self, how, what, timeout=5):
+    def is_element_present(self, how, what, timeout=10):
         try:
-            # WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
             self.browser.find_element(how, what)
+            self.browser.implicitly_wait(timeout)
         except NoSuchElementException:
             return False
         return True
 
-    def make(self, action, timeout=5):
+    def make(self, action, timeout=10):
         try:
             self.browser.execute_script(action)
-            # WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+            self.browser.implicitly_wait(timeout)
         except NoSuchElementException:
             return False
         except TimeoutException:
@@ -36,18 +39,32 @@ class BasePage(object):
 
     def is_element_clickable(self, how, what):
         try:
-            # WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what)))
             self.browser.find_element(how, what)
         except NoSuchElementException:
             return False
         return True
 
-    def take_screenshot(self):
-        now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-        namefile = f"screenshot-{now}.png"
-        self.browser.get_screenshot_as_file(namefile)
-        self.browser.save_screenshot('C:\Work\plhiv-test\screenshots')
-        print(f"Taked screenshot: {namefile}")
+    # def take_screenshot(self):
+    #     now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    #     namefile = f"screenshot-{now}.png"
+    #     self.browser.get_screenshot_as_file(namefile)
+    #     self.browser.save_screenshot('C:\Work\plhiv-test\screenshots')
+    #     print(f"Taked screenshot: {namefile}")
+
+    def choose_user_organization(self, user_org):
+        self.make(f"{PatientCardLocators.USER_NAME}.click()")
+        self.make(f"$('div[data-name=account-settings] div.menu').children()[0].click()")
+        self.make(f"document.querySelector('[id=account-edit]').click()")
+        self.make(f"{PatientCardLocators.MED_ORG_REMOVE}.click()")
+        self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '{user_org}');")
+        self.make(f"{PatientCardLocators.USER_DATA_SAVE}.click()")
+        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+
+    def take_patient_id(self):
+        id_url = self.browser.current_url
+        url_part = id_url.split('/')[5]
+        patient_id = url_part.split('?')[0]
+        return patient_id
 
 
 

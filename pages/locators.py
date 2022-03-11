@@ -126,11 +126,12 @@ class PatientCardLocators(object):
     IFA_RC_SAVE = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal .ui.green.approve.button')
 
     IB_PCR = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-ib_pcr]')"
+    IB_ADD = "$('#ib')"
     IB_NUMBER = "$('#ib_modal div[data-field=ib_number_modal] input')"
     IB_SERUM_NUM = "$('#ib_modal div[data-field=ib_number_syvorotki_modal] input')"
     SAMPLE_NUM = "$('#ib_modal div[data-field=ib_number_sample_modal] input')"
-    IB_RECEIPT_DATE = "$('#ib_modal div[data-field=ib_date_postup_modal] .ui.calendar')"
-    IB_REGISTER_DATE = "$('#ib_modal div[data-field=ib_date_postanov_modal] .ui.calendar')"
+    IB_RECEIPT_DATE = "$('#ib_date_postup_modal')"
+    IB_REGISTER_DATE = "$('#ib_date_postanov_modal')"
     IB_RESULT = "$('#ib_modal div[data-field=ib_result_modal] .ui.dropdown')"
     TEST_SYSTEM_NAME = "$('#ib_modal div[data-field=ib_name_test_system_modal] .ui.dropdown')"
     IB_EXPIRATION_DATE = "$('#ib_srok_godn_modal')"
@@ -146,8 +147,24 @@ class PatientCardLocators(object):
     P34 = "$('#ib_modal div[data-field=ib_p34_modal] .ui.dropdown')"
     P25 = "$('#ib_modal div[data-field=ib_p25_modal] .ui.dropdown')"
     P18 = "$('#ib_modal div[data-field=ib_p18_modal] .ui.dropdown')"
-    IB_SERVICES = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_which_services_modal] .ui.dropdown')"
-    IB_SAVE = "$('#ifa_k_vich_ogc_modal .ui.green.approve.button')"
+    IB_SERVICES = "$('#ib_modal div[data-field=ib_which_services_modal] .ui.dropdown')"
+    IB_SAVE = "$('#ib_modal .ui.green.approve.button')"
+
+    PCR_ADD = "$('#pcr')"
+    PCR_NUMBER = "$('#pcr_modal div[data-field=pcr_number_modal] input')"
+    PCR_SERUM_NUM = "$('#pcr_modal div[data-field=pcr_number_syvorotki_modal] input')"
+    PCR_SAMPLE_NUM = "$('#pcr_modal div[data-field=pcr_number_sample_modal] input')"
+    PCR_TYPE = "$('#pcr_modal div[data-field=pcr_vid_modal] .ui.dropdown')"
+    PCR_RECEIPT_DATE = "$('#pcr_date_postup_modal')"
+    PCR_REGISTER_DATE = "$('#pcr_date_postanov_modal')"
+    PCR_TEST_SYSTEM_NAME = "$('#pcr_modal div[data-field=pcr_name_test_system_modal] .ui.dropdown')"
+    PCR_EXPIRATION_DATE = "$('#pcr_srok_godn_modal')"
+    PCR_SERIES_NUM = "$('#pcr_modal div[data-field=pcr_serial_number_modal] input')"
+    PCR_DNA_RESULT = "$('#pcr_modal div[data-field=pcr_dnk_result_modal] .ui.dropdown')"
+    PCR_RNA_RESULT = "$('#pcr_modal div[data-field=pcr_rnk_result_modal_field] input')"
+    PCR_RESPONSIBLE_PERSON = "$('#pcr_modal div[data-field=pcr_otvetstvennoe_lico_modal] .ui.dropdown')"
+    PCR_SERVICES = "$('#pcr_modal div[data-field=pcr_which_services_modal] .ui.dropdown')"
+    PCR_SAVE = "$('#pcr_modal .ui.green.approve.button')"
 
     RESULT = (By.CSS_SELECTOR, 'div[data-block=main-menu] a[data-tab=patient_card_menu-zaklyuchenie]')
     RESULT_ADD = (By.CSS_SELECTOR, '#zaklyuchenie_table a[action-type=add]')

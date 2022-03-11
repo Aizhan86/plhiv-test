@@ -3,12 +3,18 @@ from time import sleep
 from .base_page import BasePage
 from .locators import WorkJournalLocators, RegisterPageLocators, VizitsPageLocators, ArvLogLocators, \
     AnalysisPageLocators, BookPageLocators, SettingsPageLocators
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from datetime import date
+from . import register_page
 
 
 class WorkPage(BasePage):
+
+    def choose_Zhetysai_as_user_org(self):
+        self.choose_user_organization("29")
+
+    def choose_KNCDIZ_as_user_org(self):
+        self.choose_user_organization("1")
+
     def should_add_kz_patient(self):
         # переход на страницу с регистрационной формой для казахстанцев
         assert self.is_element_present(*RegisterPageLocators.ADD_PATIENT), "Incorrect link to KZ Patient registration"
@@ -18,6 +24,47 @@ class WorkPage(BasePage):
         # переход на страницу с регистрационной формой для казахстанцев
         assert self.is_element_present(*RegisterPageLocators.ADD_FOREIGN_PATIENT), "Incorrect link to foreign Patient registration"
         self.browser.find_element(*RegisterPageLocators.ADD_FOREIGN_PATIENT).click()
+
+    def open_card_of_child(self):
+        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
+        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
+        # global patient_id_child
+        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_child}']);")
+        sleep(3)
+        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
+        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
+        assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_child}?new=1&in_rk=1", "Patient card of child hasn't opened"
+
+    def open_card_of_adult(self):
+        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
+        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
+        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_adult}']);")
+        sleep(3)
+        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
+        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
+        assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_adult}?new=1&in_rk=1", "Patient card of adult hasn't opened"
+
+    def open_card_of_homeless(self):
+        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
+        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
+        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_homeless}']);")
+        sleep(3)
+        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
+        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
+        assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_homeless}?new=1&in_rk=1", "Patient card of homeless hasn't opened"
+
+    def open_card_of_foreigner(self):
+        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
+        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
+        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_foreigner}']);")
+        sleep(3)
+        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
+        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
+        assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_foreigner}?new=1&in_rk=1", "Patient card of foreigner hasn't opened"
 
     def should_generate_sample_work_log(self):
         # проверка объектов на странице рабочего журнала

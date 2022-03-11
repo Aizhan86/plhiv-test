@@ -23,6 +23,8 @@ class RegisterPage(BasePage):
     serum_num_choice = random.choice(['1', '2', '3', '4', '5', '6', '7', '8', '9'])
     test_sys_choice = random.choice(['1', '2', '3', '4', '5', '6', '60', '61', '62'])
     aidc_center_choice = random.choice(['1', '2', '3', '4', '5', '6', '7', '8', '10', '28', '29'])
+    test_name_choice = random.choice(['1', '2', '3', '64'])
+    respon_person_choice = random.choice(['10000000011', '10000000012', '10000000022', '10000000023'])
     street_choice = random.choice(['Назарбаев', 'Абай', 'Конаев', 'Кабанбай батыр'])
     surname = ''.join(random.choices(string.ascii_uppercase, k=10))
     name = ''.join(random.choices(string.ascii_uppercase, k=5))
@@ -82,15 +84,10 @@ class RegisterPage(BasePage):
         self.make(f"$('#general_data_birth').val('{p_birthday}')")
         self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{self.gen_choice}');")
         self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        sleep(2)
         self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
         child_status_choice = random.choice(['1', '2', '3', '4', '5'])
         self.make(f"{RegisterPageLocators.CHILD_STATUS}.dropdown('set selected', '{child_status_choice}');")
@@ -127,54 +124,13 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.MOTHERS_IB_NO).send_keys(self.numbers5)
         self.browser.find_element(*RegisterPageLocators.IB_NO_DATE).send_keys(self.ib_date)
         self.browser.find_element(*RegisterPageLocators.REGISTER_SAVE_BTN).click()
-        sleep(2)
+        # self.browser.take_screenshot()
+        sleep(3)
         id_url = self.browser.current_url
         url_part = id_url.split('/')[5]
         global patient_id_child
-        patient_id_child = url_part[:12]
-        print(f"ID of child patient {patient_id_child}")
-        # self.browser.take_screenshot()
-
-    def open_card_of_child(self):
-        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
-        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
-        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
-        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{patient_id_child}']);")
-        sleep(5)
-        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
-        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
-        sleep(5)
-
-    def open_card_of_adult(self):
-        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
-        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
-        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
-        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{patient_id_adult}']);")
-        sleep(5)
-        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
-        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
-        sleep(5)
-        assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{patient_id_adult}?new=1&in_rk=1", "Patient card of adult hasn't opened"
-
-    def open_card_of_homeless(self):
-        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
-        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
-        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
-        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{patient_id_homeless}']);")
-        sleep(5)
-        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
-        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
-        sleep(5)
-
-    def open_card_of_foreigner(self):
-        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
-        self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
-        self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
-        self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{patient_id_foreigner}']);")
-        sleep(5)
-        self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
-        self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
-        sleep(5)
+        patient_id_child = url_part.split('?')[0]
+        print(f"ID of child patient is {patient_id_child}")
 
     def edit_card(self):
         self.make(f"{RegisterPageLocators.EDIT_REGIS_ADDRESS}.click()")
@@ -184,6 +140,9 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.REASON_NOT_DISP_REG}.dropdown('set selected', '6');")
         self.make(f"{RegisterPageLocators.PATIENT_CARD_SAVE}.click()")
 
+    def should_test_HIV_antibody_testing_OGC_modal(self):
+        self.fill_HIV_antibody_testing_OGC_modal()
+        self.check_HIV_antibody_testing_OGC_modal()
 
     def fill_HIV_antibody_testing_OGC_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
@@ -206,94 +165,144 @@ class RegisterPage(BasePage):
         self.browser.find_element(*PatientCardLocators.OP_SERUM).send_keys(2)
         ifa_res_choice = random.choice(['1', '2', '3', '4'])
         self.make(f"{PatientCardLocators.IFA_RESULT}.dropdown('set selected', '{ifa_res_choice}');")
-        respon_person_choice = random.choice(['170000000037', '170000000039', '170000000044', '170000000046', '170000000063', '170000000078'])
-        self.make(f"{PatientCardLocators.RESPONSIBLE_PERSON}.dropdown('set selected', '{respon_person_choice}');")
+        self.make(f"{PatientCardLocators.RESPONSIBLE_PERSON}.dropdown('set selected', '{self.respon_person_choice}');")
         ifa_services_choice = random.choice(['233', '177'])
         self.make(f"{PatientCardLocators.IFA_SERVICES}.dropdown('set selected', '{ifa_services_choice}');")
         self.browser.find_element(*PatientCardLocators.IFA_OGC_SAVE).click()
 
     def check_HIV_antibody_testing_OGC_modal(self):
-        assert self.browser.find_element_by_id('ifa_k_vich_ogc_nomer').get_attribute("data-field") == self.numbers5, "HIV antibody testing OGC modal or object Referral No hasn't saved or."
+        assert self.browser.find_element_by_id('ifa_k_vich_ogc_nomer').get_attribute("data-field") == self.numbers5, "Data in HIV antibody testing OGC modal or object Referral Number hasn't saved"
+
+    def should_test_HIV_antibody_testing_KNCDIZ_modal(self):
+        self.fill_HIV_antibody_testing_KNCDIZ_modal()
+        self.check_HIV_antibody_testing_KNCDIZ_modal()
+
+    def fill_HIV_antibody_testing_KNCDIZ_modal(self):
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.IFA_KNCDIZ_ADD}.click()")
+        self.make(f"{PatientCardLocators.SCREANING_NUM}.val('{self.numbers5}')")
+        self.make(f"{PatientCardLocators.SERUM_NUM_RC}.dropdown('set selected', '{self.serum_num_choice}');")
+        self.make(f"{PatientCardLocators.REFERRAL_NO_RC}.val('{self.numbers4}')")
+        self.browser.find_element(*PatientCardLocators.RECEIPT_DATE_RC).send_keys(self.today)
+        self.browser.find_element(*PatientCardLocators.PRODUCTION_DATE_RC).send_keys(self.today)
+        self.make(f"{PatientCardLocators.TEST_SYSTEM_NAME_RC}.dropdown('set selected', '{self.test_sys_choice}');")
+        self.browser.find_element(*PatientCardLocators.EXPIRATION_DATE_RC).send_keys(self.expiration_date)
+        self.browser.find_element(*PatientCardLocators.SERIES_NUM_RC).send_keys(self.numbers3)
+        self.browser.find_element(*PatientCardLocators.OP_CRITICAL_RC).send_keys(1)
+        self.browser.find_element(*PatientCardLocators.OP_SERUM_RC).send_keys(2)
+        ifa_res_rc_choice = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.IFA_RESULT_RC}.dropdown('set selected', '{ifa_res_rc_choice}');")
+        self.browser.find_element(*PatientCardLocators.IFA_RC_SAVE).click()
+
+    def check_HIV_antibody_testing_KNCDIZ_modal(self):
+        assert self.browser.find_element_by_id('ifa_k_vich_rc_nomer_obrazca').get_attribute(
+                "data-field") == self.numbers5, "Data in HIV antibody testing KNCDIZ modal or object Research Number hasn't saved"
+
+    def should_test_IB_modal(self):
+        self.fill_IB_modal()
+        self.check_IB_modal()
+
+    def fill_IB_modal(self):
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.IB_PCR}.click()")
+        self.make(f"{PatientCardLocators.IB_ADD}.click()")
+        self.make(f"{PatientCardLocators.IB_NUMBER}.val('{self.numbers5}');")
+        self.make(f"{PatientCardLocators.IB_SERUM_NUM}.val('{self.numbers4}');")
+        self.make(f"{PatientCardLocators.SAMPLE_NUM}.val('{self.numbers3}');")
+        self.make(f"{PatientCardLocators.IB_RECEIPT_DATE}.val('{self.today}');")
+        self.make(f"{PatientCardLocators.IB_REGISTER_DATE}.val('{self.today}');")
+        self.make(f"{PatientCardLocators.IB_RESULT}.dropdown('set selected', '1');")
+        self.make(f"{PatientCardLocators.TEST_SYSTEM_NAME}.dropdown('set selected', '{self.test_name_choice}');")
+        self.make(f"{PatientCardLocators.IB_EXPIRATION_DATE}.val('{self.expiration_date}');")
+        self.make(f"{PatientCardLocators.IB_SERIES_NUM}.val('{self.numbers3}');")
+        self.make(f"{PatientCardLocators.IB_RESPONSIBLE_PERSON}.dropdown('set selected', '{self.respon_person_choice}');")
+        gp160 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.GP160}.dropdown('set selected', '{gp160}');")
+        gp110_120 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.GP110_120}.dropdown('set selected', '{gp110_120}');")
+        p68 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.P68}.dropdown('set selected', '{p68}');")
+        p55 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.P55}.dropdown('set selected', '{p55}');")
+        p52 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.P52}.dropdown('set selected', '{p52}');")
+        gp41 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.GP41}.dropdown('set selected', '{gp41}');")
+        p40 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.P40}.dropdown('set selected', '{p40}');")
+        p34 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.P34}.dropdown('set selected', '{p34}');")
+        p25 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.P25}.dropdown('set selected', '{p25}');")
+        p18 = random.choice(['1', '2', '3'])
+        self.make(f"{PatientCardLocators.P18}.dropdown('set selected', 'p18');")
+        self.make(f"{PatientCardLocators.IB_SERVICES}.dropdown('set selected', '234');")
+        self.make(f"{PatientCardLocators.IB_SAVE}.click()")
+
+    def check_IB_modal(self):
+        assert self.browser.find_element_by_id('ib_NIB').get_attribute(
+            "data-field") == self.numbers5, "Data in IB_modal or object IB Number hasn't saved"
 
 
-        # self.make(f"{PatientCardLocators.USER_NAME}.click()")
-        # self.make(f"$('div[data-name=account-settings] div.menu').children()[0].click()")
-        # self.make(f"document.querySelector('[id=account-edit]').click()")
-        # self.make(f"{PatientCardLocators.MED_ORG_REMOVE}.click()")
-        # self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '1');")
-        # # self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '29');")
-        # self.make(f"{PatientCardLocators.USER_DATA_SAVE}.click()")
-        # self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
-        # sleep(3)
-        # self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{self.patient_id_child}']);")
-        # self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
-        # self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
-        #
-        # self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        # self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
-        # self.make(f"{PatientCardLocators.IFA_KNCDIZ_ADD}.click()")
-        # self.make(f"{PatientCardLocators.SCREANING_NUM}.val('{self.numbers5}')")
-        # self.make(f"{PatientCardLocators.SERUM_NUM_RC}.dropdown('set selected', '{self.serum_num_choice}');")
-        # self.make(f"{PatientCardLocators.REFERRAL_NO_RC}.val('{self.numbers4}')")
-        # self.browser.find_element(*PatientCardLocators.RECEIPT_DATE_RC).send_keys(self.today)
-        # self.browser.find_element(*PatientCardLocators.PRODUCTION_DATE_RC).send_keys(self.today)
-        # self.make(f"{PatientCardLocators.TEST_SYSTEM_NAME_RC}.dropdown('set selected', '{self.test_sys_choice}');")
-        # self.browser.find_element(*PatientCardLocators.EXPIRATION_DATE_RC).send_keys(self.expiration_date)
-        # self.browser.find_element(*PatientCardLocators.SERIES_NUM_RC).send_keys(self.numbers3)
-        # self.browser.find_element(*PatientCardLocators.OP_CRITICAL_RC).send_keys(1)
-        # self.browser.find_element(*PatientCardLocators.OP_SERUM_RC).send_keys(2)
-        # ifa_res_rc_choice = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.IFA_RESULT_RC}.dropdown('set selected', '{ifa_res_rc_choice}');")
-        # self.browser.find_element(*PatientCardLocators.IFA_RC_SAVE).click()
+    def should_test_PCR_modal(self):
+        self.fill_PCR_modal()
+        self.check_PCR_modal()
 
-        # self.make(f"{PatientCardLocators.IB_PCR}.click()")
-        # self.make(f"{PatientCardLocators.IB_NUMBER}.val('{self.numbers5}');")
-        # self.make(f"{PatientCardLocators.IB_SERUM_NUM}.val('{self.numbers4}');")
-        # self.make(f"{PatientCardLocators.SAMPLE_NUM}.val('{self.numbers3}');")
-        # self.make(f"{PatientCardLocators.IB_RECEIPT_DATE}.calendar('set date', '{self.today}');")
-        # self.make(f"{PatientCardLocators.IB_REGISTER_DATE}.calendar('set date', '{self.today}');")
-        # self.make(f"{PatientCardLocators.IB_RESULT}.dropdown('set selected', '1');")
-        # test_name_choice = random.choice(['1', '2', '3', '64'])
-        # self.make(f"{PatientCardLocators.TEST_SYSTEM_NAME}.dropdown('set selected', '{test_name_choice}');")
-        # self.make(f"{PatientCardLocators.IB_EXPIRATION_DATE}.val('{self.expiration_date}');")
-        # self.make(f"{PatientCardLocators.IB_SERIES_NUM}.val('{self.numbers3}');")
-        # ib_res_choice = random.choice(['10000000005', '10000000011', '10000000011', '10000000023'])
-        # self.make(f"{PatientCardLocators.IB_RESPONSIBLE_PERSON}.dropdown('set selected', '{ib_res_choice}');")
-        # gp160 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.GP160}.dropdown('set selected', '{gp160}');")
-        # gp110_120 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.GP110_120}.dropdown('set selected', '{gp110_120}');")
-        # p68 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.P68}.dropdown('set selected', '{p68}');")
-        # p55 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.P55}.dropdown('set selected', '{p55}');")
-        # p52 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.P52}.dropdown('set selected', '{p52}');")
-        # gp41 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.GP41}.dropdown('set selected', '{gp41}');")
-        # p40 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.P40}.dropdown('set selected', '{p40}');")
-        # p34 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.P34}.dropdown('set selected', '{p34}');")
-        # p25 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.P25}.dropdown('set selected', '{p25}');")
-        # p18 = random.choice(['1', '2', '3'])
-        # self.make(f"{PatientCardLocators.P18}.dropdown('set selected', '{p18}');")
-        # self.make(f"{PatientCardLocators.IB_SERVICES}.dropdown('set selected', '{234}');")
-        # self.make(f"{PatientCardLocators.IB_SAVE}.click()")
-        #
-        # self.browser.find_element(*PatientCardLocators.RESULT).click()
-        # self.browser.find_element(*PatientCardLocators.RESULT_ADD).click()
-        # self.browser.find_element(*PatientCardLocators.RESULT_NUM).send_keys(self.numbers5)
-        # self.browser.find_element(*PatientCardLocators.RESULT_DATE).send_keys(self.today)
-        # result_person_choice = random.choice(['170000000044', '170000000080', '170000000092', '170000000098', '170000000034', '170000000039'])
-        # self.make(f"{PatientCardLocators.RESULT_RESPONSIBLE_PERSON}.dropdown('set selected', '{result_person_choice}');")
-        # self.make(f"{PatientCardLocators.LAB_SUPERVISER}.dropdown('set selected', '{result_person_choice}');")
-        # result_choice = random.choice(['7', '9', '12', '14', '19'])
-        # self.make(f"{PatientCardLocators.ANALYSIS_RESULT}.dropdown('set selected', '{result_choice}');")
-        # self.browser.find_element(*PatientCardLocators.RESEARCH_BAZIS).click()
-        # self.browser.find_element(*PatientCardLocators.RESULT_SAVE).click()
-        #
+    def fill_PCR_modal(self):
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.IB_PCR}.click()")
+        self.make(f"{PatientCardLocators.PCR_ADD}.click()")
+        self.make(f"{PatientCardLocators.PCR_NUMBER}.val('{self.numbers5}');")
+        self.make(f"{PatientCardLocators.PCR_SERUM_NUM}.val('{self.numbers4}');")
+        self.make(f"{PatientCardLocators.PCR_SAMPLE_NUM}.val('{self.numbers3}');")
+        type_choice = random.choice(['1', '2'])
+        self.make(f"{PatientCardLocators.PCR_TYPE}.dropdown('set selected', '{type_choice}');")
+        self.make(f"{PatientCardLocators.PCR_RECEIPT_DATE}.val('{self.today}');")
+        self.make(f"{PatientCardLocators.PCR_REGISTER_DATE}.val('{self.today}');")
+        self.make(f"{PatientCardLocators.PCR_TEST_SYSTEM_NAME}.dropdown('set selected', '{self.test_name_choice}');")
+        self.make(f"{PatientCardLocators.PCR_EXPIRATION_DATE}.val('{self.expiration_date}');")
+        self.make(f"{PatientCardLocators.PCR_SERIES_NUM}.val('{self.numbers3}');")
+        if type_choice == 1:
+            self.make(f"{PatientCardLocators.PCR_DNA_RESULT}.dropdown('set selected', '1');")
+        else:
+            self.make(f"{PatientCardLocators.PCR_RNA_RESULT}.val('положительный');")
+        self.make(f"{PatientCardLocators.PCR_RESPONSIBLE_PERSON}.dropdown('set selected', '{self.respon_person_choice}');")
+        if type_choice == 1:
+            self.make(f"{PatientCardLocators.PCR_SERVICES}.dropdown('set selected', '262');")
+        else:
+            self.make(f"{PatientCardLocators.PCR_SERVICES}.dropdown('set selected', '263');")
+        self.make(f"{PatientCardLocators.PCR_SAVE}.click()")
+
+    def check_PCR_modal(self):
+        assert self.browser.find_element_by_id('pcr_number').get_attribute(
+            "data-field") == self.numbers5, "Data in PCR_modal or object PCR Number hasn't saved"
+
+    def should_test_result_modal(self):
+        self.fill_result_modal()
+        self.check_result_modal()
+
+    def fill_result_modal(self):
+        self.browser.find_element(*PatientCardLocators.RESULT).click()
+        self.browser.find_element(*PatientCardLocators.RESULT_ADD).click()
+        self.browser.find_element(*PatientCardLocators.RESULT_NUM).send_keys(self.numbers5)
+        self.browser.find_element(*PatientCardLocators.RESULT_DATE).send_keys(self.today)
+        result_person_choice = random.choice(['170000000044', '170000000080', '170000000092', '170000000098', '170000000034', '170000000039'])
+        self.make(f"{PatientCardLocators.RESULT_RESPONSIBLE_PERSON}.dropdown('set selected', '{result_person_choice}');")
+        self.make(f"{PatientCardLocators.LAB_SUPERVISER}.dropdown('set selected', '{result_person_choice}');")
+        result_choice = random.choice(['7', '9', '12', '14', '19'])
+        self.make(f"{PatientCardLocators.ANALYSIS_RESULT}.dropdown('set selected', '{result_choice}');")
+        self.browser.find_element(*PatientCardLocators.RESEARCH_BAZIS).click()
+        self.browser.find_element(*PatientCardLocators.RESULT_SAVE).click()
+
+    def check_result_modal(self):
+        assert self.browser.find_element_by_id('pcr_number').get_attribute(
+            "data-field") == self.numbers5, "Data in PCR_modal or object PCR Number hasn't saved"
+
+
+
         # self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
         # self.make(f"{PatientCardLocators.EPID_HISTORY}.click()")  # Открываем Эпидемиологический анамнез
         # self.make(f"{PatientCardLocators.EPID_HISTORY_HIV_ANALYSIS}.dropdown('set selected', '1');")
@@ -1000,15 +1009,10 @@ class RegisterPage(BasePage):
         self.make(f"$('#general_data_birth').val('{p_birthday}')")
         self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{self.gen_choice}');")
         self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        sleep(2)
         self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
         soc_status_choice = random.choice(['3', '4'])
         self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
@@ -1028,12 +1032,12 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.DUPLICATE_RESID_ADR}.checkbox('set checked');")
         # self.browser.take_screenshot()
         self.browser.find_element(*RegisterPageLocators.REGISTER_SAVE_BTN).click()
-        sleep(2)
+        sleep(3)
         id_url = self.browser.current_url
         url_part = id_url.split('/')[5]
         global patient_id_adult
-        patient_id_adult = url_part[:12]
-        print(f"ID of adult patient {patient_id_adult}")
+        patient_id_adult = url_part.split('?')[0]
+        print(f"ID of adult patient is {patient_id_adult}")
 
     def register_new_homeless(self):
         # автозаполнение формы регистрации для бомжа
@@ -1059,15 +1063,10 @@ class RegisterPage(BasePage):
         self.make(f"$('#general_data_birth').val('{p_birthday}')")
         self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{self.gen_choice}');")
         self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        sleep(2)
         self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
         soc_status_choice = random.choice(['4', '8'])
         self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
@@ -1075,12 +1074,10 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.HOMELESS}.checkbox('set checked');")
         # self.browser.take_screenshot()
         self.browser.find_element(*RegisterPageLocators.REGISTER_SAVE_BTN).click()
-        sleep(2)
-        id_url = self.browser.current_url
-        url_part = id_url.split('/')[5]
+        sleep(3)
         global patient_id_homeless
-        patient_id_homeless = url_part[:12]
-        print(f"ID of homeless patient {patient_id_homeless}")
+        patient_id_homeless = self.take_patient_id
+        print(f"ID of homeless patient is {patient_id_homeless}")
 
     def register_new_foreigner(self):
         # автозаполнение формы регистрации для взрослого
@@ -1107,15 +1104,10 @@ class RegisterPage(BasePage):
         self.make(f"$('#general_data_birth').val('{p_birthday}')")
         self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{self.gen_choice}');")
         self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
-        sleep(2)
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        sleep(2)
         self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '2');")
         soc_status_choice = random.choice(['3', '4'])
         self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
@@ -1134,12 +1126,9 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '170000000558');")
         self.make(f"{RegisterPageLocators.DUPLICATE_REGIS_ADR}.checkbox('set checked');")
         self.browser.find_element(*RegisterPageLocators.REGISTER_SAVE_BTN).click()
-        sleep(2)
-        id_url = self.browser.current_url
-        url_part = id_url.split('/')[5]
-        global patient_id_foreigner
-        patient_id_foreigner = url_part[:12]
-        print(f"ID of foreign patient {patient_id_foreigner}")
+        # global patient_id_foreigner
+        # patient_id_foreigner = self.take_patient_id
+        # print(f"ID of foreign patient {patient_id_foreigner}")
         # self.browser.take_screenshot()
 
     #     self.browser.find_element(*PatientCardLocators.OPEN_PATIENT_CARD).click()
