@@ -12,14 +12,15 @@ def browser():
         display = Display(visible=0, size=(800, 600))
         display.start()
         browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        # browser.maximize_window()
+        browser.maximize_window()
         yield browser
         print("\nquit browser..")
         browser.quit()
         display.stop()
     else:
-        browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        # browser.maximize_window()
+        #browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        browser = webdriver.Chrome(service=Service('C:/Work/tools/chromedriver/chromedriver.exe'))
+        browser.maximize_window()
         yield browser
         print("\nquit browser..")
         browser.quit()

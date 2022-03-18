@@ -37,13 +37,6 @@ class BasePage(object):
             return False
         return True
 
-    def is_element_clickable(self, how, what):
-        try:
-            self.browser.find_element(how, what)
-        except NoSuchElementException:
-            return False
-        return True
-
     # def take_screenshot(self):
     #     now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     #     namefile = f"screenshot-{now}.png"
