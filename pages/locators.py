@@ -373,7 +373,7 @@ class PatientCardLocators(object):
     EMERGENCIES_72HOURS = "$('#manipulations_avariya_modal div[data-field=manipulations_avariya_pkp_modal] .ui.dropdown')"
     EMERGENCIES_HIV_STATUS = "$('#manipulations_avariya_modal div[data-field=manipulations_avariya_hiv_status_modal] .ui.dropdown')"
     EMERGENCIES_SAVE = "$('#manipulations_avariya_modal .ui.green.approve.button')"
-    EMERGENCIES_EDIT = (By.CSS_SELECTOR, 'manipulations_avariya_table a[action-type=edit]')
+    EMERGENCIES_EDIT = (By.CSS_SELECTOR, '#manipulations_avariya_table a[action-type=edit]')
 
     DEPARTURES_SOURCES = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-sources]')"
     DEPARTURE_EXISTENCE = "$('div[data-field=nalich_viezd_checkbox] input')"
@@ -648,11 +648,11 @@ class PatientCardLocators(object):
     D_ACCOUNTED_DATE = "$('div[data-field=patient_detail_date_disp_uche_tub]')"
 
     ART = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-art]')"
-    ART_REASONS_DEFINE_DATE = "$('#patient_detail_date_pokaz_art]')"
-    ART_READINESS_DEFINE_DATE = "$('#patient_detail_date_priem_art]')"
+    ART_REASONS_DEFINE_DATE = "$('#patient_detail_date_pokaz_art')"
+    ART_READINESS_DEFINE_DATE = "$('#patient_detail_date_priem_art')"
     WRITTEN_CONSENT = "$('div[data-tab=patient_card_menu-art] div[data-field=patient_detail_get_sogl_art] .ui.dropdown')"
-    ART_INFORMATION_ADD = "$('#svedeniya_art_table_add]')"
-    ART_START_DATE = "$('#svedeniya_art_date_start_modal]')"
+    ART_INFORMATION_ADD = "$('#svedeniya_art_table_add')"
+    ART_START_DATE = "$('#svedeniya_art_date_start_modal')"
     ART_ROW = "$('#modal_svedeniya_art div[data-field=svedeniya_art_ryad_modal] .ui.dropdown')"
     ART_SCHEME = "$('#modal_svedeniya_art div[data-field=svedeniya_art_scheme_art_modal] .ui.dropdown')"
     ART_MED_ORG = "$('#modal_svedeniya_art div[data-field=svedeniya_art_art_conduct_modal] .ui.dropdown')"
@@ -666,13 +666,13 @@ class PatientCardLocators(object):
     ART_NEXT_DATE = "$('#art_preparat_next_day_vidachi_modal')"
     ART_ISSUANCE_SAVE = "$('#modal_art_preparaty .ui.green.approve.button')"
     ART_ISSUANCE_DENY = "$('#modal_art_preparaty .ui.red.deny.button')"
-    ART_SCHEME_CHANGED_DATE = "$('#svedeniya_art_treatment_date_change_scheme_modal]')"
+    ART_SCHEME_CHANGED_DATE = "$('#svedeniya_art_treatment_date_change_scheme_modal')"
     ART_SCHEME_CHANGE_TYPE = "$('#modal_svedeniya_art div[data-field=svedeniya_art_treatment_vid_change_modal] .ui.dropdown')"
     ART_SCHEME_CHANGE_REASON = "$('#modal_svedeniya_art div[data-field=svedeniya_art_treatment_reason_change_modal] .ui.dropdown')"
     ART_INFORMATION_SAVE = "$('#modal_svedeniya_art .ui.green.approve.button')"
 
     ART_ADHERENCE_SUPPORT = "$('div[data-tab=patient_card_menu-art] div[data-field=podderjky_priverj_art_conduct] .ui.dropdown')"
-    ART_ADHER_LEVEL_ADD = "$('#commitment_assessment_table_add]')"
+    ART_ADHER_LEVEL_ADD = "$('#commitment_assessment_table_add')"
     ART_ADHER_YEAR = "$('#commitment_assessment_year_modal')"
     ART_ADHER_QUARTER = "$('#modal_commitment_assessment div[data-field=commitment_assessment_kvartal_modal] .ui.dropdown')"
     ART_ADHERENCE = "$('#modal_commitment_assessment div[data-field=commitment_assessment_priver_modal] .ui.dropdown')"
@@ -688,7 +688,7 @@ class PatientCardLocators(object):
     DOSE = "$('#modal_recipes div[data-field=form-receipt-1-dozirovka] input')"
     DOSE_CODE = "$('#modal_recipes div[name=form-receipt-1-kod_ed_izm] .ui.dropdown')"
     CONCENTRATION = "$('#modal_recipes div[data-field=form-receipt-1-koncentration] input')"
-    PACKING = "$('#modal_recipes div[data-field=form-receipt-{$=it.index$}-fasovka] input')"
+    PACKING = "$('#modal_recipes input[name=form-receipt-1-fasovka]')"
     QUANTITY = "$('#modal_recipes div[data-field=form-receipt-1-count] input')"
     UNPACKING_SIGNS = "$('#modal_recipes div[data-field=form-receipt-1-priznak_vskritiya_pack] .ui.dropdown')"
     SIGNATURE = "$('#modal_recipes div[data-field=form-receipt-1-signature] input')"
@@ -757,7 +757,7 @@ class PatientCardLocators(object):
     OST_MEDICATION_TYPE = "$('#modal_opioid_therapy div[data-field=opioid_therapy_which_preparat_modal] .ui.dropdown')"
     REASONS_OF_FINISHING = "$('#modal_opioid_therapy div[data-field=opioid_therapy_reason_stop_modal] .ui.dropdown')"
     OST_SAVE = "$('#modal_opioid_therapy .ui.green.approve.button')"
-    OST_EDIT = (By.CSS_SELECTOR, '#modal_opioid_therapy a[action-type=edit]')
+    OST_EDIT = (By.CSS_SELECTOR, '#add_row_opioid_therapy_table a[action-type=edit]')
     VGS_TREATMENT_ADD = "$('#hcv_therapy_table_add')"
     VGS_TREAT_START_DATE = "$('#hcv_therapy_date_start_modal')"
     VGS_TREAT_END_DATE = "$('#hcv_therapy_date_end_modal')"
