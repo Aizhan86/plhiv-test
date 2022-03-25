@@ -12,7 +12,7 @@ import random
 global patient_id_child
 global patient_id_homeless
 global patient_id_foreigner
-global patient_id_adult
+global patient_id_woman
 
 class RegisterPage(BasePage):
     gen_choice = random.choice(['female', 'male'])
@@ -1531,7 +1531,7 @@ class RegisterPage(BasePage):
         assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute(
             "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
 
-    def register_new_adult(self):
+    def register_new_woman(self):
         # автозаполнение формы регистрации для взрослого
         res_code_choice = random.choice(['47', '48', '11', '22'])
         self.make(f"{RegisterPageLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
@@ -1556,7 +1556,7 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.PATIENT_MIDNAME).send_keys(p_midname)
         # self.make(f"$('{RegisterPageLocators.BIRTH_DATE}').val('{birthday}')")
         self.make(f"$('#general_data_birth').val('{p_birthday}')")
-        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{self.gen_choice}');")
+        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', 'female');")
         self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
@@ -1591,16 +1591,16 @@ class RegisterPage(BasePage):
         sleep(5)
         id_url = self.browser.current_url
         url_part = id_url.split('/')[5]
-        global patient_id_adult
-        patient_id_adult = url_part.split('?')[0]
-        if patient_id_adult == "0000000000":
+        global patient_id_woman
+        patient_id_woman = url_part.split('?')[0]
+        if patient_id_woman == "0000000000":
             sleep(5)
             id_url = self.browser.current_url
             url_part = id_url.split('/')[5]
-            patient_id_adult = url_part.split('?')[0]
-            print(f"ID of adult patient is {patient_id_adult}")
+            patient_id_woman = url_part.split('?')[0]
+            print(f"ID of adult patient is {patient_id_woman}")
         else:
-            print(f"ID of adult patient is {patient_id_adult}")
+            print(f"ID of adult patient is {patient_id_woman}")
 
 
     def register_new_homeless(self):

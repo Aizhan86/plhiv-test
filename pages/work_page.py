@@ -36,7 +36,7 @@ class WorkPage(BasePage):
         self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
         # assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_child}?new=1&in_rk=1", "Patient card of child hasn't opened"
 
-    def open_card_of_adult(self):
+    def open_card_of_woman(self):
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
