@@ -1625,7 +1625,7 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.PATIENT_MIDNAME).send_keys(p_midname)
         # self.make(f"$('{RegisterPageLocators.BIRTH_DATE}').val('{birthday}')")
         self.make(f"$('#general_data_birth').val('{p_birthday}')")
-        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{self.gen_choice}');")
+        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', 'male');")
         self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
