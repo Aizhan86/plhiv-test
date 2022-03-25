@@ -2,6 +2,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
+import os
 
 from pages.locators import PatientCardLocators, WorkJournalLocators
 
@@ -15,6 +16,17 @@ class BasePage(object):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
+
+    def get_environ(name, *args):
+        environ = os.environ.get(name, "https://plhiv-demo.dec.kz/")
+
+        if str(environ).startswith('/run/secrets/'):
+            if os.path.exists(environ):
+                with open(environ, 'r') as secrets_file:
+                    environ = secrets_file.read()
+                    secrets_file.close()
+
+        return environ
 
     def open(self):
         self.browser.get(self.url)

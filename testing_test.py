@@ -1,6 +1,6 @@
 import pytest
+import config
 from pages.register_page import RegisterPage
-# from pages.config import LinkData
 # from .pages.settings_page import SettingsPage
 from pages.work_page import WorkPage
 from pages.login_page import LoginPage
