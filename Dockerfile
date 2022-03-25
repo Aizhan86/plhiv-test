@@ -13,7 +13,7 @@ RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable 
 RUN apt-get -y update
 
 # Magic happens
-RUN apt-get install -y google-chrome-stable
+RUN apt-get install -y xvfb google-chrome-stable
 
 # Installing Unzip
 RUN apt-get install -yqq unzip
@@ -25,7 +25,7 @@ RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`cu
 RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 # Set display port as an environment variable
-ENV DISPLAY=:99
+ENV DISPLAY=:0
 
 RUN pip install -r requirements/base.pip
 
