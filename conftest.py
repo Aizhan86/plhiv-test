@@ -11,13 +11,14 @@ def browser():
     if platform == "linux" or platform == "linux2":
         display = Display(visible=0, size=(800, 600))
         display.start()
-        browser = webdriver.Chrome(service=Service('/usr/local/bin/chromedriver'))
+        browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        # browser = webdriver.Chrome(service=Service('/usr/local/bin/chromedriver'))
         browser.maximize_window()
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-        browser = webdriver.Chrome(executable_path='\chromedriver', chrome_options=chrome_options)
+        browser = webdriver.Chrome(chrome_options=chrome_options)
         yield browser
         print("\nquit browser..")
         browser.quit()
