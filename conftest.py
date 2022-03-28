@@ -11,7 +11,7 @@ def browser():
     if platform == "linux" or platform == "linux2":
         display = Display(visible=0, size=(800, 600))
         display.start()
-        browser = webdriver.Chrome(service=Service('/usr/local/bin/'))
+        browser = webdriver.Chrome(service=Service('/usr/local/bin/chromedriver'))
         browser.maximize_window()
         yield browser
         print("\nquit browser..")
