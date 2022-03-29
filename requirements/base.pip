@@ -5,3 +5,4 @@ pytest
 pytest-rerunfailures
 webdriver-manager
 pyvirtualdisplay
+allure-pytest

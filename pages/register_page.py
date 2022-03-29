@@ -1,4 +1,6 @@
+from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
+import allure
 from .base_page import BasePage
 from .locators import RegisterPageLocators, PatientCardLocators, WorkJournalLocators
 from time import sleep
@@ -126,20 +128,14 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.MOTHERS_IB_NO).send_keys(self.numbers5)
         self.browser.find_element(*RegisterPageLocators.IB_NO_DATE).send_keys(self.ib_date)
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
-        # self.browser.take_screenshot()
         sleep(5)
-        id_url = self.browser.current_url
-        url_part = id_url.split('/')[5]
-        global patient_id_child
-        patient_id_child = url_part.split('?')[0]
-        if patient_id_child == "0000000000":
-            sleep(5)
-            id_url = self.browser.current_url
-            url_part = id_url.split('/')[5]
-            patient_id_child = url_part.split('?')[0]
-            print(f"ID of child patient is {patient_id_child}")
+        patient_id_child = self.get_patient_id()
+        print(f"ID of child patient is {patient_id_child}")
+        if patient_id_child in self.browser.title:
+            assert True
         else:
-            print(f"ID of child patient is {patient_id_child}")
+            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child", attachment_type=AttachmentType.PNG)
+
 
     def edit_card(self):
         self.make(f"{RegisterPageLocators.EDIT_REGIS_ADDRESS}.click()")
@@ -1585,21 +1581,15 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.RESID_PHONE_NO).send_keys(87273456789)
         self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '80000000546');")
         self.make(f"{RegisterPageLocators.DUPLICATE_RESID_ADR}.checkbox('set checked');")
-        # self.browser.take_screenshot()
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
         sleep(5)
-        id_url = self.browser.current_url
-        url_part = id_url.split('/')[5]
-        global patient_id_woman
-        patient_id_woman = url_part.split('?')[0]
-        if patient_id_woman == "0000000000":
-            sleep(5)
-            id_url = self.browser.current_url
-            url_part = id_url.split('/')[5]
-            patient_id_woman = url_part.split('?')[0]
-            print(f"ID of adult patient is {patient_id_woman}")
+        patient_id_woman = self.get_patient_id()
+        print(f"ID of adult patient is {patient_id_woman}")
+        if patient_id_woman in self.browser.title:
+            assert True
         else:
-            print(f"ID of adult patient is {patient_id_woman}")
+            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
+                          attachment_type=AttachmentType.PNG)
 
 
     def register_new_homeless(self):
@@ -1635,21 +1625,15 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
         self.make(f"{RegisterPageLocators.MED_ORG}.dropdown('set selected', '{self.mo_choice}');")
         self.make(f"{RegisterPageLocators.HOMELESS}.checkbox('set checked');")
-        # self.browser.take_screenshot()
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click();")
         sleep(5)
-        id_url = self.browser.current_url
-        url_part = id_url.split('/')[5]
-        global patient_id_homeless
-        patient_id_homeless = url_part.split('?')[0]
-        if patient_id_homeless == "0000000000":
-            sleep(5)
-            id_url = self.browser.current_url
-            url_part = id_url.split('/')[5]
-            patient_id_homeless = url_part.split('?')[0]
-            print(f"ID of homeless patient is {patient_id_homeless}")
+        patient_id_homeless = self.get_patient_id()
+        print(f"ID of homeless patient is {patient_id_homeless}")
+        if patient_id_homeless in self.browser.title:
+            assert True
         else:
-            print(f"ID of homeless patient is {patient_id_homeless}")
+            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
+                          attachment_type=AttachmentType.PNG)
 
     def register_new_foreigner(self):
         # автозаполнение формы регистрации для иностранного гражданина
@@ -1699,19 +1683,15 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.DUPLICATE_REGIS_ADR}.checkbox('set checked');")
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click();")
         sleep(5)
-        id_url = self.browser.current_url
-        url_part = id_url.split('/')[5]
-        global patient_id_foreigner
-        patient_id_foreigner = url_part.split('?')[0]
-        if patient_id_foreigner == "0000000000":
-            sleep(5)
-            id_url = self.browser.current_url
-            url_part = id_url.split('/')[5]
-            patient_id_foreigner = url_part.split('?')[0]
-            print(f"ID of foreigner patient is {patient_id_foreigner}")
+        patient_id_foreigner = self.get_patient_id()
+        print(f"ID of foreigner patient is {patient_id_foreigner}")
+        if patient_id_foreigner in self.browser.title:
+            assert True
         else:
-            print(f"ID of foreigner patient is {patient_id_foreigner}")
-        # self.browser.take_screenshot()
+            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
+                          attachment_type=AttachmentType.PNG)
+
+
 
     #     self.browser.find_element(*PatientCardLocators.OPEN_PATIENT_CARD).click()
     #     self.browser.find_element(*PatientCardLocators.TARIFIKATOR).click()

@@ -24,6 +24,12 @@ RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`cu
 # Unzip the Chrome Driver into /usr/local/bin directory
 RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
+# Download the Chrome Driver
+RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+
+# Unzip the Chrome Driver into /usr/local/bin directory
+RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+
 # Set display port as an environment variable
 ENV DISPLAY=:0
 
@@ -31,4 +37,4 @@ RUN pip install -r requirements/base.pip
 
 RUN chmod +x /testapp/testing_test.py
 
-CMD [ "pytest", "/testapp/testing_test.py"]
+CMD [ "pytest" "-v" "-s" "--alluredir"="/usr/reports" ", "/testapp/testing_test.py"]

@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -65,11 +67,18 @@ class BasePage(object):
         self.make(f"{PatientCardLocators.USER_DATA_SAVE}.click()")
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
 
-    def take_patient_id(self):
-        id_url = self.browser.current_url
-        url_part = id_url.split('/')[5]
-        patient_id = url_part.split('?')[0]
+    def get_patient_id(self):
+        enc = 0
+        patient_id = self.browser.current_url.split('/')[-1].split('?')[0]
+        while patient_id == "0000000000":
+            patient_id = self.browser.current_url.split('/')[-1].split('?')[0]
+            enc += 1
+            sleep(1)
+            if enc == 10:
+                break
         return patient_id
+
+
 
 
 
