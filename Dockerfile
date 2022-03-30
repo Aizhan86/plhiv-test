@@ -25,8 +25,8 @@ RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`cu
 RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 # Download the Chrome Driver
-RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
-
+RUN wget -O /tmp/allure.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/
 # Unzip the Chrome Driver into /usr/local/bin directory
 RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
@@ -37,4 +37,4 @@ RUN pip install -r requirements/base.pip
 
 RUN chmod +x /testapp/testing_test.py
 
-CMD [ "pytest" "-v" "-s" "--alluredir"="/usr/reports" ", "/testapp/testing_test.py"]
+CMD [ "pytest", "/testing_test.py", "--alluredir", "/reports" ]

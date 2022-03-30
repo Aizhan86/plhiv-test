@@ -131,11 +131,11 @@ class RegisterPage(BasePage):
         sleep(5)
         patient_id_child = self.get_patient_id()
         print(f"ID of child patient is {patient_id_child}")
-        if patient_id_child in self.browser.title:
+        if patient_id_child in self.browser.title and patient_id_child != "0000000000":
             assert True
         else:
             allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child", attachment_type=AttachmentType.PNG)
-
+            assert False
 
     def edit_card(self):
         self.make(f"{RegisterPageLocators.EDIT_REGIS_ADDRESS}.click()")
@@ -1584,12 +1584,13 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
         sleep(5)
         patient_id_woman = self.get_patient_id()
-        print(f"ID of adult patient is {patient_id_woman}")
-        if patient_id_woman in self.browser.title:
+        print(f"ID of woman patient is {patient_id_woman}")
+        if patient_id_woman in self.browser.title and patient_id_woman != "0000000000":
             assert True
         else:
             allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
                           attachment_type=AttachmentType.PNG)
+            assert False
 
 
     def register_new_homeless(self):
@@ -1629,11 +1630,12 @@ class RegisterPage(BasePage):
         sleep(5)
         patient_id_homeless = self.get_patient_id()
         print(f"ID of homeless patient is {patient_id_homeless}")
-        if patient_id_homeless in self.browser.title:
+        if patient_id_homeless in self.browser.title and patient_id_homeless != "0000000000":
             assert True
         else:
             allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
                           attachment_type=AttachmentType.PNG)
+            assert False
 
     def register_new_foreigner(self):
         # автозаполнение формы регистрации для иностранного гражданина
@@ -1685,11 +1687,12 @@ class RegisterPage(BasePage):
         sleep(5)
         patient_id_foreigner = self.get_patient_id()
         print(f"ID of foreigner patient is {patient_id_foreigner}")
-        if patient_id_foreigner in self.browser.title:
+        if patient_id_foreigner in self.browser.title and patient_id_foreigner != "0000000000":
             assert True
         else:
             allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
                           attachment_type=AttachmentType.PNG)
+            assert False
 
 
 
