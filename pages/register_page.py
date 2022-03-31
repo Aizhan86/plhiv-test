@@ -126,16 +126,15 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.MOTHERS_NAME).send_keys(self.name)
         self.browser.find_element(*RegisterPageLocators.MOTHERS_MIDNAME).send_keys(self.midname)
         self.browser.find_element(*RegisterPageLocators.MOTHERS_IB_NO).send_keys(self.numbers5)
-        self.browser.find_element(*RegisterPageLocators.IB_NO_DATE).send_keys(self.ib_date)
+        self.browser.find_element(*RegisterPageLocators.MOTHERS_IB_NO_DATE).send_keys(self.ib_date)
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
+        allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
+                      attachment_type=AttachmentType.PNG)
         sleep(5)
         patient_id_child = self.get_patient_id()
         print(f"ID of child patient is {patient_id_child}")
-        if patient_id_child in self.browser.title and patient_id_child != "0000000000":
-            assert True
-        else:
-            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child", attachment_type=AttachmentType.PNG)
-            assert False
+        assert patient_id_child in self.browser.current_url and patient_id_child != "0000000000"
+
 
     def edit_card(self):
         self.make(f"{RegisterPageLocators.EDIT_REGIS_ADDRESS}.click()")
@@ -651,7 +650,8 @@ class RegisterPage(BasePage):
 
     def should_test_source_modal(self):
         self.fill_source_modal()
-        self.check_source_modal()
+        # self.check_source_modal()
+        self.check_switch_to_card_of_another_patient_modal()
 
     def fill_source_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
@@ -668,6 +668,20 @@ class RegisterPage(BasePage):
 
     def check_source_modal(self):
         assert self.is_element_present(*PatientCardLocators.SOURCE_EDIT), "Data in Source modal wasn't saved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+
+    def check_switch_to_card_of_another_patient_modal(self):
+        self.make(f"{PatientCardLocators.SOURCE_EDIT}.click();")
+        self.make(f"{PatientCardLocators.SOURCE_IB_NUM}.val('91324(1)');")
+        self.make(f"{PatientCardLocators.SOURCE_IB_DATE}.calendar('set date', '03.12.2021');")
+        self.make(f"{PatientCardLocators.SOURCE_SURNAME}.val('');")
+        self.make(f"{PatientCardLocators.SOURCE_NAME}.val('');")
+        self.make(f"{PatientCardLocators.SOURCE_MIDDLE_NAME}.val('');")
+        self.make(f"{PatientCardLocators.SOURCE_FIND}.click();")
+        self.make(f"{PatientCardLocators.SOURCE_SWITCH_TO_CARD}.click();")
+        new_window = self.browser.window_handles[1]
+        self.browser.switch_to.window(new_window)
+        assert self.is_element_present(*RegisterPageLocators.IB_NO), "There wasn't switched from Source modal to another patient's card."
         # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
 
     def should_test_contact_person_modal(self):
@@ -933,8 +947,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.HIV_DIAGNOSIS}.click();")
         self.make(f"{PatientCardLocators.REFERRAL_ADD}.click();")
         self.make(f"{PatientCardLocators.REFERRAL_DATE}.calendar('set date', '{self.today}');")
-        referral_name_choice = random.choice(['178', '35', '36', '37', '38', '40', '46'])
-        self.make(f"{PatientCardLocators.REFERRAL_NAME}.dropdown('set selected', '{referral_name_choice}');")
+        # referral_name_choice = random.choice(['178', '35', '36', '37', '38', '40', '46']) {referral_name_choice}
+        self.make(f"{PatientCardLocators.REFERRAL_NAME}.dropdown('set selected', '63');")
         self.make(f"{PatientCardLocators.REFERRAL_NUM}.val('{self.numbers4}');")
         self.make(f"{PatientCardLocators.SENDER_ORG}.dropdown('set selected', '{self.mo_choice2}');")
         self.make(f"{PatientCardLocators.RECIPIENT_ORG}.dropdown('set selected', '{self.mo_choice2}');")
@@ -945,6 +959,27 @@ class RegisterPage(BasePage):
         # self.make(f"{PatientCardLocators.SURVEY_ELEMENTS}.val('Не знаю');")
         # self.make(f"{PatientCardLocators.SCREENING_RESULT}.val('Положительный');")
         self.make(f"{PatientCardLocators.REFERRAL_SAVE}.click();")
+
+    def check_result_modal_in_additional_analysis_tab(self):
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
+        self.make(f"{PatientCardLocators.HIV_DIAGNOSIS}.click();")
+        self.make(f"{PatientCardLocators.REFERRAL_ADD}.click();")
+        self.make(f"{PatientCardLocators.REFERRAL_DATE}.calendar('set date', '{self.today}');")
+        referral_name_choice1 = random.choice(['57', '62', '138', '144', '133'])
+        self.make(f"{PatientCardLocators.REFERRAL_NAME}.dropdown('set selected', '{referral_name_choice1}');")
+        self.make(f"{PatientCardLocators.REFERRAL_NUM}.val('{self.numbers4}');")
+        self.make(f"{PatientCardLocators.SENDER_ORG}.dropdown('set selected', '{self.mo_choice2}');")
+        self.make(f"{PatientCardLocators.RECIPIENT_ORG}.dropdown('set selected', '{self.mo_choice2}');")
+        self.make(f"{PatientCardLocators.REFERRAL_SAVE}.click();")
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click();")
+        self.make(f"{PatientCardLocators.ADDITIONAL_ANALYSIS}.click();")
+        self.make(f"{PatientCardLocators.AA_EDIT}.click();")
+        self.make(f"{PatientCardLocators.AA_RESULT}.val('положительный');")
+        self.make(f"{PatientCardLocators.AA_SAVE}.click();")
+        assert self.make(f"$('#additional_research_table tr:eq(1) td:eq(7)')[0].innerText") == 'Подтвержден', "Data in Result modal in Additional Analysis Tab wasn't saved"
+
 
     def check_referral_modal(self):
         assert self.is_element_present(*PatientCardLocators.REFERRAL_EDIT), "Data in Referral modal wasn't saved or invalid selector for Edit button"
@@ -1582,15 +1617,13 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '80000000546');")
         self.make(f"{RegisterPageLocators.DUPLICATE_RESID_ADR}.checkbox('set checked');")
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
+        allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
+                      attachment_type=AttachmentType.PNG)
         sleep(5)
+        global patient_id_woman
         patient_id_woman = self.get_patient_id()
         print(f"ID of woman patient is {patient_id_woman}")
-        if patient_id_woman in self.browser.title and patient_id_woman != "0000000000":
-            assert True
-        else:
-            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
-                          attachment_type=AttachmentType.PNG)
-            assert False
+        assert f"{patient_id_woman}" in self.browser.current_url and patient_id_woman != "0000000000"
 
 
     def register_new_homeless(self):
@@ -1627,15 +1660,13 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.MED_ORG}.dropdown('set selected', '{self.mo_choice}');")
         self.make(f"{RegisterPageLocators.HOMELESS}.checkbox('set checked');")
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click();")
+        allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
+                      attachment_type=AttachmentType.PNG)
         sleep(5)
+        global patient_id_homeless
         patient_id_homeless = self.get_patient_id()
         print(f"ID of homeless patient is {patient_id_homeless}")
-        if patient_id_homeless in self.browser.title and patient_id_homeless != "0000000000":
-            assert True
-        else:
-            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
-                          attachment_type=AttachmentType.PNG)
-            assert False
+        assert f"{patient_id_homeless}" in self.browser.current_url and patient_id_homeless != "0000000000"
 
     def register_new_foreigner(self):
         # автозаполнение формы регистрации для иностранного гражданина
@@ -1684,16 +1715,13 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '170000000558');")
         self.make(f"{RegisterPageLocators.DUPLICATE_REGIS_ADR}.checkbox('set checked');")
         self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click();")
+        allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
+                      attachment_type=AttachmentType.PNG)
         sleep(5)
+        global patient_id_foreigner
         patient_id_foreigner = self.get_patient_id()
-        print(f"ID of foreigner patient is {patient_id_foreigner}")
-        if patient_id_foreigner in self.browser.title and patient_id_foreigner != "0000000000":
-            assert True
-        else:
-            allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
-                          attachment_type=AttachmentType.PNG)
-            assert False
-
+        print(f"ID of foreign patient is {patient_id_foreigner}")
+        assert f"{patient_id_foreigner}" in self.browser.current_url and patient_id_foreigner != "0000000000"
 
 
     #     self.browser.find_element(*PatientCardLocators.OPEN_PATIENT_CARD).click()

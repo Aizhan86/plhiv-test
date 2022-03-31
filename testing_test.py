@@ -17,6 +17,11 @@ def zhetysai_user_opens_card_of_woman(browser):
     work_page = WorkPage(browser, browser.current_url)
     work_page.choose_Zhetysai_as_user_org()
     work_page.open_card_of_woman()
+
+def zhetysai_user_opens_card_of_foreigner(browser):
+    work_page = WorkPage(browser, browser.current_url)
+    work_page.choose_Zhetysai_as_user_org()
+    work_page.open_card_of_foreigner()
     
 def kncdiz_user_opens_card_of_woman(browser):
     work_page = WorkPage(browser, browser.current_url)
@@ -51,26 +56,26 @@ class TestPlhiv():
     #         register_page.register_new_homeless()
     #     except Exception as e:
     #         capture_exception(e)
-
-    @pytest.mark.smoke
-    def test_registration_of_woman(self, browser):
-        login(browser)
-        work_page = WorkPage(browser, browser.current_url)
-        work_page.choose_Zhetysai_as_user_org()
-        work_page.should_add_kz_patient()
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.register_new_woman()
-        print(f"test_registration_of_woman passed")
-
+    #
     # @pytest.mark.smoke
-    # def test_registration_of_foreigner(self, browser):
+    # def test_registration_of_woman(self, browser):
     #     login(browser)
     #     work_page = WorkPage(browser, browser.current_url)
     #     work_page.choose_Zhetysai_as_user_org()
-    #     work_page.should_add_foreign_patient()
+    #     work_page.should_add_kz_patient()
     #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.register_new_foreigner()
-    #
+    #     register_page.register_new_woman()
+    #     print(f"test_registration_of_woman passed")
+
+    @pytest.mark.smoke
+    def test_registration_of_foreigner(self, browser):
+        login(browser)
+        work_page = WorkPage(browser, browser.current_url)
+        work_page.choose_Zhetysai_as_user_org()
+        work_page.should_add_foreign_patient()
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.register_new_foreigner()
+
     # @pytest.mark.smoke
     # @pytest.mark.skipif(test_registration_of_child == "FAILED", reason="patient id wasn't taken")
     # def test_editing_general_information_in_patient_card(self, browser):
@@ -84,18 +89,16 @@ class TestPlhiv():
     #         print(f"test_editing_general_information_in_patient_card passed")
     #     except Exception as e:
     #         capture_exception(e)
-
-    @pytest.mark.smoke
-    @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
-    def test_HIV_antibody_testing_OGC_modal(self, browser):
-        try:
-            login(browser)
-            zhetysai_user_opens_card_of_woman(browser)
-            register_page = RegisterPage(browser, browser.current_url)
-            register_page.should_test_HIV_antibody_testing_OGC_modal()
-            print(f"test_HIV_antibody_testing_OGC_modal passed")
-        except Exception as e:
-            capture_exception(e)
+    #
+    # @pytest.mark.smoke
+    # @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
+    # def test_HIV_antibody_testing_OGC_modal(self, browser):
+    #     login(browser)
+    #     zhetysai_user_opens_card_of_woman(browser)
+    #     register_page = RegisterPage(browser, browser.current_url)
+    #     register_page.should_test_HIV_antibody_testing_OGC_modal()
+    #     print(f"test_HIV_antibody_testing_OGC_modal passed")
+    #
 
     # @pytest.mark.smoke
     # @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
@@ -319,6 +322,16 @@ class TestPlhiv():
     #     register_page = RegisterPage(browser, browser.current_url)
     #     register_page.should_test_referral_modal()
     #     print(f"test_referral_modal passed")
+    #
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_result_modal_in_additional_analysis_tab(self, browser):
+        login(browser)
+        zhetysai_user_opens_card_of_foreigner(browser)
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_HIV_antibody_testing_OGC_modal()
+        register_page.fill_dispensary_observation_modal()
+        register_page.check_result_modal_in_additional_analysis_tab()
+        print(f"test_referral_modal passed")
     #
     # @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
     # def test_cd4_modal(self, browser):

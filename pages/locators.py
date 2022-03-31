@@ -11,10 +11,10 @@ class LoginPageLocators(object):
     AGR_BTN = (By.CSS_SELECTOR, '#modal_agreement .ui.green.inverted.ok.button')
 
 class RegisterPageLocators(object):
-    FOREIGNER_IB_NO = (By.ID, 'general_data_nib_out')
-    FOREIGNER_IB_NO_DATE = (By.ID, 'general_data_date_nib_out')
     ADD_PATIENT = (By.CSS_SELECTOR, 'a[href="/visits/patient_card/0000000000?new=1&in_rk=1&add=1"]')
     ADD_FOREIGN_PATIENT = (By.CSS_SELECTOR, 'a[href="/visits/patient_card/0000000000?new=1&in_rk=0&add=1"]')
+    IB_NO = (By.ID, 'general_data_nib_out')
+    IB_NO_DATE = (By.ID, 'general_data_date_nib_out')
     RESEARCH_CODE = "$('form[name=general-data-form] div[data-field=general_data_contengent] .ui.dropdown')"
     PATIENT_BIRTH_DATE = (By.ID, 'general_data_birth"]')
     PATIENT_GENDER = "$('form[name=general-data-form] div[data-field=general_data_gender] .ui.dropdown')"
@@ -72,7 +72,7 @@ class RegisterPageLocators(object):
     MOTHERS_NAME = (By.ID, 'general_data_mother_name')
     MOTHERS_MIDNAME = (By.ID, 'general_data_mother_patronymic')
     MOTHERS_IB_NO = (By.ID, 'general_data_mother_ib_number')
-    IB_NO_DATE = (By.ID, 'general_data_mother_date_ib')
+    MOTHERS_IB_NO_DATE = (By.ID, 'general_data_mother_date_ib')
     REGISTER_SAVE_BTN = "$('.ui.bottom.attached.tab.segment.active .right.floated.green.approve.button')"
     EDIT_REGIS_ADDRESS = "$('#registration_address_edit_button')"
     REGIS_APT2 = (By.ID, 'registration_address_kvart_modal')
@@ -81,6 +81,10 @@ class RegisterPageLocators(object):
 
 
 class PatientCardLocators(object):
+    ADDITIONAL_ANALYSIS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-additional_research]')"
+    AA_EDIT = "$('#additional_research_table a[action-type=edit]')"
+    AA_RESULT = "$('#additional_research_modal div.field input')"
+    AA_SAVE = "$('#additional_research_modal .ui.green.approve.button')"
     OPEN_PATIENT_MENU = "$('.basic.segment .ui.sidebar')"
     LAB_RESEARCH = "$('a[data-name=lab-research]')"
 
@@ -389,11 +393,13 @@ class PatientCardLocators(object):
     SOURCE_ADD = "$('#sources_infection_table a[action-type=add]')"
     SOURCE_IB_NUM = "$('#sources_contact_modal div[data-field=sources_contact_ib_number_modal] input')"
     SOURCE_IB_DATE = "$('#sources_contact_modal div[data-field=sources_contact_ib_date_modal] .ui.input')"
+    SOURCE_FIND = "$('#find-contact')"
+    SOURCE_SWITCH_TO_CARD = "$('#add-contact tr:eq(0) td:eq(5) a i.clipboard.list.icon')"
     SOURCE_SURNAME = "$('#sources_contact_modal div[data-field=sources_contact_last_name_modal] input')"
     SOURCE_NAME = "$('#sources_contact_modal div[data-field=sources_contact_name_modal] input')"
     SOURCE_MIDDLE_NAME = "$('#sources_contact_modal div[data-field=sources_contact_middle_name_modal] input')"
     SOURCE_SAVE = "$('#sources_contact_modal .ui.green.approve.button')"
-    SOURCE_EDIT = (By.CSS_SELECTOR, '#sources_infection_table a[action-type=edit]')
+    SOURCE_EDIT = "$('#sources_infection_table a[action-type=edit]')"
 
     CONTACT_PERSON = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-contact]')"
     CONTACT_PERSON_EXISTENCE = "$('div[data-field=nalich_kontakt_lic_checkbox] input')"
