@@ -81,12 +81,6 @@ class RegisterPageLocators(object):
 
 
 class PatientCardLocators(object):
-    ADDITIONAL_ANALYSIS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-additional_research]')"
-    AA_EDIT = "$('#additional_research_table a[action-type=edit]')"
-    AA_RESULT = "$('#additional_research_modal div.field input')"
-    AA_SAVE = "$('#additional_research_modal .ui.green.approve.button')"
-    OPEN_PATIENT_MENU = "$('.basic.segment .ui.sidebar')"
-    LAB_RESEARCH = "$('a[data-name=lab-research]')"
 
     IFA_OGC_ADD = "$('#ifa_ogc_add')"
     IFA_MED_ORG = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_naprav_mo_modal] .ui.dropdown')"
@@ -189,7 +183,13 @@ class PatientCardLocators(object):
     # CD4_SCREENING
     # VGS_DIAGNOSTICS
     # RESISTANCE
-    # ADDITIONAL_SURVEYS
+
+    ADDITIONAL_ANALYSIS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-additional_research]')"
+    AA_EDIT = "$('#additional_research_table a[action-type=edit]')"
+    AA_RESULT = "$('#additional_research_modal div.field input')"
+    AA_SAVE = "$('#additional_research_modal .ui.green.approve.button')"
+    OPEN_PATIENT_MENU = "$('.basic.segment .ui.sidebar')"
+    LAB_RESEARCH = "$('a[data-name=lab-research]')"
 
     EPID_HISTORY = "$('a[data-name=epid-history]')"
     EPID_HISTORY_HIV_ANALYSIS = "$('div[data-field=epid_history_obsled_hiv] .ui.dropdown')"
@@ -470,6 +470,7 @@ class PatientCardLocators(object):
     PERINATAL_DEATH_REASON = "$('#modal_perinat_uchet div[data-field=death_reason_modal] .ui.dropdown')"
     PERINATAL_DEATH_PLACE = "$('#modal_perinat_uchet div[data-field=death_place_modal] .ui.dropdown')"
     PERINATAL_SAVE = "$('#modal_perinat_uchet .ui.green.approve.button')"
+    PERINATAL_EDIT = (By.ID, 'add_perinat_uchet')
 
     ARV_PROPHYLAXIS = "$('div[data-field=perinat_uchet_arv_profil] .ui.dropdown')"
     ARV_START_DATE = "$('div[data-field=perinat_uchet_arv_date_start] input')"
@@ -771,12 +772,23 @@ class PatientCardLocators(object):
     VGS_TREAT_SAVE = "$('#modal_hcv_therapy .ui.green.approve.button')"
     VGS_TREAT_EDIT = (By.CSS_SELECTOR, '#add_row_hcv_therapy_table a[action-type=edit]')
 
-    D_EXAM_HOSPITALIZATION = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-d_osmotr]')"
-    D_EXAM_ADD = "$('div.ui.secondary.padding_ext_07.segment a.ui.green.button.add_osmotr')"
+    D_SCREENING_HOSPITALIZATION = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-d_osmotr]')"
+    D_SCRN_HOSP_ADD = "$('#ambulatory_healing_table_add')"
+    DATE_OF_ELIGIBILITY_FOR_TREATMENT = "$('#date_pokaz_modal')"
+    D_SCRN_TREAT_TYPE = "$('#ambulatory_healing_modal div[data-field=healing_type_modal] .ui.dropdown')"
+    MPI_PROFILE = "$('#ambulatory_healing_modal div[data-field=lpu_profile_modal] .ui.dropdown')"
+    HOSP_DATE = "$('#date_gospital_modal')"
+    DATE_OF_DISCHARGE = "$('#date_okonchaniya_modal')"
+    D_SCRN_TREAT_RESULT = "$('#ambulatory_healing_modal div[data-field=result_modal] .ui.dropdown')"
+    D_SCRN_HOSP_SAVE = "$('#ambulatory_healing_modal .ui.green.approve.button')"
+    D_SCRN_HOSP_EDIT = (By.CSS_SELECTOR, '#therapy_opurt_zabolev_table a[action-type=edit]')
+
+    VISITS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-visits]')"
+    SCREENING_ADD = "$('div.ui.secondary.padding_ext_07.segment a.ui.green.button.add_osmotr')"
     ATTENDANCE_DATE = "$('#visit_table_date_visit')"
-    D_EXAM_HELD = "$('div[data-field=visit_table_who_conducted] .ui.dropdown')"
-    D_SERVICES = "$('div[data-field=visit_table_which_services] .ui.dropdown')"
-    D_EXAM_PLACE = "$('div[data-field=visit_table_place_of_inspection] .ui.dropdown')"
+    SCREENING_HELD = "$('div[data-field=visit_table_who_conducted] .ui.dropdown')"
+    VISITS_SERVICES = "$('div[data-field=visit_table_which_services] .ui.dropdown')"
+    SCREENING_PLACE = "$('div[data-field=visit_table_place_of_inspection] .ui.dropdown')"
     ATTENDANCE_TYPE = "$('div[data-field=visit_table_visit_type] .ui.dropdown')"
     TEMPERATURE = "$('#row_for_total_info_table div[data-field=ljv_card_table_temp]')"
     WEIGHT = "$('#row_for_total_info_table div[data-field=ljv_card_table_weight]')"
@@ -785,15 +797,15 @@ class PatientCardLocators(object):
     HISTORY_INFORMATION = "$('#anamnez_data')"
     LAST_MENSIS = "$('input[name=last_mensis]')"
     CONTRACEPTION = "$('input[name=kontracepc]')"
-    D_EXAM_SEX_PARTNER = "$('input[name=partner_ljv]')"
+    VISITS_SEX_PARTNER = "$('input[name=partner_ljv]')"
     ART_RECEIPT = "$('input[name=partner_art]')"
     PLANNED_PREGNANCY_YES = "$('input[name=pregnancy][value=10]')"
     PLANNED_PREGNANCY_NO = "$('input[name=pregnancy][value=20]')"
-    D_EXAM_ALCOHOL = "$('input[name=alco_or_drugs]')"
-    D_EXAM_DRUGS = "$('input[name=alco_or_drugs]')"
-    D_EXAM_INJ_DRUG_LAST_HALF_YEAR = "$('div[data-field=inek_nark_six_month] .ui.dropdown')"
-    D_EXAM_COM_SEX_LAST_HALF_YEAR = "$('div[data-field=komerc_sex_six_month] .ui.dropdown')"
-    D_EXAM_HOMO_SEX_LAST_HALF_YEAR = "$('div[data-field=gomo_sex_six_month] .ui.dropdown')"
+    VISITS_ALCOHOL = "$('input[name=alco_or_drugs]')"
+    VISITS_DRUGS = "$('input[name=alco_or_drugs]')"
+    VISITS_INJ_DRUG_LAST_HALF_YEAR = "$('div[data-field=inek_nark_six_month] .ui.dropdown')"
+    VISITS_COM_SEX_LAST_HALF_YEAR = "$('div[data-field=komerc_sex_six_month] .ui.dropdown')"
+    VISITS_HOMO_SEX_LAST_HALF_YEAR = "$('div[data-field=gomo_sex_six_month] .ui.dropdown')"
     STATE = "$('div[data-field=sostoyanie] .ui.dropdown')"
     CONSCIOUSNESS = "$('div[data-field=soznanie] .ui.dropdown')"
     POSITION = "$('div[data-field=polojenie] .ui.dropdown')"
@@ -829,10 +841,10 @@ class PatientCardLocators(object):
     DIURESIS_BREACHED = "$('input[name=diurez][value=broken]')"
     DIURESIS_NORM = "$('input[name=diurez][value=norm]')"
     SWELLING = "$('#edemas')"
-    D_EXAM_DIAGNOSIS = "$('#diagnozis')"
-    D_EXAM_NOTES = "$('#description')"
-    PLANNED_D_EXAM = "$('input[value name=date_plan_d_osmotr]')"
-    D_EXAM_SAVE = "$('#save_data')"
+    VISITS_DIAGNOSIS = "$('#diagnozis')"
+    VISITS_NOTES = "$('#description')"
+    PLANNED_SCREENING = "$('input[value name=date_plan_d_osmotr]')"
+    VISITS_SAVE = "$('#save_data')"
 
 
 

@@ -131,9 +131,10 @@ class RegisterPage(BasePage):
         allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
                       attachment_type=AttachmentType.PNG)
         sleep(5)
+        global patient_id_child
         patient_id_child = self.get_patient_id()
         print(f"ID of child patient is {patient_id_child}")
-        assert patient_id_child in self.browser.current_url and patient_id_child != "0000000000"
+        assert f"{patient_id_child}" in self.browser.current_url and patient_id_child != "0000000000"
 
 
     def edit_card(self):
@@ -176,7 +177,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.IFA_OGC_SAVE}.click()")
 
     def check_HIV_antibody_testing_OGC_modal(self):
-        assert self.is_element_present(*PatientCardLocators.IFA_OGC_EDIT), "Data in HIV antibody testing OGC modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.IFA_OGC_EDIT), "Data in HIV antibody testing OGC modal weren't preserved or invalid selector for Edit button"
 
     def should_test_HIV_antibody_testing_KNCDIZ_modal(self):
         self.fill_HIV_antibody_testing_KNCDIZ_modal()
@@ -201,7 +202,7 @@ class RegisterPage(BasePage):
         self.browser.find_element(*PatientCardLocators.IFA_RC_SAVE).click()
 
     def check_HIV_antibody_testing_KNCDIZ_modal(self):
-        assert self.is_element_present(*PatientCardLocators.IFA_RC_EDIT), "Data in HIV antibody testing KNCDIZ modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.IFA_RC_EDIT), "Data in HIV antibody testing KNCDIZ modal weren't preserved or invalid selector for Edit button"
 
     def should_test_IB_modal(self):
         self.fill_IB_modal()
@@ -246,7 +247,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.IB_SAVE}.click()")
 
     def check_IB_modal(self):
-        assert self.is_element_present(*PatientCardLocators.IB_EDIT), "Data in IB modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.IB_EDIT), "Data in IB modal weren't preserved or invalid selector for Edit button"
 
 
     def should_test_PCR_modal(self):
@@ -280,7 +281,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.PCR_SAVE}.click()")
 
     def check_PCR_modal(self):
-        assert self.is_element_present(*PatientCardLocators.PCR_EDIT), "Data in PCR modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.PCR_EDIT), "Data in PCR modal weren't preserved or invalid selector for Edit button"
 
     def should_test_result_modal(self):
         self.fill_result_modal()
@@ -301,9 +302,9 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.RESULT_SAVE}.click()")
 
     def check_result_modal(self):
-        assert self.is_element_present(*PatientCardLocators.RESULT_EDIT), "Data in Result modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('zaklyuchenie_NIB').get_attribute("data-field") == self.numbers5, "Data in Result modal or object Result Number weren't saved"
-        # assert self.is_element_present(*PatientCardLocators.RESULT_PRINT), "Data in Result modal wasn't saved or Print object isn't clickable"
+        assert self.is_element_present(*PatientCardLocators.RESULT_EDIT), "Data in Result modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('zaklyuchenie_NIB').get_attribute("data-field") == self.numbers5, "Data in Result modal or object Result Number weren't preserved"
+        # assert self.is_element_present(*PatientCardLocators.RESULT_PRINT), "Data in Result modal weren't preserved or Print object isn't clickable"
 
     def should_test_family_members_modal(self):
         self.fill_family_members_modal()
@@ -331,8 +332,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.EPID_DOCTOR}.dropdown('set selected', '{epid_doc_choice}');")
 
     def check_family_members_modal(self):
-        assert self.is_element_present(*PatientCardLocators.FAMILY_MEM_EDIT), "Data in Family members modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('fam_members_surname').get_attribute("data-field") == self.surname, "Data in Family members modal or object Result Family member's surname weren't saved"
+        assert self.is_element_present(*PatientCardLocators.FAMILY_MEM_EDIT), "Data in Family members modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('fam_members_surname').get_attribute("data-field") == self.surname, "Data in Family members modal or object Result Family member's surname weren't preserved"
 
     def should_test_luin_modal(self):
         self.fill_luin_modal()
@@ -368,7 +369,7 @@ class RegisterPage(BasePage):
         self.browser.find_element(*PatientCardLocators.LUIN_RS_SAVE).click()
 
     def check_luin_modal(self):
-        assert self.is_element_present(*PatientCardLocators.RESULT_EDIT), "Data in LUIN/RS modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.RESULT_EDIT), "Data in LUIN/RS modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_css_selector('#form_luin div[data-field=luin_rs_drug_experiens_modal]').get_attribute("value") == '1', "The object was not filled"
 
 
@@ -411,7 +412,7 @@ class RegisterPage(BasePage):
         self.browser.find_element(*PatientCardLocators.SEXUAL_CONTACTS_SAVE).click()
 
     def check_sexual_contacts_modal(self):
-        assert self.is_element_present(*PatientCardLocators.RESULT_EDIT), "Data in HIV antibody testing RESULT modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.RESULT_EDIT), "Data in HIV antibody testing RESULT modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_css_selector('#form_luin div[data-field=luin_rs_drug_experiens_modal]').get_attribute("value") == '1', "The object was not filled"
 
     def should_test_mls_modal(self):
@@ -431,7 +432,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.MLS_SAVE}.click();")
 
     def check_mls_modal(self):
-        assert self.is_element_present(*PatientCardLocators.MLS_EDIT), "Data in MLS modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.MLS_EDIT), "Data in MLS modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('mls_date_start').get_attribute("data-field") == '1', "The object has not filled"
 
     def should_test_blood_donor_modal(self):
@@ -462,8 +463,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.BLOOD_DONOR_SAVE}.click();")
 
     def check_blood_donor_modal(self):
-        assert self.is_element_present(*PatientCardLocators.BLOOD_DONOR_EDIT), "Data in Blood Donor modal modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.BLOOD_DONOR_EDIT), "Data in Blood Donor modal modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_organ_donor_modal(self):
         self.fill_organ_donor_modal()
@@ -493,8 +494,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ORGAN_DONOR_SAVE}.click();")
 
     def check_organ_donor_modal(self):
-        assert self.is_element_present(*PatientCardLocators.ORGAN_DONOR_EDIT), "Data in Organ Donor modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.ORGAN_DONOR_EDIT), "Data in Organ Donor modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_blood_recipient_modal(self):
         self.fill_blood_recipient_modal()
@@ -519,8 +520,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.BLOOD_RECEIPT_SAVE}.click();")
 
     def check_blood_recipient_modal(self):
-        assert self.is_element_present(*PatientCardLocators.BLOOD_RECEIPT_EDIT), "Data in Blood donor modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.BLOOD_RECEIPT_EDIT), "Data in Blood donor modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_organ_recipient_modal(self):
         self.fill_organ_recipient_modal()
@@ -546,8 +547,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ORGAN_RECEIPT_SAVE}.click();")
 
     def check_organ_recipient_modal(self):
-        assert self.is_element_present(*PatientCardLocators.ORGAN_RECEIPT_EDIT), "Data in Organ recipient modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('recipient_other_material_date_poluch_mater').get_attribute("data-field") == '01.01.2021', "Data in Organ recipient modal or object Organ transfusion date weren't saved"
+        assert self.is_element_present(*PatientCardLocators.ORGAN_RECEIPT_EDIT), "Data in Organ recipient modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('recipient_other_material_date_poluch_mater').get_attribute("data-field") == '01.01.2021', "Data in Organ recipient modal or object Organ transfusion date weren't preserved"
 
     def should_test_ippp_modal(self):
         self.fill_ippp_modal()
@@ -577,8 +578,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.CHILD_CHEMOPROPHYLAXIS}.dropdown('set selected', '{child_chem_choice}');")
 
     def check_ippp_modal(self):
-        assert self.is_element_present(*PatientCardLocators.IPPP_SYMPTOM_EDIT), "Data in IPPP modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('ippp_diag_diagnoz').get_attribute("data-field") == self.smth_random, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.IPPP_SYMPTOM_EDIT), "Data in IPPP modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('ippp_diag_diagnoz').get_attribute("data-field") == self.smth_random, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_manipulations_modal(self):
         self.fill_manipulations_modal()
@@ -599,8 +600,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.MANIPULATIONS_SAVE}.click();")
 
     def check_manipulations_modal(self):
-        assert self.is_element_present(*PatientCardLocators.MANIPULATIONS_EDIT), "Data in Manipulations modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('manipulations_med_spr_type_vmeshat_id').get_attribute("data-field") == "{manip_sort_choice}", "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.MANIPULATIONS_EDIT), "Data in Manipulations modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('manipulations_med_spr_type_vmeshat_id').get_attribute("data-field") == "{manip_sort_choice}", "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_emergencies_modal(self):
         self.fill_emergencies_modal()
@@ -624,8 +625,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.EMERGENCIES_SAVE}.click();")
 
     def check_emergencies_modal(self):
-        assert self.is_element_present(*PatientCardLocators.EMERGENCIES_EDIT), "Data in Emergencies modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.EMERGENCIES_EDIT), "Data in Emergencies modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_departure_modal(self):
         self.fill_departure_modal()
@@ -645,8 +646,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.DEPARTURE_SAVE}.click();")
 
     def check_departure_modal(self):
-        assert self.is_element_present(*PatientCardLocators.DEPARTURE_EDIT), "Data in Departure modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.DEPARTURE_EDIT), "Data in Departure modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_source_modal(self):
         self.fill_source_modal()
@@ -667,8 +668,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.SOURCE_SAVE}.click();")
 
     def check_source_modal(self):
-        assert self.is_element_present(*PatientCardLocators.SOURCE_EDIT), "Data in Source modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.SOURCE_EDIT), "Data in Source modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def check_switch_to_card_of_another_patient_modal(self):
         self.make(f"{PatientCardLocators.SOURCE_EDIT}.click();")
@@ -681,8 +682,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.SOURCE_SWITCH_TO_CARD}.click();")
         new_window = self.browser.window_handles[1]
         self.browser.switch_to.window(new_window)
-        assert self.is_element_present(*RegisterPageLocators.IB_NO), "There wasn't switched from Source modal to another patient's card."
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*RegisterPageLocators.IB_NO), "There weren't switched from Source modal to another patient's card."
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_contact_person_modal(self):
         self.fill_contact_person_modal()
@@ -727,8 +728,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.CONTACT_PERSON_SAVE}.click();")
 
     def check_contact_person_modal(self):
-        assert self.is_element_present(*PatientCardLocators.CONTACT_PERSON_EDIT), "Data in HIV antibody testing Contact Person modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.CONTACT_PERSON_EDIT), "Data in HIV antibody testing Contact Person modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_dispensary_observation_modal(self):
         self.fill_dispensary_observation_modal()
@@ -755,9 +756,9 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.DISP_SAVE_BTN}.click();")
 
     def check_dispensary_observation_modal(self):
-        assert self.is_element_present(*PatientCardLocators.DISP_OBSER_EDIT), "Data in Dispensary Observation modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('duchet_country').get_attribute("data-field") == '4', "Data in Blood donor modal or object Blood donor code weren't saved"
-        # assert self.browser.find_element_by_id('patient_ambulator_card').get_attribute("data-value") == {self.numbers4}, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.DISP_OBSER_EDIT), "Data in Dispensary Observation modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('duchet_country').get_attribute("data-field") == '4', "Data in Blood donor modal or object Blood donor code weren't preserved"
+        # assert self.browser.find_element_by_id('patient_ambulator_card').get_attribute("data-value") == {self.numbers4}, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_dispensary_observation_modal_when_patient_deregistered(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
@@ -798,7 +799,7 @@ class RegisterPage(BasePage):
         disp_doc_choice = random.choice(['ХАЙДАРОВА Д. И.', 'МАСИЯЕВА А ', 'КЕНЖЕЕВА Г ', 'НАУШАБЕКОВА Ж '])
         self.make(f"{PatientCardLocators.DISP_DOCTORS_NAME}.dropdown('set selected', '{disp_doc_choice}');")
         self.make(f"{PatientCardLocators.DISP_SAVE_BTN}.click();")
-        # assert self.browser.find_element_by_id('duchet_reason').get_attribute("data-value") == {reason_deregis_choice}, "Data in Blood donor modal or object Blood donor code weren't saved"
+        # assert self.browser.find_element_by_id('duchet_reason').get_attribute("data-value") == {reason_deregis_choice}, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_perinatal_registration_modal(self):
         self.fill_perinatal_registration_modal()
@@ -826,8 +827,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.PERINATAL_SAVE}.click();")
 
     def check_perinatal_registration_modal(self):
-        assert self.is_element_present(*PatientCardLocators.DISP_OBSER_EDIT), "Data in Dispensary Observation modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.PERINATAL_EDIT), "Data in Dispensary Observation modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_arv_prophylaxis_modal(self):
         self.fill_arv_prophylaxis_modal()
@@ -860,8 +861,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ARV_HIV_DETERMINATION_DATE}.calendar('set date', '{self.fifty_days_ago}');")
 
     def check_arv_prophylaxis_modal(self):
-        assert self.is_element_present(*PatientCardLocators.RECOM_CONSULTATION_EDIT), "Data in Recommended Consultation modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.RECOM_CONSULTATION_EDIT), "Data in Recommended Consultation modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_hiv_diagnosis_modal(self):
         self.fill_hiv_diagnosis_modal()
@@ -878,7 +879,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.HIV_DIAGNOSIS_SAVE}.click();")
 
     def check_hiv_diagnosis_modal(self):
-        assert self.is_element_present(*PatientCardLocators.HIV_DIAGNOSIS_EDIT), "Data in HIV Diagnosis modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.HIV_DIAGNOSIS_EDIT), "Data in HIV Diagnosis modal weren't preserved or invalid selector for Edit button"
 
     def should_test_hiv_related_disease_modal(self):
         self.fill_hiv_related_disease_modal()
@@ -895,9 +896,9 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.HIV_RELATED_DISEASE_SAVE}.click();")
 
     def check_hiv_related_disease_modal(self):
-        assert self.is_element_present(*PatientCardLocators.HIV_RELATED_DISEASE_EDIT), "Data in HIV Related Disease modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('add_row_hiv_table').get_attribute("action-type") == 'edit', "Data in HIV diagnosis modal wasn't saved"
-        # assert self.browser.find_element_by_id('add_row_diag_opurt_table').get_attribute("action-type") == 'edit', "Data in HIV related diseas modal wasn't saved"
+        assert self.is_element_present(*PatientCardLocators.HIV_RELATED_DISEASE_EDIT), "Data in HIV Related Disease modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('add_row_hiv_table').get_attribute("action-type") == 'edit', "Data in HIV diagnosis modal weren't preserved"
+        # assert self.browser.find_element_by_id('add_row_diag_opurt_table').get_attribute("action-type") == 'edit', "Data in HIV related diseas modal weren't preserved"
 
     def should_test_recommended_consultation_modal(self):
         self.fill_recommended_consultation_modal()
@@ -915,8 +916,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.RECOM_CONSULTATION_SAVE}.click();")
 
     def check_recommended_consultation_modal(self):
-        assert self.is_element_present(*PatientCardLocators.RECOM_CONSULTATION_EDIT), "Data in Recommended Consultation modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('add_row_recomended_consultation_table').get_attribute("action-type") == 'edit', "Data in Recommended consultation modal wasn't saved"
+        assert self.is_element_present(*PatientCardLocators.RECOM_CONSULTATION_EDIT), "Data in Recommended Consultation modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('add_row_recomended_consultation_table').get_attribute("action-type") == 'edit', "Data in Recommended consultation modal weren't preserved"
 
     def should_test_recommended_screening_modal(self):
         self.fill_recommended_screening_modal()
@@ -934,8 +935,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.RECOM_SCREENING_SAVE}.click();")
 
     def check_recommended_screening_modal(self):
-        assert self.is_element_present(*PatientCardLocators.RECOM_SCREENING_EDIT), "Data in Recommended Screening modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('add_row_recomended_obsled_table').get_attribute("action-type") == 'edit', "Data in Recommended screening modal wasn't saved"
+        assert self.is_element_present(*PatientCardLocators.RECOM_SCREENING_EDIT), "Data in Recommended Screening modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('add_row_recomended_obsled_table').get_attribute("action-type") == 'edit', "Data in Recommended screening modal weren't preserved"
 
     def should_test_referral_modal(self):
         self.fill_referral_modal()
@@ -978,12 +979,12 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.AA_EDIT}.click();")
         self.make(f"{PatientCardLocators.AA_RESULT}.val('положительный');")
         self.make(f"{PatientCardLocators.AA_SAVE}.click();")
-        assert self.make(f"$('#additional_research_table tr:eq(1) td:eq(7)')[0].innerText") == 'Подтвержден', "Data in Result modal in Additional Analysis Tab wasn't saved"
+        assert self.browser.execute_script(f"$('#additional_research_table tr:eq(1) td:eq(7)')[0].innerText") == 'Подтвержден', "Data in Result modal in Additional Analysis Tab weren't preserved"
 
 
     def check_referral_modal(self):
-        assert self.is_element_present(*PatientCardLocators.REFERRAL_EDIT), "Data in Referral modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('add_row_refferals_table').get_attribute("action-type") == 'edit', "Data in Referral modal wasn't saved"
+        assert self.is_element_present(*PatientCardLocators.REFERRAL_EDIT), "Data in Referral modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('add_row_refferals_table').get_attribute("action-type") == 'edit', "Data in Referral modal weren't preserved"
 
     def should_test_cd4_modal(self):
         self.fill_cd4_modal()
@@ -1011,8 +1012,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.CD4_SAVE}.click();")
 
     def check_cd4_modal(self):
-        assert self.is_element_present(*PatientCardLocators.CD4_EDIT), "Data in CD4 Determination modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('obsled_cd4_lab_N_registr').get_attribute("data-field") == self.numbers5, "Data in CD4 modal weren't saved"
+        assert self.is_element_present(*PatientCardLocators.CD4_EDIT), "Data in CD4 Determination modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('obsled_cd4_lab_N_registr').get_attribute("data-field") == self.numbers5, "Data in CD4 modal weren't preserved"
 
     def should_test_viral_load_modal(self):
         self.fill_viral_load_modal()
@@ -1041,8 +1042,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.VL_SAVE}.click();")
 
     def check_viral_load_modal(self):
-        assert self.is_element_present(*PatientCardLocators.VL_EDIT), "Data in VL modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('vn_N_isledov').get_attribute("data-field") == self.numbers5, "Data in Viral load modal weren't saved"
+        assert self.is_element_present(*PatientCardLocators.VL_EDIT), "Data in VL modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('vn_N_isledov').get_attribute("data-field") == self.numbers5, "Data in Viral load modal weren't preserved"
 
     def should_test_vgv_modal(self):
         self.fill_vgv_modal()
@@ -1065,7 +1066,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.VGV_SAVE}.click();")
 
     def check_vgv_modal(self):
-        assert self.is_element_present(*PatientCardLocators.VGV_EDIT), "Data in VGV analysis modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.VGV_EDIT), "Data in VGV analysis modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('vgv_disp_table').get_attribute(
         #     "action-type") == 'edit', "Data in VGV modal weren't preserved"
 
@@ -1090,7 +1091,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.VGS_SAVE}.click();")
 
     def check_vgs_modal(self):
-        assert self.is_element_present(*PatientCardLocators.VGS_EDIT), "Data in VGS analysis modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.VGS_EDIT), "Data in VGS analysis modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('vgc-').get_attribute(
         #     "action-type") == 'edit', "Data in VGS modal weren't preserved"
 
@@ -1115,7 +1116,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.VGV_VAC_SAVE}.click();")
 
     def check_vgv_vac_modal(self):
-        assert self.is_element_present(*PatientCardLocators.VGV_VAC_EDIT), "Data in VGV Vaccination modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.VGV_VAC_EDIT), "Data in VGV Vaccination modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('vgv_vakcin_disp_table').get_attribute(
         #     "action-type") == 'edit', "Data in VGV vaccination modal weren't preserved"
 
@@ -1140,8 +1141,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.RADIOGRAPHY_SAVE}.click();")
 
     def check_fluoroscopy_and_radiography_modals(self):
-        assert self.is_element_present(*PatientCardLocators.FLUOROSCOPY_EDIT), "Data in Fluoroscopy modal wasn't saved or invalid selector for Edit button"
-        assert self.is_element_present(*PatientCardLocators.RADIOGRAPHY_EDIT), "Data in Radiography modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.FLUOROSCOPY_EDIT), "Data in Fluoroscopy modal weren't preserved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.RADIOGRAPHY_EDIT), "Data in Radiography modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('vgv_vakcin_disp_table').get_attribute(
         #     "action-type") == 'edit', "Data in VGV vaccination modal weren't preserved"
         # assert self.browser.find_element_by_id('vgv_vakcin_disp_table').get_attribute(
@@ -1168,10 +1169,10 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.TB_SYMPH_SAVE}.click();")
 
     def check_sputum_smear_and_tb_symphtoms_modals(self):
-        assert self.is_element_present(*PatientCardLocators.SPUTUM_EDIT), "Data in Sputum Smear Examination modal wasn't saved or invalid selector for Edit button"
-        assert self.is_element_present(*PatientCardLocators.TB_SYMPH_EDIT), "Data in TB Symphtoms modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.SPUTUM_EDIT), "Data in Sputum Smear Examination modal weren't preserved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.TB_SYMPH_EDIT), "Data in TB Symphtoms modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute(
-        #     "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        #     "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_xpert_mtb_and_kt_mrt_modals(self):
         self.fill_xpert_mtb_and_kt_mrt_modals()
@@ -1194,10 +1195,10 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.KT_MRT_SAVE}.click();")
 
     def check_xpert_mtb_and_kt_mrt_modals(self):
-        assert self.is_element_present(*PatientCardLocators.XPERT_MTB_EDIT), "Data in Xpert MTB modal wasn't saved or invalid selector for Edit button"
-        assert self.is_element_present(*PatientCardLocators.KT_MRT_EDIT), "Data in KT/MRT modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.XPERT_MTB_EDIT), "Data in Xpert MTB modal weren't preserved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.KT_MRT_EDIT), "Data in KT/MRT modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute(
-        #     "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        #     "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_tb_treatment_modal(self):
         self.fill_tb_treatment_modal()
@@ -1228,9 +1229,9 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.D_ACCOUNTED_DATE}.calendar('set date', '{self.today}');")
 
     def check_tb_treatment_modal(self):
-        assert self.is_element_present(*PatientCardLocators.TB_TREATMENT_EDIT), "Data in TB treatment modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.TB_TREATMENT_EDIT), "Data in TB treatment modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute(
-        #     "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        #     "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_art_information_modal(self):
         self.fill_art_information_modal()
@@ -1269,7 +1270,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ART_INFORMATION_SAVE}.click();")
 
     def check_art_information_modal(self):
-        assert self.is_element_present(*PatientCardLocators.ART_INFORMATION_EDIT), "Data in Art Information modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.ART_INFORMATION_EDIT), "Data in Art Information modal weren't preserved or invalid selector for Edit button"
 
     def should_test_art_adherence_level_modal(self):
         self.fill_art_adherence_level_modal()
@@ -1295,7 +1296,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ART_ADHER_LEVEL_SAVE}.click();")
 
     def check_art_adherence_level_modal(self):
-        assert self.is_element_present(*PatientCardLocators.ART_ADHER_LEVEL_EDIT), "Data in Art Adherence modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.ART_ADHER_LEVEL_EDIT), "Data in Art Adherence modal weren't preserved or invalid selector for Edit button"
 
     def should_test_recipe_modal(self):
         self.fill_recipe_modal()
@@ -1322,7 +1323,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ART_RECIPE_SAVE}.click();")
 
     def check_recipe_modal(self):
-        assert self.is_element_present(*PatientCardLocators.ART_RECIPE_EDIT), "Data in Recipe modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.ART_RECIPE_EDIT), "Data in Recipe modal weren't preserved or invalid selector for Edit button"
 
     def should_test_pregnancy_modal(self):
         self.fill_pregnancy_modal()
@@ -1363,8 +1364,8 @@ class RegisterPage(BasePage):
 
 
     def check_pregnancy_modal(self):
-        assert self.is_element_present(*PatientCardLocators.PREGNANCY_EDIT), "Data in Pregnancy modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.PREGNANCY_EDIT), "Data in Pregnancy modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_children_modal(self):
         self.fill_children_modal()
@@ -1401,8 +1402,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.PREGNANCY_SAVE}.click();")
 
     def check_children_modal(self):
-        assert self.is_element_present(*PatientCardLocators.PREGNANCY_EDIT), "Data in Pregnancy modal wasn't saved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+        assert self.is_element_present(*PatientCardLocators.PREGNANCY_EDIT), "Data in Pregnancy modal weren't preserved or invalid selector for Edit button"
+        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def should_test_preventive_therapy_and_ost_modals(self):
         self.fill_preventive_therapy_and_ost_modals()
@@ -1429,8 +1430,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.OST_SAVE}.click();")
 
     def check_preventive_therapy_and_ost_modals(self):
-        assert self.is_element_present(*PatientCardLocators.PREV_THER_EDIT), "Data in Preventive therapy modal wasn't saved or invalid selector for Edit button"
-        assert self.is_element_present(*PatientCardLocators.OST_EDIT), "Data in OST modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.PREV_THER_EDIT), "Data in Preventive therapy modal weren't preserved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.OST_EDIT), "Data in OST modal weren't preserved or invalid selector for Edit button"
 
     def should_test_vgs_treatment_modal(self):
         self.fill_vgs_treatment_modal()
@@ -1448,26 +1449,51 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.VGS_TREAT_SAVE}.click();")
 
     def check_vgs_treatment_modal(self):
-        assert self.is_element_present(*PatientCardLocators.VGS_TREAT_EDIT), "Data in VGS treatment modal wasn't saved or invalid selector for Edit button"
+        assert self.is_element_present(*PatientCardLocators.VGS_TREAT_EDIT), "Data in VGS treatment modal weren't preserved or invalid selector for Edit button"
 
-    def should_test_d_exam_hospitalization_modal(self):
-        self.fill_d_exam_hospitalization_modal()
-        self.check_d_exam_hospitalization_modal()
+    def should_test_d_screening_hospitalization_modal(self):
+        self.fill_d_screening_hospitalization_modal()
+        self.check_d_screening_hospitalization_modal()
 
-    def fill_d_exam_hospitalization_modal(self):
+    def fill_d_screening_hospitalization_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
         self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
-        self.make(f"{PatientCardLocators.D_EXAM_HOSPITALIZATION}.click();")
+        self.make(f"{PatientCardLocators.D_SCREENING_HOSPITALIZATION}.click();")
+        self.make(f"{PatientCardLocators.D_SCRN_HOSP_ADD}.click();")
+        self.make(f"{PatientCardLocators.DATE_OF_ELIGIBILITY_FOR_TREATMENT}.val('{self.today}');")
+        treat_type_choice = random.choice(['1', '2'])
+        self.make(f"{PatientCardLocators.D_SCRN_TREAT_TYPE}.dropdown('set selected', '{treat_type_choice}');")
+        treat_res_choice = random.choice(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'])
+        self.make(f"{PatientCardLocators.MPI_PROFILE}.dropdown('set selected', '{treat_res_choice}');")
+        self.make(f"{PatientCardLocators.HOSP_DATE}.val('{self.today}');")
+        self.make(f"{PatientCardLocators.DATE_OF_DISCHARGE}.val('{self.today}');")
+        treat_outc_choice = random.choice(['1', '2', '3', '4', '5'])
+        self.make(f"{PatientCardLocators.D_SCRN_TREAT_RESULT}.dropdown('set selected', '{treat_outc_choice}');")
+        self.make(f"{PatientCardLocators.D_SCRN_HOSP_SAVE}.click();")
+
+    def check_d_screening_hospitalization_modal(self):
+        assert self.is_element_present(*PatientCardLocators.D_SCRN_HOSP_EDIT), "Data in D-screening, hospitalization modal weren't preserved or invalid selector for Edit button"
+
+    def should_test_visits_modal(self):
+        self.fill_visits_modal()
+        self.check_visits_modal()
+
+    def fill_visits_modal(self):
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
+        self.make(f"{PatientCardLocators.VISITS}.click();")
         self.browser.execute_script("document.querySelector('div.ui.secondary.padding_ext_07.segment a.ui.green.button.add_osmotr').classList.remove('trollface');")
         sleep(5)
-        # self.make(f"{PatientCardLocators.ATTENDANCE_DATE}.val('{self.today}');")
+        new_window = self.browser.window_handles[1]
+        self.browser.switch_to.window(new_window)
+        self.make(f"{PatientCardLocators.ATTENDANCE_DATE}.val('{self.today}');")
         exam_choice = random.choice('infection', 'pediatr', 'ftiziatr', 'ginekolog', 'terapevt', 'dermatolog',
                                     'psiholog', 'social_worker', 'narkolog')
-        self.make(f"{PatientCardLocators.D_EXAM_HELD}.dropdown('set selected', 'exam_choice');")
+        self.make(f"{PatientCardLocators.SCREENING_HELD}.dropdown('set selected', 'exam_choice');")
         service_choice = random.choice('2', '3', '348', '328', '33', '25', '322', '331', '14')
-        self.make(f"{PatientCardLocators.D_SERVICES}.dropdown('set selected', 'service_choice');")
+        self.make(f"{PatientCardLocators.VISITS_SERVICES}.dropdown('set selected', 'service_choice');")
         place_choice = random.choice('home', 'mls', 'stacionar', 'center_hiv', 'ambulatorno')
-        self.make(f"{PatientCardLocators.D_EXAM_PLACE}.dropdown('set selected', 'place_choice');")
+        self.make(f"{PatientCardLocators.SCREENING_PLACE}.dropdown('set selected', 'place_choice');")
         attendance_choice = random.choice('perv_osmotr', 'd_osmotr', 'po_zabolev', 'current_reception')
         self.make(
             f"{PatientCardLocators.ATTENDANCE_TYPE}.dropdown('set selected', 'attendance_choice');")
@@ -1478,12 +1504,15 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.HISTORY_INFORMATION}.val('{self.midname}');")
         self.make(f"{PatientCardLocators.LAST_MENSIS}.val('{self.today}');")
         self.make(f"{PatientCardLocators.CONTRACEPTION}.click();")
-        self.make(f"{PatientCardLocators.D_EXAM_SEX_PARTNER}.click();")
+        self.make(f"{PatientCardLocators.VISITS_SEX_PARTNER}.click();")
         self.make(f"{PatientCardLocators.ART_RECEIPT}.click();")
-        self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_YES}.click();")
-        self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_NO}.click();")
-        self.make(f"{PatientCardLocators.D_EXAM_ALCOHOL}.click();")
-        self.make(f"{PatientCardLocators.D_EXAM_DRUGS}.click();")
+        planned_pregnancy_choice = random.choice(['1', '2'])
+        if planned_pregnancy_choice == "1":
+            self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_YES}.click();")
+        else:
+            self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_NO}.click();")
+        self.make(f"{PatientCardLocators.VISITS_ALCOHOL}.click();")
+        self.make(f"{PatientCardLocators.VISITS_DRUGS}.click();")
         # D_EXAM_INJ_DRUG_LAST_HALF_YEAR = "$('div[data-field=inek_nark_six_month] .ui.dropdown')"
         # D_EXAM_COM_SEX_LAST_HALF_YEAR = "$('div[data-field=komerc_sex_six_month] .ui.dropdown')"
         # D_EXAM_HOMO_SEX_LAST_HALF_YEAR = "$('div[data-field=gomo_sex_six_month] .ui.dropdown')"
@@ -1552,14 +1581,13 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.DIURESIS_BREACHED}.click();")
         self.make(f"{PatientCardLocators.DIURESIS_NORM}.click();")
         self.make(f"{PatientCardLocators.SWELLING}.val('yes');")
-        self.make(f"{PatientCardLocators.D_EXAM_DIAGNOSIS}.val('{self.midname}');")
-        self.make(f"{PatientCardLocators.D_EXAM_NOTES}.val('{self.surname}');")
-        self.make(f"{PatientCardLocators.PLANNED_D_EXAM}.val('{self.today}');")
-        self.make(f"{PatientCardLocators.D_EXAM_SAVE}.click();")
+        self.make(f"{PatientCardLocators.VISITS_NOTES}.val('{self.surname}');")
+        self.make(f"{PatientCardLocators.PLANNED_SCREENING}.val('{self.today}');")
+        self.make(f"{PatientCardLocators.VISITS_SAVE}.click();")
 
-    def check_d_exam_hospitalization_modal(self):
+    def check_visits_modal(self):
         assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute(
-            "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't saved"
+            "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def register_new_woman(self):
         # автозаполнение формы регистрации для взрослого

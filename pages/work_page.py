@@ -29,7 +29,6 @@ class WorkPage(BasePage):
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
-        # global patient_id_child
         self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_child}']);")
         sleep(5)
         self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
