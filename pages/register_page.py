@@ -1482,112 +1482,148 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
         self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
         self.make(f"{PatientCardLocators.VISITS}.click();")
-        self.browser.execute_script("document.querySelector('div.ui.secondary.padding_ext_07.segment a.ui.green.button.add_osmotr').classList.remove('trollface');")
-        sleep(5)
+        self.browser.execute_script("document.querySelector('div.ui.secondary.padding_ext_07.segment a.ui.green.button.add_osmotr').click()")
+        sleep(3)
         new_window = self.browser.window_handles[1]
+        first_window = self.browser.window_handles[0]
         self.browser.switch_to.window(new_window)
         self.make(f"{PatientCardLocators.ATTENDANCE_DATE}.val('{self.today}');")
-        exam_choice = random.choice('infection', 'pediatr', 'ftiziatr', 'ginekolog', 'terapevt', 'dermatolog',
-                                    'psiholog', 'social_worker', 'narkolog')
-        self.make(f"{PatientCardLocators.SCREENING_HELD}.dropdown('set selected', 'exam_choice');")
-        service_choice = random.choice('2', '3', '348', '328', '33', '25', '322', '331', '14')
-        self.make(f"{PatientCardLocators.VISITS_SERVICES}.dropdown('set selected', 'service_choice');")
-        place_choice = random.choice('home', 'mls', 'stacionar', 'center_hiv', 'ambulatorno')
-        self.make(f"{PatientCardLocators.SCREENING_PLACE}.dropdown('set selected', 'place_choice');")
-        attendance_choice = random.choice('perv_osmotr', 'd_osmotr', 'po_zabolev', 'current_reception')
-        self.make(
-            f"{PatientCardLocators.ATTENDANCE_TYPE}.dropdown('set selected', 'attendance_choice');")
+        exam_choice = random.choice(['infection', 'pediatr', 'ftiziatr', 'ginekolog', 'terapevt', 'dermatolog', 'psiholog', 'social_worker', 'narkolog'])
+        self.make(f"{PatientCardLocators.SCREENING_HELD}.dropdown('set selected', '{exam_choice}');")
+        service_choice = random.choice(['2', '3', '348', '328', '33', '25', '322', '331', '14'])
+        self.make(f"{PatientCardLocators.VISITS_SERVICES}.dropdown('set selected', '{service_choice}');")
+        place_choice = random.choice(['home', 'mls', 'stacionar', 'center_hiv', 'ambulatorno'])
+        self.make(f"{PatientCardLocators.SCREENING_PLACE}.dropdown('set selected', '{place_choice}');")
+        attendance_choice = random.choice(['perv_osmotr', 'd_osmotr', 'po_zabolev', 'current_reception'])
+        self.make(f"{PatientCardLocators.ATTENDANCE_TYPE}.dropdown('set selected', '{attendance_choice}');")
         self.make(f"{PatientCardLocators.TEMPERATURE}.val('36.6');")
         self.make(f"{PatientCardLocators.WEIGHT}.val('32');")
         self.make(f"{PatientCardLocators.HEIGHT}.val('100');")
+        self.make(f"{PatientCardLocators.IMT}.val('25');")
         self.make(f"{PatientCardLocators.COMPLAINTS}.val('{self.surname}');")
         self.make(f"{PatientCardLocators.HISTORY_INFORMATION}.val('{self.midname}');")
         self.make(f"{PatientCardLocators.LAST_MENSIS}.val('{self.today}');")
         self.make(f"{PatientCardLocators.CONTRACEPTION}.click();")
+        contraception_choice = random.choice(['condoms', 'spiral', 'hirurg_sterialize', 'drug', 'kok', 'another'])
+        self.make(f"{PatientCardLocators.CONTRACEPTION_TYPES}.dropdown('set selected', '{contraception_choice}');")
         self.make(f"{PatientCardLocators.VISITS_SEX_PARTNER}.click();")
         self.make(f"{PatientCardLocators.ART_RECEIPT}.click();")
-        planned_pregnancy_choice = random.choice(['1', '2'])
-        if planned_pregnancy_choice == "1":
+        planned_pregnancy_choice = random.choice(['Yes', 'No'])
+        if planned_pregnancy_choice == "Yes":
             self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_YES}.click();")
         else:
             self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_NO}.click();")
         self.make(f"{PatientCardLocators.VISITS_ALCOHOL}.click();")
         self.make(f"{PatientCardLocators.VISITS_DRUGS}.click();")
-        # D_EXAM_INJ_DRUG_LAST_HALF_YEAR = "$('div[data-field=inek_nark_six_month] .ui.dropdown')"
-        # D_EXAM_COM_SEX_LAST_HALF_YEAR = "$('div[data-field=komerc_sex_six_month] .ui.dropdown')"
-        # D_EXAM_HOMO_SEX_LAST_HALF_YEAR = "$('div[data-field=gomo_sex_six_month] .ui.dropdown')"
-        state_choice = random.choice('satisfactory', 'moderate_severity', 'severe_severity', 'extremely_heavy')
-        self.make(f"{PatientCardLocators.STATE}.dropdown('set selected', 'state_choice');")
-        conscious_choice = random.choice('clear', 'stupor', 'sopor', 'coma')
-        self.make(
-            f"{PatientCardLocators.CONSCIOUSNESS}.dropdown('set selected', 'conscious_choice');")
-        position_choice = random.choice('active', 'passive', 'forced')
-        self.make(f"{PatientCardLocators.POSITION}.dropdown('set selected', 'position_choice');")
-        body_choice = random.choice('normostenic', 'astenik', 'hypersthenic')
-        self.make(f"{PatientCardLocators.BODY_TYPE}.dropdown('set selected', 'body_choice');")
-        feeding_choice1 = random.choice('moderate', 'low', 'high', 'cachexia')
-        self.make(f"{PatientCardLocators.FEEDING}.dropdown('set selected', 'feeding_choice1');")
-        lipo_choice = random.choice('10', '20')
-        self.make(f"{PatientCardLocators.LIPODYSTROPHY}.dropdown('set selected', 'lipo_choice');")
-        skin_choice = random.choice('regular_coloring', 'pale_pink', 'icteric', 'another')
-        self.make(f"{PatientCardLocators.SKIN_MUCOSA}.dropdown('set selected', 'skin_choice');")
-        nails_choice = random.choice('not_changed', 'changed')
-        self.make(f"{PatientCardLocators.NAILS}.dropdown('set selected', 'nails_choice');")
-        rash_choice = random.choice('10', '20')
-        self.make(f"{PatientCardLocators.RASH}.dropdown('set selected', 'rash_choice');")
-        lymph_choice = random.choice('not_palpable', 'not_enlarged', 'palpable', 'enlarged', 'painful', 'not_painful',
-                                     'single', 'multiple', 'not_soldered')
-        self.make(
-            f"{PatientCardLocators.PERIFEPHERAL_LYMPH_NODES}.dropdown('set selected', 'lymph_choice');")
-        osteo_choice = random.choice('no_pathological_changes', 'with_pathological_changes')
-        self.make(
-            f"{PatientCardLocators.OSTEO_ARTICULAR_SYSTEM}.dropdown('set selected', 'osteo_choice');")
-        breath_choice = random.choice('vesicular', 'tough', 'weakened', 'another')
-        self.make(f"{PatientCardLocators.BREATH_SOUNDS}.dropdown('set selected', 'breath_choice');")
-        self.make(f"{PatientCardLocators.WHEEZING_YES}.click();")
-        self.make(f"{PatientCardLocators.WHEEZING_NO}.click();")
-        wheezing_choice = random.choice('dry', 'wet', 'whistling', 'crepitus')
-        self.make(f"{PatientCardLocators.WHEEZING_TYPE}.dropdown('set selected', 'wheezing_choice');")
+        choices_for_visits_modal = random.choice(['10', '20'])
+        self.make(f"{PatientCardLocators.VISITS_INJ_DRUG_LAST_HALF_YEAR}.dropdown('set selected', '{choices_for_visits_modal}');")
+        self.make(f"{PatientCardLocators.VISITS_COM_SEX_LAST_HALF_YEAR}.dropdown('set selected', '{choices_for_visits_modal}');")
+        self.make(f"{PatientCardLocators.VISITS_HOMO_SEX_LAST_HALF_YEAR}.dropdown('set selected', '{choices_for_visits_modal}');")
+        state_choice = random.choice(['satisfactory', 'moderate_severity', 'severe_severity', 'extremely_heavy'])
+        self.make(f"{PatientCardLocators.STATE}.dropdown('set selected', '{state_choice}');")
+        conscious_choice = random.choice(['clear', 'stupor', 'sopor', 'coma'])
+        self.make(f"{PatientCardLocators.CONSCIOUSNESS}.dropdown('set selected', '{conscious_choice}');")
+        position_choice = random.choice(['active', 'passive', 'forced'])
+        self.make(f"{PatientCardLocators.POSITION}.dropdown('set selected', '{position_choice}');")
+        body_choice = random.choice(['normostenic', 'astenik', 'hypersthenic'])
+        self.make(f"{PatientCardLocators.BODY_TYPE}.dropdown('set selected', '{body_choice}');")
+        feeding_choice1 = random.choice(['moderate', 'low', 'high', 'cachexia'])
+        self.make(f"{PatientCardLocators.FEEDING}.dropdown('set selected', '{feeding_choice1}');")
+        self.make(f"{PatientCardLocators.LIPODYSTROPHY}.dropdown('set selected', '{choices_for_visits_modal}');")
+        skin_choice = random.choice(['regular_coloring', 'pale_pink', 'icteric', 'another'])
+        self.make(f"{PatientCardLocators.SKIN_MUCOSA}.dropdown('set selected', '{skin_choice}');")
+        if skin_choice == 'another':
+            self.make(f"{PatientCardLocators.SKIN_DESCRIPTION}.val('пятнистый');")
+        nails_choice = random.choice(['not_changed', 'changed'])
+        self.make(f"{PatientCardLocators.NAILS}.dropdown('set selected', '{nails_choice}');")
+        if nails_choice == 'changed':
+            self.make(f"{PatientCardLocators.NAILS_DESCRIPTION}.val('странный');")
+        self.make(f"{PatientCardLocators.RASH}.dropdown('set selected', '{choices_for_visits_modal}');")
+        if choices_for_visits_modal == '10':
+            rash_choice = random.choice(['punctate', 'papular', 'vesicular', 'urtikarnaya'])
+            self.make(f"{PatientCardLocators.RASH_TYPE}.dropdown('set selected', '{rash_choice}');")
+            self.make(f"{PatientCardLocators.RASH_LOCALITY}.val('высыпания на шее');")
+        lymph_choice = random.choice(['not_palpable', 'not_enlarged', 'palpable', 'enlarged', 'painful', 'not_painful',
+                                     'single', 'multiple', 'not_soldered'])
+        self.make(f"{PatientCardLocators.PERIFEPHERAL_LYMPH_NODES}.dropdown('set selected', '{lymph_choice}');")
+        if lymph_choice == 'enlarged':
+            self.make(f"{PatientCardLocators.LYMPH_NODES_DESCRIPTION}.val('0,5');")
+        osteo_choice = random.choice(['no_pathological_changes', 'with_pathological_changes'])
+        self.make(f"{PatientCardLocators.OSTEO_ARTICULAR_SYSTEM}.dropdown('set selected', '{osteo_choice}');")
+        if osteo_choice == 'with_pathological_changes':
+            self.make(f"{PatientCardLocators.OSTEO_DESCRIPTION}.val('хрустящий');")
+        breath_choice = random.choice(['vesicular', 'tough', 'weakened', 'another'])
+        self.make(f"{PatientCardLocators.BREATH_SOUNDS}.dropdown('set selected', '{breath_choice}');")
+        if breath_choice == 'another':
+            self.make(f"{PatientCardLocators.BREATH_SOUNDS_DESCRIPTION}.val('поскрипывает');")
+        wheesing_choice = random.choice(['Yes', 'No'])
+        if wheesing_choice == "Yes":
+            self.make(f"{PatientCardLocators.WHEEZING_YES}.click();")
+            wheezing_choice = random.choice(['dry', 'wet', 'whistling', 'crepitus'])
+            self.make(f"{PatientCardLocators.WHEEZING_TYPE}.dropdown('set selected', '{wheezing_choice}');")
+        else:
+            self.make(f"{PatientCardLocators.WHEEZING_NO}.click();")
         self.make(f"{PatientCardLocators.RESPIRATORY_RATE}.val('100');")
-        heart_choice = random.choice('clear', 'muffled', 'rhythmic', 'arrhythmic')
-        self.make(f"{PatientCardLocators.HEART_SOUNDS}.dropdown('set selected', 'heart_choice');")
+        heart_choice = random.choice(['clear', 'muffled', 'rhythmic', 'arrhythmic'])
+        self.make(f"{PatientCardLocators.HEART_SOUNDS}.dropdown('set selected', '{heart_choice}');")
         self.make(f"{PatientCardLocators.HEART_RATE}.val('100');")
         self.make(f"{PatientCardLocators.BLOOD_PREASURE}.val('100');")
-        noise_choice = random.choice('not_heard', 'heard')
-        self.make(f"{PatientCardLocators.NOISE}.dropdown('set selected', 'noise_choice');")
-        tongue_choice = random.choice('decorated', 'liquid', 'without_pathological_impurities', 'blood', 'slime',
-                                      'ordinary_paint', 'green', 'acholic', 'another')
-        self.make(f"{PatientCardLocators.TONGUE}.dropdown('set selected', 'tongue_choice');")
+        noise_choice = random.choice(['not_heard', 'heard'])
+        self.make(f"{PatientCardLocators.NOISE}.dropdown('set selected', '{noise_choice}');")
+        if noise_choice == 'heard':
+            self.make(f"{PatientCardLocators.NOISE_DESCRIPTION}.val('журчит');")
+        tongue_choice = random.choice(['dry', 'wet', 'clean_of_plaque', 'white_coated', 'patches_on_side_surfaces',
+                                      'cheesy_patina', 'another'])
+        self.make(f"{PatientCardLocators.TONGUE}.dropdown('set selected', '{tongue_choice}');")
+        if tongue_choice == 'another':
+            self.make(f"{PatientCardLocators.TONGUE_DESCRIPTION}.val('язык высунут');")
         self.make(f"{PatientCardLocators.ORAL_MUCOSA}.val('{self.surname}');")
-        stomach_choice = random.choice('painless_on_palpation', 'tense', 'painful_on_palpation', 'another')
-        self.make(f"{PatientCardLocators.STOMACH}.dropdown('set selected', 'stomach_choice');")
-        liver_choice = random.choice('not_increased', 'on_the_edge_of_the_costal_arch',
+        stomach_choice = random.choice(['painless_on_palpation', 'tense', 'painful_on_palpation', 'another'])
+        self.make(f"{PatientCardLocators.STOMACH}.dropdown('set selected', '{stomach_choice}');")
+        if stomach_choice == 'another' or 'painful_on_palpation':
+            self.make(f"{PatientCardLocators.STOMACH_DESCRIPTION}.val('язык высунут');")
+        liver_choice = random.choice(['not_increased', 'on_the_edge_of_the_costal_arch',
                                      'protrudes_from_under_the_edge_of_the_costal_arch', 'consistency_dense', 'soft',
-                                     'elastic', 'another')
-        self.make(f"{PatientCardLocators.LIVER}.dropdown('set selected', 'liver_choice');")
-        spleen_choice = random.choice('not_palpable', 'increased_from_under_the_edge', 'deleted', 'another')
-        self.make(f"{PatientCardLocators.SPLEEN}.dropdown('set selected', 'spleen_choice');")
-        sym_choice = random.choice('negative', 'positive', 'two_side', 'left', 'right')
-        self.make(
-            f"{PatientCardLocators.SYMPTOMS_OF_BANGING}.dropdown('set selected', 'sym_choice');")
-        stool_choice = random.choice('decorated', 'liquid', 'without_pathological_impurities', 'blood', 'slime',
-                                     'ordinary_paint', 'green', 'acholic', 'another')
-        self.make(f"{PatientCardLocators.STOOL}.dropdown('set selected', 'stool_choice');")
+                                     'elastic', 'another'])
+        self.make(f"{PatientCardLocators.LIVER}.dropdown('set selected', '{liver_choice}');")
+        if liver_choice == 'on_the_edge_of_the_costal_arch':
+            self.make(f"{PatientCardLocators.LIVER_CM}.val('2');")
+        if liver_choice == 'another':
+            self.make(f"{PatientCardLocators.LIVER_DESCRIPTION}.val('опухший');")
+        spleen_choice = random.choice(['not_palpable', 'increased_from_under_the_edge', 'deleted', 'another'])
+        self.make(f"{PatientCardLocators.SPLEEN}.dropdown('set selected', '{spleen_choice}');")
+        if spleen_choice == 'increased_from_under_the_edge':
+            self.make(f"{PatientCardLocators.SPLEEN_CM}.val('1,5');")
+        if spleen_choice == 'another':
+            self.make(f"{PatientCardLocators.SPLEEN_DESCRIPTION}.val('пупырчатый');")
+        sym_choice = random.choice(['negative', 'positive', 'two_side', 'left', 'right'])
+        self.make(f"{PatientCardLocators.SYMPTOMS_OF_BANGING}.dropdown('set selected', '{sym_choice}');")
+        stool_choice = random.choice(['decorated', 'liquid', 'without_pathological_impurities', 'blood', 'slime',
+                                     'ordinary_paint', 'green', 'acholic', 'another'])
+        self.make(f"{PatientCardLocators.STOOL}.dropdown('set selected', '{stool_choice}');")
         self.make(f"{PatientCardLocators.STOOL_MULTIPLICITY}.val('{self.contacting_num}');")
         self.make(f"{PatientCardLocators.URINATION_FREE}.click();")
         self.make(f"{PatientCardLocators.URINATION_PAINLESS}.click();")
         self.make(f"{PatientCardLocators.URINATION_PAINFUL}.click();")
-        self.make(f"{PatientCardLocators.DIURESIS_FREQUENT}.click();")
-        self.make(f"{PatientCardLocators.DIURESIS_BREACHED}.click();")
-        self.make(f"{PatientCardLocators.DIURESIS_NORM}.click();")
+        diuresis_choice = random.choice(['breached', 'frequent', 'norm'])
+        if diuresis_choice == "frequent":
+            self.make(f"{PatientCardLocators.DIURESIS_FREQUENT}.click();")
+        if diuresis_choice == "norm":
+            self.make(f"{PatientCardLocators.DIURESIS_NORM}.click();")
+        else:
+            self.make(f"{PatientCardLocators.DIURESIS_BREACHED}.click();")
+            self.make(f"{PatientCardLocators.DIURESIS_BREACHED_DESCRIPTION}.val('что-то случилось');")
         self.make(f"{PatientCardLocators.SWELLING}.val('yes');")
+        self.make(f"{PatientCardLocators.VISITS_DIAGNOSIS}.val('Болеет');")
         self.make(f"{PatientCardLocators.VISITS_NOTES}.val('{self.surname}');")
-        self.make(f"{PatientCardLocators.PLANNED_SCREENING}.val('{self.today}');")
+        self.make(f"{PatientCardLocators.PLANNED_SCREENING}.val('{self.thirty_days_forward}');")
         self.make(f"{PatientCardLocators.VISITS_SAVE}.click();")
+        self.browser.close()
+        self.browser.switch_to.window(first_window)
 
     def check_visits_modal(self):
-        assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute(
-            "data-field") == self.numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
+        self.make(f"{PatientCardLocators.VISITS_REFRESH}.click();")
+        assert self.is_element_present(*PatientCardLocators.VISITS_EDIT), "Data in Visits modal weren't preserved or invalid selector for Edit button"
 
     def register_new_woman(self):
         # автозаполнение формы регистрации для взрослого

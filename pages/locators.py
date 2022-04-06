@@ -790,19 +790,21 @@ class PatientCardLocators(object):
     VISITS_SERVICES = "$('div[data-field=visit_table_which_services] .ui.dropdown')"
     SCREENING_PLACE = "$('div[data-field=visit_table_place_of_inspection] .ui.dropdown')"
     ATTENDANCE_TYPE = "$('div[data-field=visit_table_visit_type] .ui.dropdown')"
-    TEMPERATURE = "$('#row_for_total_info_table div[data-field=ljv_card_table_temp]')"
-    WEIGHT = "$('#row_for_total_info_table div[data-field=ljv_card_table_weight]')"
-    HEIGHT = "$('#row_for_total_info_table div[data-field=ljv_card_table_growth]')"
+    TEMPERATURE = "$('#row_for_total_info_table input[data-field=ljv_card_table_temp]')"
+    WEIGHT = "$('#row_for_total_info_table input[data-field=ljv_card_table_weight]')"
+    HEIGHT = "$('#row_for_total_info_table input[data-field=ljv_card_table_growth]')"
+    IMT = "$('#row_for_total_info_table input[data-field=ljv_card_table_imt]')"
     COMPLAINTS = "$('#complaints')"
     HISTORY_INFORMATION = "$('#anamnez_data')"
     LAST_MENSIS = "$('input[name=last_mensis]')"
     CONTRACEPTION = "$('input[name=kontracepc]')"
+    CONTRACEPTION_TYPES = "$('div[data-field=kontracepc_type] .ui.dropdown')"
     VISITS_SEX_PARTNER = "$('input[name=partner_ljv]')"
     ART_RECEIPT = "$('input[name=partner_art]')"
     PLANNED_PREGNANCY_YES = "$('input[name=pregnancy][value=10]')"
     PLANNED_PREGNANCY_NO = "$('input[name=pregnancy][value=20]')"
-    VISITS_ALCOHOL = "$('input[name=alco_or_drugs]')"
-    VISITS_DRUGS = "$('input[name=alco_or_drugs]')"
+    VISITS_ALCOHOL = "$('div[data-field=alco_or_drugs] input[value=alcohol]')"
+    VISITS_DRUGS = "$('div[data-field=alco_or_drugs] input[value=drugs]')"
     VISITS_INJ_DRUG_LAST_HALF_YEAR = "$('div[data-field=inek_nark_six_month] .ui.dropdown')"
     VISITS_COM_SEX_LAST_HALF_YEAR = "$('div[data-field=komerc_sex_six_month] .ui.dropdown')"
     VISITS_HOMO_SEX_LAST_HALF_YEAR = "$('div[data-field=gomo_sex_six_month] .ui.dropdown')"
@@ -813,11 +815,18 @@ class PatientCardLocators(object):
     FEEDING = "$('div[data-field=pitanie] .ui.dropdown')"
     LIPODYSTROPHY = "$('div[data-field=lipodistrofiya] .ui.dropdown')"
     SKIN_MUCOSA = "$('div[data-field=kojnie_pokrovy_slizistaya] .ui.dropdown')"
+    SKIN_DESCRIPTION = "$('#kojnie_pokrovy_slizistaya_input')"
     NAILS = "$('div[data-field=nails] .ui.dropdown')"
+    NAILS_DESCRIPTION = "$('#nails_input')"
     RASH = "$('div[data-field=rash] .ui.dropdown')"
+    RASH_TYPE = "$('div[data-field=character_rash] .ui.dropdown')"
+    RASH_LOCALITY = "$('#rash_input')"
     PERIFEPHERAL_LYMPH_NODES = "$('div[data-field=peripheral_lymphnodes] .ui.dropdown')"
+    LYMPH_NODES_DESCRIPTION = "$('#peripheral_lymphnodes_input')"
     OSTEO_ARTICULAR_SYSTEM = "$('div[data-field=osteo_articular_system] .ui.dropdown')"
+    OSTEO_DESCRIPTION = "$('#osteo_articular_system_input')"
     BREATH_SOUNDS = "$('div[data-field=breath] .ui.dropdown')"
+    BREATH_SOUNDS_DESCRIPTION = "$('#breath_input')"
     WHEEZING_YES = "$('input[name=wheezing][value=10]')"
     WHEEZING_NO = "$('input[name=wheezing][value=20]')"
     WHEEZING_TYPE = "$('div[data-field=which_wheezing] .ui.dropdown')"
@@ -826,25 +835,35 @@ class PatientCardLocators(object):
     HEART_RATE = "$('#chss_min_input')"
     BLOOD_PREASURE = "$('#davlenie')"
     NOISE = "$('div[data-field=noise] .ui.dropdown')"
+    NOISE_DESCRIPTION = "$('#noise_input')"
     TONGUE = "$('div[data-field=tongue] .ui.dropdown')"
+    TONGUE_DESCRIPTION = "$('#tongue_input')"
     ORAL_MUCOSA = "$('#oral_mucosa')"
     STOMACH = "$('div[data-field=stomach] .ui.dropdown')"
+    STOMACH_DESCRIPTION = "$('#stomach_input')"
     LIVER = "$('div[data-field=liver] .ui.dropdown')"
+    LIVER_CM = "$('#liver_input_CM')"
+    LIVER_DESCRIPTION = "$('#liver_input')"
     SPLEEN = "$('div[data-field=spleen] .ui.dropdown')"
+    SPLEEN_CM = "$('#spleen_input_CM')"
+    SPLEEN_DESCRIPTION = "$('#spleen_input')"
     SYMPTOMS_OF_BANGING = "$('div[data-field=symptom_tapping] .ui.dropdown')"
     STOOL = "$('div[data-field=stool] .ui.dropdown')"
     STOOL_MULTIPLICITY = "$('#count_stool')"
-    URINATION_FREE = "$('div[data-field=urination_freedom]')"
-    URINATION_PAINLESS = "$('div[data-field=urination_not_pain]')"
-    URINATION_PAINFUL = "$('div[data-field=urination_painless]')"
+    URINATION_FREE = "$('div[data-field=urination_freedom] input')"
+    URINATION_PAINLESS = "$('div[data-field=urination_not_pain] input')"
+    URINATION_PAINFUL = "$('div[data-field=urination_painless] input')"
     DIURESIS_FREQUENT = "$('input[name=diurez][value=speeded_up]')"
     DIURESIS_BREACHED = "$('input[name=diurez][value=broken]')"
+    DIURESIS_BREACHED_DESCRIPTION = "$('#diurez_input')"
     DIURESIS_NORM = "$('input[name=diurez][value=norm]')"
     SWELLING = "$('#edemas')"
     VISITS_DIAGNOSIS = "$('#diagnozis')"
     VISITS_NOTES = "$('#description')"
-    PLANNED_SCREENING = "$('input[value name=date_plan_d_osmotr]')"
+    PLANNED_SCREENING = "$('#context input[name=date_plan_d_osmotr]')"
     VISITS_SAVE = "$('#save_data')"
+    VISITS_REFRESH = "$('#visits_list div.content .header button[title=Обновить]')"
+    VISITS_EDIT = (By.CSS_SELECTOR, '#visits_list i.edit.icon')
 
 
 
@@ -903,6 +922,7 @@ class VizitsPageLocators(object):
 
 
 class AnalysisPageLocators(object):
+    LOGS_MENU = "$('.ui.fixed.inverted.menu.main div:eq(1)')"
     DETECTED_CASES_LOG = "$('a[href=/identified_case] .item')"
     FILTER_SEGMENT = "$('div[class=title]')"
     # DETECTED_CASES_DATE_START =
@@ -954,6 +974,7 @@ class AnalysisPageLocators(object):
 
 
 class ArvLogLocators(object):
+    ARV_LOGS_MENU = "$('.ui.fixed.inverted.menu.main div:eq(8)')"
     CONTRACT_LOG = "$('a[href=/contract/index] .item')"
     # CONTRACT_LOG_DATE_START =
     # CONTRACT_LOG_DATE_END =
@@ -966,7 +987,25 @@ class ArvLogLocators(object):
     # DEBIT_LOG_APPLY_BTN =
     # DEBIT_LOG_ADD_BTN =
     DEBIT_LOG_EXPORT = "$('#exportToExcel')"
-    ARRIVAL_LOG = "$('a[href=/coming/index] .item')"
+    RECEIPT_LOG = "$('.ui.fixed.inverted.menu.main div:eq(8)')"
+    RECEIPT_ADD = "$('#addComing')"
+    BUDGET_TYPE = "$('div[data-field=ui_budjet_type] .ui.dropdown')"
+    SUPPLIER = "$('div[data-field=ui_post_id] .ui.dropdown')"
+    CONTRACT_NUM = "$('#number')"
+    INVOICE_NUM = "$('#faktura')"
+    MED_RECEIPT_DATE = "$('div[name=date_pr] input')"
+    PROGRAMM = "$('div[data-field=programma] .ui.dropdown')"
+    RECIPIENT_NAME = "$('#fio')"
+    PROCUREMENT_TYPE = "$('div[data-field=ui_type_konkurs] .ui.dropdown')"
+    CONTRACT_DATE = "$('#dogovor')"
+    MEDICATION_ADD = "$('#addPreparat')"
+    MEDICATION_SEARCH = "$('#search')"
+    MEDICATION_CHOICE = "$('#add-row-preparaty-table tr:eq(0) td:eq(0) a.blue.button')"
+    MEDICATION_EXP_DATE = "$('#date_srok_1')"
+    MEDICATION_AMOUNT = "$('td[data-field=count_drug_1] input')"
+    MEDICATION_PRICE = "$('td[data-field=price_drug_1] input')"
+    # MEDICATION_SERIUS_NUM =
+    RECEIPT_SAVE = "$('#save_prihod')"
     # ARRIVAL_LOG_DATE_START =
     # ARRIVAL_LOG_DATE_END =
     # ARRIVAL_LOG_FILTER1 =

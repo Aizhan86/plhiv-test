@@ -19,16 +19,16 @@ class BasePage(object):
         self.url = url
         self.browser.implicitly_wait(timeout)
 
-    def get_environ(name, *args):
-        environ = os.environ.get(name, "https://plhiv-demo.dec.kz/")
-
-        if str(environ).startswith('/run/secrets/'):
-            if os.path.exists(environ):
-                with open(environ, 'r') as secrets_file:
-                    environ = secrets_file.read()
-                    secrets_file.close()
-
-        return environ
+    # def get_environ(name, *args):
+    #     environ = os.environ.get(name, "https://plhiv-demo.dec.kz/")
+    #
+    #     if str(environ).startswith('/run/secrets/'):
+    #         if os.path.exists(environ):
+    #             with open(environ, 'r') as secrets_file:
+    #                 environ = secrets_file.read()
+    #                 secrets_file.close()
+    #
+    #     return environ
 
     def open(self):
         self.browser.get(self.url)

@@ -16,9 +16,10 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.LOGIN_BTN)
         self.browser.find_element(*LoginPageLocators.LOGIN_BTN).click()
 
-        #  проверка, что есть форма модального соглашения и кликнуть на кнопку согласия
-        # if self.is_element_present(*LoginPageLocators.MODAL_AGR):
-        #     self.browser.find_element(*LoginPageLocators.AGR_BTN).click()
-        # self.make("return arguments[0].scrollIntoView(true);", agr_btn)
+         # проверка, что есть форма модального соглашения и кликнуть на кнопку согласия
+        if self.is_element_present(*LoginPageLocators.MODAL_AGR):
+            agr_btn = self.browser.find_element(*LoginPageLocators.AGR_BTN)
+            self.browser.execute_script("return arguments[0].scrollIntoView(true);", agr_btn)
+            agr_btn.click()
 
 
