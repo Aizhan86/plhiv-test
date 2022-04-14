@@ -7,3 +7,4 @@ webdriver-manager
 pyvirtualdisplay
 allure-pytest
 sentry-sdk
+pytest-xdist

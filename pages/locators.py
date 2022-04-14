@@ -22,7 +22,7 @@ class RegisterPageLocators(object):
     TRANSGENDER = "$('form[name=general-data-form] div[data-field=general_data_transgender] .ui.dropdown')"
     ANONIMOUS = "$('form[name=general-data-form] div[data-field=general_data_anonim] .ui.toggle.checkbox')"
     PATIENT_SURNAME = (By.ID,  'general_data_surname')
-    PATIENT_NAME = (By.ID, 'general_data_name')
+    PATIENT_NAME = "$('#general_data_name')"
     PATIENT_MIDNAME = (By.ID, 'general_data_patronymic')
     BIRTH_DATE = (By.ID, 'general_data_birth')
     EMERGENCE_AREA = "$('form[name=general-data-form] div[data-field=general_data_oblast_viyav] .ui.dropdown')"
@@ -697,9 +697,9 @@ class PatientCardLocators(object):
     CONCENTRATION = "$('#modal_recipes div[data-field=form-receipt-1-koncentration] input')"
     PACKING = "$('#modal_recipes input[name=form-receipt-1-fasovka]')"
     QUANTITY = "$('#modal_recipes div[data-field=form-receipt-1-count] input')"
-    UNPACKING_SIGNS = "$('#modal_recipes div[data-field=form-receipt-1-priznak_vskritiya_pack] .ui.dropdown')"
+    UNPACKING_SIGNS = "$('#modal_recipes div[name=form-receipt-1-priznak_vskritiya_pack] .ui.dropdown')"
     SIGNATURE = "$('#modal_recipes div[data-field=form-receipt-1-signature] input')"
-    ART_RECIPE_SAVE = "$('#modal_svedeniya_art .ui.green.approve.button')"
+    ART_RECIPE_SAVE = "$('#modal_recipes .ui.green.approve.button')"
     ART_RECIPE_EDIT = (By.CSS_SELECTOR, '#recipes_table a[action-type=edit]')
 
     CHILDREN_PREGNANCY  = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-children]')"

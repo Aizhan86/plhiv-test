@@ -1,7 +1,7 @@
 
 class UserData(object):
-    NAME = "aizha.o"
-    PASSWORD ="P?DgGt9I"
+    NAME = "aizha_o"
+    PASSWORD ="YA8x%#DU"
     URL = "https://plhiv-demo.dec.kz/"
 
 
