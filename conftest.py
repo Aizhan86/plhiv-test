@@ -1,8 +1,8 @@
 import pytest
 import sentry_sdk
 from selenium import webdriver
-from selenium.webdriver import DesiredCapabilities
-
+from selenium.webdriver import DesiredCapabilities, Proxy
+from selenium.webdriver.chrome.options import Options
 
 @pytest.fixture(scope="class")
 def browser():
@@ -12,8 +12,29 @@ def browser():
         "https://974bf7b634a249f2bf3324d1d4e4387b@debug.ico.kz/27",
         traces_sample_rate=1.0,
     )
+
+    # proxy = Proxy({
+    #     'proxyType': ProxyType.MANUAL,
+    #     'httpProxy': PROXY1,
+    #     'ftpProxy': PROXY1,
+    #     'sslProxy': PROXY1,
+    #     'noProxy': None
+    # })
+
+    capabilities = DesiredCapabilities.CHROME()
+    options = Options()
+    options.add_argument("--start-maximized")
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
+    # options.add_argument('--proxy-server=http://%s' % proxy)
+    options.add_argument("test-type")
+    capabilities.setCapability("chrome.binary", "<Path to binary>")
+    capabilities = options.to_capabilities()
+
     # browser = webdriver.Remote(desired_capabilities=DesiredCapabilities.CHROME, command_executor="http://127.0.0.1:4444/wd/hub")
-    browser = webdriver.Remote(options=webdriver.ChromeOptions(), command_executor="http://172.18.0.1:4444/wd/hub")
+    browser = webdriver.Remote(desired_capabilities=capabilities, command_executor="http://172.18.0.1:4444/wd/hub")
     # browser = webdriver.Chrome(service=Service('C:/Work/tools/chromedriver/chromedriver.exe'))
     # browser.maximize_window()
 
