@@ -1,0 +1,102 @@
+### Авторизация и получение token PROD
+ POST https://auth.ico.kz/api/auth/token
+Authorization: Bearer S2xzYmZ1QlZEVlF2eWVqUUxuTXQxZjBzbTR5WUVWVFZlQjd0SU5LQ2c3SDVzU3o3aWxMRDlTUzd4Z0tRM3NabTo5Z1Y4Q29IeDJ5eVpDZnF4VUt1aFAxY2ttMVRGcUI2ZnFsNEs2U3llQmJBSFRVN21JRktyc0lpQkVqbHJ0S2lY
+
+> {% client.global.set("access_token", response.body.access_token); %}
+
+
+### Авторизация и получение token DEV
+POST https://auth.dec.kz/api/auth/token
+Authorization: Bearer dm1HWG1WRkI3RW9uYThBYkVZZHhPd01SRUJyR0Zaa2ZZV1QyUllGaFpWd3Q0SWNpbWhMZVdaY0dLR1RwUTZTaTptbW8yQjBQTUZRWXgwblY0c2N2NThlc0x2aU43Y2JoQUhRN29oMkFVcnVnTFhTY1UxTUcwTVFmYldzdFFGOGhZ
+
+> {% client.global.set("access_token", response.body.access_token); %}
+###
+#GET https://enurse.icapapps.kz/api/questionnaire?version=1555645814.32631&client_account_id=51f11db8-28d1-4bef-bc75-2ecc2389eba4&current_version=70
+#Authorization: Token {{access_token}}
+#Content-Type: application/json
+#Accept: application/json
+#
+####
+#
+#GET https://data.egov.kz/datasets/exportjson?index=kato&version=v2&from=1&count=1000
+#
+###
+
+POST http://127.0.0.1:5000/api/search_in_hiv/search_in_hiv_test
+Authorization: Token {{access_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+"iin": "770926301854"
+}
+
+###
+POST http://127.0.0.1:5000/api/population/population_patient_info
+Authorization: Token {{access_token}}
+Content-Type: application/json
+Accept: application/json
+
+[2001]
+
+###
+POST https://info-tracker-api.ico.kz/api/v1/aids/search_in_hiv_test
+Authorization: Token {{access_token}}
+Content-Type: application/json
+
+[2001]
+
+
+###
+#[2020, 2019, 2018]
+#{
+#  "iin": "200000000439"
+#}
+
+###
+["266011418149", "266011418142", "309726482027"]
+###
+
+POST https://info-tracker-api.ico.kz/api/v1/aids/check_exists_patient
+Authorization: Token {{access_token}}
+Content-Type: application/json
+
+
+{
+"iin": "770926301854"
+}
+
+
+###
+#POST http://127.0.0.1:9129/api/print/create
+#Content-Type: application/json
+
+#{"template": {"format": "xlsx", "url": "http://127.0.0.1:5000/uploads/fr3/lpo_3.7_hlh.fr3", "version": 6, "result_format": "link"}, "dataset": {"sourses": [{"name": "frxDBDataset", "data": [{"f_razrez": "По области: МАНГИСТАУСКАЯ", "fr_period": "с 01.01.2020 по 01.04.2020", "shot_name": "МАНГИСТАУСКАЯ", "age_1_female": 0, "age_1b4_female": 0, "age_5b14_female": 0, "age_15b19_female": 0, "age_20b24_female": 0, "age_25b29_female": 0, "age_30b34_female": 2, "age_35b39_female": 0, "age_40b44_female": 0, "age_45b49_female": 0, "age_50_plus_female": 1, "total_female_get_art": 3, "age_1_male": 0, "age_1b4_male": 0, "age_5b14_male": 0, "age_15b19_male": 0, "age_20b24_male": 1, "age_25b29_male": 2, "age_30b34_male": 2, "age_35b39_male": 1, "age_40b44_male": 1, "age_45b49_male": 1, "age_50_plus_male": 0, "total_male_get_art": 8, "total_people_get_art": 11, "nark_nalich_opit": 1, "RC_nalich_opit": 1, "gomosek_nalich_opit": 2, "transgender": 1, "mls": 1, "programInfo": "Электронное слежение за ВИЧ, Пользователь: АЛЕКСЕЕВ А., 28.06.2021  10:15:24"}]}]}}
+
+
+###
+
+#curl --header "Content-Type: application/json" \
+#  --request POST \
+#  --data '{"template": {"format": "xlsx", "url": "http://web:9135/uploads/fr3/r_f4_4.fr3", "version": 6, "result_format": "link"}, "dataset": {"variables": {"fr_month": "за июнь", "fr_year": 2020, "fr_razrez": "По области: МАНГИСТАУСКАЯ", "fr_kod": "по коду: 700, dctv rjgtq", "programInfo": "Электронное слежение за ВИЧ, Пользователь: АЛЕКСЕЕВ А., 28.06.2021  08:53:36"}, "sourses": [{"name": "frxDBDataset", "data": [{"id": 0, "region_name": "ИТОГО", "amount_issled_old": null, "amount_vich_old": null, "amount_issled": null, "amount_vich": null, "amount_issled_300_old": 7794, "amount_vich_300_old": 3, "amount_issled_300": 9043, "amount_vich_300": 4}], "data_structure": {"id": "integer", "region_name": "string", "amount_issled_old": "integer", "amount_vich_old": "integer", "amount_issled": "integer", "amount_vich": "integer", "amount_issled_300_old": "integer", "amount_vich_300_old": "integer", "amount_issled_300": "integer", "amount_vich_300": "integer"}}]}}' \
+#  http://ofg:9129/api/print/create
+
+POST https://plhiv-demo.dec.kz/api/patient_auth/analysis_list
+Authorization: Token {{access_token}}
+Content-Type: application/json
+Accept: application/json
+
+{"human_info_id": 20000010960,
+"date_begin": "2020-12-12",
+"date_end": "2023-12-12"}
+
+###
+
+POST https://plhiv-demo.dec.kz/api/patient_auth/analysis_list
+Authorization: Token {{access_token}}
+Content-Type: application/json
+Accept: application/json
+
+{"human_info_id": 20000010960,
+"date_begin": "2020-12-12",
+"date_end": "2023-12-12"}
