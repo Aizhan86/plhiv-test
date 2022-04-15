@@ -8,7 +8,7 @@ from pages.login_page import LoginPage
 
 
 def login(browser):
-    login_url = "https://plhiv-demo.dec.kz/"
+    login_url = "https://plhiv-demo.ico.kz/"
     login_page = LoginPage(browser, login_url)
     login_page.open()
     login_page.should_fill_login_form()
