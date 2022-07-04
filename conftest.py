@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 def browser():
     print("\nstart browser for test..")
 
+
     sentry_sdk.init(
         "https://974bf7b634a249f2bf3324d1d4e4387b@debug.ico.kz/27",
         traces_sample_rate=1.0,
@@ -21,22 +22,22 @@ def browser():
     #     'noProxy': None
     # })
 
-    capabilities = DesiredCapabilities.CHROME()
+    # capabilities = DesiredCapabilities.CHROME()
     options = Options()
     options.add_argument("--start-maximized")
     options.add_argument('--no-sandbox')
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
+    # options.add_argument('--headless')
+    options.add_argument("--disable-extensions")
+    # options.add_argument('--disable-gpu')
     options.add_argument('--disable-dev-shm-usage')
     # options.add_argument('--proxy-server=http://%s' % proxy)
     options.add_argument("test-type")
-    capabilities.setCapability("chrome.binary", "<Path to binary>")
-    capabilities = options.to_capabilities()
+    # capabilities.setCapability("chrome.binary", "<Path to binary>")
+    # capabilities = options.to_capabilities()
 
     # browser = webdriver.Remote(desired_capabilities=DesiredCapabilities.CHROME, command_executor="http://127.0.0.1:4444/wd/hub")
-    browser = webdriver.Remote(desired_capabilities=capabilities, command_executor="http://172.18.0.1:4444/wd/hub")
-    # browser = webdriver.Chrome(service=Service('C:/Work/tools/chromedriver/chromedriver.exe'))
-    # browser.maximize_window()
+    #browser = webdriver.Remote(desired_capabilities=capabilities, command_executor="http://172.18.0.1:4444/wd/hub")
+    browser = webdriver.Chrome(chrome_options=options)
 
     # pytest --dist=loadscope --tx 4*popen//python=python3.10 -n 4 --reruns 2 --only-rerun JavascriptException --only-rerun ElementClickInterceptedException testing_test.py
 

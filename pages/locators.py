@@ -6,7 +6,7 @@ class LoginPageLocators(object):
     LOGIN_FORM = (By.CLASS_NAME, 'login_panel_block')
     USER_NAME = (By.ID, "username")
     USER_PASS = (By.ID, "password")
-    LOGIN_BTN = (By.ID, "submit")
+    LOGIN_BTN = "$('button[type=submit]')"
     MODAL_AGR = (By.ID, "modal_agreement")
     AGR_BTN = (By.CSS_SELECTOR, '#modal_agreement .ui.green.inverted.ok.button')
 
@@ -14,20 +14,21 @@ class RegisterPageLocators(object):
     ADD_PATIENT = (By.CSS_SELECTOR, 'a[href="/visits/patient_card/0000000000?new=1&in_rk=1&add=1"]')
     ADD_FOREIGN_PATIENT = (By.CSS_SELECTOR, 'a[href="/visits/patient_card/0000000000?new=1&in_rk=0&add=1"]')
     IB_NO = (By.ID, 'general_data_nib_out')
-    IB_NO_DATE = (By.ID, 'general_data_date_nib_out')
+    GENERAL_DATA = "$('a[data-name=general-data]')"
+    IB_NO_DATE = "$('#general_data_date_nib_out')"
     RESEARCH_CODE = "$('form[name=general-data-form] div[data-field=general_data_contengent] .ui.dropdown')"
-    PATIENT_BIRTH_DATE = (By.ID, 'general_data_birth"]')
     PATIENT_GENDER = "$('form[name=general-data-form] div[data-field=general_data_gender] .ui.dropdown')"
-    PATIENT_IIN = (By.ID, "general_data_iin")
+    PATIENT_IIN = "$('#general_data_iin')"
     TRANSGENDER = "$('form[name=general-data-form] div[data-field=general_data_transgender] .ui.dropdown')"
     ANONIMOUS = "$('form[name=general-data-form] div[data-field=general_data_anonim] .ui.toggle.checkbox')"
-    PATIENT_SURNAME = (By.ID,  'general_data_surname')
+    PATIENT_SURNAME = "$('#general_data_surname')"
     PATIENT_NAME = "$('#general_data_name')"
-    PATIENT_MIDNAME = (By.ID, 'general_data_patronymic')
-    BIRTH_DATE = (By.ID, 'general_data_birth')
+    PATIENT_MIDNAME = "$('#general_data_patronymic')"
+    # BIRTH_DATE = "$('#general_data_birth')"
+    BIRTH_DATE = "$('div[data-field=general_data_birth] .ui.input')"
     EMERGENCE_AREA = "$('form[name=general-data-form] div[data-field=general_data_oblast_viyav] .ui.dropdown')"
     EMERGENCE_UNIT_AREA = "$('form[name=general-data-form] div[data-field=general_data_adm_obl_viyav] .ui.dropdown')"
-    EMERGENCE_UNIT_AREA_CLICK = (By.CSS_SELECTOR, 'form[name=general-data-form] div[data-field=general_data_adm_obl_viyav] .search')
+    EMERGENCE_UNIT_AREA_CLICK = "$('form[name=general-data-form] div[data-field=general_data_adm_obl_viyav] .search')"
     EMERGENCE_PLACE = "$('form[name=general-data-form] div[data-field=general_data_place_viyav] .ui.dropdown')"
     INFECTION_PLACE = "$('form[name=general-data-form] div[data-field=general_data_place_zarajeniya] .ui.dropdown')"
     INFECTION_ORG = "$('form[name=general-data-form] div[data-field=general_data_ucherejdenie_zarajeniya] .ui.dropdown')"
@@ -35,7 +36,7 @@ class RegisterPageLocators(object):
     ADM_TER_REG = "$('form[name=general-data-form] div[data-field=general_data_adm_registr] .ui.dropdown')"
     SUPPOSED_WAY_INF = "$('form[name=general-data-form] div[data-field=general_data_peredachi] .ui.dropdown')"
     PATIENT_CITIZENSHIP = "$('form[name=general-data-form] div[data-field=general_data_citizenship] .ui.dropdown')"
-    ARRIVAL_DATE = (By.ID, 'general_data_date_priezd')
+    ARRIVAL_DATE = "$('#general_data_date_priezd')"
     COUNTRY_FROM_WHICH_CAME = "$('form[name=general-data-form] div[data-field=general_data_from_country] .ui.dropdown')"
     ARRIVAL_PURPOSE = "$('form[name=general-data-form] div[data-field=general_data_citizenship] .ui.dropdown')"
     MARITAL_STATUS = "$('form[name=general-data-form] div[data-field=general_data_fam_state] .ui.dropdown')"
@@ -45,37 +46,38 @@ class RegisterPageLocators(object):
     MED_ORG = "$('form[name=general-data-form] div[data-field=general_data_org_viyav] .ui.dropdown')"
     HOMELESS = "$('div[data-field=general_data_bomj] .ui.toggle.checkbox')"
     REGIS_AREA = "$('form[name=general-data-form] div[data-field=registration_address_region_name] .ui.dropdown')"
+    REGIS_AREA_GD = "$('#modal_registration_address div[data-field=registration_address_region_name_modal] .ui.dropdown')"
     REGIS_UNIT_AREA = "$('form[name=general-data-form] div[data-field=registration_address_unit_area] .ui.dropdown')"
-    REGIS_UNIT_AREA_CLICK = (By.CSS_SELECTOR, 'form[name=general-data-form] div[data-field=registration_address_unit_area] .ui.dropdown')
+    REGIS_UNIT_AREA_CLICK = "$('form[name=general-data-form] div[data-field=registration_address_unit_area] .ui.dropdown')"
     REGIS_LOCALITY = "$('form[name=general-data-form] div[data-field=registration_address_locality_name] .ui.dropdown')"
     REGIS_PLACE = "$('form[name=general-data-form] div[data-field=registration_address_place_live] .ui.dropdown')"
-    REGIS_STREET = (By.ID, 'registration_address_street')
-    REGIS_HOUSE = (By.ID, 'registration_address_house')
-    REGIS_APT = (By.ID, 'registration_address_kvart')
-    REGIS_PHONE_NO = (By.ID, 'registration_address_telephone')
+    REGIS_STREET = "$('#registration_address_street')"
+    REGIS_HOUSE = "$('#registration_address_house')"
+    REGIS_APT = "$('#registration_address_kvart')"
+    REGIS_PHONE_NO = "$('#registration_address_telephone')"
     DUPLICATE_REGIS_ADR = "$('#duplicate_to_fact_address_new_patient')"
     RESID_AREA = "$('form[name=general-data-form] div[data-field=fact_address_region_name] .ui.dropdown')"
     RESID_UNIT_AREA = "$('form[name=general-data-form] div[data-field=fact_address_unit_area] .ui.dropdown')"
-    RESID_UNIT_AREA_CLICK = (By.CSS_SELECTOR, 'form[name=general-data-form] div[data-field=fact_address_unit_area] .ui.dropdown')
+    RESID_UNIT_AREA_CLICK = "$('form[name=general-data-form] div[data-field=fact_address_unit_area] .ui.dropdown')"
     RESID_LOCALITY = "$('form[name=general-data-form] div[data-field=fact_address_locality_name] .ui.dropdown')"
     RESID_PLACE =  "$('form[name=general-data-form] div[data-field=fact_address_place_live] .ui.dropdown')"
-    RESID_STREET = (By.ID, 'fact_address_street')
-    RESID_HOUSE = (By.ID, 'fact_address_hous')
-    RESID_APT = (By.ID, 'fact_address_flat')
-    RESID_PHONE_NO = (By.ID, 'fact_address_telephone')
+    RESID_STREET = "$('#fact_address_street')"
+    RESID_HOUSE = "$('#fact_address_hous')"
+    RESID_APT = "$('#fact_address_flat')"
+    RESID_PHONE_NO = "$('#fact_address_telephone')"
     RESID_MED_ORG = "$('form[name=general-data-form] div[data-field=fact_address_pp_name] .ui.dropdown')"
     DUPLICATE_RESID_ADR = "$('#duplicate_to_reg_address_new_patient')"
     REASON_NOT_EPID = "$('form[name=general-data-form] div[data-field=general_data_reason_not_epid] .ui.dropdown')"
     REASON_NOT_DISP_REG = "$('form[name=general-data-form] div[data-field=general_data_reason_dispuchet] .ui.dropdown')"
     RETROSPECTIVE_CHILD = "$('form[name=general-data-form] div[data-field=general_data_mother_child] .ui.toggle.checkbox')"
-    MOTHERS_SURNAME = (By.ID, 'general_data_mother_surname')
-    MOTHERS_NAME = (By.ID, 'general_data_mother_name')
-    MOTHERS_MIDNAME = (By.ID, 'general_data_mother_patronymic')
-    MOTHERS_IB_NO = (By.ID, 'general_data_mother_ib_number')
-    MOTHERS_IB_NO_DATE = (By.ID, 'general_data_mother_date_ib')
+    MOTHERS_SURNAME = "$('#general_data_mother_surname')"
+    MOTHERS_NAME = "$('#general_data_mother_name')"
+    MOTHERS_MIDNAME = "$('#general_data_mother_patronymic')"
+    MOTHERS_IB_NO = "$('#general_data_mother_ib_number')"
+    MOTHERS_IB_NO_DATE = "$('#general_data_mother_date_ib')"
     REGISTER_SAVE_BTN = "$('.ui.bottom.attached.tab.segment.active .right.floated.green.approve.button')"
     EDIT_REGIS_ADDRESS = "$('#registration_address_edit_button')"
-    REGIS_APT2 = (By.ID, 'registration_address_kvart_modal')
+    REGIS_APT2 = "$('#registration_address_kvart_modal')"
     ERROR_REGIS_ADDRESS_SAVE = "$('#modal_registration_address .ui.green.approve.button')"
     PATIENT_CARD_SAVE = "$('#general_data_save_button')"
 
@@ -101,7 +103,8 @@ class PatientCardLocators(object):
     RESPONSIBLE_PERSON = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_fio_otvetstv_lica_lab_modal] .ui.dropdown')"
     IFA_SERVICES = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_which_services_modal] .ui.dropdown')"
     IFA_OGC_SAVE = "$('#ifa_k_vich_ogc_modal .ui.green.approve.button')"
-    IFA_OGC_EDIT = (By.CSS_SELECTOR, '#ifa_k_vich_ogc_table a[action-type=edit]')
+    IFA_OGC_EDIT = "$('#ifa_k_vich_ogc_table a[action-type=edit]')"
+    IFA_OGC_CANCEL = "$('#ifa_k_vich_ogc_modal .ui.red.deny.button')"
 
     USER_NAME = "$('div[data-name=account-settings]')"
     # PROFILE = "$('div[data-name=account-settings] div.menu').children()[0]')"
@@ -114,16 +117,17 @@ class PatientCardLocators(object):
     SCREANING_NUM = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_numb_issled_modal] input')"
     SERUM_NUM_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_number_syvorotki_modal] .ui.dropdown')"
     REFERRAL_NO_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_number_syvorotki_input_modal] input')"
-    RECEIPT_DATE_RC = (By.ID, 'ifa_k_vich_rc_date_postup_modal')
-    PRODUCTION_DATE_RC = (By.ID, 'ifa_k_vich_rc_date_postanov_modal')
+    RECEIPT_DATE_RC = "$('#ifa_k_vich_rc_date_postup_modal')"
+    PRODUCTION_DATE_RC = "$('#ifa_k_vich_rc_date_postanov_modal')"
     TEST_SYSTEM_NAME_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_name_test_system_modal] .ui.dropdown')"
-    EXPIRATION_DATE_RC = (By.ID, 'ifa_k_vich_rc_srok_godn_modal')
-    SERIES_NUM_RC = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_serial_number_modal] input')
-    OP_CRITICAL_RC = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_op_critical_modal] input')
-    OP_SERUM_RC = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_op_syvorotki_modal] input')
+    EXPIRATION_DATE_RC = "$('#ifa_k_vich_rc_srok_godn_modal')"
+    SERIES_NUM_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_serial_number_modal] input')"
+    OP_CRITICAL_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_op_critical_modal] input')"
+    OP_SERUM_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_op_syvorotki_modal] input')"
     IFA_RESULT_RC = "$('#ifa_k_vich_rc_modal div[data-field=ifa_k_vich_rc_result_modal] .ui.dropdown')"
-    IFA_RC_SAVE = (By.CSS_SELECTOR, '#ifa_k_vich_rc_modal .ui.green.approve.button')
-    IFA_RC_EDIT = (By.CSS_SELECTOR, '#ifa_k_vich_rc_table a[action-type=edit]')
+    IFA_RC_SAVE = "$('#ifa_k_vich_rc_modal .ui.green.approve.button')"
+    IFA_RC_EDIT = "$('#ifa_k_vich_rc_table a[action-type=edit]')"
+    IFA_RC_CANCEL = "$('#ifa_k_vich_rc_modal .ui.red.deny.button')"
 
     IB_PCR = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-ib_pcr]')"
     IB_ADD = "$('#ib')"
@@ -149,7 +153,8 @@ class PatientCardLocators(object):
     P18 = "$('#ib_modal div[data-field=ib_p18_modal] .ui.dropdown')"
     IB_SERVICES = "$('#ib_modal div[data-field=ib_which_services_modal] .ui.dropdown')"
     IB_SAVE = "$('#ib_modal .ui.green.approve.button')"
-    IB_EDIT = (By.CSS_SELECTOR, '#ib_table a[action-type=edit]')
+    IB_EDIT = "$('#ib_table a[action-type=edit]')"
+    IB_CANCEL = "$('#ib_modal .ui.red.deny.button')"
 
     PCR_ADD = "$('#pcr')"
     PCR_NUMBER = "$('#pcr_modal div[data-field=pcr_number_modal] input')"
@@ -166,7 +171,8 @@ class PatientCardLocators(object):
     PCR_RESPONSIBLE_PERSON = "$('#pcr_modal div[data-field=pcr_otvetstvennoe_lico_modal] .ui.dropdown')"
     PCR_SERVICES = "$('#pcr_modal div[data-field=pcr_which_services_modal] .ui.dropdown')"
     PCR_SAVE = "$('#pcr_modal .ui.green.approve.button')"
-    PCR_EDIT = (By.CSS_SELECTOR, '#pcr_table a[action-type=edit]')
+    PCR_EDIT = "$('#pcr_table a[action-type=edit]')"
+    PCR_CANCEL = "$('#pcr_modal .ui.red.deny.button')"
 
     RESULT = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-zaklyuchenie]')"
     RESULT_ADD = "$('#zaklyuchenie_table a[action-type=add]')"
@@ -178,7 +184,8 @@ class PatientCardLocators(object):
     RESEARCH_BAZIS = "$('#table_conclusion input')"
     RESULT_SAVE = "$('#zaklyuchenie_modal .ui.green.approve.button')"
     RESULT_PRINT = "$('#zaklyuchenie_modal a[action-type=print]')"
-    RESULT_EDIT = (By.CSS_SELECTOR, '#zaklyuchenie_table a[action-type=edit]')
+    RESULT_EDIT = "$('#zaklyuchenie_table a[action-type=edit]')"
+    RESULT_CANCEL = "$('#zaklyuchenie_modal .ui.red.deny.button')"
 
     # CD4_SCREENING
     # VGS_DIAGNOSTICS
@@ -196,16 +203,16 @@ class PatientCardLocators(object):
     EPID_HISTORY_ANALYSIS_YEAR = "$('div[data-field=epid_history_obsled_year] .ui.dropdown')"
     EPID_HISTORY_ANALYSIS_RESULT = "$('div[data-field=epid_history_result] .ui.dropdown')"
     FAMILY_MEM_ADD = "$('#fam_members_table a[action-type=add]')"
-    FAMILY_MEM_LASTNAME = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_last_name_modal] input')
-    FAMILY_MEM_NAME = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_name_modal] input')
-    FAMILY_MEM_MIDDLE_NAME = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_middle_name_modal] input')
+    FAMILY_MEM_LASTNAME = "$('#fam_members_modal div[data-field=fam_members_last_name_modal] input')"
+    FAMILY_MEM_NAME = "$('#fam_members_modal div[data-field=fam_members_name_modal] input')"
+    FAMILY_MEM_MIDDLE_NAME = "$('#fam_members_modal div[data-field=fam_members_middle_name_modal] input')"
     FAMILY_MEM_GENDER = "$('#fam_members_modal div[data-field=fam_members_gender_modal] .ui.dropdown')"
-    FAMILY_MEM_BIRTHDAY = (By.ID, 'fam_members_birth_modal')
-    FAMILY_MEM_ADDRESS = (By.CSS_SELECTOR, '#fam_members_modal div[data-field=fam_members_address_modal] input')
+    FAMILY_MEM_BIRTHDAY = "$('fam_members_birth_modal')"
+    FAMILY_MEM_ADDRESS = "$('#fam_members_modal div[data-field=fam_members_address_modal] input')"
     FAMILY_MEM_HIV_STATUS = "$('#fam_members_modal div[data-field=fam_members_hiv_status_modal] .ui.dropdown')"
     FAMILY_MEM_RELATION = "$('#fam_members_modal div[data-field=fam_members_rod_svyaz_modal] .ui.dropdown')"
     FAMILY_MEM_SAVE = "$('#fam_members_modal .ui.green.approve.button')"
-    FAMILY_MEM_EDIT = (By.CSS_SELECTOR, '#fam_members_table a[action-type=edit]')
+    FAMILY_MEM_EDIT = "$('#fam_members_table a[action-type=edit]')"
     EPID_HISTORY_FILLING_DATE = "$('#epid_history_date_zapolnen')"
     EPID_DOCTOR = "$('div[data-field=epid_history_fio_doctor_epidemiolog] .ui.dropdown')"
 
@@ -232,7 +239,7 @@ class PatientCardLocators(object):
     COMMERCIAL_SEX_EXP_MONTH = "$('#RC_staj_month')"
     COMMERCIAL_SEX_PARTNER_NUM = "$('#RC_pol_partn')"
     CONDOM_USAGE = "$('#form_luin div[data-field=luin_guard_on_last_sex_modal] .ui.dropdown')"
-    LUIN_RS_SAVE = (By.ID, 'button_save_luin')
+    LUIN_RS_SAVE = "$('button_save_luin')"
 
     SEXUAL_CONTACTS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-sex]')"
     HOMO_EXPIRIENCE = "$('div[data-field=sex_gomosex_modal] .ui.dropdown')"
@@ -270,7 +277,7 @@ class PatientCardLocators(object):
     MLS_DATE_START = "$('#mls_date_start_modal')"
     MLS_DATE_END = "$('#mls_date_end_modal')"
     MLS_SAVE = "$('#modal_mls .ui.green.approve.button')"
-    MLS_EDIT = (By.CSS_SELECTOR, '#mls_table a[action-type=edit]')
+    MLS_EDIT = "$('#mls_table a[action-type=edit]')"
 
     DONOR = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-donor]')"
     BLOOD_DONOR = "$('div[data-field=donor_krovi_opit_checkbox] input')"
@@ -289,7 +296,7 @@ class PatientCardLocators(object):
     BLOOD_HIV_ANALYSIS_DATE = "$('#donor_blood_date_obsled_hiv_modal')"
     BLOOD_HIV_STATUS = "$('#donor_blood_modal div[data-field=donor_blood_hiv_status_modal] .ui.dropdown')"
     BLOOD_DONOR_SAVE = "$('#donor_blood_modal .ui.green.approve.button')"
-    BLOOD_DONOR_EDIT = (By.CSS_SELECTOR, '#donor_blood_table a[action-type=edit]')
+    BLOOD_DONOR_EDIT = "$('#donor_blood_table a[action-type=edit]')"
 
     ORGAN_DONOR = "$('div[data-field=donor_organ_opit_checkbox] input')"
     ORGAN_DONOR_ADD = "$('#donor_other_material_table a[action-type=add]')"
@@ -307,7 +314,7 @@ class PatientCardLocators(object):
     ORGAN_HIV_ANALYSIS_DATE = "$('#donor_other_material_date_obsled_hiv_modal')"
     ORGAN_HIV_STATUS = "$('#donor_other_material_modal div[data-field=donor_other_material_hiv_status_modal] .ui.dropdown')"
     ORGAN_DONOR_SAVE = "$('#donor_other_material_modal .ui.green.approve.button')"
-    ORGAN_DONOR_EDIT = (By.CSS_SELECTOR, '#donor_other_material_table a[action-type=edit]')
+    ORGAN_DONOR_EDIT = "$('#donor_other_material_table a[action-type=edit]')"
 
     RECIPIENT = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-recipient]')"
     BLOOD_RECIPIENT = "$('div[data-field=recipient_krov_opit_checkbox] input')"
@@ -323,7 +330,7 @@ class PatientCardLocators(object):
     BLOOD_COMPONENT_CODE_REC = "$('#recipient_blood_modal div[data-field=recipient_blood_comp_code_modal] input')"
     BLOOD_HIV_STATUS_REC = "$('#recipient_blood_modal div[data-field=recipient_blood_hiv_status_modal] .ui.dropdown')"
     BLOOD_RECEIPT_SAVE = "$('#recipient_blood_modal .ui.green.approve.button')"
-    BLOOD_RECEIPT_EDIT = (By.CSS_SELECTOR, '#recipient_blood_table a[action-type=edit]')
+    BLOOD_RECEIPT_EDIT = "$('#recipient_blood_table a[action-type=edit]')"
 
     ORGAN_RECIPIENT =  "$('div[data-field=recipient_org_opit_checkbox] input')"
     ORGAN_RECIPIENT_ADD = "$('#recipient_other_material_table a[action-type=add]')"
@@ -366,7 +373,7 @@ class PatientCardLocators(object):
     MANIPULATIONS_TYPE = "$('#manipulations_med_modal div[data-field=manipulations_med_type_modal] .ui.dropdown')"
     MANIPULATIONS_MED_ORG = "$('#manipulations_med_modal div[data-field=manipulations_med_name_org_modal] .ui.dropdown')"
     MANIPULATIONS_SAVE = "$('#manipulations_med_modal .ui.green.approve.button')"
-    MANIPULATIONS_EDIT = (By.CSS_SELECTOR, '#manipulations_med_table a[action-type=edit]')
+    MANIPULATIONS_EDIT = "$('#manipulations_med_table a[action-type=edit]')"
 
     EMERGENCIES = "$('div[data-field=avar_situac_checkbox] input')"
     EMERGENCIES_ADD = "$('#manipulations_avariya_table a[action-type=add]')"
@@ -377,7 +384,7 @@ class PatientCardLocators(object):
     EMERGENCIES_72HOURS = "$('#manipulations_avariya_modal div[data-field=manipulations_avariya_pkp_modal] .ui.dropdown')"
     EMERGENCIES_HIV_STATUS = "$('#manipulations_avariya_modal div[data-field=manipulations_avariya_hiv_status_modal] .ui.dropdown')"
     EMERGENCIES_SAVE = "$('#manipulations_avariya_modal .ui.green.approve.button')"
-    EMERGENCIES_EDIT = (By.CSS_SELECTOR, '#manipulations_avariya_table a[action-type=edit]')
+    EMERGENCIES_EDIT = "$('#manipulations_avariya_table a[action-type=edit]')"
 
     DEPARTURES_SOURCES = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-sources]')"
     DEPARTURE_EXISTENCE = "$('div[data-field=nalich_viezd_checkbox] input')"
@@ -387,7 +394,7 @@ class PatientCardLocators(object):
     DEPARTURE_COUNTRY = "$('#sources_infection_modal div[data-field=sources_infection_country_modal] .ui.dropdown')"
     DEPARTURE_PURPOSE = "$('#sources_infection_modal div[data-field=sources_infection_cel_modal] .ui.dropdown')"
     DEPARTURE_SAVE = "$('#sources_infection_modal .ui.green.approve.button')"
-    DEPARTURE_EDIT = (By.CSS_SELECTOR, '#sources_za_predeli_rk_table a[action-type=edit]')
+    DEPARTURE_EDIT = "$('#sources_za_predeli_rk_table a[action-type=edit]')"
 
     INFECTION_SOURCE_EXISTENCE = "$('div[data-field=nalich_predpol_istoch_checkbox] input')"
     SOURCE_ADD = "$('#sources_infection_table a[action-type=add]')"
@@ -428,7 +435,7 @@ class PatientCardLocators(object):
     CONTACT_APT = "$('#contact_parter_numb_modal')"
     CONTACT_PHONE_NO = "$('#contact_tel_numb_modal')"
     CONTACT_PERSON_SAVE = "$('#contact_modal .ui.green.approve.button')"
-    CONTACT_PERSON_EDIT = (By.CSS_SELECTOR, '#contact_faces_table a[action-type=edit]')
+    CONTACT_PERSON_EDIT = "$('#contact_faces_table a[action-type=edit]')"
 
     DISP_OBSERVATION = "$('a[data-name=disp-search]')"
     DISP_OBSER_ADD = "$('#d_uchet_table a[action-type=add]')"
@@ -447,7 +454,7 @@ class PatientCardLocators(object):
     AUTOPSY = "$('#modal_d_uchet_vzyatie div[data-field=death_vskrit_modal] .ui.toggle.checkbox')"
     PATHOLOGOANATOMIC_DIAGNOSIS = "$('#modal_d_uchet_vzyatie div[data-field=death_patolog_diag] input')"
     D_OBSER_SAVE = "$('#modal_d_uchet_vzyatie .actions .ui.green.approve.button')"
-    DISP_OBSER_EDIT = (By.CSS_SELECTOR, '#d_uchet_table a[action-type=edit]')
+    DISP_OBSER_EDIT = "$('#edit_d_uchet')"
     DRUG_INJ_CONSUMPTION = "$('div[data-field=d_uchet_upotren_inek_nark] .ui.dropdown')"
     DRUG_CONSUMPTION_YEAR = "$('div[data-field=d_uchet_year_upotreb_nark] input')"
     DRUG_CONSUMPTION_REGIS = "$('div[data-field=d_uchet_uchot_narkolog] .ui.dropdown')"
@@ -456,6 +463,7 @@ class PatientCardLocators(object):
     DISP_START_DATE = "$('div[data-field=date_first_vzyat_d_uchet] .ui.input')"
     DISP_DOCTORS_NAME = "$('div[data-field=patient_fio_doctor_dd] .ui.dropdown')"
     DISP_SAVE_BTN = "$('#button_save_d_uchet_data')"
+    DISP_CANCEL_BTN = "$('#modal_d_uchet_vzyatie .ui.red.deny.button')"
 
     PERINATAL_REGISTRATION = "$('a[data-tab=patient_card_menu-perenat_uchet]')"
     PERINATAL_REGIS_ADD = "$('#perenat_uchet_table a[action-type=add]')"
@@ -470,7 +478,8 @@ class PatientCardLocators(object):
     PERINATAL_DEATH_REASON = "$('#modal_perinat_uchet div[data-field=death_reason_modal] .ui.dropdown')"
     PERINATAL_DEATH_PLACE = "$('#modal_perinat_uchet div[data-field=death_place_modal] .ui.dropdown')"
     PERINATAL_SAVE = "$('#modal_perinat_uchet .ui.green.approve.button')"
-    PERINATAL_EDIT = (By.ID, 'add_perinat_uchet')
+    PERINATAL_EDIT = "$('add_perinat_uchet')"
+    PERINATAL_CANCEL = "$('#modal_perinat_uchet .ui.red.deny.button')"
 
     ARV_PROPHYLAXIS = "$('div[data-field=perinat_uchet_arv_profil] .ui.dropdown')"
     ARV_START_DATE = "$('div[data-field=perinat_uchet_arv_date_start] input')"
@@ -495,7 +504,8 @@ class PatientCardLocators(object):
     FORMULATING_CHANGE_DATE = "$('#diagnoz_hiv_date_izmen_modal')"
     HIV_STAGE = "$('#modal_diagnoz_hiv div[data-field=diagnoz_hiv_stage_hiv_modal] .ui.dropdown')"
     HIV_DIAGNOSIS_SAVE = "$('#modal_diagnoz_hiv .ui.green.approve.button')"
-    HIV_DIAGNOSIS_EDIT = (By.CSS_SELECTOR, '#hiv_table a[action-type=edit]')
+    HIV_DIAGNOSIS_EDIT = "$('#hiv_table a[action-type=edit]')"
+    HIV_DIAGNOSIS_CANCEL = "$('#modal_diagnoz_hiv .ui.red.deny.button')"
 
     HIV_RELATED_DISEASE_ADD = "$('#diag_opurt_table  a[action-type=add]')"
     RELATED_DISEASE_HIV_STAGE = "$('#modal_oppurt_hiv div[data-field=diagnoz_opurt_stage_modal]')"
@@ -504,24 +514,29 @@ class PatientCardLocators(object):
     DISEASE_NAME = "$('#modal_oppurt_hiv div[data-field=diagnoz_opurt_name_modal] .ui.dropdown')"
     DISEASE_END_DATE = "$('#diagnoz_opurt_date_end_modal')"
     HIV_RELATED_DISEASE_SAVE = "$('#modal_oppurt_hiv .ui.green.approve.button')"
-    HIV_RELATED_DISEASE_EDIT = (By.CSS_SELECTOR, '#diag_opurt_table a[action-type=edit]')
+    HIV_RELATED_DISEASE_EDIT = "$('#diag_opurt_table a[action-type=edit]')"
+    HIV_RELATED_DISEASE_CANCEL = "$('#modal_oppurt_hiv .ui.red.deny.button')"
 
     RECOM_CONSULTATION_ADD = "$('#recomended_consultation_table_edit')"
     CONSULTATION_DATE = "$('#modal_recomended_consultation .ui.calendar')"
     CONSULTATION = "$('#modal_recomended_consultation div[data-field=recomended_consultation_consultation_modal] .ui.dropdown')"
     CONSULTATION_DESCRIPTION = "$('#recomended_consultation_description_modal')"
     RECOM_CONSULTATION_SAVE = "$('#modal_recomended_consultation .ui.green.approve.button')"
-    RECOM_CONSULTATION_EDIT = (By.CSS_SELECTOR, '#recomended_consultation_table a[action-type=edit]')
+    RECOM_CONSULTATION_EDIT = "$('#recomended_consultation_table a[action-type=edit]')"
+    RECOM_CONSULTATION_CANCEL = "$('#modal_recomended_consultation .ui.red.deny.button')"
 
     RECOM_SCREENING_ADD = "$('#recomended_obledovaniya_table_edit')"
     SCREENING_DATE = "$('#modal_recomended_obsled .ui.calendar')"
     SURVEY = "$('#modal_recomended_obsled div[data-field=recomended_obsled_obsled_modal] .ui.dropdown')"
     SCREENING_DESCRIPTION = "$('#recomended_obsled_description_modal')"
     RECOM_SCREENING_SAVE = "$('#modal_recomended_obsled .ui.green.approve.button')"
-    RECOM_SCREENING_EDIT = (By.CSS_SELECTOR, '#recomended_obsled_table a[action-type=edit]')
+    RECOM_SCREENING_EDIT = "$('#recomended_obsled_table a[action-type=edit]')"
+    RECOM_SCREENING_CANCEL = "$('#modal_recomended_obsled .ui.red.deny.button')"
 
+    REFFERALS = "$('a[data-name=refferals]')"
     REFERRAL_ADD = "$('#refferals_table a[action-type=add]')"
-    REFERRAL_DATE = "$('#modal_refferals .ui.calendar')"
+    REFERRAL_TYPE= "$('#modal_refferals div[data-field=refferal_type_modal] .ui.dropdown')"
+    REFERRAL_DATE = "$('#refferals_date_modal')"
     REFERRAL_NAME = "$('#modal_refferals div[data-field=refferals_name_modal] .ui.dropdown')"
     REFERRAL_NUM = "$('#refferals_number_modal')"
     SENDER_ORG = "$('#modal_refferals div[data-field=refferals_org_sender_modal] .ui.dropdown')"
@@ -532,7 +547,7 @@ class PatientCardLocators(object):
     SURVEY_ELEMENTS = "$('#refferals_research_elements_modal')"
     SCREENING_RESULT = "$('#refferals_value_modal')"
     REFERRAL_SAVE = "$('#modal_refferals  .ui.green.approve.button')"
-    REFERRAL_EDIT = (By.CSS_SELECTOR, '#refferals_table a[action-type=edit]')
+    REFERRAL_EDIT = "$('#refferals_table a[action-type=edit]')"
 
     CD4_VL_SURVEY = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-obsledovanie_cd4_disp]')"
     CD4_DETERMINATION_ADD = "$('#obsled_cd4_lab_table a[action-type=add]')"
@@ -550,7 +565,8 @@ class PatientCardLocators(object):
     CD4_REMARK = "$('#obsled_cd4_modal div[data-field=obsled_cd4_note_modal] input')"
     CD4_SERVICES = "$('#obsled_cd4_modal div[data-field=obsled_cd4_which_services_modal] .ui.dropdown')"
     CD4_SAVE = "$('#obsled_cd4_modal .ui.green.approve.button')"
-    CD4_EDIT = (By.CSS_SELECTOR, '#obsled_cd4_lab_table a[action-type=edit]')
+    CD4_EDIT = "$('#obsled_cd4_lab_table a[action-type=edit]')"
+    CD4_CANCEL = "$('#obsled_cd4_modal .ui.red.deny.button')"
 
     VIRAL_LOAD_ADD = "$('#vn_table a[action-type=add]')"
     VL_ANALYSIS_NUM = "$('#vn_modal div[data-field=vn_issled_number_modal] input')"
@@ -565,7 +581,8 @@ class PatientCardLocators(object):
     VL_REMARK = "$('#vn_modal div[data-field=vn_note_modal] .ui.dropdown')"
     VL_SERVICES = "$('#vn_modal div[data-field=vn_which_services_modal] .ui.dropdown')"
     VL_SAVE = "$('#vn_modal .ui.green.approve.button')"
-    VL_EDIT = (By.CSS_SELECTOR, '#vn_table a[action-type=edit]')
+    VL_EDIT = "$('#vn_table a[action-type=edit]')"
+    VL_CANCEL = "$('#vn_modal .ui.red.deny.button')"
 
     VIRAL_HEPATITIS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-diagnozis_vgv_vgc_disp]')"
     VGV_ADD = "$('#vgv_disp_table a[action-type=add]')"
@@ -578,7 +595,8 @@ class PatientCardLocators(object):
     VGV_MED_ORG_PROVIDED_ANALYSIS = "$('#vgv_modal div[data-field=vgv_mo_provod_issled_modal] .ui.dropdown')"
     VGV_REMARK = "$('#vgv_modal div[data-field=vgv_note_modal] input')"
     VGV_SAVE = "$('#vgv_modal .ui.green.approve.button')"
-    VGV_EDIT = (By.CSS_SELECTOR, '#vgv_disp_table a[action-type=edit]')
+    VGV_EDIT = "$('#vgv_disp_table a[action-type=edit]')"
+    VGV_CANCEL = "$('#vgv_modal .ui.red.deny.button')"
 
     VGS_ADD = "$('#vgc_disp_table a[action-type=add]')"
     VGS_REGISTRATION_NUM = "$('#vgc_modal div[data-field=vgc_reg_number_modal] input')"
@@ -590,7 +608,8 @@ class PatientCardLocators(object):
     VGS_MED_ORG_PROVIDED_ANALYSIS = "$('#vgc_modal div[data-field=vgc_mo_provod_issled_modal] .ui.dropdown')"
     VGS_REMARK = "$('#vgc_modal div[data-field=vgc_note_modal] input')"
     VGS_SAVE = "$('#vgc_modal .ui.green.approve.button')"
-    VGS_EDIT = (By.CSS_SELECTOR, '#vgc_disp_table a[action-type=edit]')
+    VGS_EDIT = "$('#vgc_disp_table a[action-type=edit]')"
+    VGS_CANCEL = "$('#vgc_modal .ui.red.deny.button')"
 
     VGV_VAC_ADD = "$('#vgv_vakcin_disp_table a[action-type=add]')"
     VGV_VAC_MULTIPLICITY = "$('#vgv_vakcin_modal div[data-field=vgv_vakcin_kratnost_modal] .ui.dropdown')"
@@ -600,44 +619,51 @@ class PatientCardLocators(object):
     VGV_VAC_COUNTRY_PRODUCER = "$('#vgv_vakcin_modal div[data-field=vgv_vakcin_country_modal] input')"
     MED_ORG_PROVIDED_VACCINATION = "$('#vgv_vakcin_modal div[data-field=vgv_vakcin_mo_modal] .ui.dropdown')"
     VGV_VAC_SAVE = "$('#vgv_vakcin_modal .ui.green.approve.button')"
-    VGV_VAC_EDIT = (By.CSS_SELECTOR, '#vgv_vakcin_disp_table a[action-type=edit]')
+    VGV_VAC_EDIT = "$('#vgv_vakcin_disp_table a[action-type=edit]')"
+    VGV_VAC_CANCEL = "$('#vgv_vakcin_modal .ui.red.deny.button')"
 
     TUBERCULOSIS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-tubik]')"
     FLUOROSCOPY_ADD = "$('#flura_table_add')"
     FLUOR_REGISTERING_DATE = "$('#modal_flura .ui.calendar')"
     FLUOR_RESULT = "$('#modal_flura div[data-field=flura_result_modal] .ui.dropdown')"
     FLUOROSCOPY_SAVE = "$('#modal_flura .ui.green.approve.button')"
-    FLUOROSCOPY_EDIT = (By.CSS_SELECTOR, '#flura_table a[action-type=edit]')
+    FLUOROSCOPY_EDIT = "$('#flura_table a[action-type=edit]')"
+    FLUOROSCOPY_CANCEL = "$('#modal_flura .ui.red.deny.button')"
 
     RADIOGRAPHY_ADD = "$('#rentgen_table_add')"
     RADIO_REGISTERING_DATE = "$('#modal_rentgen .ui.calendar')"
     RADIO_RESULT = "$('#modal_rentgen div[data-field=rentgen_result_modal] .ui.dropdown')"
     RADIOGRAPHY_SAVE = "$('#modal_rentgen .ui.green.approve.button')"
-    RADIOGRAPHY_EDIT = (By.CSS_SELECTOR, '#rentgen_table a[action-type=edit]')
+    RADIOGRAPHY_EDIT = "$('#rentgen_table a[action-type=edit]')"
+    RADIOGRAPHY_CANCEL = "$('#modal_rentgen .ui.red.deny.button')"
 
     SPUTUM_SMEAR_EXAMINATION_ADD = "$('#bakterioskop_table_add')"
     SPUTUM_REGISTERING_DATE = "$('#modal_bakterioskop .ui.calendar')"
     SPUTUM_RESULT = "$('#modal_bakterioskop div[data-field=bakterioskop_result_modal] .ui.dropdown')"
     SPUTUM_SAVE = "$('#modal_bakterioskop .ui.green.approve.button')"
-    SPUTUM_EDIT = (By.CSS_SELECTOR, '#bakter_mokr_table a[action-type=edit]')
+    SPUTUM_EDIT = "$('#bakter_mokr_table a[action-type=edit]')"
+    SPUTUM_CANCEL = "$('#modal_bakterioskop .ui.red.deny.button')"
 
     TB_SYMPHTOMS_ADD = "$('#symptom_tb_table_add')"
     TB_SYMPH_REGISTERING_DATE = "$('#modal_symptom_tb .ui.calendar')"
     TB_SYMPH_RESULT = "$('#modal_symptom_tb div[data-field=symptom_tb_result_modal] .ui.dropdown')"
     TB_SYMPH_SAVE = "$('#modal_symptom_tb .ui.green.approve.button')"
-    TB_SYMPH_EDIT = (By.CSS_SELECTOR, '#symptom_tub_table a[action-type=edit]')
+    TB_SYMPH_EDIT = "$('#symptom_tub_table a[action-type=edit]')"
+    TB_SYMPH_CANCEL = "$('#modal_symptom_tb .ui.red.deny.button')"
 
     XPERT_MTB_ADD ="$('#xpert_table_add')"
     XPERT_MTB_REGISTERING_DATE = "$('#modal_xpert .ui.calendar')"
     XPERT_MTB_RESULT = "$('#modal_xpert div[data-field=xpert_result_modal] .ui.dropdown')"
     XPERT_MTB_SAVE = "$('#modal_xpert .ui.green.approve.button')"
-    XPERT_MTB_EDIT = (By.CSS_SELECTOR, '#xpert_table a[action-type=edit]')
+    XPERT_MTB_EDIT = "$('#xpert_table a[action-type=edit]')"
+    XPERT_MTB_CANCEL = "$('#modal_xpert .ui.red.deny.button')"
 
     KT_MRT_ADD = "$('#mrt_table_add')"
     KT_MRT_REGISTERING_DATE = "$('#modal_mrt .ui.calendar')"
     KT_MRT_RESULT = "$('#modal_mrt div[data-field=mrt_result_modal] .ui.dropdown')"
     KT_MRT_SAVE = "$('#modal_mrt .ui.green.approve.button')"
-    KT_MRT_EDIT = (By.CSS_SELECTOR, '#mrt_table a[action-type=edit]')
+    KT_MRT_EDIT = "$('#mrt_table a[action-type=edit]')"
+    KT_MRT_CANCEL = "$('#modal_mrt .ui.red.deny.button')"
 
     TB_TREATMENT_ADD = "$('#lechenie_tb_table_add')"
     LAB_NAME_CONFIRMED_TB = "$('#lechenie_tb_lpo_name_modal')"
@@ -650,7 +676,8 @@ class PatientCardLocators(object):
     BAC_SECRETION = "$('#modal_lechenie_tb div[data-field=lechenie_tb_bakovidelenie_modal] .ui.dropdown')"
     OUTCOME = "$('#modal_lechenie_tb div[data-field=lechenie_tb_ishod_modal] .ui.dropdown')"
     TB_TREATMENT_SAVE = "$('#modal_lechenie_tb .ui.green.approve.button')"
-    TB_TREATMENT_EDIT = (By.CSS_SELECTOR, '#lechenie_tb_table a[action-type=edit]')
+    TB_TREATMENT_EDIT = "$('#lechenie_tb_table a[action-type=edit]')"
+    TB_TREATMENT_CANCEL = "$('#modal_lechenie_tb .ui.red.deny.button')"
     PRESENCE_TB_IN_HISTORY = "$('div[data-tab=patient_card_menu-tubik] div[data-field=patient_detail_nalich_TB_anamnez] .ui.dropdown')"
     D_ACCOUNTED_DATE = "$('div[data-field=patient_detail_date_disp_uche_tub]')"
 
@@ -663,7 +690,7 @@ class PatientCardLocators(object):
     ART_ROW = "$('#modal_svedeniya_art div[data-field=svedeniya_art_ryad_modal] .ui.dropdown')"
     ART_SCHEME = "$('#modal_svedeniya_art div[data-field=svedeniya_art_scheme_art_modal] .ui.dropdown')"
     ART_MED_ORG = "$('#modal_svedeniya_art div[data-field=svedeniya_art_art_conduct_modal] .ui.dropdown')"
-    ART_INFORMATION_EDIT = (By.CSS_SELECTOR, '#svedeniya_art_table a[action-type=edit]')
+    ART_INFORMATION_EDIT = "$('#svedeniya_art_table a[action-type=edit]')"
     ART_ISSUANCE_ADD = "$('#is_table a[action-type=add]')"
     ART_MEDICATION_NAME = "$('#modal_art_preparaty div[data-field=art_preparat_name_modal] .inverted.circular.icon')"
     ART_MEDICATION_NAME_CHOICE = "$('#add-row-preparaty-table tr:eq(0) td:eq(0) a')"
@@ -686,7 +713,7 @@ class PatientCardLocators(object):
     ART_ADHER_LOW_REASONS = "$('#modal_commitment_assessment div[data-field=commitment_assessment_reason_name_modal] .ui.dropdown')"
     SIDE_EFFECTS = "$('#modal_commitment_assessment div[data-field=commitment_assessment_toksich_reak_name_modal] .ui.dropdown')"
     ART_ADHER_LEVEL_SAVE = "$('#modal_commitment_assessment .ui.green.approve.button')"
-    ART_ADHER_LEVEL_EDIT = (By.CSS_SELECTOR, '#commitment_assessment_table a[action-type=edit]')
+    ART_ADHER_LEVEL_EDIT = "$('#commitment_assessment_table a[action-type=edit]')"
 
     ART_RECIPE_ADD =  "$('#recipes_table a[action-type=add]')"
     RECIPE_NUM = "$('#modal_recipes div[data-field=recipes_number_modal] input')"
@@ -700,7 +727,7 @@ class PatientCardLocators(object):
     UNPACKING_SIGNS = "$('#modal_recipes div[name=form-receipt-1-priznak_vskritiya_pack] .ui.dropdown')"
     SIGNATURE = "$('#modal_recipes div[data-field=form-receipt-1-signature] input')"
     ART_RECIPE_SAVE = "$('#modal_recipes .ui.green.approve.button')"
-    ART_RECIPE_EDIT = (By.CSS_SELECTOR, '#recipes_table a[action-type=edit]')
+    ART_RECIPE_EDIT = "$('#recipes_table a[action-type=edit]')"
 
     CHILDREN_PREGNANCY  = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-children]')"
     PREGNANCY_ADD = "$('#hiv_table_edit')"
@@ -748,7 +775,7 @@ class PatientCardLocators(object):
     CHILDS_DEATH_DATE = "$('#child_date_death_modal')"
     INFORMATION_CHILDREN_SAVE = "$('#modal_child_info .ui.green.approve.button')"
     PREGNANCY_SAVE = "$('#modal_preg .ui.green.approve.button')"
-    PREGNANCY_EDIT = (By.CSS_SELECTOR, '#preg_table a[action-type=edit]')
+    PREGNANCY_EDIT = "$('#preg_table a[action-type=edit]')"
 
     THERAPHY  = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-therapy]')"
     PREVENTIVE_THERAPHY_ADD = "$('#therapy_opurt_zabolev_table_add')"
@@ -757,7 +784,7 @@ class PatientCardLocators(object):
     PREV_THER_START_DATE = "$('#therapy_opurt_zabolev_date_start_modal')"
     PREV_THER_END_DATE = "$('#therapy_opurt_zabolev_date_end_modal')"
     PREV_THER_SAVE = "$('#modal_therapy_opurt_zabolev .ui.green.approve.button')"
-    PREV_THER_EDIT = (By.CSS_SELECTOR, '#add_row_therapy_opurt_zabolev_table a[action-type=edit]')
+    PREV_THER_EDIT = "$('#add_row_therapy_opurt_zabolev_table a[action-type=edit]')"
     OPIOID_SUBSTITUTION_THERAPHY_ADD = "$('#opioid_therapy_table_add')"
     OST_START_DATE = "$('#opioid_therapy_date_start_ozt_modal')"
     OST_END_DATE = "$('#opioid_therapy_date_end_ozt_modal')"
@@ -770,7 +797,7 @@ class PatientCardLocators(object):
     VGS_TREAT_END_DATE = "$('#hcv_therapy_date_end_modal')"
     VGS_TREAT_RESULT = "$('#modal_hcv_therapy div[data-field=hcv_therapy_table_ishod_modal] .ui.dropdown')"
     VGS_TREAT_SAVE = "$('#modal_hcv_therapy .ui.green.approve.button')"
-    VGS_TREAT_EDIT = (By.CSS_SELECTOR, '#add_row_hcv_therapy_table a[action-type=edit]')
+    VGS_TREAT_EDIT = "$(''#add_row_hcv_therapy_table a[action-type=edit]')"
 
     D_SCREENING_HOSPITALIZATION = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-d_osmotr]')"
     D_SCRN_HOSP_ADD = "$('#ambulatory_healing_table_add')"
@@ -781,7 +808,8 @@ class PatientCardLocators(object):
     DATE_OF_DISCHARGE = "$('#date_okonchaniya_modal')"
     D_SCRN_TREAT_RESULT = "$('#ambulatory_healing_modal div[data-field=result_modal] .ui.dropdown')"
     D_SCRN_HOSP_SAVE = "$('#ambulatory_healing_modal .ui.green.approve.button')"
-    D_SCRN_HOSP_EDIT = (By.CSS_SELECTOR, '#therapy_opurt_zabolev_table a[action-type=edit]')
+    D_SCRN_HOSP_EDIT = "$('#therapy_opurt_zabolev_table a[action-type=edit]')"
+    D_SCRN_HOSP_CANCEL = "$('#ambulatory_healing_modal .ui.red.deny.button')"
 
     VISITS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-visits]')"
     SCREENING_ADD = "$('div.ui.secondary.padding_ext_07.segment a.ui.green.button.add_osmotr')"
@@ -863,7 +891,7 @@ class PatientCardLocators(object):
     PLANNED_SCREENING = "$('#context input[name=date_plan_d_osmotr]')"
     VISITS_SAVE = "$('#save_data')"
     VISITS_REFRESH = "$('#visits_list div.content .header button[title=Обновить]')"
-    VISITS_EDIT = (By.CSS_SELECTOR, '#visits_list i.edit.icon')
+    VISITS_EDIT = "$('#visits_list i.edit.icon')"
 
 
 
@@ -895,6 +923,7 @@ class WorkJournalLocators(object):
     EDIT_CARD = "document.querySelector('#gridContainer div.dropdown.button .menu').children[1]"
     LIST_BUTTON = "document.querySelector('#gridContainer div.dropdown.button')"
     HOME_ICON = "$('.header.item .home.icon')"
+    WORK_JOURNAL = "document.querySelector('body > div.ui.main-page > div > div.ui.piled.segment > div.ui.accordion.accordion-widht > div:nth-child(6) > div > div > div:nth-child(1) > a')"
     WORK_JOURNAL_MENU = "$('div[data-name=main-menu] .ui.pointing.labeled.dropdown.link.item')"
     BOOK_ICON_MENU = "$('i[class=book icon] .right.menu')"
     ARV_LOG_MENU = "$('.ui.fixed.inverted.menu.main .ui.pointing.dropdown.link.item.active.visible')"
@@ -1104,5 +1133,4 @@ class SettingsPageLocators(object):
     LEGEND_REVISE = "$('div[data-field=is_legend] .checkbox')"
     USER_ORGANIZATION = "$('div[data-field=org_id] .field')"
     USER_ADD = "$('#submit .field')"
-
 

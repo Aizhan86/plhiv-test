@@ -13,8 +13,8 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.USER_PASS)
         self.browser.find_element(*LoginPageLocators.USER_PASS).send_keys(*UserData.PASSWORD)
 
-        assert self.is_element_present(*LoginPageLocators.LOGIN_BTN)
-        self.browser.find_element(*LoginPageLocators.LOGIN_BTN).click()
+        # assert self.is_element_present(*LoginPageLocators.LOGIN_BTN)
+        self.make(f"{LoginPageLocators.LOGIN_BTN}.click()")
 
          # проверка, что есть форма модального соглашения и кликнуть на кнопку согласия
         if self.is_element_present(*LoginPageLocators.MODAL_AGR):

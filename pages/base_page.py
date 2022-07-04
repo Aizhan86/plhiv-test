@@ -1,5 +1,5 @@
 from time import sleep
-
+from .values import *
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -77,6 +77,25 @@ class BasePage(object):
             if enc == 10:
                 break
         return patient_id
+
+    def get_referral(self, ref_type, ref_name):
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.REFFERALS}.click();")  # Выбрали Направления
+        self.make(f"{PatientCardLocators.REFERRAL_ADD}.click();")
+        self.make(f"{PatientCardLocators.REFERRAL_TYPE}.dropdown('set selected', '{ref_type}');")
+        self.make(f"{PatientCardLocators.REFERRAL_DATE}.calendar('set date', '{today}');")
+        # referral_name_choice = random.choice(['178', '35', '36', '37', '38', '40', '46']) {referral_name_choice}
+        self.make(f"{PatientCardLocators.REFERRAL_NAME}.dropdown('set selected', '{ref_name}');")
+        self.make(f"{PatientCardLocators.REFERRAL_NUM}.val('{numbers4}');")
+        # self.make(f"{PatientCardLocators.SENDER_ORG}.dropdown('set selected', '{mo_choice2}');")
+        # self.make(f"{PatientCardLocators.RECIPIENT_ORG}.dropdown('set selected', '{mo_choice2}');")
+        # category_choice = random.choice(['1', '2', '3', '4', '5', '6', '7', '8'])
+        # self.make(f"{PatientCardLocators.CATEGORY}.dropdown('set selected', '{category_choice}');")
+        # self.make(f"{PatientCardLocators.NOSOLOGY}.click();")
+        # self.make(f"{PatientCardLocators.NOSOLOGY_CHOICE}.click();")
+        # self.make(f"{PatientCardLocators.SURVEY_ELEMENTS}.val('Не знаю');")
+        # self.make(f"{PatientCardLocators.SCREENING_RESULT}.val('Положительный');")
+        self.make(f"{PatientCardLocators.REFERRAL_SAVE}.click();")
 
 
 

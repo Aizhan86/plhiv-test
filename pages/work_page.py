@@ -27,16 +27,18 @@ class WorkPage(BasePage):
 
     def open_card_of_child(self):
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.WORK_JOURNAL}.click()")
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
         self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_child}']);")
-        sleep(10)
+        sleep(15)
         self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
         self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
         # assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_child}?new=1&in_rk=1", "Patient card of child hasn't opened"
 
     def open_card_of_woman(self):
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.WORK_JOURNAL}.click()")
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
         self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_woman}']);")
@@ -47,6 +49,7 @@ class WorkPage(BasePage):
 
     def open_card_of_homeless(self):
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.WORK_JOURNAL}.click()")
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
         self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_homeless}']);")
@@ -57,6 +60,7 @@ class WorkPage(BasePage):
 
     def open_card_of_foreigner(self):
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
+        self.make(f"{WorkJournalLocators.WORK_JOURNAL}.click()")
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
         self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_foreigner}']);")
