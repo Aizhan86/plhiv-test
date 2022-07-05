@@ -77,10 +77,10 @@ class RegisterPageLocators(object):
     MOTHERS_IB_NO_DATE = "$('#general_data_mother_date_ib')"
     REGISTER_SAVE_BTN = "$('.ui.bottom.attached.tab.segment.active .right.floated.green.approve.button')"
     EDIT_REGIS_ADDRESS = "$('#registration_address_edit_button')"
-    REGIS_APT2 = "$('#registration_address_kvart_modal')"
-    ERROR_REGIS_ADDRESS_SAVE = "$('#modal_registration_address .ui.green.approve.button')"
+    CANCEL_REGIS_ADDRESS = "$('#modal_registration_address .ui.red.deny.button')"
     PATIENT_CARD_SAVE = "$('#general_data_save_button')"
-
+    EDIT_RESID_ADDRESS = "$('#fact_address_edit_button')"
+    CANCEL_RESID_ADDRESS = "$('#modal_fact_address .ui.red.deny.button')"
 
 class PatientCardLocators(object):
 

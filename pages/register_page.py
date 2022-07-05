@@ -61,7 +61,7 @@ class RegisterPage(BasePage):
         sleep(1)
         self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('hide');")
         # self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
-        self.make(f"{RegisterPageLocators.REGIS_LOCALITY}.dropdown('set selected', '177');")
+        self.make(f"{RegisterPageLocators.REGIS_LOCALITY}.dropdown('set selected', '290000000002');")
         self.make(f"{RegisterPageLocators.REGIS_PLACE}.dropdown('set selected', '2');")
         self.make(f"{RegisterPageLocators.REGIS_STREET}.val('{street_choice}');")
         self.make(f"{RegisterPageLocators.REGIS_HOUSE}.val('{55}');")
@@ -76,7 +76,7 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.dropdown('set selected', '33');")
         sleep(1)
         self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.dropdown('hide');")
-        self.make(f"{RegisterPageLocators.RESID_LOCALITY}.dropdown('set selected', '170000000008');")
+        self.make(f"{RegisterPageLocators.RESID_LOCALITY}.dropdown('set selected', '290000000004');")
         self.make(f"{RegisterPageLocators.RESID_PLACE}.dropdown('set selected', '2');")
         self.make(f"{RegisterPageLocators.RESID_STREET}.val('{street_choice}');")
         self.make(f"{RegisterPageLocators.RESID_HOUSE}.val('25');")
@@ -156,11 +156,13 @@ class RegisterPage(BasePage):
         print(s)
         assert s == 'mo_choice', "Social status object doesn't take a value"
 
+    def check_edit_button_registration_address_modal(self):
+        assert self.browser.execute_script(f"return {RegisterPageLocators.EDIT_REGIS_ADDRESS}.length"), "Edit button in Registration address modal is not accessible"
+        self.make(f"{RegisterPageLocators.EDIT_REGIS_ADDRESS}.click();")
+
     def check_registration_area(self):
-        self.make(f"$('#registration_address_edit_button').click();")
         sleep(2)
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_region_name_modal] .ui.dropdown').length"), "Patient's registration area object is not accessible"
-        sleep(1)
         a = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_region_name_modal] .ui.dropdown input[type=hidden]').val()")
         print(a)
         assert a == '5', "Patient's registration area object doesn't take a value"
@@ -173,7 +175,7 @@ class RegisterPage(BasePage):
     def check_registration_locality(self):
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').length"), "Patient's registration locality object is not accessible"
         n = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').find('input[type=hidden]').val()")
-        assert n == '177', "Patient's registration locality object doesn't take a value"
+        assert n == '290000000002', "Patient's registration locality object doesn't take a value"
 
     def check_registration_place(self):
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').length"), "Patient's registration place object is not accessible"
@@ -181,65 +183,74 @@ class RegisterPage(BasePage):
         assert o == '2', "Patient's registration place object doesn't take a value"
 
     def check_registration_street(self):
+        sleep(1)
         assert self.browser.execute_script(f"return $('#registration_address_street_modal').length"), "Patient's registration street object is not accessible"
-        p = self.browser.execute_script(f"return $('#registration_address_street_modal').find('input[type=hidden]').val()")
-        assert p == 'street_choice', "Patient's registration street object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#registration_address_street_modal').val()") == street_choice, "Patient's registration street object doesn't take a value"
 
     def check_registration_house(self):
         assert self.browser.execute_script(f"return $('#registration_address_house_modal').length"), "Patient's registration house object is not accessible"
-        q = self.browser.execute_script(f"return $('#registration_address_house_modal').find('input[type=hidden]').val()")
+        q = self.browser.execute_script(f"return $('#registration_address_house_modal').val()")
         assert q == '55', "Patient's registration house object doesn't take a value"
 
     def check_registration_apartment(self):
         assert self.browser.execute_script(f"return $('#registration_address_kvart_modal').length"), "Patient's registration apartment object is not accessible"
-        r = self.browser.execute_script(f"return $('#registration_address_kvart_modal').find('input[type=hidden]').val()")
+        r = self.browser.execute_script(f"return $('#registration_address_kvart_modal').val()")
         assert r == '44', "Patient's registration apartment object doesn't take a value"
 
     def check_registration_phone_number(self):
         assert self.browser.execute_script(f"return $('#registration_address_telephone_modal').length"), "Patient's registration phone number object is not accessible"
-        s = self.browser.execute_script(f"return $('#registration_address_telephone_modal').find('input[type=hidden]').val()")
+        s = self.browser.execute_script(f"return $('#registration_address_telephone_modal').val()")
         assert s == '87273456987', "Patient's registration phone number object doesn't take a value"
-        self.make(f"$('#duplicate_to_fact_address').siblings().css('ui', 'red', 'deny', 'button').click()")
+
+    def check_cancel_button_registration_address_modal(self):
+        assert self.browser.execute_script(f"return {RegisterPageLocators.CANCEL_REGIS_ADDRESS}.length"), "Cancel button in Registration address modal is not accessible"
+        self.make(f"{RegisterPageLocators.CANCEL_REGIS_ADDRESS}.click();")
+
+    def check_edit_button_residence_address_modal(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return {RegisterPageLocators.EDIT_RESID_ADDRESS}.length"), "Edit button in Residence address modal is not accessible"
+        self.make(f"{RegisterPageLocators.EDIT_RESID_ADDRESS}.click();")
 
     def check_residence_area(self):
-        sleep(1)
-        self.make(f"$('#registration_address_edit_button').click();")
         sleep(2)
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_AREA}.length"), "Patient's residence area object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_AREA}.find('input').val()") == '3', "Patient's residence area object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').length"), "Patient's residence area object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').find('input').val()") == '3', "Patient's residence area object doesn't take a value"
 
     def check_residence_unit_area(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_UNIT_AREA}.length"), "Patient's residence unit area object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_UNIT_AREA}.find('input').val()") == '33', "Patient's residence unit area object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').length"), "Patient's residence unit area object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').find('input').val()") == '33', "Patient's residence unit area object doesn't take a value"
 
     def check_residence_locality(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_LOCALITY}.length"), "Patient's residence locality object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_LOCALITY}.find('input').val()") == '170000000008', "Patient's residence locality object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').length"), "Patient's residence locality object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').find('input').val()") == '290000000004', "Patient's residence locality object doesn't take a value"
 
     def check_residence_place(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_PLACE}.length"), "Patient's residence place object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_PLACE}.find('input').val()") == '2', "Patient's residence place object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').length"), "Patient's residence place object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').find('input').val()") == '2', "Patient's residence place object doesn't take a value"
 
     def check_residence_street(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_STREET}.length"), "Patient's residence street object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_STREET}.find('input').val()") == 'street_choice', "Patient's residence street object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#fact_address_street_modal').length"), "Patient's residence street object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_street_modal').val()") == street_choice, "Patient's residence street object doesn't take a value"
 
     def check_residence_house(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_HOUSE}.length"), "Patient's residence house object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_HOUSE}.val()") == '25', "Patient's residence house object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#fact_address_hous_modal').length"), "Patient's residence house object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_hous_modal').val()") == '25', "Patient's residence house object doesn't take a value"
 
     def check_residence_apartment(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_APT}.length"), "Patient's residence apartment object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_APT}.val()") == '45', "Patient's residence apartment object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').length"), "Patient's residence apartment object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').val()") == '45', "Patient's residence apartment object doesn't take a value"
 
     def check_residence_phone_number(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_PHONE_NO}.length"), "Patient's residence phone number object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RESID_PHONE_NO}.val()") == '87273456789', "Patient's residence phone number object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').length"), "Patient's residence phone number object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').val()") == '87273456789', "Patient's residence phone number object doesn't take a value"
 
     def check_residence_medical_organization(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.length"), "Residence medical organization object is not accessible"
         assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.find('input').val()") == '170000000558', "Residence medical organization object doesn't take a value"
-        self.make(f"$('#modal_fact_address .ui.red.deny.button').click();")
+
+    def check_cancel_button_residence_address_modal(self):
+        assert self.browser.execute_script(f"return {RegisterPageLocators.CANCEL_RESID_ADDRESS}.length"), "Edit button in Residence address modal is not accessible"
+        self.make(f"{RegisterPageLocators.CANCEL_RESID_ADDRESS}.click();")
 
     def check_retrospective_child_checkbox(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.RETROSPECTIVE_CHILD}.length"), "Retrospective child checkbox object is not accessible"
@@ -264,14 +275,6 @@ class RegisterPage(BasePage):
     def check_ib_number_date_of_mother(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_IB_NO_DATE}.length"), "Mother's ib number date object is not accessible"
         assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_IB_NO_DATE}.find('input').val()") == 'ib_date', "Mother's ib number date object doesn't take a value"
-
-    def edit_card(self):
-        self.make(f"{RegisterPageLocators.EDIT_REGIS_ADDRESS}.click()")
-        self.browser.find_element(*RegisterPageLocators.REGIS_APT2).send_keys(77)
-        self.make(f"{RegisterPageLocators.ERROR_REGIS_ADDRESS_SAVE}.click()")
-        self.make(f"{RegisterPageLocators.REASON_NOT_EPID}.dropdown('set selected', '3');")
-        self.make(f"{RegisterPageLocators.REASON_NOT_DISP_REG}.dropdown('set selected', '6');")
-        self.make(f"{RegisterPageLocators.PATIENT_CARD_SAVE}.click()")
 
     def fill_hiv_antibody_testing_ogc_modal(self):
         # self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента

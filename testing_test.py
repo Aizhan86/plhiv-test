@@ -85,9 +85,9 @@ class TestGeneralData():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_social_status()
 
-    # def test_registration_medical_organization(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_registration_medical_organization()
+    def test_edit_button_registration_address_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_edit_button_registration_address_modal()
 
     def test_registration_area(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -97,66 +97,78 @@ class TestGeneralData():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_registration_unit_area()
 
-    # def test_registration_locality(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_registration_locality()
+    def test_registration_locality(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_registration_locality()
 
     def test_registration_place(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_registration_place()
 
-    # def test_registration_street(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_registration_street()
-    #
-    # def test_registration_house(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_registration_house()
-    #
-    # def test_registration_apartment(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_registration_apartment()
-    #
-    # def test_registration_phone_number(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_registration_phone_number()
-    #
-    # def test_residence_area(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_area()
-    #
-    # def test_residence_unit_area(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_unit_area()
-    #
-    # def test_residence_locality(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_locality()
-    #
-    # def test_residence_place(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_place()
-    #
-    # def test_residence_street(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_street()
-    #
-    # def test_residence_house(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_house()
-    #
-    # def test_residence_apartment(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_apartment()
-    #
-    # def test_residence_phone_number(self, browser):
-    #     register_page = RegisterPage(browser, browser.current_url)
-    #     register_page.check_residence_locality()
-    #
+    def test_registration_street(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_registration_street()
+
+    def test_registration_house(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_registration_house()
+
+    def test_registration_apartment(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_registration_apartment()
+
+    def test_registration_phone_number(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_registration_phone_number()
+
+    def test_cancel_button_registration_address_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_cancel_button_registration_address_modal()
+
+    def test_edit_button_residence_address_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_edit_button_residence_address_modal()
+
+    def test_residence_area(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_area()
+
+    def test_residence_unit_area(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_unit_area()
+
+    def test_residence_locality(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_locality()
+
+    def test_residence_place(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_place()
+
+    def test_residence_street(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_street()
+
+    def test_residence_house(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_house()
+
+    def test_residence_apartment(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_apartment()
+
+    def test_residence_phone_number(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_residence_locality()
+
+    def test_cancel_button_residence_address_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_cancel_button_residence_address_modal()
+
     # def test_residence_medical_organization(self, browser):
     #     register_page = RegisterPage(browser, browser.current_url)
     #     register_page.check_residence_medical_organization()
-
+    #
     # def test_retrospective_child_checkbox(self, browser):
     #     register_page = RegisterPage(browser, browser.current_url)
     #     register_page.check_retrospective_child_checkbox()
@@ -180,15 +192,6 @@ class TestGeneralData():
     # def test_ib_number_date_of_mother(self, browser):
     #     register_page = RegisterPage(browser, browser.current_url)
     #     register_page.check_ib_number_date_of_mother()
-
-    @pytest.mark.smoke
-    def test_editing_general_information_in_patient_card(self, browser):
-        try:
-            register_page = RegisterPage(browser, browser.current_url)
-            register_page.edit_card()
-            print(f"test_editing_general_information_in_patient_card passed")
-        except Exception as e:
-            capture_exception(e)
 
 @allure.severity(allure.severity_level.NORMAL)
 class TestChildCase():
