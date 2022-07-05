@@ -303,6 +303,7 @@ class RegisterPage(BasePage):
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_OGC_ADD}.length"), "Add button in HIV antibody testing OGC modal is not accessible"
 
     def check_edit_button_hiv_ogc_modal(self):
+        sleep(2)
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_OGC_EDIT}.length"), "Edit button in HIV antibody testing OGC modal is not accessible"
         self.make(f"{PatientCardLocators.IFA_OGC_EDIT}.click();")
 
@@ -1221,7 +1222,6 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.DISP_CANCEL_BTN}.click();")
 
     def fill_at_risk_modal(self):
-        drug_cons_choice = random.choice(['1', '2'])
         self.make(f"{PatientCardLocators.DRUG_INJ_CONSUMPTION}.dropdown('set selected', '{drug_cons_choice}');")
         self.make(f"{PatientCardLocators.DRUG_CONSUMPTION_YEAR}.val('2');")
         self.make(f"{PatientCardLocators.DRUG_CONSUMPTION_REGIS}.dropdown('set selected', '{two_choice}');")
@@ -1238,7 +1238,7 @@ class RegisterPage(BasePage):
         assert self.browser.execute_script(f"return {PatientCardLocators.DRUG_INJ_CONSUMPTION}.length"), "Drug consumption object in Dispensary observation is not accessible"
         dic = self.browser.execute_script(f"return {PatientCardLocators.DRUG_INJ_CONSUMPTION}.find('input').val()")
         print(dic)
-        assert dic == two_choice, "Drug consumption object in Dispensary observation doesn't take a value"
+        assert dic == drug_cons_choice, "Drug consumption object in Dispensary observation doesn't take a value"
 
     def check_drug_consumption_year(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.DRUG_CONSUMPTION_YEAR}.length"), "Drug consumption year object is not accessible"
@@ -1457,9 +1457,7 @@ class RegisterPage(BasePage):
 
     def check_formulating_change_date_hiv_diagnosis_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.FORMULATING_CHANGE_DATE}.length"), "The Formulating change date object in HIV diagnosis modal is not accessible"
-        fcd = self.browser.execute_script(f"return {PatientCardLocators.FORMULATING_CHANGE_DATE}.find('input').val()")
-        print(fcd)
-        assert fcd == thirty_days_ago, "The Formulating change date object in HIV diagnosis modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.FORMULATING_CHANGE_DATE}.val()") == thirty_days_ago, "The Formulating change date object in HIV diagnosis modal doesn't take a value"
 
     def check_hiv_stage_hiv_diagnosis_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.HIV_STAGE}.length"), "The HIV Stage object in HIV diagnosis modal is not accessible"
@@ -1468,10 +1466,12 @@ class RegisterPage(BasePage):
         assert hs == hiv_stage_choice, "The HIV Stage object in HIV diagnosis modal doesn't take a value"
 
     def check_cancel_button_hiv_diagnosis_modal(self):
+        sleep(1)
         assert self.browser.execute_script(f"return {PatientCardLocators.HIV_DIAGNOSIS_CANCEL}.length"), "Cancel button in HIV diagnosis modal in Dispensary observation is not accessible"
         self.make(f"{PatientCardLocators.HIV_DIAGNOSIS_CANCEL}.click();")
 
     def fill_hiv_related_disease_modal(self):
+        sleep(1)
         self.make(f"{PatientCardLocators.HIV_RELATED_DISEASE_ADD}.click();")
         self.make(f"{PatientCardLocators.RELATED_DISEASE_HIV_STAGE}.click();")
         self.make(f"{PatientCardLocators.RELATED_DISEASE_HIV_STAGE_CHOICE}.click();")
@@ -1487,8 +1487,9 @@ class RegisterPage(BasePage):
         assert self.browser.execute_script(f"return {PatientCardLocators.HIV_RELATED_DISEASE_ADD}.length"), "Add button in HIV related disease modal is not accessible"
 
     def check_edit_button_hiv_related_disease_modal(self):
+        sleep(1)
         assert self.browser.execute_script(f"return {PatientCardLocators.HIV_RELATED_DISEASE_EDIT}.length"), "Edit button in HIV related disease modal in Dispensary observation is not accessible"
-        self.make(f"{PatientCardLocators.HIV_DIAGNOSIS_EDIT}.click();")
+        self.make(f"{PatientCardLocators.HIV_RELATED_DISEASE_EDIT}.click();")
 
     def check_hiv_stage_hiv_related_disease_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.RELATED_DISEASE_HIV_STAGE}.length"), "The HIV Stage object in HIV related disease is not accessible"
@@ -1498,24 +1499,18 @@ class RegisterPage(BasePage):
 
     def check_disease_start_date_hiv_related_disease_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.DISEASE_START_DATE}.length"), "The Disease start date object in HIV related disease is not accessible"
-        dsdhr = self.browser.execute_script(f"return {PatientCardLocators.DISEASE_START_DATE}.find('input').val()")
-        print(dsdhr)
-        assert dsdhr == thirty_days_ago, "The Disease start date object in HIV related disease doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.DISEASE_START_DATE}.val()") == thirty_days_ago, "The Disease start date object in HIV related disease doesn't take a value"
 
     def check_disease_end_date_hiv_related_disease_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.DISEASE_END_DATE}.length"), "The Disease end date object in HIV related disease is not accessible"
-        dedhr = self.browser.execute_script(f"return {PatientCardLocators.DISEASE_END_DATE}.find('input').val()")
-        print(dedhr)
-        assert dedhr == twenty_days_ago, "The Disease end date object in HIV related disease doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.DISEASE_END_DATE}.val()") == twenty_days_ago, "The Disease end date object in HIV related disease doesn't take a value"
 
     def check_cancel_button_hiv_related_disease_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.HIV_RELATED_DISEASE_CANCEL}.length"), "Cancel button in HIV diagnosis modal in Dispensary observation is not accessible"
         self.make(f"{PatientCardLocators.HIV_RELATED_DISEASE_CANCEL}.click();")
 
     def fill_recommended_consultation_modal(self):
-        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
-        self.make(f"{PatientCardLocators.HIV_DIAGNOSIS}.click();")
+        sleep(3)
         self.make(f"{PatientCardLocators.RECOM_CONSULTATION_ADD}.click();")
         self.make(f"{PatientCardLocators.CONSULTATION_DATE}.calendar('set date', '{thirty_days_forward}');")
         self.make(f"{PatientCardLocators.CONSULTATION}.dropdown('set selected', '{consultation_choice}');")
@@ -1534,9 +1529,7 @@ class RegisterPage(BasePage):
 
     def check_consultation_date_recommended_consultation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DATE}.length"), "The Consultation date object in Recommended consultation modal is not accessible"
-        cd = self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DATE}.find('input').val()")
-        print(cd)
-        assert cd == thirty_days_forward, "The Consultation date object in Recommended consultation modaldoesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DATE}.find('input').val()") == thirty_days_forward, "The Consultation date object in Recommended consultation modaldoesn't take a value"
 
     def check_consultation_type_recommended_consultation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION}.length"), "The Consultation in Recommended consultation modal is not accessible"
@@ -1546,9 +1539,7 @@ class RegisterPage(BasePage):
 
     def check_consultation_description_recommended_consultation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DESCRIPTION}.length"), "The Consultation description  in Recommended consultation modal is not accessible"
-        cdrc = self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DESCRIPTION}.find('input').val()")
-        print(cdrc)
-        assert cdrc == 'Положительный', "The Consultation description object in Recommended consultation modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DESCRIPTION}.find('input').val()") == 'Положительный', "The Consultation description object in Recommended consultation modal doesn't take a value"
 
     def check_cancel_button_recommended_consultation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.RECOM_CONSULTATION_CANCEL}.length"), "Cancel button in Recommended consultation modal in Dispensary observation is not accessible"
@@ -1576,9 +1567,7 @@ class RegisterPage(BasePage):
 
     def check_consultation_date_recommended_screening_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SCREENING_DATE}.length"), "The Consultation date object in Recommended screening modal is not accessible"
-        cd = self.browser.execute_script(f"return {PatientCardLocators.SCREENING_DATE}.find('input').val()")
-        print(cd)
-        assert cd == thirty_days_forward, "The Consultation date object in Recommended screening modaldoesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SCREENING_DATE}.find('input').val()") == thirty_days_forward, "The Consultation date object in Recommended screening modaldoesn't take a value"
 
     def check_consultation_type_recommended_screening_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SURVEY}.length"), "The Consultation in Recommended screening modal is not accessible"
@@ -1637,7 +1626,6 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.CD4_rate}.val('2');")
         self.make(f"{PatientCardLocators.CD4_MED_ORG_PROVIDED_ANALYSIS}.dropdown('set selected', '{mo_choice1}');")
         self.make(f"{PatientCardLocators.CD4_REMARK}.val('Положительный');")
-        service_choice = random.choice(['304', '238'])
         self.make(f"{PatientCardLocators.CD4_SERVICES}.dropdown('set selected', '{service_choice}');")
 
     def check_save_button_cd4_modal(self):
@@ -2090,13 +2078,13 @@ class RegisterPage(BasePage):
         assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_REGISTERING_DATE}.length"), "The Registering date object in Sputum smear modal is not accessible"
         rrd = self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_REGISTERING_DATE}.find('input').val()")
         print(rrd)
-        assert rrd == sputum_choice, "The Registering date object in Sputum smear modal doesn't take a value"
+        assert rrd == today, "The Registering date object in Sputum smear modal doesn't take a value"
 
     def check_result_sputum_smear_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_RESULT}.length"), "The Result object in Sputum smear modal is not accessible"
         rr = self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_RESULT}.find('input').val()")
         print(rr)
-        assert rr == today, "The Result object in Sputum smear modal doesn't take a value"
+        assert rr == sputum_choice, "The Result object in Sputum smear modal doesn't take a value"
 
     def check_cancel_button_sputum_smear_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_CANCEL}.length"), "Cancel button in Sputum smear modal is not accessible"
@@ -2527,7 +2515,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.D_SCRN_HOSP_SAVE}.click();")
 
     def check_add_button_d_screening_hospitalization_modal(self):
-        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_ADD}.length"), "Add button in D-screening, hospitalization modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_HOSP_ADD}.length"), "Add button in D-screening, hospitalization modal is not accessible"
 
     def check_edit_button_d_screening_hospitalization_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_HOSP_EDIT}.length"), "Edit button in D-screening, hospitalization modal is not accessible"
@@ -2535,13 +2523,13 @@ class RegisterPage(BasePage):
 
     def check_date_of_eligibility_for_treatment_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_ELIGIBILITY_FOR_TREATMENT}.length"), "Date of eligibility for treatment object in D-screening, hospitalization modal is not accessible"
-        doeft = self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_ELIGIBILITY_FOR_TREATMENT}.find('input').val()")
+        doeft = self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_ELIGIBILITY_FOR_TREATMENT}.val()")
         print(doeft)
         assert doeft == today, "Date of eligibility for treatment objectt in D-screening, hospitalization modal doesn't take a value"
 
     def check_treatment_type_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_TYPE}.length"), "The Treatment type object in D-screening, hospitalization modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_TYPE}.val()") == today, "The Treatment type object in D-screening, hospitalization modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_TYPE}.find('input').val()") == two_choice, "The Treatment type object in D-screening, hospitalization modal doesn't take a value"
 
     def check_mpi_profile_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.MPI_PROFILE}.length"), "The MPI profile object in D-screening, hospitalization modal is not accessible"
@@ -2551,15 +2539,11 @@ class RegisterPage(BasePage):
 
     def check_hosp_date_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.HOSP_DATE}.length"), "Hospitalization date in D-screening, hospitalization modal is not accessible"
-        hosd = self.browser.execute_script(f"return {PatientCardLocators.HOSP_DATE}.find('input').val()")
-        print(hosd)
-        assert hosd == today, "Hospitalization date in D-screening, hospitalization modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.HOSP_DATE}.val()") == today, "Hospitalization date in D-screening, hospitalization modal doesn't take a value"
 
     def check_date_of_discharge_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_DISCHARGE}.length"), "The Date of discharge object in D-screening, hospitalization modal is not accessible"
-        dod = self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_DISCHARGE}.find('input').val()")
-        print(dod)
-        assert dod == today, "The Date of discharge object  in D-screening, hospitalization modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_DISCHARGE}.val()") == today, "The Date of discharge object  in D-screening, hospitalization modal doesn't take a value"
 
     def check_treatment_result_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_RESULT}.length"), "Treatment result in D-screening, hospitalization modal is not accessible"

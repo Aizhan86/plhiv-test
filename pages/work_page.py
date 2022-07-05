@@ -31,7 +31,7 @@ class WorkPage(BasePage):
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
         self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_child}']);")
-        sleep(15)
+        sleep(10)
         self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
         self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
         # assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_child}?new=1&in_rk=1", "Patient card of child hasn't opened"
@@ -42,7 +42,7 @@ class WorkPage(BasePage):
         self.make(f"{WorkJournalLocators.DATA_TYPE}.dropdown('set selected', '1');")
         self.make(f"{WorkJournalLocators.DATE_RANGE_BTN}.click()")
         self.make(f"$('#gridContainer').dxDataGrid('instance').filter(['id_human_info', '=', '{register_page.patient_id_woman}']);")
-        sleep(5)
+        sleep(10)
         self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
         self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
         # assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_adult}?new=1&in_rk=1", "Patient card of adult hasn't opened"
