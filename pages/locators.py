@@ -69,7 +69,7 @@ class RegisterPageLocators(object):
     DUPLICATE_RESID_ADR = "$('#duplicate_to_reg_address_new_patient')"
     REASON_NOT_EPID = "$('form[name=general-data-form] div[data-field=general_data_reason_not_epid] .ui.dropdown')"
     REASON_NOT_DISP_REG = "$('form[name=general-data-form] div[data-field=general_data_reason_dispuchet] .ui.dropdown')"
-    RETROSPECTIVE_CHILD = "$('form[name=general-data-form] div[data-field=general_data_mother_child]')"
+    RETROSPECTIVE_CHILD = "$('#child_info')"
     SEARCH = "$('#find_sources_general_data')"
     MOTHERS_IB_NO_SEARCH = "$('#sources_contact_ib_number_modal')"
     FIND = "$('#find-contact')"
@@ -211,12 +211,13 @@ class PatientCardLocators(object):
     FAMILY_MEM_NAME = "$('#fam_members_modal div[data-field=fam_members_name_modal] input')"
     FAMILY_MEM_MIDDLE_NAME = "$('#fam_members_modal div[data-field=fam_members_middle_name_modal] input')"
     FAMILY_MEM_GENDER = "$('#fam_members_modal div[data-field=fam_members_gender_modal] .ui.dropdown')"
-    FAMILY_MEM_BIRTHDAY = "$('fam_members_birth_modal')"
+    FAMILY_MEM_BIRTHDAY = "$('#fam_members_birth_modal')"
     FAMILY_MEM_ADDRESS = "$('#fam_members_modal div[data-field=fam_members_address_modal] input')"
     FAMILY_MEM_HIV_STATUS = "$('#fam_members_modal div[data-field=fam_members_hiv_status_modal] .ui.dropdown')"
     FAMILY_MEM_RELATION = "$('#fam_members_modal div[data-field=fam_members_rod_svyaz_modal] .ui.dropdown')"
     FAMILY_MEM_SAVE = "$('#fam_members_modal .ui.green.approve.button')"
     FAMILY_MEM_EDIT = "$('#fam_members_table a[action-type=edit]')"
+    FAMILY_MEM_CANCEL = "$('#fam_members_modal .ui.red.deny.button')"
     EPID_HISTORY_FILLING_DATE = "$('#epid_history_date_zapolnen')"
     EPID_DOCTOR = "$('div[data-field=epid_history_fio_doctor_epidemiolog] .ui.dropdown')"
 
@@ -243,7 +244,7 @@ class PatientCardLocators(object):
     COMMERCIAL_SEX_EXP_MONTH = "$('#RC_staj_month')"
     COMMERCIAL_SEX_PARTNER_NUM = "$('#RC_pol_partn')"
     CONDOM_USAGE = "$('#form_luin div[data-field=luin_guard_on_last_sex_modal] .ui.dropdown')"
-    LUIN_RS_SAVE = "$('button_save_luin')"
+    LUIN_RS_SAVE = "$('#button_save_luin')"
 
     SEXUAL_CONTACTS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-sex]')"
     HOMO_EXPIRIENCE = "$('div[data-field=sex_gomosex_modal] .ui.dropdown')"
@@ -282,6 +283,7 @@ class PatientCardLocators(object):
     MLS_DATE_END = "$('#mls_date_end_modal')"
     MLS_SAVE = "$('#modal_mls .ui.green.approve.button')"
     MLS_EDIT = "$('#mls_table a[action-type=edit]')"
+    MLS_CANCEL = "$('#modal_mls .ui.red.deny.button')"
 
     DONOR = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-donor]')"
     BLOOD_DONOR = "$('div[data-field=donor_krovi_opit_checkbox] input')"
@@ -301,6 +303,7 @@ class PatientCardLocators(object):
     BLOOD_HIV_STATUS = "$('#donor_blood_modal div[data-field=donor_blood_hiv_status_modal] .ui.dropdown')"
     BLOOD_DONOR_SAVE = "$('#donor_blood_modal .ui.green.approve.button')"
     BLOOD_DONOR_EDIT = "$('#donor_blood_table a[action-type=edit]')"
+    BLOOD_DONOR_CANCEL = "$('#donor_blood_modal .ui.red.deny.button')"
 
     ORGAN_DONOR = "$('div[data-field=donor_organ_opit_checkbox] input')"
     ORGAN_DONOR_ADD = "$('#donor_other_material_table a[action-type=add]')"
@@ -319,6 +322,7 @@ class PatientCardLocators(object):
     ORGAN_HIV_STATUS = "$('#donor_other_material_modal div[data-field=donor_other_material_hiv_status_modal] .ui.dropdown')"
     ORGAN_DONOR_SAVE = "$('#donor_other_material_modal .ui.green.approve.button')"
     ORGAN_DONOR_EDIT = "$('#donor_other_material_table a[action-type=edit]')"
+    ORGAN_DONOR_CANCEL = "$('#donor_other_material_modal .ui.red.deny.button')"
 
     RECIPIENT = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-recipient]')"
     BLOOD_RECIPIENT = "$('div[data-field=recipient_krov_opit_checkbox] input')"

@@ -254,7 +254,7 @@ class TestGeneralData():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_area_date_perinatal_registration_modal()
 
-    @pytest.mark.xfail(reason="the field doesn't take a value")
+    @pytest.mark.xfail(reason="it's bag")
     @pytest.mark.skipif(test_save_perinatal_registration_modal == "FAILED", reason="patient id wasn't taken")
     def test_unit_area_perinatal_registration_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -719,61 +719,455 @@ class TestChildCase():
 #         arv_page.should_test_receipt_log()
 #         print(f"test_receipt_log passed")
 
-# @allure.severity(allure.severity_level.NORMAL)
-# class TestHomelessCase():
-#     @pytest.mark.smoke
-#     def test_registration_of_homeless(self, browser):
-#         try:
-#             login(browser)
-#             work_page = WorkPage(browser, browser.current_url)
-#             work_page.choose_Zhetysai_as_user_org()
-#             work_page.should_add_kz_patient()
-#             register_page = RegisterPage(browser, browser.current_url)
-#             register_page.register_new_homeless()
-#             print(f"test_registration_of_homeless passed")
-#         except Exception as e:
-#             capture_exception(e)
-#
-#     def test_patient_id_homeless(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.check_patient_id_homeless()
-#     #
-#     @pytest.mark.smoke
-#     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
-#     def test_family_members_modal(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.should_test_family_members_modal()
-#         print(f"test_family_members_modal passed")
-#
-#     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
-#     def test_luin_modal(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.fill_luin_modal()
-#         print(f"test_luin_modal passed")
-#
-#     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
-#     def test_sexual_contacts_modal(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.should_test_sexual_contacts_modal()
-#         print(f"test_sexual_contacts_modal passed")
-#
-#     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
-#     def test_mls_modal(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.should_test_mls_modal()
-#         print(f"test_mls_modal passed")
-#
-#     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
-#     def test_blood_donor_modal(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.should_test_blood_donor_modal()
-#         print(f"test_blood_donor_modal passed")
-#
-#     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
-#     def test_organ_donor_modal(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.should_test_organ_donor_modal()
-#         print(f"test_organ_donor_modal passed")
+@allure.severity(allure.severity_level.NORMAL)
+class TestHomelessCase():
+    @pytest.mark.smoke
+    def test_registration_of_homeless(self, browser):
+        try:
+            login(browser)
+            work_page = WorkPage(browser, browser.current_url)
+            work_page.choose_Zhetysai_as_user_org()
+            work_page.should_add_kz_patient()
+            register_page = RegisterPage(browser, browser.current_url)
+            register_page.register_new_homeless()
+        except Exception as e:
+            capture_exception(e)
+
+    def test_patient_id_homeless(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_patient_id_homeless()
+
+    @pytest.mark.smoke
+    @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
+    def test_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_family_members_modal()
+
+    @pytest.mark.skipif(test_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_save_button_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_add_button_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_edit_button_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_surname_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_surname_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_name_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_name_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_middle_name_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_middle_name_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_gender_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_gender_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_birthday_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_birthday_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def check_hiv_status_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_hiv_status_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_family_connection_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_family_connection_family_members_modal()
+
+    @pytest.mark.skipif(test_save_button_family_members_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_family_members_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_cancel_button_family_members_modal()
+
+    @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
+    def test_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_luin_tab()
+
+    @pytest.mark.skipif(test_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_save_button_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_experience_injection_drug_use_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_experience_injection_drug_use_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_drug_usage_in_twelve_month_with_police_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_drug_usage_in_twelve_month_with_police_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_drug_use_years_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_drug_use_years_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_drug_use_month_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_drug_use_month_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_sharing_drug_injection_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_sharing_drug_injection_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_sharing_drug_injection_with_hiv_positiv_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_sharing_drug_injection_with_hiv_positiv_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_sharing_drug_injection_with_sexual_partner_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_sharing_drug_injection_with_sexual_partner_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_sharing_drug_injection_with_permanent_group_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_sharing_drug_injection_with_permanent_group_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_sharing_drug_injection_with_random_group_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_sharing_drug_injection_with_random_group_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_heroin_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_heroin_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_hanka_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_hanka_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_mak_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_mak_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_amphetamin_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_amphetamin_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_sintethics_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_sintethics_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_other_drugs_checkbox_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_other_drugs_checkbox_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_registered_in_narcological_dispensary_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_registered_in_narcological_dispensary_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_registered_with_police_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_registered_with_police_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_commercial_sex_experience_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_commercial_sex_experience_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_commercial_sex_experience_year_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_commercial_sex_experience_year_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_commercial_sex_experience_month_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_commercial_sex_experience_month_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_number_of_sex_partners_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_number_of_sex_partners_luin_tab()
+
+    @pytest.mark.skipif(test_save_button_luin_tab == "FAILED", reason="patient id wasn't taken")
+    def test_condom_usage_luin_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_condom_use_luin_tab()
+
+    # @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
+    # def test_sexual_contacts_modal(self, browser):
+    #     register_page = RegisterPage(browser, browser.current_url)
+    #     register_page.should_test_sexual_contacts_modal()
+    #     print(f"test_sexual_contacts_modal passed")
+
+    @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
+    def test_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_mls_modal()
+
+    @pytest.mark.skipif(test_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_save_button_mls_modal()
+
+    @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_mls_experience_checkbox_mls_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_mls_experience_checkbox_mls_tab()
+
+    @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_add_button_mls_modal()
+
+    @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_edit_button_mls_modal()
+
+    @pytest.mark.xfail(reason="it's bag of mls modal")
+    @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_mls_name_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_mls_name_mls_modal()
+
+    @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_start_date_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_start_date_mls_modal()
+
+    @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_end_date_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_end_date_mls_modal()
+
+    @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_mls_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_cancel_button_mls_modal()
+
+    @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
+    def test_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_blood_donor_modal()
+
+    @pytest.mark.skipif(test_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_save_button_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_blood_donor_last_5years_checkbox_donor_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_blood_donor_last_5years_checkbox_donor_tab()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_existence_checkbox_donor_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_existence_checkbox_donor_tab()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_add_button_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_edit_button_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_place_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_place_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_existence_checkbox_donor_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_existence_checkbox_donor_tab()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_area_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_area_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_unit_area_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_unit_area_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_locality_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_locality_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_date_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_date_blood_donor_modal()
+
+    @pytest.mark.xfail(reason="no value for medical organization objects")
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_medical_organization_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_medical_organization_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_blood_donor_category_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_blood_donor_category_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donor_type_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donor_type_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donor_code_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donor_code_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_code_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_code_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_hiv_analysis_date_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_hiv_analysis_date_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_hiv_status_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_hiv_status_blood_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_blood_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_cancel_button_blood_donor_modal()
+
+    @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
+    def test_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_organ_donor_modal()
+
+    @pytest.mark.skipif(test_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_save_button_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_material_donor_last_5years_checkbox_donor_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_material_donor_last_5years_checkbox_donor_tab()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_add_button_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_edit_button_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_place_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_place_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_area_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_area_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_unit_area_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_unit_area_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_locality_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_locality_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donation_date_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donation_date_organ_donor_modal()
+
+    @pytest.mark.xfail(reason="no value for medical organization objects")
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_medical_organization_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_medical_organization_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_blood_donor_category_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_blood_donor_category_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donor_type_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donor_type_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donor_material_type_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donor_material_type_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donor_material_number_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_donor_material_number_organ_donor_modal()
+
+    @pytest.mark.xfail(reason="checkbox isn't tested")
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_hiv_analysis_date_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_hiv_analysis_date_organ_donor_modal()
+
+    @pytest.mark.xfail(reason="no value for medical organization objects")
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_recipient_medical_organization_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_recipient_medical_organization_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_hiv_status_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_hiv_status_organ_donor_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_organ_donor_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_cancel_button_organ_donor_modal()
 #
 #     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
 #     def test_ippp_modal(self, browser):
