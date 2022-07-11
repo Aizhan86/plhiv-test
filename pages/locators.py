@@ -69,7 +69,11 @@ class RegisterPageLocators(object):
     DUPLICATE_RESID_ADR = "$('#duplicate_to_reg_address_new_patient')"
     REASON_NOT_EPID = "$('form[name=general-data-form] div[data-field=general_data_reason_not_epid] .ui.dropdown')"
     REASON_NOT_DISP_REG = "$('form[name=general-data-form] div[data-field=general_data_reason_dispuchet] .ui.dropdown')"
-    RETROSPECTIVE_CHILD = "$('form[name=general-data-form] div[data-field=general_data_mother_child] .ui.toggle.checkbox')"
+    RETROSPECTIVE_CHILD = "$('form[name=general-data-form] div[data-field=general_data_mother_child]')"
+    SEARCH = "$('#find_sources_general_data')"
+    MOTHERS_IB_NO_SEARCH = "$('#sources_contact_ib_number_modal')"
+    FIND = "$('#find-contact')"
+    CHOOSE_MOTHER_ID = "$('#add-contact i.chevron.left.icon')"
     MOTHERS_SURNAME = "$('#general_data_mother_surname')"
     MOTHERS_NAME = "$('#general_data_mother_name')"
     MOTHERS_MIDNAME = "$('#general_data_mother_patronymic')"
@@ -466,7 +470,7 @@ class PatientCardLocators(object):
     DISP_CANCEL_BTN = "$('#modal_d_uchet_vzyatie .ui.red.deny.button')"
 
     PERINATAL_REGISTRATION = "$('a[data-tab=patient_card_menu-perenat_uchet]')"
-    PERINATAL_REGIS_ADD = "$('#perenat_uchet_table a[action-type=add]')"
+    PERINATAL_REGIS_ADD = "$('#add_perinat_uchet')"
     PERINATAL_MED_ORG = "$('#modal_perinat_uchet div[data-field=perinat_uchet_vzyatie_org_modal] .ui.dropdown')"
     PERINATAL_DATE_OF_REGIS = "$('#modal_perinat_uchet div[data-field=perinat_uchet_vzyatie_date_modal] .ui.input')"
     PERINATAL_DATE_OF_DEREGIS = "$('#modal_perinat_uchet div[data-field=perinat_uchet_date_snyatie_modal] .ui.input')"
@@ -478,7 +482,7 @@ class PatientCardLocators(object):
     PERINATAL_DEATH_REASON = "$('#modal_perinat_uchet div[data-field=death_reason_modal] .ui.dropdown')"
     PERINATAL_DEATH_PLACE = "$('#modal_perinat_uchet div[data-field=death_place_modal] .ui.dropdown')"
     PERINATAL_SAVE = "$('#modal_perinat_uchet .ui.green.approve.button')"
-    PERINATAL_EDIT = "$('add_perinat_uchet')"
+    PERINATAL_EDIT = "$('#edit_perinat_uchet')"
     PERINATAL_CANCEL = "$('#modal_perinat_uchet .ui.red.deny.button')"
 
     ARV_PROPHYLAXIS = "$('div[data-field=perinat_uchet_arv_profil] .ui.dropdown')"
@@ -496,8 +500,8 @@ class PatientCardLocators(object):
     ARV_ISSUANCE_SAVE = "$('#modal_perinat_uchet_preparat .ui.green.approve.button')"
     PCP_PROPHYLAXIS_START_DATE = "$('div[data-field=child_pcp_date_start_modal] .ui.input')"
     PCP_PROPHYLAXIS_END_DATE = "$('div[data-field=child_pcp_date_end_modal] .ui.input')"
-    ARV_HIV_STATUS = "$('div[data-field=child_hiv_state_modal] .ui.dropdown')"
-    ARV_HIV_DETERMINATION_DATE = "$('div[data-field=child_date_check_modal] .ui.input')"
+    HIV_STATUS_P_TAB = "$('div[data-field=child_hiv_state_modal] .ui.dropdown')"
+    HIV_DETERMINATION_DATE_P_TAB = "$('div[data-field=child_date_check_modal] .ui.input')"
 
     HIV_DIAGNOSIS = "$('div[data-field=patient_card_tabs] a[data-tab=patient_card_menu-diagnoz_vich]')"
     HIV_DIAGNOSIS_ADD = "$('#hiv_table  a[action-type=add]')"
@@ -519,6 +523,7 @@ class PatientCardLocators(object):
 
     RECOM_CONSULTATION_ADD = "$('#recomended_consultation_table_edit')"
     CONSULTATION_DATE = "$('#modal_recomended_consultation .ui.calendar')"
+    SERVICE_WITHIN_TARIFICATOR = "$('#modal_recomended_consultation div[data-field=consult_in_tarif_modal] .ui.dropdown')"
     CONSULTATION = "$('#modal_recomended_consultation div[data-field=recomended_consultation_consultation_modal] .ui.dropdown')"
     CONSULTATION_DESCRIPTION = "$('#recomended_consultation_description_modal')"
     RECOM_CONSULTATION_SAVE = "$('#modal_recomended_consultation .ui.green.approve.button')"
@@ -526,6 +531,7 @@ class PatientCardLocators(object):
     RECOM_CONSULTATION_CANCEL = "$('#modal_recomended_consultation .ui.red.deny.button')"
 
     RECOM_SCREENING_ADD = "$('#recomended_obledovaniya_table_edit')"
+    SCREENEG_SERVICE_WITHIN_TARIFICATOR = "$('#modal_recomended_obsled div[data-field=obsled_in_tarif_modal] .ui.dropdown')"
     SCREENING_DATE = "$('#modal_recomended_obsled .ui.calendar')"
     SURVEY = "$('#modal_recomended_obsled div[data-field=recomended_obsled_obsled_modal] .ui.dropdown')"
     SCREENING_DESCRIPTION = "$('#recomended_obsled_description_modal')"
