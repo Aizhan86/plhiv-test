@@ -39,7 +39,7 @@ def browser():
     browser = webdriver.Remote(desired_capabilities=capabilities, command_executor="http://172.18.0.1:4444/wd/hub")
     # browser = webdriver.Chrome('/home/user/tool/chromedriver', chrome_options=options)
 
-    # pytest --dist=loadscope --tx 5*popen//python=python3.10 -n 5 --reruns 2 --only-rerun JavascriptException --only-rerun ElementClickInterceptedException testing_test.py
+    # pytest --dist=loadscope --tx 5*popen//python=python3.10 -n 5 --reruns 1 --only-rerun JavascriptException --only-rerun ElementClickInterceptedException testing_test.py
 
     yield browser
     print("\nquit browser..")

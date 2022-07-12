@@ -82,7 +82,7 @@ class RegisterPage(BasePage):
         self.make(f"{RegisterPageLocators.RESID_HOUSE}.val('25');")
         self.make(f"{RegisterPageLocators.RESID_APT}.val('45');")
         self.make(f"{RegisterPageLocators.RESID_PHONE_NO}.val('87273456789');")
-        # self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '170000000558');")
+        # self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '280000000448');")
         self.make(f"{RegisterPageLocators.RETROSPECTIVE_CHILD}.click();")
         # self.make(f"{RegisterPageLocators.MOTHERS_SURNAME}.val('{surname}');")
         # self.make(f"{RegisterPageLocators.MOTHERS_NAME}.val('{name}');")
@@ -1095,7 +1095,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.BLOOD_DONATION_UNIT_AREA}.dropdown('set selected', '33');")
         self.make(f"{PatientCardLocators.BLOOD_DONATION_LOCALITY}.dropdown('set selected', '{locality_choice1}');")
         self.make(f"{PatientCardLocators.BLOOD_DONATION_DATE}.val('01.01.2021');")
-        self.make(f"{PatientCardLocators.BLOOD_DONATION_MED_ORG}.dropdown('set selected', '{mo_choice3}');")
+        self.make(f"{PatientCardLocators.BLOOD_DONATION_MED_ORG}.dropdown('set selected', '280000000228');")
         self.make(f"{PatientCardLocators.BLOOD_DONOR_CATEGORY}.dropdown('set selected', '{blood_don_cat_choice}');")
         self.make(f"{PatientCardLocators.BLOOD_DONOR_TYPE}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.BLOOD_DONOR_CODE}.val('{numbers3}');")
@@ -1151,7 +1151,7 @@ class RegisterPage(BasePage):
 
     def check_medical_organization_blood_donor_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.BLOOD_DONATION_MED_ORG}.length"), "The Medical organization object in Blood donor modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.BLOOD_DONATION_MED_ORG}.find('input[type=hidden]').val()") == mo_choice3, "The Medical organization object in Blood donor modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.BLOOD_DONATION_MED_ORG}.dropdown('get text')") == 'МЕД ЦЕНТР КЕНТАУ', "The Medical organization object in Blood donor modal doesn't take a value"
 
     def check_blood_donor_category_blood_donor_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.BLOOD_DONOR_CATEGORY}.length"), "The Blood donor category object in Blood donor modal is not accessible"
@@ -1193,12 +1193,12 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ORGAN_DONATION_UNIT_AREA}.dropdown('set selected', '33');")
         self.make(f"{PatientCardLocators.ORGAN_DONATION_LOCALITY}.dropdown('set selected', '{locality_choice1}');")
         self.make(f"{PatientCardLocators.ORGAN_DONATION_DATE}.val('01.01.2021');")
-        self.make(f"{PatientCardLocators.ORGAN_DONOR_MED_ORG}.dropdown('set selected', '{mo_choice3}');")
+        self.make(f"{PatientCardLocators.ORGAN_DONOR_MED_ORG}.dropdown('set selected', '280000000228');")
         self.make(f"{PatientCardLocators.ORGAN_DONATION_CATEGORY}.dropdown('set selected', '{organ_don_cat_choice}');")
         self.make(f"{PatientCardLocators.ORGAN_DONOR_TYPE}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.ORGAN_DONOR_MAT_TYPE}.dropdown('set selected', '{organ_mat_type_choice}');")
         self.make(f"{PatientCardLocators.ORGAN_DONOR_MAT_NO}.val('{numbers3}');")
-        self.make(f"{PatientCardLocators.ORGAN_RECIPIENT_MED_ORG}.dropdown('set selected', '{mo_rec_choice1}');")
+        self.make(f"{PatientCardLocators.ORGAN_RECIPIENT_MED_ORG}.dropdown('set selected', '280000000228');")
         self.make(f"{PatientCardLocators.ORGAN_HIV_ANALYSIS_DATE}.val('01.01.2021');")
         self.make(f"{PatientCardLocators.ORGAN_HIV_STATUS}.dropdown('set selected', '1');")
 
@@ -1243,7 +1243,7 @@ class RegisterPage(BasePage):
 
     def check_medical_organization_organ_donor_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONOR_MED_ORG}.length"), "The Medical organization object in Organ donor modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONOR_MED_ORG}.find('input[type=hidden]').val()") == mo_choice3, "The Medical organization object in Organ donor modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONOR_MED_ORG}.dropdown('get text')") == 'МЕД ЦЕНТР КЕНТАУ', "The Medical organization object in Organ donor modal doesn't take a value"
 
     def check_blood_donor_category_organ_donor_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONATION_CATEGORY}.length"), "The Blood donor category object in Organ donor modal is not accessible"
@@ -1263,7 +1263,7 @@ class RegisterPage(BasePage):
 
     def check_recipient_medical_organization_organ_donor_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_RECIPIENT_MED_ORG}.length"), "The HIV analysis date object in Organ donor modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_RECIPIENT_MED_ORG}.find('input[type=hidden]').val()") == mo_rec_choice1, "The HIV analysis object in Organ donor modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_RECIPIENT_MED_ORG}.dropdown('get text')") == 'МЕД ЦЕНТР КЕНТАУ', "The HIV analysis object in Organ donor modal doesn't take a value"
 
     def check_hiv_analysis_date_organ_donor_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_HIV_ANALYSIS_DATE}.length"), "The HIV analysis date object in Organ donor modal is not accessible"
@@ -1288,7 +1288,7 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.BLOOD_TRANSFUSION_UNIT_AREA}.dropdown('set selected', '33');")
         self.make(f"{PatientCardLocators.BLOOD_TRANSFUSION_LOCALITY}.dropdown('set selected', '{locality_choice1}');")
         self.make(f"{PatientCardLocators.BLOOD_TRANSFUSION_DATE}.val('01.01.2021');")
-        self.make(f"{PatientCardLocators.BLOOD_TRANSFUSION_MED_ORG}.dropdown('set selected', '{mo_choice}');")
+        self.make(f"{PatientCardLocators.BLOOD_TRANSFUSION_MED_ORG}.dropdown('set selected', '280000000028');")
         self.make(f"{PatientCardLocators.EPID_HISTORY_NUM_REC}.val('{numbers5}');")
         self.make(f"{PatientCardLocators.BLOOD_DONOR_CODE_REC}.val('{numbers3}');")
         self.make(f"{PatientCardLocators.BLOOD_COMPONENT_CODE_REC}.val('{numbers4}');")
@@ -1336,7 +1336,7 @@ class RegisterPage(BasePage):
 
     def check_medical_organization_blood_recipient_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.BLOOD_TRANSFUSION_MED_ORG}.length"), "The Medical organization object in Blood recipient modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.BLOOD_TRANSFUSION_MED_ORG}.find('input[type=hidden]').val()") == mo_choice, "The Medical organization object in Blood recipient modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.BLOOD_TRANSFUSION_MED_ORG}.dropdown('get text')") == 'ОЦ СПИД  ГТУРКЕСТАН', "The Medical organization object in Blood recipient modal doesn't take a value"
 
     def check_epid_history_number_blood_recipient_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.EPID_HISTORY_NUM_REC}.length"), "The Epidemiological history number object in Blood recipient modal is not accessible"
@@ -1368,8 +1368,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ORGAN_TRANSFUSION_AREA}.dropdown('set selected', '3');")
         self.make(f"{PatientCardLocators.ORGAN_TRANSFUSION_UNIT_AREA}.dropdown('set selected', '33');")
         self.make(f"{PatientCardLocators.ORGAN_TRANSFUSION_LOCALITY}.dropdown('set selected', '{locality_choice1}');")
-        self.make(f"{PatientCardLocators.ORGAN_DONOR_MED_ORG_REC}.dropdown('set selected', '{mo_choice1}');")
-        self.make(f"{PatientCardLocators.ORGAN_RECEIPT_MED_ORG}.dropdown('set selected', '{mo_rec_choice1}');")
+        self.make(f"{PatientCardLocators.ORGAN_DONOR_MED_ORG_REC}.dropdown('set selected', '290000000074');")
+        self.make(f"{PatientCardLocators.ORGAN_RECEIPT_MED_ORG}.dropdown('set selected', '280000000228');")
         self.make(f"{PatientCardLocators.ORGAN_TRANSFUSION_DATE}.val('01.01.2021');")
         self.make(f"{PatientCardLocators.ORGAN_DONOR_MAT_NO_REC}.val('{numbers3}');")
         self.make(f"{PatientCardLocators.ORGAN_DONOR_MAT_TYPE_REC}.dropdown('set selected', '{organ_mat_type_choice}');")
@@ -1419,11 +1419,11 @@ class RegisterPage(BasePage):
 
     def check_donor_medical_organization_organ_recipient_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONOR_MED_ORG_REC}.length"), "The Donor medical organization object in Organ recipient modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONOR_MED_ORG_REC}.find('input[type=hidden]').val()") == mo_choice1, "The Donor medical organization object in Organ recipient modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONOR_MED_ORG_REC}.dropdown('get text')") == 'АСЫКАТИНСАКАЯ ПОЛИКЛИНИКА', "The Donor medical organization object in Organ recipient modal doesn't take a value"
 
     def check_recipient_medical_organization_organ_recipient_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_RECEIPT_MED_ORG}.length"), "The Recipient medical organization object in Organ recipient modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_RECEIPT_MED_ORG}.find('input[type=hidden]').val()") == mo_rec_choice1, "The Recipient medical organization object in Organ recipient modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_RECEIPT_MED_ORG}.dropdown('get text')") == 'МЕД ЦЕНТР КЕНТАУ', "The Recipient medical organization object in Organ recipient modal doesn't take a value"
 
     def check_organ_material_number_organ_recipient_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.ORGAN_DONOR_MAT_NO_REC}.length"), "The Organ material number object in Organ recipient modal is not accessible"
@@ -2048,9 +2048,7 @@ class RegisterPage(BasePage):
     def check_service_within_tarificator_recommended_consultation_modal(self):
         sleep(2)
         assert self.browser.execute_script(f"return {PatientCardLocators.SERVICE_WITHIN_TARIFICATOR}.length"), "The Service proveded within tarificator object in Recommended consultation modal is not accessible"
-        spwt = self.browser.execute_script(f"return {PatientCardLocators.SERVICE_WITHIN_TARIFICATOR}.find('input').val()")
-        print(spwt)
-        assert spwt == two_choice, "The Service proveded within tarificator object in Recommended consultation modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SERVICE_WITHIN_TARIFICATOR}.find('input').val()") == two_choice, "The Service proveded within tarificator object in Recommended consultation modal doesn't take a value"
 
     def check_consultation_date_recommended_consultation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DATE}.length"), "The Consultation date object in Recommended consultation modal is not accessible"
@@ -2058,9 +2056,7 @@ class RegisterPage(BasePage):
 
     def check_consultation_type_recommended_consultation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION}.length"), "The Consultation in Recommended consultation modal is not accessible"
-        ct = self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION}.find('input').val()")
-        print(ct)
-        assert ct == consultation_choice, "The Consultation in Recommended consultation modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION}.find('input').val()")== consultation_choice, "The Consultation in Recommended consultation modal doesn't take a value"
 
     def check_consultation_description_recommended_consultation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CONSULTATION_DESCRIPTION}.length"), "The Consultation description  in Recommended consultation modal is not accessible"
@@ -2097,9 +2093,7 @@ class RegisterPage(BasePage):
     def check_service_within_tarificator_recommended_screening_modal(self):
         sleep(2)
         assert self.browser.execute_script(f"return {PatientCardLocators.SCREENEG_SERVICE_WITHIN_TARIFICATOR}.length"), "The Service proveded within tarificator object in Recommended screening modal is not accessible"
-        spwt = self.browser.execute_script(f"return {PatientCardLocators.SCREENEG_SERVICE_WITHIN_TARIFICATOR}.find('input').val()")
-        print(spwt)
-        assert spwt == two_choice, "The Service proveded within tarificator object in Recommended screening modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SCREENEG_SERVICE_WITHIN_TARIFICATOR}.find('input').val()") == two_choice, "The Service proveded within tarificator object in Recommended screening modal doesn't take a value"
 
     def check_consultation_date_recommended_screening_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SCREENING_DATE}.length"), "The Consultation date object in Recommended screening modal is not accessible"
@@ -2107,9 +2101,7 @@ class RegisterPage(BasePage):
 
     def check_consultation_type_recommended_screening_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SURVEY}.length"), "The Consultation in Recommended screening modal is not accessible"
-        ct = self.browser.execute_script(f"return {PatientCardLocators.SURVEY}.find('input').val()")
-        print(ct)
-        assert ct == survey_choice, "The Consultation in Recommended screening modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SURVEY}.find('input').val()") == survey_choice, "The Consultation in Recommended screening modal doesn't take a value"
 
     def check_consultation_description_recommended_screening_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SCREENING_DESCRIPTION}.length"), "The Consultation screening  in Recommended screening modal is not accessible"
@@ -2179,9 +2171,7 @@ class RegisterPage(BasePage):
 
     def check_cd4_blood_donor_medical_org(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CD4_BLOOD_DONOR_MED_ORG}.length"), "Blood donor medical organization object in CD4 is not accessible"
-        bdmo = self.browser.execute_script(f"return {PatientCardLocators.CD4_BLOOD_DONOR_MED_ORG}.find('input').val()")
-        print(bdmo)
-        assert bdmo == mo_choice1, "Blood donor medical organization object in CD4 doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CD4_BLOOD_DONOR_MED_ORG}.find('input').val()") == mo_choice1, "Blood donor medical organization object in CD4 doesn't take a value"
 
     def check_cd4_material_receipt_date(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CD4_MATERIAL_RECEIPT_DATE}.length"), "Material receipt date object in CD4 is not accessible"
@@ -2217,9 +2207,7 @@ class RegisterPage(BasePage):
 
     def check_cd4_medical_org_provided_analysis(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CD4_MED_ORG_PROVIDED_ANALYSIS}.length"), "Medical organization which provided analysis in CD4 is not accessible"
-        mopa = self.browser.execute_script(f"return {PatientCardLocators.CD4_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()")
-        print(mopa)
-        assert mopa == mo_choice1, "Medical organization which provided analysis in CD4 doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CD4_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()") == mo_choice1, "Medical organization which provided analysis in CD4 doesn't take a value"
 
     def check_cd4_note(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CD4_REMARK}.length"), "CD4 note object is not accessible"
@@ -2227,9 +2215,7 @@ class RegisterPage(BasePage):
 
     def check_cd4_services(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CD4_SERVICES}.length"), "Services object in CD4 is not accessible"
-        mopa = self.browser.execute_script(f"return {PatientCardLocators.CD4_SERVICES}.find('input').val()")
-        print(mopa)
-        assert mopa == service_choice, "Services object  in CD4 doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CD4_SERVICES}.find('input').val()") == service_choice, "Services object  in CD4 doesn't take a value"
 
     def check_cancel_button_cd4_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CD4_CANCEL}.length"), "Cancel button in CD4 modal in Dispensary observation is not accessible"
@@ -2269,9 +2255,7 @@ class RegisterPage(BasePage):
 
     def check_cd4_vl_donor_medical_org(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VL_DONOR_MED_ORG}.length"), "Donor medical organization object in Viral load in CD4&VL is not accessible"
-        dmo = self.browser.execute_script(f"return {PatientCardLocators.VL_DONOR_MED_ORG}.find('input').val()")
-        print(dmo)
-        assert dmo == mo_choice1, "Donor medical organization object in Viral load in CD4&VL doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VL_DONOR_MED_ORG}.find('input').val()") == mo_choice1, "Donor medical organization object in Viral load in CD4&VL doesn't take a value"
 
     def check_cd4_vl_material_receipt_date(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VL_MATERIAL_RECEIPT_DATE}.length"), "Material receipt date object in Viral load in CD4&VL is not accessible"
@@ -2287,16 +2271,11 @@ class RegisterPage(BasePage):
 
     def check_cd4_vl_result(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VL_RESULT}.length"), "Result object in Viral load in CD4&VL is not accessible"
-        vlr = self.browser.execute_script(f"return {PatientCardLocators.VL_RESULT}.find('input').val()")
-        print(vlr)
-        assert vlr == vl_res_choice, "Result object in Viral load in CD4&VL doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VL_RESULT}.find('input').val()") == vl_res_choice, "Result object in Viral load in CD4&VL doesn't take a value"
 
     def check_cd4_vl_result_ml(self):
-        assert self.browser.execute_script(
-            f"return {PatientCardLocators.VL_RESULT_ML}.length"), "Result ML object in Viral load in CD4&VL is not accessible"
-        rml = self.browser.execute_script(f"return {PatientCardLocators.VL_RESULT_ML}.find('input').val()")
-        print(rml)
-        assert rml == vl_res_ml_choice, "Result ML in Viral load in CD4&VL doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VL_RESULT_ML}.length"), "Result ML object in Viral load in CD4&VL is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VL_RESULT_ML}.find('input').val()") == vl_res_ml_choice, "Result ML in Viral load in CD4&VL doesn't take a value"
 
     def check_log(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.LOG}.length"), "Log object in Viral load in CD4&VL is not accessible"
@@ -2304,9 +2283,7 @@ class RegisterPage(BasePage):
 
     def check_cd4_vl_medical_org_provided_analysis(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VL_MED_ORG_PROVIDED_ANALYSIS}.length"), "Medical organization which provided analysis in Viral load in CD4&VL is not accessible"
-        vmopa = self.browser.execute_script(f"return {PatientCardLocators.VL_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()")
-        print(vmopa)
-        assert vmopa == mo_choice1, "Medical organization which provided analysis in Viral load in CD4&VL doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VL_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()") == mo_choice1, "Medical organization which provided analysis in Viral load in CD4&VL doesn't take a value"
 
     def check_cd4_vl_note(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VL_REMARK}.length"), "Note object in Viral load in CD4&VL is not accessible"
@@ -2314,9 +2291,7 @@ class RegisterPage(BasePage):
 
     def check_cd4_vl_services(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VL_SERVICES}.length"), "Services object in Viral load in CD4&VL is not accessible"
-        vls = self.browser.execute_script(f"return {PatientCardLocators.VL_SERVICES}.find('input').val()")
-        print(vls)
-        assert vls == vl_service_choice, "Services object in Viral load in CD4&VL doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VL_SERVICES}.find('input').val()") == vl_service_choice, "Services object in Viral load in CD4&VL doesn't take a value"
 
     def check_cancel_button_cd4_vl_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VL_CANCEL}.length"), "Cancel button in Viral load in CD4&VLmodal is not accessible"
@@ -2353,9 +2328,7 @@ class RegisterPage(BasePage):
 
     def check_vgv_donor_medical_org(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_MAT_DONOR_MED_ORG}.length"), "Donor medical organization object in VGV modal is not accessible"
-        mdmo = self.browser.execute_script(f"return {PatientCardLocators.VGV_MAT_DONOR_MED_ORG}.find('input').val()")
-        print(mdmo)
-        assert mdmo == mo_choice1, "Donor medical organization object in VGV modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_MAT_DONOR_MED_ORG}.find('input').val()") == mo_choice1, "Donor medical organization object in VGV modal doesn't take a value"
 
     def check_vgv_material_receipt_date(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_MATERIAL_RECEIPT_DATE}.length"), "Material receipt date object in VGV modal is not accessible"
@@ -2367,27 +2340,19 @@ class RegisterPage(BasePage):
 
     def check_marker(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.MARKER}.length"), "Marker object in VGV modal is not accessible"
-        vgvm = self.browser.execute_script(f"return {PatientCardLocators.MARKER}.find('input').val()")
-        print(vgvm)
-        assert vgvm == marker_choice, "Marker object in VGV modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MARKER}.find('input').val()") == marker_choice, "Marker object in VGV modal doesn't take a value"
 
     def check_vgv_result(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_RESULT}.length"), "Result object in VGV modal is not accessible"
-        vgvres = self.browser.execute_script(f"return {PatientCardLocators.VGV_RESULT}.find('input').val()")
-        print(vgvres)
-        assert vgvres == '1', "Result object in VGV modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_RESULT}.find('input').val()") == '1', "Result object in VGV modal doesn't take a value"
 
     def check_vgv_medical_org_provided_analysis(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_MED_ORG_PROVIDED_ANALYSIS}.length"), "Medical organization which provided analysis in VGV modal is not accessible"
-        mopa = self.browser.execute_script(f"return {PatientCardLocators.VGV_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()")
-        print(mopa)
-        assert mopa == mo_choice1, "Medical organization which provided analysis in VGV modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()") == mo_choice1, "Medical organization which provided analysis in VGV modal doesn't take a value"
 
     def check_vgv_note(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_REMARK}.length"), "Note object in VGV modal is not accessible"
-        vgvr = self.browser.execute_script(f"return {PatientCardLocators.VGV_REMARK}.find('input').val()")
-        print(vgvr)
-        assert vgvr == 'Положительный', "Note object in VGV modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_REMARK}.find('input').val()") == 'Положительный', "Note object in VGV modal doesn't take a value"
 
     def check_cancel_button_vgv_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_CANCEL}.length"), "Cancel button in VGV modal is not accessible"
@@ -2424,9 +2389,7 @@ class RegisterPage(BasePage):
 
     def check_vgs_donor_medical_org(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGS_MAT_DONOR_MED_ORG}.length"), "Donor medical organization object in VGS modal is not accessible"
-        mdmo = self.browser.execute_script(f"return {PatientCardLocators.VGS_MAT_DONOR_MED_ORG}.find('input').val()")
-        print(mdmo)
-        assert mdmo == mo_choice1, "Donor medical organization object in VGS modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_MAT_DONOR_MED_ORG}.find('input').val()") == mo_choice1, "Donor medical organization object in VGS modal doesn't take a value"
 
     def check_vgs_material_receipt_date(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGS_MATERIAL_RECEIPT_DATE}.length"), "Material receipt date object in VGS modal is not accessible"
@@ -2438,27 +2401,19 @@ class RegisterPage(BasePage):
 
     def check_vgs_analysis_type(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGS_ANALYSIS_TYPE}.length"), "Marker object in VGS modal is not accessible"
-        vgvm = self.browser.execute_script(f"return {PatientCardLocators.VGS_ANALYSIS_TYPE}.find('input').val()")
-        print(vgvm)
-        assert vgvm == analysis_choice, "Marker object in VGS modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_ANALYSIS_TYPE}.find('input').val()") == analysis_choice, "Marker object in VGS modal doesn't take a value"
 
     def check_vgs_result(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGS_RESULT}.length"), "Result object in VGS modal is not accessible"
-        vgsres = self.browser.execute_script(f"return {PatientCardLocators.VGS_RESULT}.find('input').val()")
-        print(vgsres)
-        assert vgsres == '1', "Result object in VGS modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_RESULT}.find('input').val()") == '1', "Result object in VGS modal doesn't take a value"
 
     def check_vgs_medical_org_provided_analysis(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGS_MED_ORG_PROVIDED_ANALYSIS}.length"), "Medical organization which provided analysis in VGS modal is not accessible"
-        mopa = self.browser.execute_script(f"return {PatientCardLocators.VGS_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()")
-        print(mopa)
-        assert mopa == mo_choice1, "Medical organization which provided analysis in VGS modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_MED_ORG_PROVIDED_ANALYSIS}.find('input').val()") == mo_choice1, "Medical organization which provided analysis in VGS modal doesn't take a value"
 
     def check_vgs_note(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGS_REMARK}.length"), "Note object in VGS modal is not accessible"
-        vgvr = self.browser.execute_script(f"return {PatientCardLocators.VGS_REMARK}.find('input').val()")
-        print(vgvr)
-        assert vgvr == 'Положительный', "Note object in VGS modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_REMARK}.find('input').val()") == 'Положительный', "Note object in VGS modal doesn't take a value"
 
     def check_cancel_button_vgs_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGS_CANCEL}.length"), "Cancel button in VGS modal is not accessible"
@@ -2484,16 +2439,12 @@ class RegisterPage(BasePage):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_ADD}.length"), "Add button in VGV vaccination modal is not accessible"
 
     def check_edit_button_vgv_vac_modal(self):
-        assert self.browser.execute_script(
-            f"return {PatientCardLocators.VGV_VAC_EDIT}.length"), "Edit button in VGV vaccination modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_EDIT}.length"), "Edit button in VGV vaccination modal is not accessible"
         self.make(f"{PatientCardLocators.VGV_VAC_EDIT}.click();")
 
     def check_vgv_vac_multiplicity(self):
-        assert self.browser.execute_script(
-            f"return {PatientCardLocators.VGV_VAC_MULTIPLICITY}.length"), "Multilicity object in VGV vaccination modal is not accessible"
-        mdmo = self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_MULTIPLICITY}.find('input').val()")
-        print(mdmo)
-        assert mdmo == vac_multi_choice, "Multilicity object in VGV vaccination modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_MULTIPLICITY}.length"), "Multilicity object in VGV vaccination modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_MULTIPLICITY}.find('input').val()") == vac_multi_choice, "Multilicity object in VGV vaccination modal doesn't take a value"
 
     def check_vgv_vac_immunization_date(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IMMUNIZATION_DATE}.length"), "Immunization date object in VGV vaccination modal is not accessible"
@@ -2505,21 +2456,15 @@ class RegisterPage(BasePage):
 
     def check_vgv_vac_series(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_SERIES}.length"), "Marker object in VGV vaccination modal is not accessible"
-        ser = self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_SERIES}.find('input').val()")
-        print(ser)
-        assert ser == numbers5, "Marker object in VGV vaccination modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_SERIES}.find('input').val()") == numbers5, "Marker object in VGV vaccination modal doesn't take a value"
 
     def check_vgv_vac_country_producer(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_COUNTRY_PRODUCER}.length"), "Result object in VGV vaccination modal is not accessible"
-        vgvcp = self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_COUNTRY_PRODUCER}.find('input').val()")
-        print(vgvcp)
-        assert vgvcp == vac_multi_choice, "Result object in VGV vaccination modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_COUNTRY_PRODUCER}.find('input').val()") == vac_multi_choice, "Result object in VGV vaccination modal doesn't take a value"
 
     def check_vgv_medical_org_provided_vaccination(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.MED_ORG_PROVIDED_VACCINATION}.length"), "Medical organization which provided vaccination in VGV vaccination modal is not accessible"
-        mopv = self.browser.execute_script(f"return {PatientCardLocators.MED_ORG_PROVIDED_VACCINATION}.find('input').val()")
-        print(mopv)
-        assert mopv == mo_choice1, "Medical organization which provided analysis in VGV vaccination modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MED_ORG_PROVIDED_VACCINATION}.find('input').val()") == mo_choice1, "Medical organization which provided analysis in VGV vaccination modal doesn't take a value"
 
     def check_cancel_button_vgv_vgs_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.VGV_VAC_CANCEL}.length"), "Cancel button in VGV vaccination modal is not accessible"
@@ -2547,15 +2492,11 @@ class RegisterPage(BasePage):
     def check_registering_date_fluoroscopy_modal(self):
         sleep(3)
         assert self.browser.execute_script(f"return {PatientCardLocators.FLUOR_REGISTERING_DATE}.length"), "The Registering date object in Fluoroscopy modal is not accessible"
-        frt = self.browser.execute_script(f"return {PatientCardLocators.FLUOR_REGISTERING_DATE}.find('input').val()")
-        print(frt)
-        assert frt == today, "The Registering date object in Fluoroscopy modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.FLUOR_REGISTERING_DATE}.find('input').val()") == today, "The Registering date object in Fluoroscopy modal doesn't take a value"
 
     def check_result_fluoroscopy_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.FLUOR_RESULT}.length"), "Tne Result object in Fluoroscopy modal is not accessible"
-        rr = self.browser.execute_script(f"return {PatientCardLocators.FLUOR_RESULT}.find('input').val()")
-        print(rr)
-        assert rr == fluor_choice, "The Result object in Fluoroscopy modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.FLUOR_RESULT}.find('input').val()") == fluor_choice, "The Result object in Fluoroscopy modal doesn't take a value"
 
     def check_cancel_button_fluoroscopy_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.FLUOROSCOPY_CANCEL}.length"), "Cancel button in Fluoroscopy modal is not accessible"
@@ -2579,15 +2520,11 @@ class RegisterPage(BasePage):
 
     def check_registering_date_radiography_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.RADIO_REGISTERING_DATE}.length"), "The Registering date object in Radiography modal is not accessible"
-        rrd = self.browser.execute_script(f"return {PatientCardLocators.RADIO_REGISTERING_DATE}.find('input').val()")
-        print(rrd)
-        assert rrd == today, "The Registering date in Radiography modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RADIO_REGISTERING_DATE}.find('input').val()") == today, "The Registering date in Radiography modal doesn't take a value"
 
     def check_result_radiography_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.RADIO_RESULT}.length"), "The Result object in Radiography modal is not accessible"
-        rr = self.browser.execute_script(f"return {PatientCardLocators.RADIO_RESULT}.find('input').val()")
-        print(rr)
-        assert rr == radio_choice, "The Result object in Radiography modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RADIO_RESULT}.find('input').val()") == radio_choice, "The Result object in Radiography modal doesn't take a value"
 
     def check_cancel_button_radiography_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.RADIOGRAPHY_CANCEL}.length"), "Cancel button in Radiography modal is not accessible"
@@ -2611,15 +2548,11 @@ class RegisterPage(BasePage):
 
     def check_registering_date_sputum_smear_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_REGISTERING_DATE}.length"), "The Registering date object in Sputum smear modal is not accessible"
-        rrd = self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_REGISTERING_DATE}.find('input').val()")
-        print(rrd)
-        assert rrd == today, "The Registering date object in Sputum smear modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_REGISTERING_DATE}.find('input').val()") == today, "The Registering date object in Sputum smear modal doesn't take a value"
 
     def check_result_sputum_smear_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_RESULT}.length"), "The Result object in Sputum smear modal is not accessible"
-        rr = self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_RESULT}.find('input').val()")
-        print(rr)
-        assert rr == sputum_choice, "The Result object in Sputum smear modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_RESULT}.find('input').val()") == sputum_choice, "The Result object in Sputum smear modal doesn't take a value"
 
     def check_cancel_button_sputum_smear_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SPUTUM_CANCEL}.length"), "Cancel button in Sputum smear modal is not accessible"
@@ -2643,15 +2576,11 @@ class RegisterPage(BasePage):
 
     def check_registering_date_tb_symphtoms_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TB_SYMPH_REGISTERING_DATE}.length"), "The Registering date object in TB symphtoms modal is not accessible"
-        srd = self.browser.execute_script(f"return {PatientCardLocators.TB_SYMPH_REGISTERING_DATE}.find('input').val()")
-        print(srd)
-        assert srd == today, "The Registering date object in TB symphtoms modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.TB_SYMPH_REGISTERING_DATE}.find('input').val()") == today, "The Registering date object in TB symphtoms modal doesn't take a value"
 
     def check_result_tb_symphtoms_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TB_SYMPH_RESULT}.length"), "The Result object in TB symphtoms modal is not accessible"
-        sr = self.browser.execute_script(f"return {PatientCardLocators.TB_SYMPH_RESULT}.find('input').val()")
-        print(sr)
-        assert sr == tb_symph_choice, "The Result object in TB symphtoms modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.TB_SYMPH_RESULT}.find('input').val()") == tb_symph_choice, "The Result object in TB symphtoms modal doesn't take a value"
 
     def check_cancel_button_tb_symphtoms_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TB_SYMPH_CANCEL}.length"), "Cancel button in TB symphtoms modal is not accessible"
@@ -2675,15 +2604,11 @@ class RegisterPage(BasePage):
 
     def check_registering_date_xpert_mtb_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.XPERT_MTB_REGISTERING_DATE}.length"), "The Registering date object in Xpert MTB modal is not accessible"
-        xrd = self.browser.execute_script(f"return {PatientCardLocators.XPERT_MTB_REGISTERING_DATE}.find('input').val()")
-        print(xrd)
-        assert xrd == today, "The Registering date object in Xpert MTB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.XPERT_MTB_REGISTERING_DATE}.find('input').val()") == today, "The Registering date object in Xpert MTB modal doesn't take a value"
 
     def check_result_xpert_mtb_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.XPERT_MTB_RESULT}.length"), "The Result object in Xpert MTB modal is not accessible"
-        xr = self.browser.execute_script(f"return {PatientCardLocators.XPERT_MTB_RESULT}.find('input').val()")
-        print(xr)
-        assert xr == xpert_choice, "The Result object in Xpert MTB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.XPERT_MTB_RESULT}.find('input').val()") == xpert_choice, "The Result object in Xpert MTB modal doesn't take a value"
 
     def check_cancel_button_xpert_mtb_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.XPERT_MTB_CANCEL}.length"), "Cancel button in Xpert MTB modal is not accessible"
@@ -2707,15 +2632,11 @@ class RegisterPage(BasePage):
 
     def check_registering_date_kt_mrt_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.KT_MRT_REGISTERING_DATE}.length"), "The Registering date object in KT/MRT modal is not accessible"
-        ktrd = self.browser.execute_script(f"return {PatientCardLocators.KT_MRT_REGISTERING_DATE}.find('input').val()")
-        print(ktrd)
-        assert ktrd == today, "The Registering date object in KT/MRT modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.KT_MRT_REGISTERING_DATE}.find('input').val()") == today, "The Registering date object in KT/MRT modal doesn't take a value"
 
     def check_result_kt_mrt_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.KT_MRT_RESULT}.length"), "The Result object in KT/MRT modal is not accessible"
-        ktr = self.browser.execute_script(f"return {PatientCardLocators.KT_MRT_RESULT}.find('input').val()")
-        print(ktr)
-        assert ktr == mrt_choice, "The Result object in KT/MRT modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.KT_MRT_RESULT}.find('input').val()") == mrt_choice, "The Result object in KT/MRT modal doesn't take a value"
 
     def check_cancel_button_kt_mrt_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.KT_MRT_CANCEL}.length"), "Cancel button in KT/MRT modal is not accessible"
@@ -2746,9 +2667,7 @@ class RegisterPage(BasePage):
 
     def check_lab_name_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.LAB_NAME_CONFIRMED_TB}.length"), "Confirmed labaratory name object in TB treatment modal is not accessible"
-        lnc = self.browser.execute_script(f"return {PatientCardLocators.LAB_NAME_CONFIRMED_TB}.val()")
-        print(lnc)
-        assert lnc == 'Random lab', "Confirmed labaratory name object in TB treatment modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.LAB_NAME_CONFIRMED_TB}.val()") == 'Random lab', "Confirmed labaratory name object in TB treatment modal doesn't take a value"
 
     def check_diagnosis_registering_date_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TB_DIAG_REGISTERING_DATE}.length"), "Diagnosis registering date in TB treatment modal is not accessible"
@@ -2756,27 +2675,19 @@ class RegisterPage(BasePage):
 
     def check_sick_type_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SICK_TYPE}.length"), "The Sick type object in TB treatment modal is not accessible"
-        ktr = self.browser.execute_script(f"return {PatientCardLocators.SICK_TYPE}.find('input').val()")
-        print(ktr)
-        assert ktr == case_choice, "The Sick type object in TB treatment doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SICK_TYPE}.find('input').val()") == case_choice, "The Sick type object in TB treatment doesn't take a value"
 
     def check_diagnosis_mkb10_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TB_DIAG_MKB10}.length"), "The diagnosis MKB10 object in TB treatment modal is not accessible"
-        mkb10 = self.browser.execute_script(f"return {PatientCardLocators.TB_DIAG_MKB10}.find('input').val()")
-        print(mkb10)
-        assert mkb10 == tb_analysis_choice, "The diagnosis MKB10 object in TB treatment doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.TB_DIAG_MKB10}.find('input').val()") == tb_analysis_choice, "The diagnosis MKB10 object in TB treatment doesn't take a value"
 
     def check_location_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.LOCATION}.length"), "The Location object in TB treatment modal is not accessible"
-        tbloc = self.browser.execute_script(f"return {PatientCardLocators.LOCATION}.find('input').val()")
-        print(tbloc)
-        assert tbloc == two_choice, "The Location object in TB treatment doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.LOCATION}.find('input').val()") == two_choice, "The Location object in TB treatment doesn't take a value"
 
     def check_bac_secretion_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.BAC_SECRETION}.length"), "The BAC secretion object in TB treatment modal is not accessible"
-        bac = self.browser.execute_script(f"return {PatientCardLocators.BAC_SECRETION}.find('input').val()")
-        print(bac)
-        assert bac == bac_secr_choice, "The BAC secretion object in TB treatment doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.BAC_SECRETION}.find('input').val()") == bac_secr_choice, "The BAC secretion object in TB treatment doesn't take a value"
 
     def check_treatment_start_date_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TREATMENT_START_DATE}.length"), "The Treatment start date object in TB treatment modal is not accessible"
@@ -2788,9 +2699,7 @@ class RegisterPage(BasePage):
 
     def check_outcome_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.OUTCOME}.length"), "The Outcome object in TB treatment modal is not accessible"
-        ktr = self.browser.execute_script(f"return {PatientCardLocators.OUTCOME}.find('input').val()")
-        print(ktr)
-        assert ktr == outcome_choice, "The Outcome object in TB treatment doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.OUTCOME}.find('input').val()") == outcome_choice, "The Outcome object in TB treatment doesn't take a value"
 
     def check_cancel_button_tb_treatment_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TB_TREATMENT_CANCEL}.length"), "Cancel button in TB treatment modal is not accessible"
@@ -2799,16 +2708,12 @@ class RegisterPage(BasePage):
     def check_presence_in_history_tb_tab(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_ACCOUNTED_DATE}.length"), "The Presence in history object in TB tab is not accessible"
         self.make(f"{PatientCardLocators.PRESENCE_TB_IN_HISTORY}.dropdown('set selected', '{two_choice}');")
-        tbh = self.browser.execute_script(f"return {PatientCardLocators.PRESENCE_TB_IN_HISTORY}.find('input').val()")
-        print(tbh)
-        assert tbh == two_choice, "The Presence in history object in TB tab doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PRESENCE_TB_IN_HISTORY}.find('input').val()") == two_choice, "The Presence in history object in TB tab doesn't take a value"
 
     def check_d_registered_date_tb_tab(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_ACCOUNTED_DATE}.length"), "The Disp registered date object in TB tab is not accessible"
         self.make(f"{PatientCardLocators.D_ACCOUNTED_DATE}.calendar('set date', '{today}');")
-        drd = self.browser.execute_script(f"return {PatientCardLocators.D_ACCOUNTED_DATE}.find('input').val()")
-        print(drd)
-        assert drd == today, "The Disp registered date object in TB tab doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.D_ACCOUNTED_DATE}.find('input').val()") == today, "The Disp registered date object in TB tab doesn't take a value"
 
     def should_test_art_information_modal(self):
         self.fill_art_information_modal()
@@ -3054,9 +2959,7 @@ class RegisterPage(BasePage):
     def check_date_of_eligibility_for_treatment_d_screening_hospitalization(self):
         sleep(1)
         assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_ELIGIBILITY_FOR_TREATMENT}.length"), "Date of eligibility for treatment object in D-screening, hospitalization modal is not accessible"
-        doeft = self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_ELIGIBILITY_FOR_TREATMENT}.val()")
-        print(doeft)
-        assert doeft == today, "Date of eligibility for treatment objectt in D-screening, hospitalization modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_ELIGIBILITY_FOR_TREATMENT}.val()") == today, "Date of eligibility for treatment objectt in D-screening, hospitalization modal doesn't take a value"
 
     def check_treatment_type_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_TYPE}.length"), "The Treatment type object in D-screening, hospitalization modal is not accessible"
@@ -3064,9 +2967,7 @@ class RegisterPage(BasePage):
 
     def check_mpi_profile_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.MPI_PROFILE}.length"), "The MPI profile object in D-screening, hospitalization modal is not accessible"
-        mpif = self.browser.execute_script(f"return {PatientCardLocators.MPI_PROFILE}.find('input').val()")
-        print(mpif)
-        assert mpif == treat_res_choice, "The MPI profile object in D-screening, hospitalization modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MPI_PROFILE}.find('input').val()") == treat_res_choice, "The MPI profile object in D-screening, hospitalization modal doesn't take a value"
 
     def check_hosp_date_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.HOSP_DATE}.length"), "Hospitalization date in D-screening, hospitalization modal is not accessible"
@@ -3078,9 +2979,7 @@ class RegisterPage(BasePage):
 
     def check_treatment_result_d_screening_hospitalization(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_RESULT}.length"), "Treatment result in D-screening, hospitalization modal is not accessible"
-        tr = self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_RESULT}.find('input').val()")
-        print(tr)
-        assert tr == treat_outc_choice, "Treatment result in D-screening, hospitalization modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_TREAT_RESULT}.find('input').val()") == treat_outc_choice, "Treatment result in D-screening, hospitalization modal doesn't take a value"
 
     def check_cancel_button_d_screening_hospitalization_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_SCRN_HOSP_CANCEL}.length"), "Cancel button in D-screening, hospitalization modal is not accessible"

@@ -171,10 +171,10 @@ class TestGeneralData():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_cancel_button_residence_address_modal()
 
-    @pytest.mark.xfail(reason="не понятно")
-    def test_residence_medical_organization(self, browser):
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.check_residence_medical_organization()
+    # @pytest.mark.xfail(reason="не понятно")
+    # def test_residence_medical_organization(self, browser):
+    #     register_page = RegisterPage(browser, browser.current_url)
+    #     register_page.check_residence_medical_organization()
 
     def test_retrospective_child_checkbox(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1030,7 +1030,6 @@ class TestHomelessCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_donation_date_blood_donor_modal()
 
-    @pytest.mark.xfail(reason="no value for medical organization objects")
     @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
     def test_medical_organization_blood_donor_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1121,7 +1120,6 @@ class TestHomelessCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_donation_date_organ_donor_modal()
 
-    @pytest.mark.xfail(reason="no value for medical organization objects")
     @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
     def test_medical_organization_organ_donor_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1152,7 +1150,7 @@ class TestHomelessCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_hiv_analysis_date_organ_donor_modal()
 
-    @pytest.mark.xfail(reason="no value for medical organization objects")
+    @pytest.mark.xfail(reason="it's bag, object doesn't save a value")
     @pytest.mark.skipif(test_save_button_blood_donor_modal == "FAILED", reason="patient id wasn't taken")
     def test_recipient_medical_organization_organ_donor_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
