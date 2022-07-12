@@ -339,6 +339,7 @@ class PatientCardLocators(object):
     BLOOD_HIV_STATUS_REC = "$('#recipient_blood_modal div[data-field=recipient_blood_hiv_status_modal] .ui.dropdown')"
     BLOOD_RECEIPT_SAVE = "$('#recipient_blood_modal .ui.green.approve.button')"
     BLOOD_RECEIPT_EDIT = "$('#recipient_blood_table a[action-type=edit]')"
+    BLOOD_RECIPIENT_CANCEL = "$('#recipient_blood_modal .ui.red.deny.button')"
 
     ORGAN_RECIPIENT =  "$('div[data-field=recipient_org_opit_checkbox] input')"
     ORGAN_RECIPIENT_ADD = "$('#recipient_other_material_table a[action-type=add]')"
@@ -354,7 +355,8 @@ class PatientCardLocators(object):
     ORGAN_DONOR_NAME = "$('#recipient_other_material_modal div[data-field=recipient_other_material_fio_donor_modal] input')"
     ORGAN_HIV_STATUS_REC = "$('#recipient_other_material_modal div[data-field=recipient_other_material_hiv_status_modal] .ui.dropdown')"
     ORGAN_RECEIPT_SAVE = "$('#recipient_other_material_modal .ui.green.approve.button')"
-    ORGAN_RECEIPT_EDIT = (By.CSS_SELECTOR, '#recipient_other_material_table a[action-type=edit]')
+    ORGAN_RECEIPT_EDIT = "$('#recipient_other_material_table a[action-type=edit]')"
+    BLOOD_RECIPIENT_CANCEL = "$('#recipient_other_material_modal .ui.red.deny.button')"
 
     IPPP = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-ippp]')"
     IPPP_SYMPTOM_EXISTENCE = "$('div[data-tab=patient_card_menu-ippp] div[data-field=ipp_data_ippp_symptom] .ui.dropdown')"
