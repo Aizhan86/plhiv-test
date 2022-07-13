@@ -146,3 +146,4 @@ com_sex_partners_choice = random.choice(['10', '20', '30', '14', '25', '36', '27
 deduction_choice = random.choice(['114', '115', '20', '30', '25', '36', '27', '39', '54'])
 blood_don_cat_choice = random.choice(['1', '2', '3'])
 organ_don_cat_choice = random.choice(['1', '2', '3'])
+three_choice = random.choice(['1', '2', '3'])

@@ -240,27 +240,19 @@ class TestGeneralData():
         register_page.check_deregistration_date_perinatal_registration_modal()
 
     @pytest.mark.skipif(test_save_perinatal_registration_modal == "FAILED", reason="patient id wasn't taken")
-    def test_eregistration_reason_perinatal_registration_modal(self, browser):
+    def test_deregistration_reason_perinatal_registration_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_deregistration_reason_perinatal_registration_modal()
 
     @pytest.mark.skipif(test_save_perinatal_registration_modal == "FAILED", reason="patient id wasn't taken")
-    def test_country_perinatal_registration_modal(self, browser):
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.check_country_date_perinatal_registration_modal()
-
-    @pytest.mark.skipif(test_save_perinatal_registration_modal == "FAILED", reason="patient id wasn't taken")
-    def test_area_date_perinatal_registration_modal(self, browser):
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.check_area_date_perinatal_registration_modal()
-
-    @pytest.mark.xfail(reason="it's bag")
-    @pytest.mark.skipif(test_save_perinatal_registration_modal == "FAILED", reason="patient id wasn't taken")
-    def test_unit_area_perinatal_registration_modal(self, browser):
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.check_unit_area_date_perinatal_registration_modal()
-
     def test_patient_death_case_perinatal_registration_modal(self, browser):
+        if values.reason_deregis_choice == 2:
+            register_page = RegisterPage(browser, browser.current_url)
+            register_page.check_country_date_perinatal_registration_modal()
+        if values.reason_deregis_choice == 3:
+            register_page = RegisterPage(browser, browser.current_url)
+            register_page.check_area_date_perinatal_registration_modal()
+            register_page.check_unit_area_date_perinatal_registration_modal()
         if values.reason_deregis_choice == 4:
             register_page = RegisterPage(browser, browser.current_url)
             register_page.check_date_of_death_perinatal_registration_modal()
@@ -1165,12 +1157,93 @@ class TestHomelessCase():
     def test_cancel_button_organ_donor_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_cancel_button_organ_donor_modal()
-#
-#     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
-#     def test_ippp_modal(self, browser):
-#         register_page = RegisterPage(browser, browser.current_url)
-#         register_page.should_test_ippp_modal()
-#         print(f"test_ippp_modal passed")
+
+    @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
+    def test_ippp_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_ippp_modal()
+
+    @pytest.mark.skipif(test_ippp_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_ippp_symptoms_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_save_button_ippp_symptoms_modal()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_ippp_symptoms_existence_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_ippp_symptoms_existence_ippp_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_dispencary_registered_in_kvd_area_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_dispencary_registered_in_kvd_area_ippp_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_dk_contacting_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_dk_contacting_ippp_tab()
+
+    @pytest.mark.xfail(reason="object doesn't save a value")
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_dk_contacting_number_last_12month_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_dk_contacting_number_last_12month_ippp_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_private_clinics_contacting_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_private_clinics_contacting_ippp_tab()
+
+    @pytest.mark.xfail(reason="object doesn't save a value")
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_private_clinics_contacting_number_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_private_clinics_contacting_number_ippp_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_born_by_caesarean_section_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_born_by_caesarean_section_ippp_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_chemoprophylaxis_of_mother_during_pregnancy_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_chemoprophylaxis_of_mother_during_pregnancy_ippp_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_child_had_artificial_feeding_ippp_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_child_had_artificial_feeding_ippp_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_chemoprophylaxis_of_child_during_tab(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_chemoprophylaxis_of_child_during_tab()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_ippp_symptoms_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_add_button_ippp_symptoms_modal()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_ippp_symptoms_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_edit_button_ippp_symptoms_modal()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_diagnosis_date_symptoms_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_diagnosis_date_symptoms_modal()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_diagnosis_ippp_symptoms_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_diagnosis_ippp_symptoms_modal()
+
+    @pytest.mark.skipif(test_save_button_ippp_symptoms_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_ippp_symptoms_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_cancel_button_ippp_symptoms_modal()
 #
 #     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
 #     def test_manipulations_modal(self, browser):
@@ -1287,7 +1360,6 @@ class TestForeignerCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_outpatient_card_num()
 
-    @pytest.mark.xfail(reason="extracted value includes time which mustn't be there")
     @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
     def test_initial_registration_date(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1750,7 +1822,6 @@ class TestForeignerCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_transfusion_date_blood_recipient_modal()
 
-    @pytest.mark.xfail(reason="no value for medical organization objects")
     @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
     def test_medical_organization_blood_recipient_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1832,13 +1903,11 @@ class TestForeignerCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_transfusion_date_organ_recipient_modal()
 
-    @pytest.mark.xfail(reason="no value for medical organization objects")
     @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
     def test_donor_medical_organization_organ_recipient_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_donor_medical_organization_organ_recipient_modal()
 
-    @pytest.mark.xfail(reason="no value for medical organization objects")
     @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
     def test_recipient_medical_organization_organ_recipient_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1970,6 +2039,7 @@ class TestWomanCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_cancel_button_hiv_related_disease_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
     def test_recommended_consultation_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1985,6 +2055,7 @@ class TestWomanCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_add_button_recommended_consultation_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_edit_button_recommended_consultation_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1996,16 +2067,19 @@ class TestWomanCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_service_within_tarificator_recommended_consultation_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_consultation_date_recommended_consultation_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_consultation_date_recommended_consultation_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_consultation_type_recommended_consultation_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_consultation_type_recommended_consultation_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_consultation_description_recommended_consultation_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -2016,10 +2090,12 @@ class TestWomanCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_cancel_button_recommended_consultation_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
     def test_recommended_screening_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.fill_recommended_screening_modal()
+
 
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_save_button_recommended_screening_modal(self, browser):
@@ -2033,6 +2109,7 @@ class TestWomanCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_add_button_recommended_screening_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_edit_button_recommended_screening_modal(self, browser):
         sleep(1)
@@ -2045,16 +2122,19 @@ class TestWomanCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_service_within_tarificator_recommended_screening_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_consultation_date_recommended_screening_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_consultation_date_recommended_screening_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_consultation_type_recommended_screening_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_consultation_type_recommended_screening_modal()
 
+    @pytest.mark.xfail(reason="it's a bag")
     @pytest.mark.skipif(test_hiv_diagnosis_modal == "FAILED", reason="patient id wasn't taken")
     def test_consultation_description_recommended_screening_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
