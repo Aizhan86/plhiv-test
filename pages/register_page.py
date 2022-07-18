@@ -149,29 +149,27 @@ class RegisterPage(BasePage):
 
     def check_patient_gender(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_GENDER}.length"), "Patient's gender object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_GENDER}.find('input').val()") == gen_choice, "Patient's gender object doesn't take a value"
+        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_GENDER}.dropdown('get value')") == gen_choice, "Patient's gender object doesn't take a value"
 
     def check_emergence_area(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.EMERGENCE_AREA}.length"), "Patient's emergence area object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.EMERGENCE_AREA}.find('input').val()") == '3', "Patient's emergence area object doesn't take a value"
+        assert self.browser.execute_script(f"return {RegisterPageLocators.EMERGENCE_AREA}.dropdown('get value')") == '3', "Patient's emergence area object doesn't take a value"
 
     def check_patient_citizenship(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_CITIZENSHIP}.length"), "Patient's citizenship object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_CITIZENSHIP}.find('input').val()") == '1', "Patient's citizenship object doesn't take a value"
+        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('get value')") == '1', "Patient's citizenship object doesn't take a value"
 
     def check_child_status(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.CHILD_STATUS}.length"), "Child status object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.CHILD_STATUS}.find('input').val()") == child_status_choice, "Child status object doesn't take a value"
+        assert self.browser.execute_script(f"return {RegisterPageLocators.CHILD_STATUS}.dropdown('get value')") == child_status_choice, "Child status object doesn't take a value"
 
     def check_social_status(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.SOCIAL_STATUS}.length"), "Patient's region of living object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.SOCIAL_STATUS}.find('input').val()") == soc_status_choice, "Patient's region of living object doesn't take a value"
+        assert self.browser.execute_script(f"return {RegisterPageLocators.SOCIAL_STATUS}.dropdown('get value')") == soc_status_choice, "Patient's region of living object doesn't take a value"
 
     def check_registration_medical_organization(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.length"), "Social status object is not accessible"
-        s = self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.find('input').val()")
-        print(s)
-        assert s == 'mo_choice', "Social status object doesn't take a value"
+        assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.dropdown('get value')") == 'mo_choice', "Social status object doesn't take a value"
 
     def check_edit_button_registration_address_modal(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.EDIT_REGIS_ADDRESS}.length"), "Edit button in Registration address modal is not accessible"
@@ -186,17 +184,16 @@ class RegisterPage(BasePage):
 
     def check_registration_unit_area(self):
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').length"), "Patient's registration unit area object is not accessible"
-        m = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').find('input[type=hidden]').val()")
-        assert m == '180', "Patient's registration unit area object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').dropdown('get value')") == '180', "Patient's registration unit area object doesn't take a value"
 
     def check_registration_locality(self):
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').length"), "Patient's registration locality object is not accessible"
-        n = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').find('input[type=hidden]').val()")
+        n = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').dropdown('get value')")
         assert n == '290000000002', "Patient's registration locality object doesn't take a value"
 
     def check_registration_place(self):
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').length"), "Patient's registration place object is not accessible"
-        o = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').find('input[type=hidden]').val()")
+        o = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').dropdown('get value')")
         assert o == '2', "Patient's registration place object doesn't take a value"
 
     def check_registration_street(self):
@@ -231,19 +228,19 @@ class RegisterPage(BasePage):
     def check_residence_area(self):
         sleep(2)
         assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').length"), "Patient's residence area object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').find('input').val()") == '3', "Patient's residence area object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').dropdown('get value')") == '3', "Patient's residence area object doesn't take a value"
 
     def check_residence_unit_area(self):
         assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').length"), "Patient's residence unit area object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').find('input').val()") == '33', "Patient's residence unit area object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').dropdown('get value')") == '33', "Patient's residence unit area object doesn't take a value"
 
     def check_residence_locality(self):
         assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').length"), "Patient's residence locality object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').find('input').val()") == '290000000004', "Patient's residence locality object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').dropdown('get value')") == '290000000004', "Patient's residence locality object doesn't take a value"
 
     def check_residence_place(self):
         assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').length"), "Patient's residence place object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').find('input').val()") == '2', "Patient's residence place object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').dropdown('get value')") == '2', "Patient's residence place object doesn't take a value"
 
     def check_residence_street(self):
         assert self.browser.execute_script(f"return $('#fact_address_street_modal').length"), "Patient's residence street object is not accessible"
@@ -263,7 +260,7 @@ class RegisterPage(BasePage):
 
     def check_residence_medical_organization(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.length"), "Residence medical organization object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.find('input').val()") == '170000000558', "Residence medical organization object doesn't take a value"
+        assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.dropdown('get value')") == '170000000558', "Residence medical organization object doesn't take a value"
 
     def check_cancel_button_residence_address_modal(self):
         assert self.browser.execute_script(f"return {RegisterPageLocators.CANCEL_RESID_ADDRESS}.length"), "Edit button in Residence address modal is not accessible"
@@ -334,7 +331,7 @@ class RegisterPage(BasePage):
     def check_medical_organization_hiv_ogc_modal(self):
         sleep(2)
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_MED_ORG}.length"), "Medical organization in HIV antibody testing OGC modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.IFA_MED_ORG}.find('input').val()") == mo_choice, "Medical organization object in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IFA_MED_ORG}.dropdown('get value')") == mo_choice, "Medical organization object in HIV antibody testing OGC modal doesn't take a value"
 
     def check_surname_of_person_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SURNAME_PERSON_MEDORG}.length"), "Surname of person in medical organization in HIV antibody testing OGC modal is not accessible"
@@ -360,9 +357,7 @@ class RegisterPage(BasePage):
 
     def check_serum_number_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SERUM_NUM}.length"), "Serum number in HIV antibody testing OGC modal is not accessible"
-        sn = self.browser.execute_script(f"return {PatientCardLocators.SERUM_NUM}.find('input').val()")
-        print(sn)
-        assert sn == serum_num_choice, "Serum number in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SERUM_NUM}.dropdown('get value')") == serum_num_choice, "Serum number in HIV antibody testing OGC modal doesn't take a value"
 
     def check_serum_number2_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SERUM_NUM2}.length"), "Serum number 2 in HIV antibody testing OGC modal is not accessible"
@@ -372,27 +367,19 @@ class RegisterPage(BasePage):
 
     def check_test_system_type_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_TYPE}.length"), "Test system type in HIV antibody testing OGC modal is not accessible"
-        tst = self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_TYPE}.find('input').val()")
-        print(tst)
-        assert tst == test_sys_choice, "Test system type in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_TYPE}.dropdown('get value')") == test_sys_choice, "Test system type in HIV antibody testing OGC modal doesn't take a value"
 
     def check_expiration_date_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.EXPIRATION_DATE}.length"), "Expiration date in HIV antibody testing OGC modal is not accessible"
-        asd = self.browser.execute_script(f"return {PatientCardLocators.EXPIRATION_DATE}.val()")
-        print(asd)
-        assert asd == expiration_date, "Expiration date in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.EXPIRATION_DATE}.val()") == expiration_date, "Expiration date in HIV antibody testing OGC modal doesn't take a value"
 
     def check_series_number_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SERIES_NUM}.length"), "Series number in HIV antibody testing OGC modal is not accessible"
-        sern = self.browser.execute_script(f"return {PatientCardLocators.SERIES_NUM}.val()")
-        print(sern)
-        assert sern == numbers3, "Series number in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SERIES_NUM}.val()") == numbers3, "Series number in HIV antibody testing OGC modal doesn't take a value"
 
     def check_test_category_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TEST_CATEGORY}.length"), "Test category in HIV antibody testing OGC modal is not accessible"
-        tc = self.browser.execute_script(f"return {PatientCardLocators.TEST_CATEGORY}.find('input').val()")
-        print(tc)
-        assert tc == test_cat_choice, "Test category in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.TEST_CATEGORY}.dropdown('get value')") == test_cat_choice, "Test category in HIV antibody testing OGC modal doesn't take a value"
 
     def check_op_critical_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.OP_CRITICAL}.length"), "The OP critical object in HIV antibody testing OGC modal is not accessible"
@@ -406,21 +393,15 @@ class RegisterPage(BasePage):
 
     def check_result_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_RESULT}.length"), "Result object in HIV antibody testing OGC modal is not accessible"
-        ifares = self.browser.execute_script(f"return {PatientCardLocators.IFA_RESULT}.find('input').val()")
-        print(ifares)
-        assert ifares == ifa_res_choice, "Result object in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IFA_RESULT}.dropdown('get value')") == ifa_res_choice, "Result object in HIV antibody testing OGC modal doesn't take a value"
 
     def check_responsible_person_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.RESPONSIBLE_PERSON}.length"), "Responsible_person in HIV antibody testing OGC modal is not accessible"
-        rp = self.browser.execute_script(f"return {PatientCardLocators.RESPONSIBLE_PERSON}.find('input').val()")
-        print(rp)
-        assert rp == ifa_resp_person_choice, "Responsible person in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESPONSIBLE_PERSON}.dropdown('get value')") == ifa_resp_person_choice, "Responsible person in HIV antibody testing OGC modal doesn't take a value"
 
     def check_services_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_SERVICES}.length"), "The Services object in HIV antibody testing OGC modal is not accessible"
-        ifaser = self.browser.execute_script(f"return {PatientCardLocators.IFA_SERVICES}.find('input').val()")
-        print(ifaser)
-        assert ifaser == ifa_services_choice, "The Services object in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IFA_SERVICES}.dropdown('get value')") == ifa_services_choice, "The Services object in HIV antibody testing OGC modal doesn't take a value"
 
     def check_cancel_button_hiv_ogc_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_OGC_CANCEL}.length"), "Cancel button in HIV antibody testing OGC modal is not accessible"
@@ -455,7 +436,7 @@ class RegisterPage(BasePage):
 
     def check_screening_number_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SCREANING_NUM}.length"), "The Screening number object in HIV antibody testing KNCDIZ modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.SCREANING_NUM}.find('input').val()") == numbers5, "The Screening number object in HIV antibody testing KNCDIZ modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SCREANING_NUM}.dropdown('get value')") == numbers5, "The Screening number object in HIV antibody testing KNCDIZ modal doesn't take a value"
 
     def check_serum_number_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SERUM_NUM_RC}.length"), "Serum number in HIV antibody testing KNCDIZ modal is not accessible"
@@ -477,9 +458,7 @@ class RegisterPage(BasePage):
 
     def check_test_system_type_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_NAME_RC}.length"), "Test system type in HIV antibody testing KNCDIZ modal is not accessible"
-        tstrc = self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_NAME_RC}.find('input').val()")
-        print(tstrc)
-        assert tstrc == test_sys_choice, "Test system type in HIV antibody testing KNCDIZ modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_NAME_RC}.dropdown('get value')") == test_sys_choice, "Test system type in HIV antibody testing KNCDIZ modal doesn't take a value"
 
     def check_expiration_date_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.EXPIRATION_DATE_RC}.length"), "Expiration date in HIV antibody testing KNCDIZ modal is not accessible"
@@ -487,9 +466,7 @@ class RegisterPage(BasePage):
 
     def check_series_number_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SERIES_NUM_RC}.length"), "Series number in HIV antibody testing KNCDIZ modal is not accessible"
-        sernrc = self.browser.execute_script(f"return {PatientCardLocators.SERIES_NUM_RC}.val()")
-        print(sernrc)
-        assert sernrc == numbers3, "Series number in HIV antibody testing KNCDIZ modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SERIES_NUM_RC}.val()") == numbers3, "Series number in HIV antibody testing KNCDIZ modal doesn't take a value"
 
     def check_op_critical_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.OP_CRITICAL_RC}.length"), "The OP critical object in HIV antibody testing KNCDIZ modal is not accessible"
@@ -503,9 +480,7 @@ class RegisterPage(BasePage):
 
     def check_result_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_RESULT_RC}.length"), "Result object in HIV antibody testing KNCDIZ modal is not accessible"
-        resrc = self.browser.execute_script(f"return {PatientCardLocators.IFA_RESULT_RC}.find('input').val()")
-        print(resrc)
-        assert resrc == two_choice, "Result object in HIV antibody testing OGC modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IFA_RESULT_RC}.dropdown('get value')") == two_choice, "Result object in HIV antibody testing OGC modal doesn't take a value"
 
     def check_cancel_button_hiv_kncdiz_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IFA_RC_CANCEL}.length"), "Cancel button in HIV antibody testing KNCDIZ modal is not accessible"
@@ -567,9 +542,7 @@ class RegisterPage(BasePage):
 
     def check_sample_number_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.SAMPLE_NUM}.length"), "The Sample number object in IB modal is not accessible"
-        samn = self.browser.execute_script(f"return {PatientCardLocators.SAMPLE_NUM}.val()")
-        print(samn)
-        assert samn == numbers3, "The Sample number object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SAMPLE_NUM}.val()") == numbers3, "The Sample number object in IB modal doesn't take a value"
 
     def check_receipt_date_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IB_RECEIPT_DATE}.length"), "The IB Receipt date object in IB modal is not accessible"
@@ -581,15 +554,11 @@ class RegisterPage(BasePage):
 
     def check_result_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IB_RESULT}.length"), "The Result object in IB modal is not accessible"
-        ibres = self.browser.execute_script(f"return {PatientCardLocators.IB_RESULT}.find('input').val()")
-        print(ibres)
-        assert ibres == '1', "The Result object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IB_RESULT}.dropdown('get value')") == '1', "The Result object in IB modal doesn't take a value"
 
     def check_test_system_name_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_NAME}.length"), "The Test system name object in IB modal is not accessible"
-        tsn = self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_NAME}.find('input').val()")
-        print(tsn)
-        assert tsn == test_name_choice, "The Test system name object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.TEST_SYSTEM_NAME}.dropdown('get value')") == test_name_choice, "The Test system name object in IB modal doesn't take a value"
 
     def check_expiration_date_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IB_EXPIRATION_DATE}.length"), "Expiration date in IB modal is not accessible"
@@ -597,81 +566,55 @@ class RegisterPage(BasePage):
 
     def check_series_number_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IB_SERIES_NUM}.length"), "Series number in IB modal is not accessible"
-        sernib = self.browser.execute_script(f"return {PatientCardLocators.IB_SERIES_NUM}.val()")
-        print(sernib)
-        assert sernib == numbers3, "Series number in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IB_SERIES_NUM}.val()") == numbers3, "Series number in IB modal doesn't take a value"
 
     def check_responsible_person_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IB_RESPONSIBLE_PERSON}.length"), "The Responsible_person object in IB modal is not accessible"
-        ibrp = self.browser.execute_script(f"return {PatientCardLocators.IB_RESPONSIBLE_PERSON}.find('input').val()")
-        print(ibrp)
-        assert ibrp == respon_person_choice, "the Responsible person object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IB_RESPONSIBLE_PERSON}.dropdown('get value')") == respon_person_choice, "the Responsible person object in IB modal doesn't take a value"
 
     def check_gp160_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.GP160}.length"), "The GP160 objectin IB modal is not accessible"
-        ib_gp160= self.browser.execute_script(f"return {PatientCardLocators.GP160}.find('input').val()")
-        print(ib_gp160)
-        assert ib_gp160 == gp160, "The GP160 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.GP160}.dropdown('get value')") == gp160, "The GP160 object in IB modal doesn't take a value"
 
     def check_gp110_120_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.GP110_120}.length"), "The GP110_120 objectin IB modal is not accessible"
-        ib_gp110_120 = self.browser.execute_script(f"return {PatientCardLocators.GP110_120}.find('input').val()")
-        print(ib_gp110_120)
-        assert ib_gp110_120 == gp110_120, "The GP110_120 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.GP110_120}.dropdown('get value')") == gp110_120, "The GP110_120 object in IB modal doesn't take a value"
 
     def check_p68_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.P68}.length"), "The P68 objectin IB modal is not accessible"
-        ib_p68 = self.browser.execute_script(f"return {PatientCardLocators.P68}.find('input').val()")
-        print(ib_p68)
-        assert ib_p68 == p68, "The P68 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.P68}.dropdown('get value')") == p68, "The P68 object in IB modal doesn't take a value"
 
     def check_p55_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.P55}.length"), "The P55 objectin IB modal is not accessible"
-        ib_p55 = self.browser.execute_script(f"return {PatientCardLocators.P55}.find('input').val()")
-        print(ib_p55)
-        assert ib_p55 == p55, "The P55 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.P55}.dropdown('get value')") == p55, "The P55 object in IB modal doesn't take a value"
 
     def check_p52_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.P52}.length"), "The P52 objectin IB modal is not accessible"
-        ib_p52 = self.browser.execute_script(f"return {PatientCardLocators.P52}.find('input').val()")
-        print(ib_p52)
-        assert ib_p52 == p52, "The P52 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.P52}.dropdown('get value')") == p52, "The P52 object in IB modal doesn't take a value"
 
     def check_gp41_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.GP41}.length"), "The GP41 objectin IB modal is not accessible"
-        ib_gp41 = self.browser.execute_script(f"return {PatientCardLocators.GP41}.find('input').val()")
-        print(ib_gp41)
-        assert ib_gp41 == gp41, "The GP41 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.GP41}.dropdown('get value')") == gp41, "The GP41 object in IB modal doesn't take a value"
 
     def check_p40_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.P40}.length"), "The P40 objectin IB modal is not accessible"
-        ib_p40 = self.browser.execute_script(f"return {PatientCardLocators.P40}.find('input').val()")
-        print(ib_p40)
-        assert ib_p40 == p40, "The P40 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.P40}.fdropdown('get value')") == p40, "The P40 object in IB modal doesn't take a value"
 
     def check_p34_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.P34}.length"), "The P34 objectin IB modal is not accessible"
-        ib_p34 = self.browser.execute_script(f"return {PatientCardLocators.P34}.find('input').val()")
-        print(ib_p34)
-        assert ib_p34 == p34, "The P34 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.P34}.dropdown('get value')") == p34, "The P34 object in IB modal doesn't take a value"
 
     def check_p25_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.P25}.length"), "The P25 objectin IB modal is not accessible"
-        ib_p25 = self.browser.execute_script(f"return {PatientCardLocators.P25}.find('input').val()")
-        print(ib_p25)
-        assert ib_p25 == p25, "The P25 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.P25}.dropdown('get value')") == p25, "The P25 object in IB modal doesn't take a value"
 
     def check_p18_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.P18}.length"), "The P18 object in IB modal is not accessible"
-        ib_p18 = self.browser.execute_script(f"return {PatientCardLocators.P18}.find('input').val()")
-        print(ib_p18)
-        assert ib_p18 == p18, "The P18 object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.P18}.dropdown('get value')") == p18, "The P18 object in IB modal doesn't take a value"
 
     def check_services_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IB_SERVICES}.length"), "The Services object in IB modal is not accessible"
-        ibser = self.browser.execute_script(f"return {PatientCardLocators.IB_SERVICES}.val()")
-        print(ibser)
-        assert ibser == '234', "The Services object in IB modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.IB_SERVICES}.val()") == '234', "The Services object in IB modal doesn't take a value"
 
     def check_cancel_button_ib_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.IB_CANCEL}.length"), "Cancel button in IB modal is not accessible"
@@ -1981,7 +1924,13 @@ class RegisterPage(BasePage):
         assert ddn == disp_doc_choice, "Doctor name object in Dispensary observation doesn't take a value"
 
     def fill_dispensary_observation_modal_when_patient_died(self):
+        sleep(2)
         self.fill_dispensary_observation_modal()
+        sleep(2)
+        self.make(f"{PatientCardLocators.D_OBSER_SAVE}.click();")
+        sleep(2)
+        self.make(f"{PatientCardLocators.DISP_OBSER_EDIT}.click();")
+        self.make(f"{PatientCardLocators.DATE_OF_DEREGIS}.val('{deregis_date}');")
         self.make(f"{PatientCardLocators.D_OBSER_REASON_OF_DEREGIS}.dropdown('set selected', '1');")
         self.make(f"{PatientCardLocators.DATE_OF_DEATH}.val('{deregis_date}');")
         self.make(f"{PatientCardLocators.AIDC_RELATED_DEATH}.dropdown('set selected', '{two_choice}');")
@@ -1989,9 +1938,12 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.DEATH_PLACE}.dropdown('set selected', '{death_place_choice}');")
         self.make(f"{PatientCardLocators.AUTOPSY}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.PATHOLOGOANATOMIC_DIAGNOSIS}.val('Положительный');")
-        self.make(f"{PatientCardLocators.DISP_SAVE_BTN}.click();")
+        self.make(f"{PatientCardLocators.D_OBSER_SAVE}.click();")
+        sleep(2)
+        self.make(f"{PatientCardLocators.DISP_OBSER_EDIT}.click();")
 
     def check_patients_death_date_dispensary_observation_modal(self):
+        sleep(2)
         assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_DEATH}.length"), "The Patient's death date object in Dispensary observation modal is not accessible"
         assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_DEATH}.val()") == deregis_date, "The Patient's death date object in Dispensary observation modal doesn't take a value"
 
@@ -2016,34 +1968,55 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.PATHOLOGOANATOMIC_DIAGNOSIS}.val()") == 'Положительный', "The Pathologoanatomic diagnosis object in Dispensary observation doesn't take a value"
 
     def fill_dispensary_observation_modal_when_patient_left_rk(self):
-        self.fill_dispensary_observation_modal()
+        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
+        self.make(f"{PatientCardLocators.DISP_OBSER_EDIT}.click();")
+        self.make(f"{PatientCardLocators.DATE_OF_DEREGIS}.val('{deregis_date}');")
         self.make(f"{PatientCardLocators.D_OBSER_REASON_OF_DEREGIS}.dropdown('set selected', '2');")
         self.make(f"{PatientCardLocators.D_OBSER_COUNTRY}.dropdown('set selected', '{country_choice}');")
-        self.make(f"{PatientCardLocators.DISP_SAVE_BTN}.click();")
+        self.make(f"{PatientCardLocators.D_OBSER_SAVE}.click();")
+        sleep(2)
+        self.make(f"{PatientCardLocators.DISP_OBSER_EDIT}.click();")
+
+    def check_deregistration_date_dispensary_observation_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_DEREGIS}.length"), "The Deregistration date object in Dispensary observation modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.DATE_OF_DEREGIS}.val()") == deregis_date, "The Deregistration date object in Dispensary observation modal doesn't take a value"
 
     def check_deregistration_reason_dispensary_observation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_REASON_OF_DEREGIS}.length"), "The Deregistration reason object in Dispensary observation modal is not accessible"
-        assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_REASON_OF_DEREGIS}.dropdown('get value')") == reason_perinatal_deregis_choice, "The Deregistration reason object in Dispensary observation modal doesn't take a value"
+        assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_REASON_OF_DEREGIS}.dropdown('get value')") == '2', "The Deregistration reason object in Dispensary observation modal doesn't take a value"
 
     def check_country_dispensary_observation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_COUNTRY}.length"), "The Country object in Dispensary observation modal is not accessible"
         assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_COUNTRY}.dropdown('get value')") == country_choice, "The Country object in Dispensary observation modal doesn't take a value"
 
     def fill_dispensary_observation_modal_when_patient_left_region(self):
+        sleep(2)
         self.fill_dispensary_observation_modal()
+        sleep(1)
+        self.make(f"{PatientCardLocators.D_OBSER_SAVE}.click();")
+        sleep(3)
+        self.make(f"{PatientCardLocators.DISP_OBSER_EDIT}.click();")
+        self.make(f"{PatientCardLocators.DATE_OF_DEREGIS}.val('{deregis_date}');")
         self.make(f"{PatientCardLocators.D_OBSER_REASON_OF_DEREGIS}.dropdown('set selected', '3');")
         self.make(f"{PatientCardLocators.D_OBSER_AREA}.dropdown('set selected', '3');")
+        sleep(2)
         self.make(f"{PatientCardLocators.D_OBSER_UNIT_AREA_CLICK}.focus();")
+        sleep(2)
         self.make(f"{PatientCardLocators.D_OBSER_UNIT_AREA_CLICK}.click();")
+        sleep(2)
         self.make(f"{PatientCardLocators.D_OBSER_UNIT_AREA}.dropdown('set selected', '33');")
+        sleep(1)
         self.make(f"{PatientCardLocators.D_OBSER_UNIT_AREA}.dropdown('hide');")
-        self.make(f"{PatientCardLocators.D_OBSER_UNIT_AREA}.dropdown('set selected', '33');")
-        self.make(f"{PatientCardLocators.DISP_SAVE_BTN}.click();")
+        self.make(f"{PatientCardLocators.D_OBSER_SAVE}.click();")
+        sleep(2)
+        self.make(f"{PatientCardLocators.DISP_OBSER_EDIT}.click();")
 
     def check_area_dispensary_observation_modal(self):
         sleep(2)
         assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_AREA}.length"), "The Area object in Perinatal registration modal is not accessible"
         assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_AREA}.dropdown('get value')") == '3', "The area date object in Perinatal registration modal doesn't take a value"
+
 
     def check_unit_area_dispensary_observation_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.D_OBSER_UNIT_AREA}.length"), "The Unit area object in Perinatal registration modal is not accessible"

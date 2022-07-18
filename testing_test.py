@@ -3,6 +3,7 @@ from pages import values
 import pytest
 import allure
 from sentry_sdk import capture_exception
+from sentry_sdk import capture_message
 from pages.arv_logs import ArvLogs
 from pages.register_page import RegisterPage
 from pages.work_page import WorkPage
@@ -42,66 +43,82 @@ class TestGeneralData():
         work_page.should_add_kz_patient()
         register_page = RegisterPage(browser, browser.current_url)
         register_page.register_new_child()
+        capture_message('Passed')
 
     def test_patient_id_child(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_id_child()
+        capture_message('Passed')
 
     def test_search_mother(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.fill_mothers_data()
+        capture_message('Passed')
 
     def test_patient_iin(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_iin()
+        capture_message('Passed')
 
     def test_patient_surname(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_surname()
+        capture_message('Passed')
 
     def test_patient_birth_date(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_birth_date()
+        capture_message('Passed')
 
     def test_patient_gender(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_gender()
+        capture_message('Passed')
 
     def test_emergence_area(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_emergence_area()
+        capture_message('Passed')
 
     def test_patient_midname(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_midname()
+        capture_message('Passed')
 
     def test_patient_name(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_name()
+        capture_message('Passed')
 
     def test_patient_citizenship(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_patient_citizenship()
+        capture_message('Passed')
 
     def test_child_status(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_child_status()
+        capture_message('Passed')
 
     def test_social_status(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_social_status()
+        capture_message('Passed')
 
     def test_edit_button_registration_address_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_edit_button_registration_address_modal()
+        capture_message('Passed')
 
     def test_registration_area(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_registration_area()
+        capture_message('Passed')
 
     def test_registration_unit_area(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_registration_unit_area()
+        capture_message('Passed')
 
     def test_registration_locality(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -248,15 +265,15 @@ class TestGeneralData():
     def test_patient_death_case_perinatal_registration_modal(self, browser):
         if values.reason_perinatal_deregis_choice == 2:
             register_page = RegisterPage(browser, browser.current_url)
-            register_page.check_country_date_perinatal_registration_modal()
+            register_page.check_country_perinatal_registration_modal()
         if values.reason_perinatal_deregis_choice == 3:
             register_page = RegisterPage(browser, browser.current_url)
-            register_page.check_area_date_perinatal_registration_modal()
-            register_page.check_unit_area_date_perinatal_registration_modal()
+            register_page.check_area_perinatal_registration_modal()
+            register_page.check_unit_area_perinatal_registration_modal()
         if values.reason_perinatal_deregis_choice == 4:
             register_page = RegisterPage(browser, browser.current_url)
             register_page.check_date_of_death_perinatal_registration_modal()
-            register_page.check_death_reason_date_perinatal_registration_modal()
+            register_page.check_death_reason_perinatal_registration_modal()
             register_page.check_death_place_perinatal_registration_modal()
         else: pass
 
@@ -283,16 +300,19 @@ class TestChildCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.register_new_child()
         register_page.fill_hiv_antibody_testing_ogc_modal()
+        capture_message('Passed')
 
     @pytest.mark.skipif(test_fill_HIV_antibody_testing_ogc_modal == "FAILED", reason="patient id wasn't taken")
     def test_save_button_hiv_ogc_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_save_button_hiv_ogc_modal()
+        capture_message('Passed')
 
     @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
     def test_add_button_hiv_ogc_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_add_button_hiv_ogc_modal()
+        capture_message('Passed')
 
     @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
     def test_edit_button_hiv_ogc_modal(self, browser):
@@ -711,6 +731,26 @@ class TestChildCase():
 #         arv_page.should_test_receipt_log()
 #         print(f"test_receipt_log passed")
 
+    @pytest.mark.skipif(test_fill_HIV_antibody_testing_ogc_modal == "FAILED", reason="patient id wasn't taken")
+    def test_patient_left_region_case_dispensary_observation_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.fill_dispensary_observation_modal_when_patient_left_region()
+        capture_message('Passed')
+
+    @pytest.mark.skipif(test_patient_left_region_case_dispensary_observation_modal == "FAILED", reason="patient id wasn't taken")
+    def test_area_dispensary_observation_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_area_dispensary_observation_modal()
+        capture_message('Passed')
+
+    @pytest.mark.xfail(reason="it's bag, unit_area object doesn't save value")
+    @pytest.mark.skipif(test_patient_left_region_case_dispensary_observation_modal == "FAILED", reason="patient id wasn't taken")
+    def test_unit_area_dispensary_observation_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_unit_area_dispensary_observation_modal()
+        register_page.check_cancel_button_dispensary_observation_modal()
+        capture_message('Passed')
+
 @allure.severity(allure.severity_level.NORMAL)
 class TestHomelessCase():
     @pytest.mark.smoke
@@ -1046,8 +1086,7 @@ class TestHomelessCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_commercial_heterosexual_partners_during_life_checkbox_sexual_contacts_tab()
 
-
-
+    @pytest.mark.xfail(reason="can't catch a bag")
     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
     def test_mls_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1068,27 +1107,31 @@ class TestHomelessCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_add_button_mls_modal()
 
+    @pytest.mark.xfail(reason="can't catch a bag")
     @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
     def test_edit_button_mls_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_edit_button_mls_modal()
 
-    @pytest.mark.xfail(reason="it's bag of mls modal")
+    @pytest.mark.xfail(reason="can't catch a bag")
     @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
     def test_mls_name_mls_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_mls_name_mls_modal()
 
+    @pytest.mark.xfail(reason="can't catch a bag")
     @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
     def test_start_date_mls_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_start_date_mls_modal()
 
+    @pytest.mark.xfail(reason="can't catch a bag")
     @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
     def test_end_date_mls_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_end_date_mls_modal()
 
+    @pytest.mark.xfail(reason="can't catch a bag")
     @pytest.mark.skipif(test_save_button_mls_modal == "FAILED", reason="patient id wasn't taken")
     def test_cancel_button_mls_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -1402,6 +1445,7 @@ class TestHomelessCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_edit_button_manipulations_modal()
 
+    @pytest.mark.xfail(reason="after saving form the date object doesn't save it's value")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_date_manipulations_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -2257,7 +2301,7 @@ class TestForeignerCase():
         register_page = RegisterPage(browser, browser.current_url)
         register_page.check_transfusion_unit_area_organ_recipient_modal()
 
-    @pytest.mark.xfail(reason="it's bag, locality object doesn't save value")
+    # @pytest.mark.xfail(reason="it's bag, locality object doesn't save value")
     @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
     def test_locality_organ_recipient_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
@@ -2314,9 +2358,13 @@ class TestForeignerCase():
         register_page.fill_dispensary_observation_modal_when_patient_left_rk()
 
     @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_deregistration_date_dispensary_observation_modal(self, browser):
+        register_page = RegisterPage(browser, browser.current_url)
+        register_page.check_deregistration_date_dispensary_observation_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
     def test_deregistration_reason_dispensary_observation_modal(self, browser):
         register_page = RegisterPage(browser, browser.current_url)
-        register_page.check_edit_button_dispensary_observation_modal()
         register_page.check_deregistration_reason_dispensary_observation_modal()
 
     @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
@@ -2836,19 +2884,3 @@ class TestWomanCase():
 #         register_page.should_test_children_modal()
 #         print(f"test_children_modal passed")
 #
-    @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
-    def test_patient_left_region_case_dispensary_observation_modal(self, browser):
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.fill_dispensary_observation_modal_when_patient_left_region()
-
-    @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
-    def test_left_rk_case_dispensary_observation_modal(self, browser):
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.check_edit_button_dispensary_observation_modal()
-        register_page.check_area_dispensary_observation_modal()
-
-    @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
-    def test_left_rk_case_dispensary_observation_modal(self, browser):
-        register_page = RegisterPage(browser, browser.current_url)
-        register_page.check_unit_area_dispensary_observation_modal()
-        register_page.check_cancel_button_dispensary_observation_modal()
