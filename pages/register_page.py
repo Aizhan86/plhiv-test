@@ -184,7 +184,7 @@ class RegisterPage(BasePage):
 
     def check_registration_unit_area(self):
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').length"), "Patient's registration unit area object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').dropdown('get value')") == '180', "Patient's registration unit area object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').find('input[type=hidden]').val()") == '180', "Patient's registration unit area object doesn't take a value"
 
     def check_registration_locality(self):
         assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').length"), "Patient's registration locality object is not accessible"
@@ -232,7 +232,7 @@ class RegisterPage(BasePage):
 
     def check_residence_unit_area(self):
         assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').length"), "Patient's residence unit area object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').dropdown('get value')") == '33', "Patient's residence unit area object doesn't take a value"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').find('input[type=hidden]').val()") == '33', "Patient's residence unit area object doesn't take a value"
 
     def check_residence_locality(self):
         assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').length"), "Patient's residence locality object is not accessible"
@@ -723,14 +723,6 @@ class RegisterPage(BasePage):
         assert self.browser.execute_script(f"return {PatientCardLocators.PCR_CANCEL}.length"), "Cancel button in PCR modal is not accessible"
         self.make(f"{PatientCardLocators.PCR_CANCEL}.click();")
 
-
-
-
-
-    def should_test_result_modal(self):
-        self.fill_result_modal()
-        self.check_result_modal()
-
     def fill_result_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
         self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
@@ -740,15 +732,46 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.RESULT_DATE}.val('{today}');")
         self.make(f"{PatientCardLocators.RESULT_RESPONSIBLE_PERSON}.dropdown('set selected', '{respon_person_choice}');")
         self.make(f"{PatientCardLocators.LAB_SUPERVISER}.dropdown('set selected', '{respon_person_choice}');")
-        result_choice = random.choice(['7', '9', '12', '14', '19'])
         self.make(f"{PatientCardLocators.ANALYSIS_RESULT}.dropdown('set selected', '{result_choice}');")
         self.make(f"{PatientCardLocators.RESEARCH_BAZIS}.click()")
-        self.make(f"{PatientCardLocators.RESULT_SAVE}.click()")
 
-    def check_result_modal(self):
-        assert self.is_element_present(*PatientCardLocators.RESULT_EDIT), "Data in Result modal weren't preserved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('zaklyuchenie_NIB').get_attribute("data-field") == numbers5, "Data in Result modal or object Result Number weren't preserved"
-        # assert self.is_element_present(*PatientCardLocators.RESULT_PRINT), "Data in Result modal weren't preserved or Print object isn't clickable"
+    def check_save_button_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_SAVE}.length"), "Save button in Result modal is not accessible"
+        self.make(f"{PatientCardLocators.RESULT_SAVE}.click();")
+
+    def check_add_button_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_ADD}.length"), "Add button in Result modal is not accessible"
+
+    def check_edit_button_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_EDIT}.length"), "Edit button in Result modal is not accessible"
+        self.make(f"{PatientCardLocators.RESULT_EDIT}.click();")
+
+    def check_result_number_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_NUM}.length"), "The Result number object in Result modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_NUM}.val()") == numbers5, "The Result number object in Result modal doesn't take a value"
+
+    def check_result_date_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_DATE}.length"), "The Result date object in Result modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_DATE}.val()") == today, "The Result date object in Result modal doesn't take a value"
+
+    def check_responsible_person_in_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_RESPONSIBLE_PERSON}.length"), "The Responsible person type object in Result modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_RESPONSIBLE_PERSON}.dropdown('get value')") == respon_person_choice, "The Responsible person object in Result modal doesn't take a value"
+
+    def check_labaratory_superviser_in_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.LAB_SUPERVISER}.length"), "The Labaratory superviser object in Result modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.LAB_SUPERVISER}.dropdown('get value')") == respon_person_choice, "The Labaratory superviser object in Result modal doesn't take a value"
+
+    def check_analysis_result_in_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ANALYSIS_RESULT}.length"), "The Analysis result object in Result modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ANALYSIS_RESULT}.dropdown('get value')") == result_choice, "The Analysis result object in Result modal doesn't take a value"
+
+    def check_research_bazis_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESEARCH_BAZIS}.length"), "Research bazis object in Result modal is not accessible"
+
+    def check_cansel_button_result_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_CANCEL}.length"), "Cancel button in Result modal is not accessible"
+        self.make(f"{PatientCardLocators.RESULT_CANCEL}.click();")
 
     def fill_family_members_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
@@ -1745,7 +1768,7 @@ class RegisterPage(BasePage):
 
     def check_save_button_source_modal(self):
         sleep(2)
-        assert self.browser.execute_script(f"return {PatientCardLocators.SOURCE_SAVE}.length"), "Save button in Source is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SOURCE_SAVE}.length"), "Save button in Source modal is not accessible"
         self.make(f"{PatientCardLocators.SOURCE_SAVE}.click();")
 
     def check_infection_source_existence_checkbox_departure_source_tab(self):
@@ -1800,15 +1823,11 @@ class RegisterPage(BasePage):
         # assert self.make(f"{RegisterPageLocators.PATIENT_NAME}.val()") == "{BPRJXOSSKEVR}", "There weren't switched from Source modal to another patient's card."
         # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
-    def should_test_contact_person_modal(self):
-        self.fill_contact_person_modal()
-        self.check_contact_person_modal()
-
     def fill_contact_person_modal(self):
-        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.EPID_HISTORY}.click()")
+        # self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        # self.make(f"{PatientCardLocators.EPID_HISTORY}.click()")
         self.make(f"{PatientCardLocators.CONTACT_PERSON}.click();")
-        self.make(f"{PatientCardLocators.CONTACT_PERSON_EXISTENCE}.click();")
+        self.make(f"{PatientCardLocators.CONTACT_PERSON_EXISTENCE}.dropdown('set selected', '1');") # В списке выбрали ДА в объекте Существует ли контактные лица.
         self.make(f"{PatientCardLocators.CONTACT_PERSON_ADD}.click();")
         self.make(f"{PatientCardLocators.CONTACT_PERSON_SURNAME}.val('{surname}');")
         self.make(f"{PatientCardLocators.CONTACT_PERSON_NAME}.val('{name}');")
@@ -1816,35 +1835,158 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.CONTACT_PERSON_GENDER}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.CONTACT_PERSON_BIRTHDAY}.val('{birthday}');")
         self.make(f"{PatientCardLocators.CONTACT_DATE_START}.val('{fifty_days_ago}');")
-        contact_type_choice = random.choice(['1', '2', '3', '4', '5', '6', '7'])
         self.make(f"{PatientCardLocators.CONTACT_TYPE}.dropdown('set selected', '{contact_type_choice}');")
         self.make(f"{PatientCardLocators.CONTACT_IB_NUM}.val('{numbers4}');")
         self.make(f"{PatientCardLocators.CONTACT_IB_NUM_DATE}.val('{ib_date}');")
         self.make(f"{PatientCardLocators.CONTACT_SURVEY_ADD}.click();")
         self.make(f"{PatientCardLocators.CONTACT_DIAGNOSTICS_DATE}.calendar('set date', '{diagnosis_date}');")
-        contact_hiv_choice = random.choice(['1', '2', '3'])
-        self.make(f"{PatientCardLocators.CONTACT_HIV_STATUS}.dropdown('set selected', '{contact_hiv_choice}');")
+        self.make(f"{PatientCardLocators.CONTACT_HIV_STATUS}.dropdown('set selected', '{three_choice}');")
         self.make(f"{PatientCardLocators.CONTACT_SURVEY_SAVE}.click();")
-        contact_hiv_status = self.make(f"$('#obsled_state').attr('data-field')")
+        contact_hiv_status = self.browser.execute_script(f"return $('#add-row-obsled-table').find('tr td:eq(1)').attr('data-field')")
         if contact_hiv_status == "3":
-            con_reason_not_surv_choice = random.choice(['1', '2', '3', '4', '5', '6', '7'])
-            self.make(f"{PatientCardLocators.REASON_NOT_SURVEYING}.dropdown('set selected', '{con_reason_not_surv_choice}');")
+            self.make(f"{PatientCardLocators.REASON_NOT_SURVEYING}.dropdown('set selected', '1');")
         self.make(f"{PatientCardLocators.CONTACT_FINISHED}.click();")
-        self.make(f"{PatientCardLocators.CONTACT_DAY_END}.val('{twenty_days_ago}');")
+        self.make(f"{PatientCardLocators.CONTACT_DATE_END}.val('{twenty_days_ago}');")
         self.make(f"{PatientCardLocators.CONTACT_AREA}.dropdown('set selected', '3');")
-        self.make(f"{PatientCardLocators.CONTACT_UNIT_AREA}.click();")
+        sleep(2)
+        self.make(f"{PatientCardLocators.CONTACT_UNIT_AREA_SEARCH}.focus();")
+        sleep(2)
+        self.make(f"{PatientCardLocators.CONTACT_UNIT_AREA_SEARCH}.click();")
+        sleep(2)
         self.make(f"{PatientCardLocators.CONTACT_UNIT_AREA}.dropdown('set selected', '33');")
+        sleep(1)
         self.make(f"{PatientCardLocators.CONTACT_UNIT_AREA}.dropdown('hide');")
-        self.make(f"{PatientCardLocators.CONTACT_LOCALITY}.dropdown('set selected', '{locality_choice}');")
+        self.make(f"{PatientCardLocators.CONTACT_LOCALITY}.dropdown('set selected', '{locality_choice1}');")
         self.make(f"{PatientCardLocators.CONTACT_STREET}.val('{street_choice}');")
         self.make(f"{PatientCardLocators.CONTACT_HOUSE}.val('55');")
         self.make(f"{PatientCardLocators.CONTACT_APT}.val('47');")
         self.make(f"{PatientCardLocators.CONTACT_PHONE_NO}.val('87279876543');")
+
+    def check_save_button_contact_person_modal(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_SAVE}.length"), "Save button in Contact person modal is not accessible"
         self.make(f"{PatientCardLocators.CONTACT_PERSON_SAVE}.click();")
 
-    def check_contact_person_modal(self):
-        assert self.is_element_present(*PatientCardLocators.CONTACT_PERSON_EDIT), "Data in HIV antibody testing Contact Person modal weren't preserved or invalid selector for Edit button"
-        # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
+    def check_contact_person_existence_contact_person_tab(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_EXISTENCE}.length"), "The Contact person object object in Contact person tab is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_EXISTENCE}.find('input[type=hidden]').val()") == '1', "The Contact person existence object in Contact person tab doesn't take a value"
+
+    def check_add_button_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_ADD}.length"), "Add button in Contact person modal is not accessible"
+
+    def check_edit_button_contact_person_modal(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_EDIT}.length"), "Edit button in Contact person modal is not accessible"
+        self.make(f"{PatientCardLocators.CONTACT_PERSON_EDIT}.click();")
+
+    def check_surname_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_SURNAME}.length"), "The Surname object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_SURNAME}.val()") == surname, "The Surname in Contact person modal doesn't take a value"
+
+    def check_name_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_NAME}.length"), "The Name object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_NAME}.val()") == name, "The Name object in Contact person modal doesn't take a value"
+
+    def check_midname_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_MIDDLE_NAME}.length"), "The Middle name object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_MIDDLE_NAME}.val()") == midname, "The Middle name object in Contact person modal doesn't take a value"
+
+    def check_gender_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_GENDER}.length"), "The Gender object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_GENDER}.dropdown('get value')") == two_choice, "The Gender object in Contact person modal doesn't take a value"
+
+    def check_bithday_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_BIRTHDAY}.length"), "The Bithday object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_BIRTHDAY}.val()") == birthday, "The Bithday in Contact person modal doesn't take a value"
+
+    def check_contacting_start_date_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_DATE_START}.length"), "The Contacting start date object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_DATE_START}.val()") == fifty_days_ago, "The Contacting start date object in Contact person modal doesn't take a value"
+
+    def check_contact_type_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_TYPE}.length"), "The Contact type object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_TYPE}.dropdown('get value')") == contact_type_choice, "The Contact type object in Contact person modal doesn't take a value"
+
+    def check_contact_ib_number_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_IB_NUM}.length"), "The Contact ib number object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_IB_NUM}.val()") == numbers4, "The Contact ib number object in Contact person modal doesn't take a value"
+
+    def check_contact_ib_number_date_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_IB_NUM_DATE}.length"), "The Contact ib number date object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_IB_NUM_DATE}.val()") == ib_date, "The Contact ib number date object in Contact person modal doesn't take a value"
+
+    def check_add_button_contact_survey_modal_in_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_SURVEY_ADD}.length"), "Add button in Contact survey modal of Contact person modal is not accessible"
+
+    def check_edit_button_contact_survey_modal_in_contact_person_modal(self):
+        sleep(1)
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_SURVEY_EDIT}.length"), "Edit button in Contact survey modal of Contact person modal is not accessible"
+        self.make(f"{PatientCardLocators.CONTACT_SURVEY_EDIT}.click();")
+
+    def check_diagnostics_date_contact_survey_modal_in_contact_person_modal(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_DIAGNOSTICS_DATE}.length"), "The Diagnostics date object in Contact survey modal of Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_DIAGNOSTICS_DATE}.val()") == diagnosis_date, "The Diagnostics date object in Contact survey modal of Contact person modal doesn't take a value"
+
+    def check_hiv_status_contact_survey_modal_in_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_HIV_STATUS}.length"), "The HIV status object in Contact survey modal of Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_HIV_STATUS}.dropdown('get value')") == three_choice, "The HIV status object in Contact survey modal of Contact person modal doesn't take a value"
+
+    def check_save_button_contact_survey_modal_in_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_SURVEY_SAVE}.length"), "Save button in Contact survey modal of Contact person modal is not accessible"
+
+    def check_cancel_button_contact_survey_modal_in_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_SURVEY_CANCEL}.length"), "Cancel button in Contact survey modal of Contact person modal is not accessible"
+        self.make(f"{PatientCardLocators.CONTACT_SURVEY_CANCEL}.click();")
+
+    def check_reason_not_surveying_contact_person_modal(self):
+        contact_hiv_status = self.browser.execute_script(f"return $('#add-row-obsled-table').find('tr td:eq(1)').attr('data-field')")
+        if contact_hiv_status == '3':
+            assert self.browser.execute_script(f"return {PatientCardLocators.REASON_NOT_SURVEYING}.length"), "The Reason not surveying object in Contact person modal is not accessible"
+            assert self.browser.execute_script(f"return {PatientCardLocators.REASON_NOT_SURVEYING}.dropdown('get value')") == '1', "The Reason not surveying object in Contact person modal doesn't take a value"
+        else:
+            assert self.browser.execute_script(f"return $('#contact_modal div[data-field=contact_reason_not_obsled_modal]').attr('class')") == 'ui field disabled', "The Reason not surveying object in Contact person modal is accessible"
+
+    def check_contacting_finished_checkbox_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_FINISHED}.length"), "The Contacting finished checkbox in Contact person modal is not accessible"
+        assert self.make(f"{PatientCardLocators.CONTACT_FINISHED}.is(':checked')"), "The Contacting finished checkbox in Contact person modal is not ticked"
+
+    def check_contacting_end_date_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_DATE_END}.length"), "The Contacting end date object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_DATE_END}.val()") == twenty_days_ago, "The Contacting end date object in Contact person modal doesn't take a value"
+
+    def check_area_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_AREA}.length"), "The Area object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_AREA}.dropdown('get value')") == '3', "The Area object in Contact person modal doesn't take a value"
+
+    def check_unit_area_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_UNIT_AREA}.length"), "The Unit area object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_UNIT_AREA}.dropdown('get value')") == '33', "The Unit area object in Contact person modal doesn't take a value"
+
+    def check_locality_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_LOCALITY}.length"), "The Locality object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_LOCALITY}.dropdown('get value')") == locality_choice1, "The Locality object in Contact person modal doesn't take a value"
+
+    def check_street_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_STREET}.length"), "The Street object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_STREET}.val()") == street_choice, "The Street object in Contact person modal doesn't take a value"
+
+    def check_house_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_HOUSE}.length"), "The House object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_HOUSE}.val()") == '55', "The House object in Contact person modal doesn't take a value"
+
+    def check_apartment_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_APT}.length"), "The Apartment object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_APT}.val()") == '47', "The Apartment object in Contact person modal doesn't take a value"
+
+    def check_phone_number_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PHONE_NO}.length"), "The Phone number object in Contact person modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PHONE_NO}.val()") == '87279876543', "The Phone number object in Contact person modal doesn't take a value"
+
+    def check_cancel_button_contact_person_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_CANCEL}.length"), "Cancel button in Contact person modal is not accessible"
+        self.make(f"{PatientCardLocators.CONTACT_PERSON_CANCEL}.click();")
 
     def fill_dispensary_observation_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
@@ -3048,16 +3190,13 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.ART_RECIPE_ADD}.click();")
         self.make(f"{PatientCardLocators.RECIPE_NUM}.val('{numbers4}');")
         self.make(f"{PatientCardLocators.RECIPE_DATE}.val('{today}')")
-        art_med_choice = random.choice(['111'])
         self.make(f"{PatientCardLocators.ART_MEDICATION}.dropdown('set selected', '{art_med_choice}');")
         self.make(f"{PatientCardLocators.DOSE}.val('1 таблетка');")
-        dose_code_choice = random.choice(['1', '2'])
-        self.make(f"{PatientCardLocators.DOSE_CODE}.dropdown('set selected', '{dose_code_choice}');")
+        self.make(f"{PatientCardLocators.DOSE_CODE}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.CONCENTRATION}.val('1');")
         self.make(f"{PatientCardLocators.PACKING}.val('Да');")
         self.make(f"{PatientCardLocators.QUANTITY}.val('30');")
-        unpacking_choice = random.choice(['1', '2'])
-        self.make(f"{PatientCardLocators.UNPACKING_SIGNS}.dropdown('set selected', '{unpacking_choice}');")
+        self.make(f"{PatientCardLocators.UNPACKING_SIGNS}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.SIGNATURE}.val('{smth_random}');")
         self.make(f"{PatientCardLocators.ART_RECIPE_SAVE}.click();")
 
@@ -3130,12 +3269,9 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.CHILDS_MIDNAME}.val('{midname}');")
         self.make(f"{PatientCardLocators.CHILDS_BIRTHDAY}.val('{birthday}');")
         self.make(f"{PatientCardLocators.CHILDS_GENDER}.dropdown('set selected', '{two_choice}');")
-        pathology_choice = random.choice(['1', '2'])
-        self.make(f"{PatientCardLocators.PATHALOGY_AT_BIRTH}.dropdown('set selected', '{pathology_choice}');")
-        feeding_choice = random.choice(['1', '2', '3'])
-        self.make(f"{PatientCardLocators.CHILDS_FEEDING}.dropdown('set selected', '{feeding_choice}');")
-        full_term_choice = random.choice(['1', '2'])
-        self.make(f"{PatientCardLocators.FULL_TERM_CHILD}.dropdown('set selected', '{full_term_choice}');")
+        self.make(f"{PatientCardLocators.PATHALOGY_AT_BIRTH}.dropdown('set selected', '{two_choice}');")
+        self.make(f"{PatientCardLocators.CHILDS_FEEDING}.dropdown('set selected', '{three_choice}');")
+        self.make(f"{PatientCardLocators.FULL_TERM_CHILD}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.CHILDS_DEATH_DATE}.val('{deregis_date}');")
         self.make(f"{PatientCardLocators.INFORMATION_CHILDREN_SAVE}.click();")
         self.make(f"{PatientCardLocators.PREGNANCY_SAVE}.click();")
@@ -3144,52 +3280,119 @@ class RegisterPage(BasePage):
         assert self.is_element_present(*PatientCardLocators.PREGNANCY_EDIT), "Data in Pregnancy modal weren't preserved or invalid selector for Edit button"
         # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
-    def should_test_preventive_therapy_and_ost_modals(self):
-        self.fill_preventive_therapy_and_ost_modals()
-        self.check_preventive_therapy_and_ost_modals()
-
-    def fill_preventive_therapy_and_ost_modals(self):
+    def fill_preventive_therapy_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
         self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
         self.make(f"{PatientCardLocators.THERAPHY}.click();")
         self.make(f"{PatientCardLocators.PREVENTIVE_THERAPHY_ADD}.click();")
-        prev_med_choice = random.choice(['1', '2'])
-        self.make(f"{PatientCardLocators.PREV_THER_MEDICATION}.dropdown('set selected', '{prev_med_choice}');")
+        self.make(f"{PatientCardLocators.PREV_THER_MEDICATION}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.REASONS_SET_DATE}.val('{today}');")
         self.make(f"{PatientCardLocators.PREV_THER_START_DATE}.val('{today}');")
         self.make(f"{PatientCardLocators.PREV_THER_END_DATE}.val('{today}');")
+
+    def check_save_button_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_SAVE}.length"), "Save button in Preventive therapy modal is not accessible"
         self.make(f"{PatientCardLocators.PREV_THER_SAVE}.click();")
+
+    def check_add_button_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREVENTIVE_THERAPHY_ADD}.length"), "Add button in Preventive therapy modal is not accessible"
+
+    def check_edit_button_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_EDIT}.length"), "Edit button in Preventive therapy modal is not accessible"
+        self.make(f"{PatientCardLocators.PREV_THER_EDIT}.click();")
+
+    def check_medication_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_MEDICATION}.length"), "The Medication object in Preventive therapy modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_MEDICATION}.dropdown('get value')") == two_choice, "The Medication object in Preventive therapy modal doesn't take a value"
+
+    def check_reason_set_date_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.REASONS_SET_DATE}.length"), "The Reasons set date object in Preventive therapy modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.REASONS_SET_DATE}.val()") == today, "The Reasons set date object in Preventive therapy doesn't take a value"
+
+    def check_therapy_start_date_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_START_DATE}.length"), "The Preventive therapy start date object in Preventive therapy modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_START_DATE}.val()") == today, "The Preventive therapy start date object in Preventive therapy modal doesn't take a value"
+
+    def check_therapy_end_date_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_END_DATE}.length"), "The Preventive therapy end date object in Preventive therapy modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_END_DATE}.val()") == today, "The TPreventive therapy end date object in Preventive therapy modal doesn't take a value"
+
+    def check_cancel_button_preventive_therapy_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PREV_THER_CANCEL}.length"), "Cancel button in Preventive therapy modal is not accessible"
+        self.make(f"{PatientCardLocators.PREV_THER_CANCEL}.click();")
+
+    def fill_ost_modal(self):
         self.make(f"{PatientCardLocators.OPIOID_SUBSTITUTION_THERAPHY_ADD}.click();")
+        sleep(2)
         self.make(f"{PatientCardLocators.OST_START_DATE}.val('{today}');")
         self.make(f"{PatientCardLocators.OST_END_DATE}.val('{today}');")
-        ost_med_choice = random.choice(['1', '2'])
-        self.make(f"{PatientCardLocators.OST_MEDICATION_TYPE}.dropdown('set selected', '{ost_med_choice}');")
+        self.make(f"{PatientCardLocators.OST_MEDICATION_TYPE}.dropdown('set selected', '{two_choice}');")
         # reas_fin_choice = random.choice(['1', '2'])
         # self.make(f"{PatientCardLocators.REASONS_OF_FINISHING}.dropdown('set selected', '{reas_fin_choice}');")
+
+    def check_save_button_ost_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_SAVE}.length"), "Save button in OST modal is not accessible"
         self.make(f"{PatientCardLocators.OST_SAVE}.click();")
 
-    def check_preventive_therapy_and_ost_modals(self):
-        assert self.is_element_present(*PatientCardLocators.PREV_THER_EDIT), "Data in Preventive therapy modal weren't preserved or invalid selector for Edit button"
-        assert self.is_element_present(*PatientCardLocators.OST_EDIT), "Data in OST modal weren't preserved or invalid selector for Edit button"
+    def check_add_button_ost_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.OPIOID_SUBSTITUTION_THERAPHY_ADD}.length"), "Add button in OST modal is not accessible"
 
-    def should_test_vgs_treatment_modal(self):
-        self.fill_vgs_treatment_modal()
-        self.check_vgs_treatment_modal()
+    def check_edit_button_ost_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_EDIT}.length"), "Edit button in OST modal is not accessible"
+        self.make(f"{PatientCardLocators.OST_EDIT}.click();")
+
+    def check_ost_start_date_ost_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_START_DATE}.length"), "The OST start date object in OST modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_START_DATE}.val()") == today, "The OST start date object in OST modal doesn't take a value"
+
+    def check_ost_end_date_ost_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_END_DATE}.length"), "The OST end date object in OST modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_END_DATE}.val()") == today, "The OST end date object in OST modal doesn't take a value"
+
+    def check_medication_type_ost_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_MEDICATION_TYPE}.length"), "The Medication type object in OST modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_MEDICATION_TYPE}.dropdown('get value')") == two_choice, "The Medication type object in OST modal doesn't take a value"
+
+    def check_cancel_button_ost_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.OST_CANCEL}.length"), "Cancel button in OST modal is not accessible"
+        self.make(f"{PatientCardLocators.OST_CANCEL}.click();")
 
     def fill_vgs_treatment_modal(self):
-        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
-        self.make(f"{PatientCardLocators.THERAPHY}.click();")
+        # self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        # self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
+        # self.make(f"{PatientCardLocators.THERAPHY}.click();")
         self.make(f"{PatientCardLocators.VGS_TREATMENT_ADD}.click();")
+        sleep(2)
         self.make(f"{PatientCardLocators.VGS_TREAT_START_DATE}.val('{today}');")
         self.make(f"{PatientCardLocators.VGS_TREAT_END_DATE}.val('{today}');")
-        treat_res_choice = random.choice(['1', '2', '3', '4', '5', '6', '7'])
         self.make(f"{PatientCardLocators.VGS_TREAT_RESULT}.dropdown('set selected', '{treat_res_choice}');")
+
+    def check_save_button_vgs_treatment_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_SAVE}.length"), "Save button in VGS treatment modal is not accessible"
         self.make(f"{PatientCardLocators.VGS_TREAT_SAVE}.click();")
 
-    def check_edit_button_vgs_treatment_modal(self):
-        assert self.is_element_present(*PatientCardLocators.VGS_TREAT_EDIT), "Data in VGS treatment modal weren't preserved or invalid selector for Edit button"
+    def check_add_button_vgs_treatment_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREATMENT_ADD}.length"), "Add button in VGS treatment modal is not accessible"
 
+    def check_edit_button_vgs_treatment_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_EDIT}.length"), "Edit button in VGS treatment modal is not accessible"
+        self.make(f"{PatientCardLocators.VGS_TREAT_EDIT}.click();")
+
+    def check_treatment_start_date_vgs_treatment_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_START_DATE}.length"), "The Treatment start date object in VGS treatment modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_START_DATE}.val()") == today, "The Treatment start date object in VGS treatment modal doesn't take a value"
+
+    def check_treatment_end_date_vgs_treatment_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_END_DATE}.length"), "The Treatment end date object in VGS treatment modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_END_DATE}.val()") == today, "The Treatment end date object in VGS treatment modal doesn't take a value"
+
+    def check_treatment_result_vgs_treatment_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_RESULT}.length"), "The Treatment result object in VGS treatment modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_RESULT}.dropdown('get value')") == treat_res_choice, "The Treatment result in VGS treatment modal doesn't take a value"
+
+    def check_cancel_button_vgs_treatment_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.VGS_TREAT_CANCEL}.length"), "Cancel button in VGS treatment modal is not accessible"
+        self.make(f"{PatientCardLocators.VGS_TREAT_CANCEL}.click();")
 
     def fill_d_screening_hospitalization_modal(self):
         self.make(f"{PatientCardLocators.D_SCREENING_HOSPITALIZATION}.click();")
@@ -3252,13 +3455,9 @@ class RegisterPage(BasePage):
         first_window = self.browser.window_handles[0]
         self.browser.switch_to.window(new_window)
         self.make(f"{PatientCardLocators.ATTENDANCE_DATE}.val('{today}');")
-        exam_choice = random.choice(['infection', 'pediatr', 'ftiziatr', 'ginekolog', 'terapevt', 'dermatolog', 'psiholog', 'social_worker', 'narkolog'])
         self.make(f"{PatientCardLocators.SCREENING_HELD}.dropdown('set selected', '{exam_choice}');")
-        service_choice = random.choice(['2', '3', '348', '328', '33', '25', '322', '331', '14'])
         self.make(f"{PatientCardLocators.VISITS_SERVICES}.dropdown('set selected', '{service_choice}');")
-        place_choice = random.choice(['home', 'mls', 'stacionar', 'center_hiv', 'ambulatorno'])
         self.make(f"{PatientCardLocators.SCREENING_PLACE}.dropdown('set selected', '{place_choice}');")
-        attendance_choice = random.choice(['perv_osmotr', 'd_osmotr', 'po_zabolev', 'current_reception'])
         self.make(f"{PatientCardLocators.ATTENDANCE_TYPE}.dropdown('set selected', '{attendance_choice}');")
         self.make(f"{PatientCardLocators.TEMPERATURE}.val('36.6');")
         self.make(f"{PatientCardLocators.WEIGHT}.val('32');")
@@ -3268,108 +3467,78 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.HISTORY_INFORMATION}.val('{midname}');")
         self.make(f"{PatientCardLocators.LAST_MENSIS}.val('{today}');")
         self.make(f"{PatientCardLocators.CONTRACEPTION}.click();")
-        contraception_choice = random.choice(['condoms', 'spiral', 'hirurg_sterialize', 'drug', 'kok', 'another'])
         self.make(f"{PatientCardLocators.CONTRACEPTION_TYPES}.dropdown('set selected', '{contraception_choice}');")
         self.make(f"{PatientCardLocators.VISITS_SEX_PARTNER}.click();")
         self.make(f"{PatientCardLocators.ART_RECEIPT}.click();")
-        planned_pregnancy_choice = random.choice(['Yes', 'No'])
-        if planned_pregnancy_choice == "Yes":
+        if yes_no_choice == "Yes":
             self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_YES}.click();")
         else:
             self.make(f"{PatientCardLocators.PLANNED_PREGNANCY_NO}.click();")
         self.make(f"{PatientCardLocators.VISITS_ALCOHOL}.click();")
         self.make(f"{PatientCardLocators.VISITS_DRUGS}.click();")
-        choices_for_visits_modal = random.choice(['10', '20'])
         self.make(f"{PatientCardLocators.VISITS_INJ_DRUG_LAST_HALF_YEAR}.dropdown('set selected', '{choices_for_visits_modal}');")
         self.make(f"{PatientCardLocators.VISITS_COM_SEX_LAST_HALF_YEAR}.dropdown('set selected', '{choices_for_visits_modal}');")
         self.make(f"{PatientCardLocators.VISITS_HOMO_SEX_LAST_HALF_YEAR}.dropdown('set selected', '{choices_for_visits_modal}');")
-        state_choice = random.choice(['satisfactory', 'moderate_severity', 'severe_severity', 'extremely_heavy'])
         self.make(f"{PatientCardLocators.STATE}.dropdown('set selected', '{state_choice}');")
-        conscious_choice = random.choice(['clear', 'stupor', 'sopor', 'coma'])
         self.make(f"{PatientCardLocators.CONSCIOUSNESS}.dropdown('set selected', '{conscious_choice}');")
-        position_choice = random.choice(['active', 'passive', 'forced'])
         self.make(f"{PatientCardLocators.POSITION}.dropdown('set selected', '{position_choice}');")
-        body_choice = random.choice(['normostenic', 'astenik', 'hypersthenic'])
         self.make(f"{PatientCardLocators.BODY_TYPE}.dropdown('set selected', '{body_choice}');")
-        feeding_choice1 = random.choice(['moderate', 'low', 'high', 'cachexia'])
         self.make(f"{PatientCardLocators.FEEDING}.dropdown('set selected', '{feeding_choice1}');")
         self.make(f"{PatientCardLocators.LIPODYSTROPHY}.dropdown('set selected', '{choices_for_visits_modal}');")
-        skin_choice = random.choice(['regular_coloring', 'pale_pink', 'icteric', 'another'])
         self.make(f"{PatientCardLocators.SKIN_MUCOSA}.dropdown('set selected', '{skin_choice}');")
         if skin_choice == 'another':
             self.make(f"{PatientCardLocators.SKIN_DESCRIPTION}.val('пятнистый');")
-        nails_choice = random.choice(['not_changed', 'changed'])
         self.make(f"{PatientCardLocators.NAILS}.dropdown('set selected', '{nails_choice}');")
         if nails_choice == 'changed':
             self.make(f"{PatientCardLocators.NAILS_DESCRIPTION}.val('странный');")
         self.make(f"{PatientCardLocators.RASH}.dropdown('set selected', '{choices_for_visits_modal}');")
         if choices_for_visits_modal == '10':
-            rash_choice = random.choice(['punctate', 'papular', 'vesicular', 'urtikarnaya'])
             self.make(f"{PatientCardLocators.RASH_TYPE}.dropdown('set selected', '{rash_choice}');")
             self.make(f"{PatientCardLocators.RASH_LOCALITY}.val('высыпания на шее');")
-        lymph_choice = random.choice(['not_palpable', 'not_enlarged', 'palpable', 'enlarged', 'painful', 'not_painful',
-                                     'single', 'multiple', 'not_soldered'])
         self.make(f"{PatientCardLocators.PERIFEPHERAL_LYMPH_NODES}.dropdown('set selected', '{lymph_choice}');")
         if lymph_choice == 'enlarged':
             self.make(f"{PatientCardLocators.LYMPH_NODES_DESCRIPTION}.val('0,5');")
-        osteo_choice = random.choice(['no_pathological_changes', 'with_pathological_changes'])
         self.make(f"{PatientCardLocators.OSTEO_ARTICULAR_SYSTEM}.dropdown('set selected', '{osteo_choice}');")
         if osteo_choice == 'with_pathological_changes':
             self.make(f"{PatientCardLocators.OSTEO_DESCRIPTION}.val('хрустящий');")
-        breath_choice = random.choice(['vesicular', 'tough', 'weakened', 'another'])
         self.make(f"{PatientCardLocators.BREATH_SOUNDS}.dropdown('set selected', '{breath_choice}');")
         if breath_choice == 'another':
             self.make(f"{PatientCardLocators.BREATH_SOUNDS_DESCRIPTION}.val('поскрипывает');")
-        wheesing_choice = random.choice(['Yes', 'No'])
-        if wheesing_choice == "Yes":
+        if yes_no_choice == "Yes":
             self.make(f"{PatientCardLocators.WHEEZING_YES}.click();")
-            wheezing_choice = random.choice(['dry', 'wet', 'whistling', 'crepitus'])
             self.make(f"{PatientCardLocators.WHEEZING_TYPE}.dropdown('set selected', '{wheezing_choice}');")
         else:
             self.make(f"{PatientCardLocators.WHEEZING_NO}.click();")
         self.make(f"{PatientCardLocators.RESPIRATORY_RATE}.val('100');")
-        heart_choice = random.choice(['clear', 'muffled', 'rhythmic', 'arrhythmic'])
         self.make(f"{PatientCardLocators.HEART_SOUNDS}.dropdown('set selected', '{heart_choice}');")
         self.make(f"{PatientCardLocators.HEART_RATE}.val('100');")
         self.make(f"{PatientCardLocators.BLOOD_PREASURE}.val('100');")
-        noise_choice = random.choice(['not_heard', 'heard'])
         self.make(f"{PatientCardLocators.NOISE}.dropdown('set selected', '{noise_choice}');")
         if noise_choice == 'heard':
             self.make(f"{PatientCardLocators.NOISE_DESCRIPTION}.val('журчит');")
-        tongue_choice = random.choice(['dry', 'wet', 'clean_of_plaque', 'white_coated', 'patches_on_side_surfaces',
-                                      'cheesy_patina', 'another'])
         self.make(f"{PatientCardLocators.TONGUE}.dropdown('set selected', '{tongue_choice}');")
         if tongue_choice == 'another':
             self.make(f"{PatientCardLocators.TONGUE_DESCRIPTION}.val('язык высунут');")
         self.make(f"{PatientCardLocators.ORAL_MUCOSA}.val('{surname}');")
-        stomach_choice = random.choice(['painless_on_palpation', 'tense', 'painful_on_palpation', 'another'])
         self.make(f"{PatientCardLocators.STOMACH}.dropdown('set selected', '{stomach_choice}');")
         if stomach_choice == 'another' or 'painful_on_palpation':
             self.make(f"{PatientCardLocators.STOMACH_DESCRIPTION}.val('язык высунут');")
-        liver_choice = random.choice(['not_increased', 'on_the_edge_of_the_costal_arch',
-                                     'protrudes_from_under_the_edge_of_the_costal_arch', 'consistency_dense', 'soft',
-                                     'elastic', 'another'])
         self.make(f"{PatientCardLocators.LIVER}.dropdown('set selected', '{liver_choice}');")
         if liver_choice == 'on_the_edge_of_the_costal_arch':
             self.make(f"{PatientCardLocators.LIVER_CM}.val('2');")
         if liver_choice == 'another':
             self.make(f"{PatientCardLocators.LIVER_DESCRIPTION}.val('опухший');")
-        spleen_choice = random.choice(['not_palpable', 'increased_from_under_the_edge', 'deleted', 'another'])
         self.make(f"{PatientCardLocators.SPLEEN}.dropdown('set selected', '{spleen_choice}');")
         if spleen_choice == 'increased_from_under_the_edge':
             self.make(f"{PatientCardLocators.SPLEEN_CM}.val('1,5');")
         if spleen_choice == 'another':
             self.make(f"{PatientCardLocators.SPLEEN_DESCRIPTION}.val('пупырчатый');")
-        sym_choice = random.choice(['negative', 'positive', 'two_side', 'left', 'right'])
         self.make(f"{PatientCardLocators.SYMPTOMS_OF_BANGING}.dropdown('set selected', '{sym_choice}');")
-        stool_choice = random.choice(['decorated', 'liquid', 'without_pathological_impurities', 'blood', 'slime',
-                                     'ordinary_paint', 'green', 'acholic', 'another'])
         self.make(f"{PatientCardLocators.STOOL}.dropdown('set selected', '{stool_choice}');")
         self.make(f"{PatientCardLocators.STOOL_MULTIPLICITY}.val('{contacting_num}');")
         self.make(f"{PatientCardLocators.URINATION_FREE}.click();")
         self.make(f"{PatientCardLocators.URINATION_PAINLESS}.click();")
         self.make(f"{PatientCardLocators.URINATION_PAINFUL}.click();")
-        diuresis_choice = random.choice(['breached', 'frequent', 'norm'])
         if diuresis_choice == "frequent":
             self.make(f"{PatientCardLocators.DIURESIS_FREQUENT}.click();")
         if diuresis_choice == "norm":
@@ -3389,6 +3558,10 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.VISITS_REFRESH}.click();")
         sleep(3)
         assert self.is_element_present(*PatientCardLocators.VISITS_EDIT), "Data in Visits modal weren't preserved or invalid selector for Edit button"
+
+
+
+
 
     def register_new_woman(self):
         # автозаполнение формы регистрации для взрослого
