@@ -10,7 +10,7 @@ class LoginPageLocators(object):
     MODAL_AGR = (By.ID, "modal_agreement")
     AGR_BTN = (By.CSS_SELECTOR, '#modal_agreement .ui.green.inverted.ok.button')
 
-class RegisterPageLocators(object):
+class PatientCardLocators(object):
     ADD_PATIENT = (By.CSS_SELECTOR, 'a[href="/visits/patient_card/0000000000?new=1&in_rk=1&add=1"]')
     ADD_FOREIGN_PATIENT = (By.CSS_SELECTOR, 'a[href="/visits/patient_card/0000000000?new=1&in_rk=0&add=1"]')
     IB_NO = (By.ID, 'general_data_nib_out')
@@ -85,8 +85,6 @@ class RegisterPageLocators(object):
     PATIENT_CARD_SAVE = "$('#general_data_save_button')"
     EDIT_RESID_ADDRESS = "$('#fact_address_edit_button')"
     CANCEL_RESID_ADDRESS = "$('#modal_fact_address .ui.red.deny.button')"
-
-class PatientCardLocators(object):
 
     IFA_OGC_ADD = "$('#ifa_ogc_add')"
     IFA_MED_ORG = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_naprav_mo_modal] .ui.dropdown')"
@@ -735,8 +733,9 @@ class PatientCardLocators(object):
     SIDE_EFFECTS = "$('#modal_commitment_assessment div[data-field=commitment_assessment_toksich_reak_name_modal] .ui.dropdown')"
     ART_ADHER_LEVEL_SAVE = "$('#modal_commitment_assessment .ui.green.approve.button')"
     ART_ADHER_LEVEL_EDIT = "$('#commitment_assessment_table a[action-type=edit]')"
+    ART_ADHER_LEVEL_CANCEL = "$('#modal_commitment_assessment .ui.red.deny.button')"
 
-    ART_RECIPE_ADD =  "$('#recipes_table a[action-type=add]')"
+    ART_RECIPE_ADD =  "$('#recipes_table a[data-name=invisible_button]')"
     RECIPE_NUM = "$('#modal_recipes div[data-field=recipes_number_modal] input')"
     RECIPE_DATE = "$('#recipes_date_modal')"
     ART_MEDICATION = "$('#modal_recipes div[data-field=form-receipt-1-preparat_id] .ui.dropdown')"
@@ -748,7 +747,8 @@ class PatientCardLocators(object):
     UNPACKING_SIGNS = "$('#modal_recipes div[name=form-receipt-1-priznak_vskritiya_pack] .ui.dropdown')"
     SIGNATURE = "$('#modal_recipes div[data-field=form-receipt-1-signature] input')"
     ART_RECIPE_SAVE = "$('#modal_recipes .ui.green.approve.button')"
-    ART_RECIPE_EDIT = "$('#recipes_table a[action-type=edit]')"
+    ART_RECIPE_EDIT = "$('a[data-name=edit_recipe]')"
+    ART_RECIPE_CANCEL = "$('#modal_recipes .ui.red.deny.button')"
 
     CHILDREN_PREGNANCY  = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-children]')"
     PREGNANCY_ADD = "$('#hiv_table_edit')"
@@ -1029,37 +1029,39 @@ class AnalysisPageLocators(object):
 
 class ArvLogLocators(object):
     ARV_LOGS_MENU = "$('.ui.fixed.inverted.menu.main div:eq(8)')"
-    CONTRACT_LOG = "$('a[href=/contract/index] .item')"
+    CONTRACT_LOG = "$('window.location = $('div[data-name=arv-journal-list] a[data-name=contract]')"
     # CONTRACT_LOG_DATE_START =
     # CONTRACT_LOG_DATE_END =
     # CONTRACT_LOG_APPLY_BTN =
     CONTRACT_LOG_EXPORT = "$('#exportToExcel')"
-    DEBIT_LOG = "$('a[href=/debit/index] .item')"
+    DEBIT_LOG = "$('window.location = $('div[data-name=arv-journal-list] a[data-name=debit]')"
     # DEBIT_LOG_DATE_START =
     # DEBIT_LOG_DATE_END =
     # DEBIT_LOG_FILTER =
     # DEBIT_LOG_APPLY_BTN =
     # DEBIT_LOG_ADD_BTN =
     DEBIT_LOG_EXPORT = "$('#exportToExcel')"
-    RECEIPT_LOG = "$('.ui.fixed.inverted.menu.main div:eq(8)')"
+    RECEIPT_LOG = "$('div[data-name=arv-journal-list] a[data-name=coming]')"
+    ORG_FILTER = "$('#filter').parent()"
     RECEIPT_ADD = "$('#addComing')"
-    BUDGET_TYPE = "$('div[data-field=ui_budjet_type] .ui.dropdown')"
-    SUPPLIER = "$('div[data-field=ui_post_id] .ui.dropdown')"
-    CONTRACT_NUM = "$('#number')"
+    RECEIPT_TYPE = "$('div[data-field=postavshik_type] .ui.dropdown')"
+    BUDGET_TYPE = "$('div[data-field=budjet_type] .ui.dropdown')"
+    SUPPLIER = "$('div[data-field=post_id] .ui.dropdown')"
+    CONSIGNMENT_NUM = "$('#number')"
     INVOICE_NUM = "$('#faktura')"
-    MED_RECEIPT_DATE = "$('div[name=date_pr] input')"
+    RECEIPT_DATE = "$('div[data-field=date_pr] input')"
     PROGRAMM = "$('div[data-field=programma] .ui.dropdown')"
     RECIPIENT_NAME = "$('#fio')"
-    PROCUREMENT_TYPE = "$('div[data-field=ui_type_konkurs] .ui.dropdown')"
-    CONTRACT_DATE = "$('#dogovor')"
+    PROCUREMENT_TYPE = "$('div[data-field=type_konkurs] .ui.dropdown')"
+    CONTRACT_NUM_DATE = "$('#dogovor')"
     MEDICATION_ADD = "$('#addPreparat')"
     MEDICATION_SEARCH = "$('#search')"
-    MEDICATION_CHOICE = "$('#add-row-preparaty-table tr:eq(0) td:eq(0) a.blue.button')"
+    MEDICATION_CHOICE = "$('document.querySelector('#\\31  > td:nth-child(1) > a')"
     MEDICATION_EXP_DATE = "$('#date_srok_1')"
     MEDICATION_AMOUNT = "$('td[data-field=count_drug_1] input')"
     MEDICATION_PRICE = "$('td[data-field=price_drug_1] input')"
-    # MEDICATION_SERIUS_NUM =
-    RECEIPT_SAVE = "$('#save_prihod')"
+    MEDICATION_SERIUS_NUM = "$('td[data-field=price_drug_1] input')"
+    RECEIPT_LOG_SAVE = "$('#save_prihod')"
     # ARRIVAL_LOG_DATE_START =
     # ARRIVAL_LOG_DATE_END =
     # ARRIVAL_LOG_FILTER1 =

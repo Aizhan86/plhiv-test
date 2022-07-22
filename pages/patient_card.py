@@ -2,7 +2,7 @@ from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 import allure
 from .base_page import BasePage
-from .locators import RegisterPageLocators, PatientCardLocators, WorkJournalLocators
+from .locators import PatientCardLocators, WorkJournalLocators
 from time import sleep
 from random import randrange
 import datetime
@@ -16,287 +16,15 @@ global patient_id_homeless
 global patient_id_foreigner
 global patient_id_woman
 
-class RegisterPage(BasePage):
+class PatientCard(BasePage):
 
-
-    def register_new_child(self):
-        # автозаполнение формы регистрации для ребенка
-        self.make(f"{RegisterPageLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
-        res_code_choice = random.choice(['47', '48', '11', '22'])
-        self.make(f"{RegisterPageLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
-        self.make(f"{RegisterPageLocators.PATIENT_IIN}.val('{iin}')")
-        # self.make(f"{RegisterPageLocators.ANONIMOUS}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.PATIENT_SURNAME}.val('{p_surname}')")
-        self.make(f"{RegisterPageLocators.PATIENT_NAME}.val('{p_name}')")
-        self.make(f"{RegisterPageLocators.PATIENT_MIDNAME}.val('{p_midname}')")
-        self.make(f"{RegisterPageLocators.BIRTH_DATE}.calendar('set date', '{p_birthday}');")
-        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
-        self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
-        self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
-        self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
-        self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
-        self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        if self.browser.find_element(By.CSS_SELECTOR, 'div[data-field=general_data_adm_obl_viyav] input').get_attribute("value") == "33":
-            pass
-        else:
-            sleep(2)
-            self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
-            sleep(2)
-            self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
-            sleep(1)
-            self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
-            sleep(1)
-            self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
-        self.make(f"{RegisterPageLocators.CHILD_STATUS}.dropdown('set selected', '{child_status_choice}');")
-        self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
-        # self.make(f"{RegisterPageLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
-        self.make(f"{RegisterPageLocators.REGIS_AREA}.dropdown('set selected', '5');")
-        sleep(2)
-        self.make(f"$('div[data-field=registration_address_unit_area] input.search').focus();")
-        sleep(1)
-        self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.click();")
-        sleep(1)
-        self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
-        sleep(1)
-        self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('hide');")
-        # self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
-        self.make(f"{RegisterPageLocators.REGIS_LOCALITY}.dropdown('set selected', '290000000002');")
-        self.make(f"{RegisterPageLocators.REGIS_PLACE}.dropdown('set selected', '2');")
-        self.make(f"{RegisterPageLocators.REGIS_STREET}.val('{street_choice}');")
-        self.make(f"{RegisterPageLocators.REGIS_HOUSE}.val('{55}');")
-        self.make(f"{RegisterPageLocators.REGIS_APT}.val('{44}');")
-        self.make(f"{RegisterPageLocators.REGIS_PHONE_NO}.val('{87273456987}');")
-        self.make(f"{RegisterPageLocators.RESID_AREA}.dropdown('set selected', '3');")
-        sleep(2)
-        self.make(f"$('div[data-field=fact_address_unit_area] input.search').focus();")
-        sleep(1)
-        self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.click();")
-        sleep(1)
-        self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.dropdown('set selected', '33');")
-        sleep(1)
-        self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.dropdown('hide');")
-        self.make(f"{RegisterPageLocators.RESID_LOCALITY}.dropdown('set selected', '290000000004');")
-        self.make(f"{RegisterPageLocators.RESID_PLACE}.dropdown('set selected', '2');")
-        self.make(f"{RegisterPageLocators.RESID_STREET}.val('{street_choice}');")
-        self.make(f"{RegisterPageLocators.RESID_HOUSE}.val('25');")
-        self.make(f"{RegisterPageLocators.RESID_APT}.val('45');")
-        self.make(f"{RegisterPageLocators.RESID_PHONE_NO}.val('87273456789');")
-        # self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '280000000448');")
-        self.make(f"{RegisterPageLocators.RETROSPECTIVE_CHILD}.click();")
-        # self.make(f"{RegisterPageLocators.MOTHERS_SURNAME}.val('{surname}');")
-        # self.make(f"{RegisterPageLocators.MOTHERS_NAME}.val('{name}');")
-        # self.make(f"{RegisterPageLocators.MOTHERS_MIDNAME}.val('{midname}');")
-        # self.make(f"{RegisterPageLocators.MOTHERS_IB_NO}.val('{numbers5}');")
-        # self.make(f"{RegisterPageLocators.MOTHERS_IB_NO_DATE}.val('{ib_date}');")
-        assert self.browser.execute_script(f"return {RegisterPageLocators.REGISTER_SAVE_BTN}.length"), "No Save button for registering patients"
-        self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
-        sleep(5)
-        global patient_id_child
-        patient_id_child = self.get_patient_id()
-        print(f"ID of child patient is {patient_id_child}")
-
-    def check_patient_id_child(self):
-        assert f"{patient_id_child}" in self.browser.current_url and patient_id_child != "0000000000"
-
-    def fill_mothers_data(self):
-        self.make(f"{RegisterPageLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
-        sleep(2)
-        element = self.browser.find_element(By.ID, "find_sources_general_data")
-        self.browser.execute_script("arguments[0].scrollIntoView();", element)
-        element.click()
-        # self.make(f"{RegisterPageLocators.SEARCH}).click()")
-        sleep(2)
-        self.make(f"{RegisterPageLocators.MOTHERS_IB_NO_SEARCH}.val('94100');")
-        sleep(5)
-        self.make(f"{RegisterPageLocators.FIND}.click()")
-        sleep(3)
-        self.make(f"{RegisterPageLocators.CHOOSE_MOTHER_ID}.click()")
-        sleep(2)
-        self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
-        sleep(5)
-
-    def check_patient_id_homeless(self):
-        assert f"{patient_id_homeless}" in self.browser.current_url and patient_id_homeless != "0000000000"
-
-    def check_patient_id_woman(self):
-        assert f"{patient_id_woman}" in self.browser.current_url and patient_id_woman != "0000000000"
-
-    def check_patient_id_foreigner(self):
-        assert f"{patient_id_foreigner}" in self.browser.current_url and patient_id_foreigner != "0000000000"
-
-    def check_patient_iin(self):
-        self.make(f"{RegisterPageLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_IIN}.length"), "Patient's IIN object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_IIN}.val()") == iin, "Patient's IIN object doesn't take a value"
-
-    def check_patient_surname(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_SURNAME}.length"), "Patient's surname object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_SURNAME}.val()") == p_surname, "Patient's surname object doesn't take a value"
-
-    def check_patient_name(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_NAME}.length"), "Patient's name object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_NAME}.val()") == p_name, "Patient's name object doesn't take a value"
-
-    def check_patient_midname(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_MIDNAME}.length"), "Patient's middle name object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_MIDNAME}.val()") == p_midname, "Patient's middle name object doesn't take a value"
-
-    def check_patient_birth_date(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.BIRTH_DATE}.length"), "Patient's birth date object is not accessible"
-        l = self.browser.execute_script(f"return {RegisterPageLocators.BIRTH_DATE}.find('input').val()")
-        assert l == p_birthday, "Patient's birth date object doesn't take a value"
-
-    def check_patient_gender(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_GENDER}.length"), "Patient's gender object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_GENDER}.dropdown('get value')") == gen_choice, "Patient's gender object doesn't take a value"
-
-    def check_emergence_area(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.EMERGENCE_AREA}.length"), "Patient's emergence area object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.EMERGENCE_AREA}.dropdown('get value')") == '3', "Patient's emergence area object doesn't take a value"
-
-    def check_patient_citizenship(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_CITIZENSHIP}.length"), "Patient's citizenship object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('get value')") == '1', "Patient's citizenship object doesn't take a value"
-
-    def check_child_status(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.CHILD_STATUS}.length"), "Child status object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.CHILD_STATUS}.dropdown('get value')") == child_status_choice, "Child status object doesn't take a value"
-
-    def check_social_status(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.SOCIAL_STATUS}.length"), "Patient's region of living object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.SOCIAL_STATUS}.dropdown('get value')") == soc_status_choice, "Patient's region of living object doesn't take a value"
-
-    def check_registration_medical_organization(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.length"), "Social status object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.dropdown('get value')") == 'mo_choice', "Social status object doesn't take a value"
-
-    def check_edit_button_registration_address_modal(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.EDIT_REGIS_ADDRESS}.length"), "Edit button in Registration address modal is not accessible"
-        self.make(f"{RegisterPageLocators.EDIT_REGIS_ADDRESS}.click();")
-
-    def check_registration_area(self):
-        sleep(2)
-        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_region_name_modal] .ui.dropdown').length"), "Patient's registration area object is not accessible"
-        a = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_region_name_modal] .ui.dropdown input[type=hidden]').val()")
-        print(a)
-        assert a == '5', "Patient's registration area object doesn't take a value"
-
-    def check_registration_unit_area(self):
-        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').length"), "Patient's registration unit area object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').find('input[type=hidden]').val()") == '180', "Patient's registration unit area object doesn't take a value"
-
-    def check_registration_locality(self):
-        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').length"), "Patient's registration locality object is not accessible"
-        n = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').dropdown('get value')")
-        assert n == '290000000002', "Patient's registration locality object doesn't take a value"
-
-    def check_registration_place(self):
-        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').length"), "Patient's registration place object is not accessible"
-        o = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').dropdown('get value')")
-        assert o == '2', "Patient's registration place object doesn't take a value"
-
-    def check_registration_street(self):
-        sleep(1)
-        assert self.browser.execute_script(f"return $('#registration_address_street_modal').length"), "Patient's registration street object is not accessible"
-        assert self.browser.execute_script(f"return $('#registration_address_street_modal').val()") == street_choice, "Patient's registration street object doesn't take a value"
-
-    def check_registration_house(self):
-        assert self.browser.execute_script(f"return $('#registration_address_house_modal').length"), "Patient's registration house object is not accessible"
-        q = self.browser.execute_script(f"return $('#registration_address_house_modal').val()")
-        assert q == '55', "Patient's registration house object doesn't take a value"
-
-    def check_registration_apartment(self):
-        assert self.browser.execute_script(f"return $('#registration_address_kvart_modal').length"), "Patient's registration apartment object is not accessible"
-        r = self.browser.execute_script(f"return $('#registration_address_kvart_modal').val()")
-        assert r == '44', "Patient's registration apartment object doesn't take a value"
-
-    def check_registration_phone_number(self):
-        assert self.browser.execute_script(f"return $('#registration_address_telephone_modal').length"), "Patient's registration phone number object is not accessible"
-        s = self.browser.execute_script(f"return $('#registration_address_telephone_modal').val()")
-        assert s == '87273456987', "Patient's registration phone number object doesn't take a value"
-
-    def check_cancel_button_registration_address_modal(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.CANCEL_REGIS_ADDRESS}.length"), "Cancel button in Registration address modal is not accessible"
-        self.make(f"{RegisterPageLocators.CANCEL_REGIS_ADDRESS}.click();")
-
-    def check_edit_button_residence_address_modal(self):
-        sleep(2)
-        assert self.browser.execute_script(f"return {RegisterPageLocators.EDIT_RESID_ADDRESS}.length"), "Edit button in Residence address modal is not accessible"
-        self.make(f"{RegisterPageLocators.EDIT_RESID_ADDRESS}.click();")
-
-    def check_residence_area(self):
-        sleep(2)
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').length"), "Patient's residence area object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').dropdown('get value')") == '3', "Patient's residence area object doesn't take a value"
-
-    def check_residence_unit_area(self):
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').length"), "Patient's residence unit area object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').find('input[type=hidden]').val()") == '33', "Patient's residence unit area object doesn't take a value"
-
-    def check_residence_locality(self):
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').length"), "Patient's residence locality object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').dropdown('get value')") == '290000000004', "Patient's residence locality object doesn't take a value"
-
-    def check_residence_place(self):
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').length"), "Patient's residence place object is not accessible"
-        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').dropdown('get value')") == '2', "Patient's residence place object doesn't take a value"
-
-    def check_residence_street(self):
-        assert self.browser.execute_script(f"return $('#fact_address_street_modal').length"), "Patient's residence street object is not accessible"
-        assert self.browser.execute_script(f"return $('#fact_address_street_modal').val()") == street_choice, "Patient's residence street object doesn't take a value"
-
-    def check_residence_house(self):
-        assert self.browser.execute_script(f"return $('#fact_address_hous_modal').length"), "Patient's residence house object is not accessible"
-        assert self.browser.execute_script(f"return $('#fact_address_hous_modal').val()") == '25', "Patient's residence house object doesn't take a value"
-
-    def check_residence_apartment(self):
-        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').length"), "Patient's residence apartment object is not accessible"
-        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').val()") == '45', "Patient's residence apartment object doesn't take a value"
-
-    def check_residence_phone_number(self):
-        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').length"), "Patient's residence phone number object is not accessible"
-        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').val()") == '87273456789', "Patient's residence phone number object doesn't take a value"
-
-    def check_residence_medical_organization(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.length"), "Residence medical organization object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MED_ORG}.dropdown('get value')") == '170000000558', "Residence medical organization object doesn't take a value"
-
-    def check_cancel_button_residence_address_modal(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.CANCEL_RESID_ADDRESS}.length"), "Edit button in Residence address modal is not accessible"
-        self.make(f"{RegisterPageLocators.CANCEL_RESID_ADDRESS}.click();")
-
-    def check_retrospective_child_checkbox(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RETROSPECTIVE_CHILD}.length"), "Retrospective child checkbox object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.RETROSPECTIVE_CHILD}.is(':checked')"), "Retrospective child checkbox object doesn't take a value"
-
-
-        # assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_SURNAME}.length"), "Mother's surname object is not accessible"
-        # assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_SURNAME}.find('input').val('100014')") , "Mother's surname object doesn't take a value"
-
-    def check_surname_of_mother(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_SURNAME}.length"), "Mother's surname object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_SURNAME}.val()") == 'BFNAGB', "Mother's surname object doesn't take a value"
-
-    def check_name_of_mother(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_NAME}.length"), "Mother's name object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_NAME}.val()") == 'PQYMOLXQP', "Mother's name object doesn't take a value"
-
-    def check_midname_of_mother(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_MIDNAME}.length"), "Mother's middle name object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_MIDNAME}.val()") == 'VNBZIIZZB', "Mother's middle name object doesn't take a value"
-
-    def check_ib_number_of_mother(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_IB_NO}.length"), "Mother's ib number object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_IB_NO}.val()") == '94100(1)', "Mother's ib number object doesn't take a value"
-
-    def check_ib_number_date_of_mother(self):
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_IB_NO_DATE}.length"), "Mother's ib number date object is not accessible"
-        assert self.browser.execute_script(f"return {RegisterPageLocators.MOTHERS_IB_NO_DATE}.val()") == '12.05.2022', "Mother's ib number date object doesn't take a value"
+    """
+    Тесты на Лабораторные исследования
+    """
 
     def fill_hiv_antibody_testing_ogc_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Лабораторные исследования
         self.make(f"{PatientCardLocators.IFA_OGC_ADD}.click()")
         self.make(f"{PatientCardLocators.IFA_MED_ORG}.dropdown('set selected', '{mo_choice}');")
         self.make(f"{PatientCardLocators.SURNAME_PERSON_MEDORG}.val('{surname}');")
@@ -409,7 +137,7 @@ class RegisterPage(BasePage):
 
     def fill_HIV_antibody_testing_KNCDIZ_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Лабораторные исследования
         self.make(f"{PatientCardLocators.IFA_KNCDIZ_ADD}.click()")
         self.make(f"{PatientCardLocators.SCREANING_NUM}.val('{numbers5}')")
         self.make(f"{PatientCardLocators.SERUM_NUM_RC}.dropdown('set selected', '{serum_num_choice}');")
@@ -494,7 +222,7 @@ class RegisterPage(BasePage):
 
     def fill_IB_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Лабораторные исследования
         self.make(f"{PatientCardLocators.IB_PCR}.click()")
         self.make(f"{PatientCardLocators.IB_ADD}.click()")
         self.make(f"{PatientCardLocators.IB_NUMBER}.val('{numbers5}');")
@@ -622,7 +350,7 @@ class RegisterPage(BasePage):
 
     def fill_PCR_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Лабораторные исследования
         self.make(f"{PatientCardLocators.IB_PCR}.click()")
         self.make(f"{PatientCardLocators.PCR_ADD}.click()")
         self.make(f"{PatientCardLocators.PCR_NUMBER}.val('{numbers5}');")
@@ -725,7 +453,7 @@ class RegisterPage(BasePage):
 
     def fill_result_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Эпидемиологический анамнез
+        self.make(f"{PatientCardLocators.LAB_RESEARCH}.click()")  # Открываем Лабораторные исследования
         self.make(f"{PatientCardLocators.RESULT}.click()")
         self.make(f"{PatientCardLocators.RESULT_ADD}.click()")
         self.make(f"{PatientCardLocators.RESULT_NUM}.val('{numbers5}');")
@@ -772,6 +500,11 @@ class RegisterPage(BasePage):
     def check_cansel_button_result_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.RESULT_CANCEL}.length"), "Cancel button in Result modal is not accessible"
         self.make(f"{PatientCardLocators.RESULT_CANCEL}.click();")
+
+    """
+     Тесты на Эпидемиологический анамнез
+    """
+
 
     def fill_family_members_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
@@ -1819,8 +1552,8 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.SOURCE_MIDDLE_NAME}.val('');")
         self.make(f"{PatientCardLocators.SOURCE_FIND}.click();")
         self.make(f"{PatientCardLocators.SOURCE_SWITCH_TO_CARD}.click();")
-        # self.browser.find_element(*RegisterPageLocators.IB_NO).send_keys(55)
-        # assert self.make(f"{RegisterPageLocators.PATIENT_NAME}.val()") == "{BPRJXOSSKEVR}", "There weren't switched from Source modal to another patient's card."
+        # self.browser.find_element(*PatientCardLocators.IB_NO).send_keys(55)
+        # assert self.make(f"{PatientCardLocators.PATIENT_NAME}.val()") == "{BPRJXOSSKEVR}", "There weren't switched from Source modal to another patient's card."
         # assert self.browser.find_element_by_id('donor_blood_kod_donor').get_attribute("data-field") == numbers3, "Data in Blood donor modal or object Blood donor code weren't preserved"
 
     def fill_contact_person_modal(self):
@@ -1987,6 +1720,12 @@ class RegisterPage(BasePage):
     def check_cancel_button_contact_person_modal(self):
         assert self.browser.execute_script(f"return {PatientCardLocators.CONTACT_PERSON_CANCEL}.length"), "Cancel button in Contact person modal is not accessible"
         self.make(f"{PatientCardLocators.CONTACT_PERSON_CANCEL}.click();")
+
+
+    """
+     Тесты на Диспансерное наблюдение
+    """
+
 
     def fill_dispensary_observation_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
@@ -3114,10 +2853,6 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.D_ACCOUNTED_DATE}.calendar('set date', '{today}');")
         assert self.browser.execute_script(f"return {PatientCardLocators.D_ACCOUNTED_DATE}.find('input').val()") == today, "The Disp registered date object in TB tab doesn't take a value"
 
-    def should_test_art_information_modal(self):
-        self.fill_art_information_modal()
-        self.check_art_information_modal()
-
     def fill_art_information_modal(self):
         self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
         self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
@@ -3127,23 +2862,21 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.WRITTEN_CONSENT}.dropdown('set selected', '1');")
         self.make(f"{PatientCardLocators.ART_INFORMATION_ADD}.click();")
         self.make(f"{PatientCardLocators.ART_START_DATE}.val('{today}')")
-        row_choice = random.choice(['1', '2', '3'])
-        self.make(f"{PatientCardLocators.ART_ROW}.dropdown('set selected', '{row_choice}');")
-        self.make(f"{PatientCardLocators.ART_SCHEME}.dropdown('set selected', '{preg_medic_choice}');")
-        art_mo_choice = random.choice(['1', '2', '3'])
-        self.make(f"{PatientCardLocators.ART_MED_ORG}.dropdown('set selected', '{art_mo_choice}');")
+        self.make(f"{PatientCardLocators.ART_ROW}.dropdown('set selected', '{three_choice}');")
+        self.make(f"{PatientCardLocators.ART_SCHEME}.dropdown('set selected', '10');")
+        self.make(f"{PatientCardLocators.ART_MED_ORG}.dropdown('set selected', '{three_choice}');")
         self.make(f"{PatientCardLocators.ART_INFORMATION_SAVE}.click();")
-        self.browser.find_element(*PatientCardLocators.ART_INFORMATION_EDIT).click()
+        self.make(f"{PatientCardLocators.ART_INFORMATION_EDIT}.click();")
         self.make(f"{PatientCardLocators.ART_ISSUANCE_ADD}.click();")
         self.make(f"{PatientCardLocators.ART_MEDICATION_NAME}.click();")
-        if PatientCardLocators.ART_MEDICATION_NAME_CHOICE:
-            self.make(f"{PatientCardLocators.ART_MEDICATION_NAME_CHOICE}.click();")
-            self.make(f"{PatientCardLocators.ART_RECIPE_NUM}.val('{numbers4}');")
-            self.make(f"{PatientCardLocators.ART_ISSUANCE_SAVE}.click();")
-        else:
-            self.make(f"{PatientCardLocators.ART_MEDICATION_NAME_DENY}.click();")
-            self.make(f"{PatientCardLocators.ART_ISSUANCE_DENY}.click();")
-            print(f"Medicines are not available")
+        # if PatientCardLocators.ART_MEDICATION_NAME_CHOICE:
+        self.make(f"{PatientCardLocators.ART_MEDICATION_NAME_CHOICE}.click();")
+        self.make(f"{PatientCardLocators.ART_RECIPE_NUM}.val('{numbers4}');")
+        self.make(f"{PatientCardLocators.ART_ISSUANCE_SAVE}.click();")
+        # else:
+        #     self.make(f"{PatientCardLocators.ART_MEDICATION_NAME_DENY}.click();")
+        #     self.make(f"{PatientCardLocators.ART_ISSUANCE_DENY}.click();")
+        #     print(f"Medicines are not available")
         self.make(f"{PatientCardLocators.ART_SCHEME_CHANGED_DATE}.val('{today}')")
         self.make(f"{PatientCardLocators.ART_SCHEME_CHANGE_TYPE}.dropdown('set selected', '1');")
         art_change_choice = random.choice(['1', '5', '6', '7', '8', '18', '20'])
@@ -3153,40 +2886,63 @@ class RegisterPage(BasePage):
     def check_art_information_modal(self):
         assert self.is_element_present(*PatientCardLocators.ART_INFORMATION_EDIT), "Data in Art Information modal weren't preserved or invalid selector for Edit button"
 
-    def should_test_art_adherence_level_modal(self):
-        self.fill_art_adherence_level_modal()
-        self.check_art_adherence_level_modal()
-
     def fill_art_adherence_level_modal(self):
-        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
-        self.make(f"{PatientCardLocators.ART}.click();")
-        support_choice = random.choice(['1', '2'])
-        self.make(f"{PatientCardLocators.ART_ADHERENCE_SUPPORT}.dropdown('set selected', '{support_choice}');")
+        # self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        # self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
+        # self.make(f"{PatientCardLocators.ART}.click();")
+        self.make(f"{PatientCardLocators.ART_ADHERENCE_SUPPORT}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.ART_ADHER_LEVEL_ADD}.click();")
         self.make(f"{PatientCardLocators.ART_ADHER_YEAR}.val('2021');")
-        quater_choice = random.choice(['1', '2', '3', '4'])
         self.make(f"{PatientCardLocators.ART_ADHER_QUARTER}.dropdown('set selected', '{quater_choice}');")
-        adherence_choice = random.choice(['1', '2', '3'])
-        self.make(f"{PatientCardLocators.ART_ADHERENCE}.dropdown('set selected', '{adherence_choice}');")
-        if adherence_choice == "3":
-            adher_reas_choice = random.choice(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'])
+        self.make(f"{PatientCardLocators.ART_ADHERENCE}.dropdown('set selected', '{three_choice}');")
+        if three_choice == "3":
             self.make(f"{PatientCardLocators.ART_ADHER_LOW_REASONS}.dropdown('set selected', '{adher_reas_choice}');")
-        side_effect_choice = random.choice(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'])
         self.make(f"{PatientCardLocators.SIDE_EFFECTS}.dropdown('set selected', '{side_effect_choice}');")
+
+    def check_art_adherence_support_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHERENCE_SUPPORT}.length"), "The Art adherence support object in Art tab is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHERENCE_SUPPORT}.dropdown('get value')") == two_choice, "The Art adherence support object in Art tab doesn't take a value"
+
+    def check_save_button_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_LEVEL_SAVE}.length"), "Save button in Art Adherence modal is not accessible"
         self.make(f"{PatientCardLocators.ART_ADHER_LEVEL_SAVE}.click();")
 
-    def check_art_adherence_level_modal(self):
-        assert self.is_element_present(*PatientCardLocators.ART_ADHER_LEVEL_EDIT), "Data in Art Adherence modal weren't preserved or invalid selector for Edit button"
+    def check_add_button_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_LEVEL_ADD}.length"), "Add button in Art Adherence modal is not accessible"
 
-    def should_test_recipe_modal(self):
-        self.fill_recipe_modal()
-        # self.check_recipe_modal()
+    def check_edit_button_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_LEVEL_EDIT}.length"), "Edit button in Art Adherence modal is not accessible"
+        self.make(f"{PatientCardLocators.ART_ADHER_LEVEL_EDIT}.click();")
+
+    def check_recipe_number_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_YEAR}.length"), "The Recipe number object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_YEAR}.val()") == '2021', "The Recipe number object in Recipe modal doesn't take a value"
+
+    def check_recipe_date_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_QUARTER}.length"), "The Recipe date object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_QUARTER}.dropdown('get value')") == quater_choice, "The Recipe date object in Recipe doesn't take a value"
+
+    def check_art_adherence_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHERENCE}.length"), "The Art adherence support object in Art tab is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHERENCE}.dropdown('get value')") == two_choice, "The Art adherence support object in Art tab doesn't take a value"
+
+    def check_art_adherence_low_reasons_support_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_LOW_REASONS}.length"), "The Art adherence support object in Art tab is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_LOW_REASONS}.dropdown('get value')") == two_choice, "The Art adherence support object in Art tab doesn't take a value"
+
+    def check_side_effects_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.SIDE_EFFECTS}.length"), "The Art adherence support object in Art tab is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SIDE_EFFECTS}.dropdown('get value')") == two_choice, "The Art adherence support object in Art tab doesn't take a value"
+
+    def check_cancel_button_art_adherence_level_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_ADHER_LEVEL_CANCEL}.length"), "Cancel button in Art Adherence modal is not accessible"
+        self.make(f"{PatientCardLocators.ART_ADHER_LEVEL_CANCEL}.click();")
+
 
     def fill_recipe_modal(self):
-        self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
-        self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
-        self.make(f"{PatientCardLocators.ART}.click();")
+        # self.make(f"{PatientCardLocators.OPEN_PATIENT_MENU}.sidebar('show')")  # Развернули карту пациента
+        # self.make(f"{PatientCardLocators.DISP_OBSERVATION}.click();")  # Выбрали Диспансерное наблюдение
+        # self.make(f"{PatientCardLocators.ART}.click();")
         self.make(f"{PatientCardLocators.ART_RECIPE_ADD}.click();")
         self.make(f"{PatientCardLocators.RECIPE_NUM}.val('{numbers4}');")
         self.make(f"{PatientCardLocators.RECIPE_DATE}.val('{today}')")
@@ -3198,10 +2954,61 @@ class RegisterPage(BasePage):
         self.make(f"{PatientCardLocators.QUANTITY}.val('30');")
         self.make(f"{PatientCardLocators.UNPACKING_SIGNS}.dropdown('set selected', '{two_choice}');")
         self.make(f"{PatientCardLocators.SIGNATURE}.val('{smth_random}');")
+
+    def check_save_button_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_RECIPE_SAVE}.length"), "Save button in Recipe modal is not accessible"
         self.make(f"{PatientCardLocators.ART_RECIPE_SAVE}.click();")
 
-    def check_recipe_modal(self):
-        assert self.is_element_present(*PatientCardLocators.ART_RECIPE_EDIT), "Data in Recipe modal weren't preserved or invalid selector for Edit button"
+    def check_add_button_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_RECIPE_ADD}.length"), "Add button in Recipe modal is not accessible"
+
+    def check_edit_button_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_RECIPE_EDIT}.length"), "Edit button in Recipe modal is not accessible"
+        self.make(f"{PatientCardLocators.ART_RECIPE_EDIT}.click();")
+
+    def check_recipe_number_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RECIPE_NUM}.length"), "The Recipe number object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RECIPE_NUM}.val()") == numbers4, "The Recipe number object in Recipe modal doesn't take a value"
+
+    def check_recipe_date_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RECIPE_DATE}.length"), "The Recipe date object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RECIPE_DATE}.val()") == today, "The Recipe date object in Recipe doesn't take a value"
+
+    def check_art_medication_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_MEDICATION}.length"), "The ART Medication object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_MEDICATION}.dropdown('get value')") == art_med_choice, "The ART Medication object in Recipe doesn't take a value"
+
+    def check_dose_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.DOSE}.length"), "The Dose object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.DOSE}.val()") == '1 таблетка', "The Dose object in Recipe doesn't take a value"
+
+    def check_dose_code_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.DOSE_CODE}.length"), "The Dose code object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.DOSE_CODE}.dropdown('get value')") == two_choice, "The Dose code object in Recipe doesn't take a value"
+
+    def check_concentration_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONCENTRATION}.length"), "The Concentration object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CONCENTRATION}.val()") == '1', "The Concentration object in Recipe doesn't take a value"
+
+    def check_packing_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PACKING}.length"), "The Packing object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PACKING}.val()") == 'Да', "The Packing object in Recipe modal doesn't take a value"
+
+    def check_quatity_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.QUANTITY}.length"), "The Quatity object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.QUANTITY}.val()") == '30', "The Treatment end date object in Recipe modal doesn't take a value"
+
+    def check_unpacking_signs_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.UNPACKING_SIGNS}.length"), "The Unpacking object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.UNPACKING_SIGNS}.dropdown('get value')") == two_choice, "The Unpacking object in Recipe doesn't take a value"
+
+    def check_signiture_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.SIGNATURE}.length"), "The Signiture object in Recipe modal is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SIGNATURE}.val()") == smth_random, "The Signiture object in Recipe modal doesn't take a value"
+
+    def check_cancel_button_recipe_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.ART_RECIPE_CANCEL}.length"), "Cancel button in Recipe modal is not accessible"
+        self.make(f"{PatientCardLocators.ART_RECIPE_CANCEL}.click();")
 
     def should_test_pregnancy_modal(self):
         self.fill_pregnancy_modal()
@@ -3560,25 +3367,23 @@ class RegisterPage(BasePage):
         assert self.is_element_present(*PatientCardLocators.VISITS_EDIT), "Data in Visits modal weren't preserved or invalid selector for Edit button"
 
 
+        """
+        Тесты на Общие данные
+        """
 
-
-
-    def register_new_woman(self):
-        # автозаполнение формы регистрации для взрослого
-        self.make(f"{RegisterPageLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
-        res_code_choice = random.choice(['45', '53', '1', '4'])
-        self.make(f"{RegisterPageLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
-        trans_choice = random.choice(['1', '2'])
-        self.make(f"{RegisterPageLocators.TRANSGENDER}.dropdown('set selected', '{trans_choice}');")
-        self.make(f"{RegisterPageLocators.ANONIMOUS}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.PATIENT_IIN}.val('{woman_iin}')")
-        # self.make(f"{RegisterPageLocators.ANONIMOUS}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.PATIENT_SURNAME}.val('{w_surname}')")
-        self.make(f"{RegisterPageLocators.PATIENT_NAME}.val('{w_name}')")
-        self.make(f"{RegisterPageLocators.PATIENT_MIDNAME}.val('{w_midname}')")
-        self.make(f"{RegisterPageLocators.BIRTH_DATE}.calendar('set date', '{w_birthday}');")
-        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
-        self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
+    def register_new_child(self):
+        # автозаполнение формы регистрации для ребенка
+        self.make(f"{PatientCardLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
+        res_code_choice = random.choice(['47', '48', '11', '22'])
+        self.make(f"{PatientCardLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
+        self.make(f"{PatientCardLocators.PATIENT_IIN}.val('{iin}')")
+        # self.make(f"{PatientCardLocators.ANONIMOUS}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.PATIENT_SURNAME}.val('{p_surname}')")
+        self.make(f"{PatientCardLocators.PATIENT_NAME}.val('{p_name}')")
+        self.make(f"{PatientCardLocators.PATIENT_MIDNAME}.val('{p_midname}')")
+        self.make(f"{PatientCardLocators.BIRTH_DATE}.calendar('set date', '{p_birthday}');")
+        self.make(f"{PatientCardLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
+        self.make(f"{PatientCardLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
@@ -3594,25 +3399,303 @@ class RegisterPage(BasePage):
             self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
             sleep(1)
             self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
-        soc_status_choice = random.choice(['3', '4'])
-        self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
-        self.make(f"{RegisterPageLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
-        self.make(f"{RegisterPageLocators.RESID_AREA}.dropdown('set selected', '3');")
+        self.make(f"{PatientCardLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
+        self.make(f"{PatientCardLocators.CHILD_STATUS}.dropdown('set selected', '{child_status_choice}');")
+        self.make(f"{PatientCardLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
+        # self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
+        self.make(f"{PatientCardLocators.REGIS_AREA}.dropdown('set selected', '5');")
+        sleep(2)
+        self.make(f"$('div[data-field=registration_address_unit_area] input.search').focus();")
+        sleep(1)
+        self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.click();")
+        sleep(1)
+        self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
+        sleep(1)
+        self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.dropdown('hide');")
+        # self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
+        self.make(f"{PatientCardLocators.REGIS_LOCALITY}.dropdown('set selected', '290000000002');")
+        self.make(f"{PatientCardLocators.REGIS_PLACE}.dropdown('set selected', '2');")
+        self.make(f"{PatientCardLocators.REGIS_STREET}.val('{street_choice}');")
+        self.make(f"{PatientCardLocators.REGIS_HOUSE}.val('{55}');")
+        self.make(f"{PatientCardLocators.REGIS_APT}.val('{44}');")
+        self.make(f"{PatientCardLocators.REGIS_PHONE_NO}.val('{87273456987}');")
+        self.make(f"{PatientCardLocators.RESID_AREA}.dropdown('set selected', '3');")
+        sleep(2)
+        self.make(f"$('div[data-field=fact_address_unit_area] input.search').focus();")
+        sleep(1)
+        self.make(f"{PatientCardLocators.RESID_UNIT_AREA}.click();")
+        sleep(1)
+        self.make(f"{PatientCardLocators.RESID_UNIT_AREA}.dropdown('set selected', '33');")
+        sleep(1)
+        self.make(f"{PatientCardLocators.RESID_UNIT_AREA}.dropdown('hide');")
+        self.make(f"{PatientCardLocators.RESID_LOCALITY}.dropdown('set selected', '290000000004');")
+        self.make(f"{PatientCardLocators.RESID_PLACE}.dropdown('set selected', '2');")
+        self.make(f"{PatientCardLocators.RESID_STREET}.val('{street_choice}');")
+        self.make(f"{PatientCardLocators.RESID_HOUSE}.val('25');")
+        self.make(f"{PatientCardLocators.RESID_APT}.val('45');")
+        self.make(f"{PatientCardLocators.RESID_PHONE_NO}.val('87273456789');")
+        # self.make(f"{PatientCardLocators.RESID_MED_ORG}.dropdown('set selected', '280000000448');")
+        self.make(f"{PatientCardLocators.RETROSPECTIVE_CHILD}.click();")
+        # self.make(f"{PatientCardLocators.MOTHERS_SURNAME}.val('{surname}');")
+        # self.make(f"{PatientCardLocators.MOTHERS_NAME}.val('{name}');")
+        # self.make(f"{PatientCardLocators.MOTHERS_MIDNAME}.val('{midname}');")
+        # self.make(f"{PatientCardLocators.MOTHERS_IB_NO}.val('{numbers5}');")
+        # self.make(f"{PatientCardLocators.MOTHERS_IB_NO_DATE}.val('{ib_date}');")
+        assert self.browser.execute_script(f"return {PatientCardLocators.REGISTER_SAVE_BTN}.length"), "No Save button for registering patients"
+        self.make(f"{PatientCardLocators.REGISTER_SAVE_BTN}.click()")
+        sleep(5)
+        global patient_id_child
+        patient_id_child = self.get_patient_id()
+        print(f"ID of child patient is {patient_id_child}")
+
+    def check_patient_id_child(self):
+        assert f"{patient_id_child}" in self.browser.current_url and patient_id_child != "0000000000"
+
+    def fill_mothers_data(self):
+        self.make(f"{PatientCardLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
+        sleep(2)
+        element = self.browser.find_element(By.ID, "find_sources_general_data")
+        self.browser.execute_script("arguments[0].scrollIntoView();", element)
+        element.click()
+        # self.make(f"{PatientCardLocators.SEARCH}).click()")
+        sleep(2)
+        self.make(f"{PatientCardLocators.MOTHERS_IB_NO_SEARCH}.val('94100');")
+        sleep(5)
+        self.make(f"{PatientCardLocators.FIND}.click()")
         sleep(3)
-        self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.click();")
-        self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.dropdown('set selected', '33');")
-        self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.dropdown('hide');")
-        self.make(f"{RegisterPageLocators.RESID_UNIT_AREA}.dropdown('set selected', '33');")
-        self.make(f"{RegisterPageLocators.RESID_LOCALITY}.dropdown('set selected', '170000000008');")
-        self.make(f"{RegisterPageLocators.RESID_PLACE}.dropdown('set selected', '2');")
-        self.make(f"{RegisterPageLocators.REGIS_STREET}.val('{street_choice}');")
-        self.make(f"{RegisterPageLocators.REGIS_HOUSE}.val('{55}');")
-        self.make(f"{RegisterPageLocators.REGIS_APT}.val('{44}');")
-        self.make(f"{RegisterPageLocators.REGIS_PHONE_NO}.val('{87273456987}');")
-        self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '80000000546');")
-        self.make(f"{RegisterPageLocators.DUPLICATE_RESID_ADR}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click()")
+        self.make(f"{PatientCardLocators.CHOOSE_MOTHER_ID}.click()")
+        sleep(2)
+        self.make(f"{PatientCardLocators.REGISTER_SAVE_BTN}.click()")
+        sleep(5)
+
+    def check_patient_id_homeless(self):
+        assert f"{patient_id_homeless}" in self.browser.current_url and patient_id_homeless != "0000000000"
+
+    def check_patient_id_woman(self):
+        assert f"{patient_id_woman}" in self.browser.current_url and patient_id_woman != "0000000000"
+
+    def check_patient_id_foreigner(self):
+        assert f"{patient_id_foreigner}" in self.browser.current_url and patient_id_foreigner != "0000000000"
+
+    def check_patient_iin(self):
+        self.make(f"{PatientCardLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_IIN}.length"), "Patient's IIN object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_IIN}.val()") == iin, "Patient's IIN object doesn't take a value"
+
+    def check_patient_surname(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_SURNAME}.length"), "Patient's surname object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_SURNAME}.val()") == p_surname, "Patient's surname object doesn't take a value"
+
+    def check_patient_name(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_NAME}.length"), "Patient's name object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_NAME}.val()") == p_name, "Patient's name object doesn't take a value"
+
+    def check_patient_midname(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_MIDNAME}.length"), "Patient's middle name object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_MIDNAME}.val()") == p_midname, "Patient's middle name object doesn't take a value"
+
+    def check_patient_birth_date(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.BIRTH_DATE}.length"), "Patient's birth date object is not accessible"
+        l = self.browser.execute_script(f"return {PatientCardLocators.BIRTH_DATE}.find('input').val()")
+        assert l == p_birthday, "Patient's birth date object doesn't take a value"
+
+    def check_patient_gender(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_GENDER}.length"), "Patient's gender object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_GENDER}.dropdown('get value')") == gen_choice, "Patient's gender object doesn't take a value"
+
+    def check_emergence_area(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.EMERGENCE_AREA}.length"), "Patient's emergence area object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.EMERGENCE_AREA}.dropdown('get value')") == '3', "Patient's emergence area object doesn't take a value"
+
+    def check_patient_citizenship(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_CITIZENSHIP}.length"), "Patient's citizenship object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.PATIENT_CITIZENSHIP}.dropdown('get value')") == '1', "Patient's citizenship object doesn't take a value"
+
+    def check_child_status(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CHILD_STATUS}.length"), "Child status object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.CHILD_STATUS}.dropdown('get value')") == child_status_choice, "Child status object doesn't take a value"
+
+    def check_social_status(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.SOCIAL_STATUS}.length"), "Patient's region of living object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.SOCIAL_STATUS}.dropdown('get value')") == soc_status_choice, "Patient's region of living object doesn't take a value"
+
+    def check_registration_medical_organization(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.MED_ORG}.length"), "Social status object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MED_ORG}.dropdown('get value')") == 'mo_choice', "Social status object doesn't take a value"
+
+    def check_edit_button_registration_address_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.EDIT_REGIS_ADDRESS}.length"), "Edit button in Registration address modal is not accessible"
+        self.make(f"{PatientCardLocators.EDIT_REGIS_ADDRESS}.click();")
+
+    def check_registration_area(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_region_name_modal] .ui.dropdown').length"), "Patient's registration area object is not accessible"
+        a = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_region_name_modal] .ui.dropdown input[type=hidden]').val()")
+        print(a)
+        assert a == '5', "Patient's registration area object doesn't take a value"
+
+    def check_registration_unit_area(self):
+        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').length"), "Patient's registration unit area object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_unit_area_modal] .ui.dropdown').find('input[type=hidden]').val()") == '180', "Patient's registration unit area object doesn't take a value"
+
+    def check_registration_locality(self):
+        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').length"), "Patient's registration locality object is not accessible"
+        n = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_locality_name_modal] .ui.dropdown').dropdown('get value')")
+        assert n == '290000000002', "Patient's registration locality object doesn't take a value"
+
+    def check_registration_place(self):
+        assert self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').length"), "Patient's registration place object is not accessible"
+        o = self.browser.execute_script(f"return $('#modal_registration_address div[data-field=registration_address_place_live_modal] .ui.dropdown').dropdown('get value')")
+        assert o == '2', "Patient's registration place object doesn't take a value"
+
+    def check_registration_street(self):
+        sleep(1)
+        assert self.browser.execute_script(f"return $('#registration_address_street_modal').length"), "Patient's registration street object is not accessible"
+        assert self.browser.execute_script(f"return $('#registration_address_street_modal').val()") == street_choice, "Patient's registration street object doesn't take a value"
+
+    def check_registration_house(self):
+        assert self.browser.execute_script(f"return $('#registration_address_house_modal').length"), "Patient's registration house object is not accessible"
+        q = self.browser.execute_script(f"return $('#registration_address_house_modal').val()")
+        assert q == '55', "Patient's registration house object doesn't take a value"
+
+    def check_registration_apartment(self):
+        assert self.browser.execute_script(f"return $('#registration_address_kvart_modal').length"), "Patient's registration apartment object is not accessible"
+        r = self.browser.execute_script(f"return $('#registration_address_kvart_modal').val()")
+        assert r == '44', "Patient's registration apartment object doesn't take a value"
+
+    def check_registration_phone_number(self):
+        assert self.browser.execute_script(f"return $('#registration_address_telephone_modal').length"), "Patient's registration phone number object is not accessible"
+        s = self.browser.execute_script(f"return $('#registration_address_telephone_modal').val()")
+        assert s == '87273456987', "Patient's registration phone number object doesn't take a value"
+
+    def check_cancel_button_registration_address_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CANCEL_REGIS_ADDRESS}.length"), "Cancel button in Registration address modal is not accessible"
+        self.make(f"{PatientCardLocators.CANCEL_REGIS_ADDRESS}.click();")
+
+    def check_edit_button_residence_address_modal(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return {PatientCardLocators.EDIT_RESID_ADDRESS}.length"), "Edit button in Residence address modal is not accessible"
+        self.make(f"{PatientCardLocators.EDIT_RESID_ADDRESS}.click();")
+
+    def check_residence_area(self):
+        sleep(2)
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').length"), "Patient's residence area object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_region_name_modal] .ui.dropdown').dropdown('get value')") == '3', "Patient's residence area object doesn't take a value"
+
+    def check_residence_unit_area(self):
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').length"), "Patient's residence unit area object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_unit_area_modal] .ui.dropdown').find('input[type=hidden]').val()") == '33', "Patient's residence unit area object doesn't take a value"
+
+    def check_residence_locality(self):
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').length"), "Patient's residence locality object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_locality_name_modal] .ui.dropdown').dropdown('get value')") == '290000000004', "Patient's residence locality object doesn't take a value"
+
+    def check_residence_place(self):
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').length"), "Patient's residence place object is not accessible"
+        assert self.browser.execute_script(f"return $('#modal_fact_address div[data-field=fact_address_place_live_modal] .ui.dropdown').dropdown('get value')") == '2', "Patient's residence place object doesn't take a value"
+
+    def check_residence_street(self):
+        assert self.browser.execute_script(f"return $('#fact_address_street_modal').length"), "Patient's residence street object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_street_modal').val()") == street_choice, "Patient's residence street object doesn't take a value"
+
+    def check_residence_house(self):
+        assert self.browser.execute_script(f"return $('#fact_address_hous_modal').length"), "Patient's residence house object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_hous_modal').val()") == '25', "Patient's residence house object doesn't take a value"
+
+    def check_residence_apartment(self):
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').length"), "Patient's residence apartment object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').val()") == '45', "Patient's residence apartment object doesn't take a value"
+
+    def check_residence_phone_number(self):
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').length"), "Patient's residence phone number object is not accessible"
+        assert self.browser.execute_script(f"return $('#fact_address_flat_modal').val()") == '87273456789', "Patient's residence phone number object doesn't take a value"
+
+    def check_residence_medical_organization(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.MED_ORG}.length"), "Residence medical organization object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MED_ORG}.dropdown('get value')") == '170000000558', "Residence medical organization object doesn't take a value"
+
+    def check_cancel_button_residence_address_modal(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.CANCEL_RESID_ADDRESS}.length"), "Edit button in Residence address modal is not accessible"
+        self.make(f"{PatientCardLocators.CANCEL_RESID_ADDRESS}.click();")
+
+    def check_retrospective_child_checkbox(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.RETROSPECTIVE_CHILD}.length"), "Retrospective child checkbox object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.RETROSPECTIVE_CHILD}.is(':checked')"), "Retrospective child checkbox object doesn't take a value"
+
+
+        # assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_SURNAME}.length"), "Mother's surname object is not accessible"
+        # assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_SURNAME}.find('input').val('100014')") , "Mother's surname object doesn't take a value"
+
+    def check_surname_of_mother(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_SURNAME}.length"), "Mother's surname object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_SURNAME}.val()") == 'BFNAGB', "Mother's surname object doesn't take a value"
+
+    def check_name_of_mother(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_NAME}.length"), "Mother's name object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_NAME}.val()") == 'PQYMOLXQP', "Mother's name object doesn't take a value"
+
+    def check_midname_of_mother(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_MIDNAME}.length"), "Mother's middle name object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_MIDNAME}.val()") == 'VNBZIIZZB', "Mother's middle name object doesn't take a value"
+
+    def check_ib_number_of_mother(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_IB_NO}.length"), "Mother's ib number object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_IB_NO}.val()") == '94100(1)', "Mother's ib number object doesn't take a value"
+
+    def check_ib_number_date_of_mother(self):
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_IB_NO_DATE}.length"), "Mother's ib number date object is not accessible"
+        assert self.browser.execute_script(f"return {PatientCardLocators.MOTHERS_IB_NO_DATE}.val()") == '12.05.2022', "Mother's ib number date object doesn't take a value"
+
+    def register_new_woman(self):
+        # автозаполнение формы регистрации для взрослого
+        self.make(f"{PatientCardLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
+        res_code_choice = random.choice(['45', '53', '1', '4'])
+        self.make(f"{PatientCardLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
+        trans_choice = random.choice(['1', '2'])
+        self.make(f"{PatientCardLocators.TRANSGENDER}.dropdown('set selected', '{trans_choice}');")
+        self.make(f"{PatientCardLocators.ANONIMOUS}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.PATIENT_IIN}.val('{woman_iin}')")
+        # self.make(f"{PatientCardLocators.ANONIMOUS}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.PATIENT_SURNAME}.val('{w_surname}')")
+        self.make(f"{PatientCardLocators.PATIENT_NAME}.val('{w_name}')")
+        self.make(f"{PatientCardLocators.PATIENT_MIDNAME}.val('{w_midname}')")
+        self.make(f"{PatientCardLocators.BIRTH_DATE}.calendar('set date', '{w_birthday}');")
+        self.make(f"{PatientCardLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
+        self.make(f"{PatientCardLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
+        self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
+        self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
+        self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
+        self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
+        if self.browser.find_element(By.CSS_SELECTOR, 'div[data-field=general_data_adm_obl_viyav] input').get_attribute("value") == "33":
+            pass
+        else:
+            sleep(2)
+            self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
+            sleep(2)
+            self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
+            sleep(1)
+            self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
+            sleep(1)
+            self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
+        self.make(f"{PatientCardLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
+        soc_status_choice = random.choice(['3', '4'])
+        self.make(f"{PatientCardLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
+        self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
+        self.make(f"{PatientCardLocators.RESID_AREA}.dropdown('set selected', '3');")
+        sleep(3)
+        self.make(f"{PatientCardLocators.RESID_UNIT_AREA}.click();")
+        self.make(f"{PatientCardLocators.RESID_UNIT_AREA}.dropdown('set selected', '33');")
+        self.make(f"{PatientCardLocators.RESID_UNIT_AREA}.dropdown('hide');")
+        self.make(f"{PatientCardLocators.RESID_UNIT_AREA}.dropdown('set selected', '33');")
+        self.make(f"{PatientCardLocators.RESID_LOCALITY}.dropdown('set selected', '170000000008');")
+        self.make(f"{PatientCardLocators.RESID_PLACE}.dropdown('set selected', '2');")
+        self.make(f"{PatientCardLocators.REGIS_STREET}.val('{street_choice}');")
+        self.make(f"{PatientCardLocators.REGIS_HOUSE}.val('{55}');")
+        self.make(f"{PatientCardLocators.REGIS_APT}.val('{44}');")
+        self.make(f"{PatientCardLocators.REGIS_PHONE_NO}.val('{87273456987}');")
+        self.make(f"{PatientCardLocators.RESID_MED_ORG}.dropdown('set selected', '80000000546');")
+        self.make(f"{PatientCardLocators.DUPLICATE_RESID_ADR}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.REGISTER_SAVE_BTN}.click()")
         allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child",
                       attachment_type=AttachmentType.PNG)
         sleep(5)
@@ -3622,17 +3705,17 @@ class RegisterPage(BasePage):
 
     def register_new_homeless(self):
         # автозаполнение формы регистрации для бомжа
-        self.make(f"{RegisterPageLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
+        self.make(f"{PatientCardLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
         res_code_choice = random.choice(['1', '3', '59', '49'])
-        self.make(f"{RegisterPageLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
-        self.make(f"{RegisterPageLocators.PATIENT_IIN}.val('{homeless_iin}')")
-        # self.make(f"{RegisterPageLocators.ANONIMOUS}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.PATIENT_SURNAME}.val('{h_surname}')")
-        self.make(f"{RegisterPageLocators.PATIENT_NAME}.val('{h_name}')")
-        self.make(f"{RegisterPageLocators.PATIENT_MIDNAME}.val('{h_midname}')")
-        self.make(f"{RegisterPageLocators.BIRTH_DATE}.calendar('set date', '{h_birthday}');")
-        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
-        self.make(f"{RegisterPageLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
+        self.make(f"{PatientCardLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
+        self.make(f"{PatientCardLocators.PATIENT_IIN}.val('{homeless_iin}')")
+        # self.make(f"{PatientCardLocators.ANONIMOUS}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.PATIENT_SURNAME}.val('{h_surname}')")
+        self.make(f"{PatientCardLocators.PATIENT_NAME}.val('{h_name}')")
+        self.make(f"{PatientCardLocators.PATIENT_MIDNAME}.val('{h_midname}')")
+        self.make(f"{PatientCardLocators.BIRTH_DATE}.calendar('set date', '{h_birthday}');")
+        self.make(f"{PatientCardLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
+        self.make(f"{PatientCardLocators.EMERGENCE_AREA}.dropdown('set selected', '3');")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
@@ -3648,12 +3731,12 @@ class RegisterPage(BasePage):
             self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
             sleep(1)
             self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
+        self.make(f"{PatientCardLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '1');")
         soc_status_choice = random.choice(['4', '8'])
-        self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
-        self.make(f"{RegisterPageLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
-        self.make(f"{RegisterPageLocators.HOMELESS}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click();")
+        self.make(f"{PatientCardLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
+        self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
+        self.make(f"{PatientCardLocators.HOMELESS}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.REGISTER_SAVE_BTN}.click();")
         # allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child", attachment_type=AttachmentType.PNG)
         sleep(5)
         global patient_id_homeless
@@ -3662,16 +3745,16 @@ class RegisterPage(BasePage):
 
     def register_new_foreigner(self):
         # автозаполнение формы регистрации для иностранного гражданина
-        self.make(f"{RegisterPageLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
+        self.make(f"{PatientCardLocators.GENERAL_DATA}.click()")  # Открываем Общие данные
         res_code_choice = random.choice(['47', '48', '11', '22'])
-        self.make(f"{RegisterPageLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
-        self.make(f"{RegisterPageLocators.PATIENT_IIN}.val('{foreigner_iin}')")
-        # self.make(f"{RegisterPageLocators.ANONIMOUS}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.PATIENT_SURNAME}.val('{f_surname}')")
-        self.make(f"{RegisterPageLocators.PATIENT_NAME}.val('{f_name}')")
-        self.make(f"{RegisterPageLocators.PATIENT_MIDNAME}.val('{f_midname}')")
-        self.make(f"{RegisterPageLocators.BIRTH_DATE}.calendar('set date', '{f_birthday}');")
-        self.make(f"{RegisterPageLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
+        self.make(f"{PatientCardLocators.RESEARCH_CODE}.dropdown('set selected', '{res_code_choice}');")
+        self.make(f"{PatientCardLocators.PATIENT_IIN}.val('{foreigner_iin}')")
+        # self.make(f"{PatientCardLocators.ANONIMOUS}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.PATIENT_SURNAME}.val('{f_surname}')")
+        self.make(f"{PatientCardLocators.PATIENT_NAME}.val('{f_name}')")
+        self.make(f"{PatientCardLocators.PATIENT_MIDNAME}.val('{f_midname}')")
+        self.make(f"{PatientCardLocators.BIRTH_DATE}.calendar('set date', '{f_birthday}');")
+        self.make(f"{PatientCardLocators.PATIENT_GENDER}.dropdown('set selected', '{gen_choice}');")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').focus();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] input.search').click();")
         self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
@@ -3687,24 +3770,24 @@ class RegisterPage(BasePage):
             self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('set selected', '33');")
             sleep(1)
             self.make(f"$('div[data-field=general_data_adm_obl_viyav] .ui.dropdown').dropdown('hide');")
-        self.make(f"{RegisterPageLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '2');")
+        self.make(f"{PatientCardLocators.PATIENT_CITIZENSHIP}.dropdown('set selected', '2');")
         soc_status_choice = random.choice(['3', '4'])
-        self.make(f"{RegisterPageLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
-        self.make(f"{RegisterPageLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
-        self.make(f"{RegisterPageLocators.REGIS_AREA}.dropdown('set selected', '5');")
-        self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.click();")
-        self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
-        self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('hide');")
-        # self.make(f"{RegisterPageLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
-        self.make(f"{RegisterPageLocators.REGIS_LOCALITY}.dropdown('set selected', '177');")
-        self.make(f"{RegisterPageLocators.REGIS_PLACE}.dropdown('set selected', '2');")
-        self.make(f"{RegisterPageLocators.REGIS_STREET}.val('{street_choice}');")
-        self.make(f"{RegisterPageLocators.REGIS_HOUSE}.val('{55}');")
-        self.make(f"{RegisterPageLocators.REGIS_APT}.val('{44}');")
-        self.make(f"{RegisterPageLocators.REGIS_PHONE_NO}.val('{87273456987}');")
-        self.make(f"{RegisterPageLocators.RESID_MED_ORG}.dropdown('set selected', '170000000558');")
-        self.make(f"{RegisterPageLocators.DUPLICATE_REGIS_ADR}.checkbox('set checked');")
-        self.make(f"{RegisterPageLocators.REGISTER_SAVE_BTN}.click();")
+        self.make(f"{PatientCardLocators.SOCIAL_STATUS}.dropdown('set selected', '{soc_status_choice}');")
+        self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '{mo_choice}');")
+        self.make(f"{PatientCardLocators.REGIS_AREA}.dropdown('set selected', '5');")
+        self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.click();")
+        self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
+        self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.dropdown('hide');")
+        # self.make(f"{PatientCardLocators.REGIS_UNIT_AREA}.dropdown('set selected', '180');")
+        self.make(f"{PatientCardLocators.REGIS_LOCALITY}.dropdown('set selected', '177');")
+        self.make(f"{PatientCardLocators.REGIS_PLACE}.dropdown('set selected', '2');")
+        self.make(f"{PatientCardLocators.REGIS_STREET}.val('{street_choice}');")
+        self.make(f"{PatientCardLocators.REGIS_HOUSE}.val('{55}');")
+        self.make(f"{PatientCardLocators.REGIS_APT}.val('{44}');")
+        self.make(f"{PatientCardLocators.REGIS_PHONE_NO}.val('{87273456987}');")
+        self.make(f"{PatientCardLocators.RESID_MED_ORG}.dropdown('set selected', '170000000558');")
+        self.make(f"{PatientCardLocators.DUPLICATE_REGIS_ADR}.checkbox('set checked');")
+        self.make(f"{PatientCardLocators.REGISTER_SAVE_BTN}.click();")
         # allure.attach(self.browser.get_screenshot_as_png(), name="register_new_child", attachment_type=AttachmentType.PNG)
         sleep(5)
         global patient_id_foreigner
