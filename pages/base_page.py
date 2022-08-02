@@ -64,6 +64,7 @@ class BasePage(object):
         self.make(f"document.querySelector('[id=account-edit]').click()")
         self.make(f"{PatientCardLocators.MED_ORG_REMOVE}.click()")
         self.make(f"{PatientCardLocators.MED_ORG}.dropdown('set selected', '{user_org}');")
+        self.make(f"{PatientCardLocators.WORKING_SCHEDULE}.dropdown('set selected', '1')")
         self.make(f"{PatientCardLocators.USER_DATA_SAVE}.click()")
         self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
 

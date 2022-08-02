@@ -1,7 +1,7 @@
 import random
 from time import sleep
 from .base_page import BasePage
-from .locators import WorkJournalLocators, PatientCardLocators, VizitsPageLocators, ArvLogLocators, \
+from .locators import WorkJournalLocators, PatientCardLocators, VizitsPageLocators, ArvRegisterLocators, \
     AnalysisPageLocators, BookPageLocators, SettingsPageLocators
 from datetime import date
 from . import patient_card
@@ -14,6 +14,9 @@ class WorkPage(BasePage):
 
     def choose_KNCDIZ_as_user_org(self):
         self.choose_user_organization("1")
+
+    def choose_Turkestan_area_as_user_org(self):
+        self.choose_user_organization("28")
 
     def should_add_kz_patient(self):
         # переход на страницу с регистрационной формой для казахстанцев
@@ -131,7 +134,7 @@ class WorkPage(BasePage):
         # переход на страницу Журнала АРВ
         self.browser.find_element(*WorkJournalLocators.ARV_LOG_MENU).click()
         # assert self.is_element_present(*VizitsPageLocators.VISITS_LINK), "Incorrect link to Foreign Patient registration"
-        self.browser.find_element(*ArvLogLocators.CONTRACT_LOG).click()
+        self.browser.find_element(*ArvRegisterLocators.CONTRACT_LOG).click()
 
 
     def should_switch_to_form4_in_book_page(self):
@@ -169,3 +172,6 @@ class WorkPage(BasePage):
         self.browser.find_element(*WorkJournalLocators.SETTINGS_ICON_MENU).click()
         # assert self.is_element_present(*SettingsPageLocators.USERS), "Incorrect link to USERS"
         self.browser.find_element(*SettingsPageLocators.USERS).click()
+
+    def open_main_page(self):
+        self.make(f"{WorkJournalLocators.HOME_ICON}.click()")
