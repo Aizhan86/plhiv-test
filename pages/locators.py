@@ -87,6 +87,7 @@ class PatientCardLocators(object):
     EDIT_RESID_ADDRESS = "$('#fact_address_edit_button')"
     CANCEL_RESID_ADDRESS = "$('#modal_fact_address .ui.red.deny.button')"
 
+    IFA = "$('#issledovaniya_antitela_vich')"
     IFA_OGC_ADD = "$('#ifa_ogc_add')"
     IFA_MED_ORG = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_naprav_mo_modal] .ui.dropdown')"
     SURNAME_PERSON_MEDORG = "$('#ifa_k_vich_ogc_modal div[data-field=ifa_k_vich_ogc_fio_otvetstv_lica_mo_modal] input')"
@@ -132,7 +133,7 @@ class PatientCardLocators(object):
     IFA_RC_EDIT = "$('#ifa_k_vich_rc_table a[action-type=edit]')"
     IFA_RC_CANCEL = "$('#ifa_k_vich_rc_modal .ui.red.deny.button')"
 
-    IB_PCR = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-ib_pcr]')"
+    IB_PCR = "$('#ib_pcr')"
     IB_ADD = "$('#ib')"
     IB_NUMBER = "$('#ib_modal div[data-field=ib_number_modal] input')"
     IB_SERUM_NUM = "$('#ib_modal div[data-field=ib_number_syvorotki_modal] input')"
@@ -177,7 +178,7 @@ class PatientCardLocators(object):
     PCR_EDIT = "$('#pcr_table a[action-type=edit]')"
     PCR_CANCEL = "$('#pcr_modal .ui.red.deny.button')"
 
-    RESULT = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-zaklyuchenie]')"
+    RESULT = "$('#zaklyuchenie')"
     RESULT_ADD = "$('#zaklyuchenie_table a[action-type=add]')"
     RESULT_NUM = "$('#zaklyuchenie_modal div[data-field=zaklyuchenie_number_modal] input')"
     RESULT_DATE = "$('#zaklyuchenie_date_vydachi_modal')"
@@ -194,7 +195,7 @@ class PatientCardLocators(object):
     # VGS_DIAGNOSTICS
     # RESISTANCE
 
-    ADDITIONAL_ANALYSIS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-additional_research]')"
+    ADDITIONAL_ANALYSIS = "$('#additional_research')"
     AA_EDIT = "$('#additional_research_table a[action-type=edit]')"
     AA_RESULT = "$('#additional_research_modal div.field input')"
     AA_SAVE = "$('#additional_research_modal .ui.green.approve.button')"
@@ -555,11 +556,11 @@ class PatientCardLocators(object):
     RECOM_SCREENING_EDIT = "$('#recomended_obsled_table a[action-type=edit]')"
     RECOM_SCREENING_CANCEL = "$('#modal_recomended_obsled .ui.red.deny.button')"
 
-    REFFERALS = "$('a[data-name=refferals]')"
+    REFERRALS = "$('a[data-name=refferals]')"
     REFERRAL_ADD = "$('#refferals_table a[action-type=add]')"
     REFERRAL_TYPE= "$('#modal_refferals div[data-field=refferal_type_modal] .ui.dropdown')"
     REFERRAL_DATE = "$('#refferals_date_modal')"
-    REFERRAL_NAME = "$('#modal_refferals div[data-field=refferals_name_modal] .ui.dropdown')"
+    REFERRAL_NAME = "$('#modal_refferals div[data-field=refferals_tarif_modal] .ui.dropdown')"
     REFERRAL_NUM = "$('#refferals_number_modal')"
     SENDER_ORG = "$('#modal_refferals div[data-field=refferals_org_sender_modal] .ui.dropdown')"
     RECIPIENT_ORG = "$('#modal_refferals div[data-field=refferals_org_recipient_modal] .ui.dropdown')"
@@ -607,7 +608,7 @@ class PatientCardLocators(object):
     VL_CANCEL = "$('#vn_modal .ui.red.deny.button')"
 
     VIRAL_HEPATITIS = "$('div[data-block=main-menu] a[data-tab=patient_card_menu-diagnozis_vgv_vgc_disp]')"
-    VGV_ADD = "$('#vgv_disp_table a[action-type=add]')"
+    VGV_ADD = "$('#vgv_lab_table a[action-type=add]')"
     VGV_REGISTRATION_NUM = "$('#vgv_modal div[data-field=vgv_reg_number_modal] input')"
     VGV_MAT_DONOR_MED_ORG = "$('#vgv_modal div[data-field=vgv_otkuda_postup_modal] .ui.dropdown')"
     VGV_MATERIAL_RECEIPT_DATE = "$('#vgv_date_postup_material_modal')"
@@ -617,7 +618,7 @@ class PatientCardLocators(object):
     VGV_MED_ORG_PROVIDED_ANALYSIS = "$('#vgv_modal div[data-field=vgv_mo_provod_issled_modal] .ui.dropdown')"
     VGV_REMARK = "$('#vgv_modal div[data-field=vgv_note_modal] input')"
     VGV_SAVE = "$('#vgv_modal .ui.green.approve.button')"
-    VGV_EDIT = "$('#vgv_disp_table a[action-type=edit]')"
+    VGV_EDIT = "$('#vgv_lab_table a[action-type=edit]')"
     VGV_CANCEL = "$('#vgv_modal .ui.red.deny.button')"
 
     VGS_ADD = "$('#vgc_disp_table a[action-type=add]')"

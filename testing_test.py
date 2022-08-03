@@ -942,11 +942,6 @@ class TestGeneralData():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_cancel_button_residence_address_modal()
 
-    # @pytest.mark.xfail(reason="не понятно")
-    # def test_residence_medical_organization(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_residence_medical_organization()
-
     def test_retrospective_child_checkbox(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_retrospective_child_checkbox()
@@ -975,13 +970,24 @@ class TestGeneralData():
 @allure.severity(allure.severity_level.NORMAL)
 class TestChildCase():
     @pytest.mark.smoke
-    def test_fill_HIV_antibody_testing_ogc_modal(self, browser):
+    def test_referral_modal(self, browser):
         login(browser)
         work_page = WorkPage(browser, browser.current_url)
         work_page.choose_Zhetysai_as_user_org()
         work_page.should_add_kz_patient()
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.register_new_child()
+        patient_card.get_refferal_for_additional_research()
+        patient_card.get_refferal_for_labaratory_analysis_of_kncdiz()
+
+    @pytest.mark.skipif(test_referral_modal == "FAILED", reason="patient id wasn't taken")
+    def test_result_modal_in_additional_analysis_tab(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_result_modal_in_additional_analysis_tab()
+
+    @pytest.mark.skipif(test_referral_modal == "FAILED", reason="patient id wasn't taken")
+    def test_fill_HIV_antibody_testing_ogc_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
         patient_card.fill_hiv_antibody_testing_ogc_modal()
 
     @pytest.mark.skipif(test_fill_HIV_antibody_testing_ogc_modal == "FAILED", reason="patient id wasn't taken")
@@ -1089,367 +1095,334 @@ class TestChildCase():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_cancel_button_hiv_ogc_modal()
 
-    # @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
-    # @pytest.mark.smoke
-    # def test_fill_HIV_antibody_testing_KNCDIZ_modal(self, browser):
-    #     kncdiz_user_opens_card_of_child(browser)
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_HIV_antibody_testing_KNCDIZ_modal()
-    #
-    # @pytest.mark.skipif(test_fill_HIV_antibody_testing_KNCDIZ_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_screening_number_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_screening_number_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_serum_number_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_serum_number_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_referral_number_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_referral_number_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_production_date_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_production_date_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_testing_system_type_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_test_system_type_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_expiration_date_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_expiration_date_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_series_number_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_series_number_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_op_critical_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_op_critical_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_op_serum_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_op_serum_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_result_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_result_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_cancel_button_hiv_kncdiz_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cancel_button_hiv_kncdiz_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
-    # @pytest.mark.smoke
-    # def test_fill_IB_modal(self, browser):
-    #     zhetysai_user_opens_card_of_child(browser)
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.get_refferal_for_ib()
-    #     patient_card.get_refferal_for_pcr()
-    #     kncdiz_user_opens_card_of_child(browser)
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_IB_modal()
-    #
-    # @pytest.mark.skipif(test_fill_IB_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_ib_number_in_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_ib_number_in_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_serum_number_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_serum_number_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_sample_number_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_sample_number_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_receipt_date_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_receipt_date_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # @pytest.mark.smoke
-    # def test_register_date_ib_modal(self, browser):
-    #     kncdiz_user_opens_card_of_child(browser)
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_register_date_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_register_date_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_register_date_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_result_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_result_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_test_system_name_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_test_system_name_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_expiration_date_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_expiration_date_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_series_number_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_series_number_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_responsible_person_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_responsible_person_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_gp160_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_gp160_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_gp110_120_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_gp110_120_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_p68_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_p68_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_p55_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_p55_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_p52_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_p52_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_gp41_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_gp41_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_p40_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_p40_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_p34_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_p34_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_p25_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_p25_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_p18_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_p18_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_services_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_services_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_cancel_button_ib_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cancel_button_ib_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
-    # @pytest.mark.smoke
-    # def test_fill_PCR_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_PCR_modal()
-    #
-    # @pytest.mark.skipif(test_fill_PCR_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_pcr_number_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_pcr_number_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_serum_number_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_serum_number_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_sample_number_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_sample_number_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_pcr_type_in_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_pcr_type_in_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_receipt_date_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_receipt_date_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # @pytest.mark.smoke
-    # def test_register_date_pcr_modal(self, browser):
-    #     kncdiz_user_opens_card_of_child(browser)
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_register_date_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_test_system_name_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_test_system_name_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_expiration_date_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_expiration_date_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_series_number_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_series_number_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_result_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_result_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_responsible_person_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_responsible_person_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_services_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_services_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_cancel_button_pcr_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cancel_button_pcr_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_result_modal()
-    #
-    # @pytest.mark.skipif(test_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_result_number_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_result_number_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_result_date_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_result_date_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_responsible_person_in_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_responsible_person_in_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_labaratory_superviser_in_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_labaratory_superviser_in_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_analysis_result_in_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_analysis_result_in_result_modal()
-    #
-    # @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
-    # def test_cansel_button_result_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cansel_button_result_modal()
+    @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
+    def test_fill_HIV_antibody_testing_KNCDIZ_modal(self, browser):
+        kncdiz_user_opens_card_of_child(browser)
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_HIV_antibody_testing_KNCDIZ_modal()
+
+    @pytest.mark.skipif(test_fill_HIV_antibody_testing_KNCDIZ_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_add_button_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_screening_number_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_screening_number_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_serum_number_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_serum_number_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_referral_number_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_referral_number_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_production_date_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_production_date_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_testing_system_type_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_test_system_type_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_expiration_date_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_expiration_date_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_series_number_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_series_number_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_op_critical_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_op_critical_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_op_serum_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_op_serum_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_result_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_result_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_kncdiz_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_hiv_kncdiz_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_hiv_kncdiz_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
+    def test_fill_IB_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_IB_modal()
+
+    @pytest.mark.skipif(test_fill_IB_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_ib_number_in_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_ib_number_in_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_serum_number_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_serum_number_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_sample_number_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_sample_number_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_receipt_date_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_receipt_date_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_register_date_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_register_date_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_register_date_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_register_date_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_result_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_result_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_test_system_name_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_test_system_name_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_expiration_date_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_expiration_date_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_series_number_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_series_number_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_responsible_person_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_responsible_person_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_gp160_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_gp160_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_gp110_120_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_gp110_120_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_p68_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_p68_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_p55_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_p55_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_p52_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_p52_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_gp41_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_gp41_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_p40_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_p40_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_p34_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_p34_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_p25_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_p25_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_p18_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_p18_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_ib_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_ib_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_ib_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
+    def test_fill_PCR_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_PCR_modal()
+
+    @pytest.mark.skipif(test_fill_PCR_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_pcr_number_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_pcr_number_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_serum_number_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_serum_number_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_sample_number_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_sample_number_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_pcr_type_in_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_pcr_type_in_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_receipt_date_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_receipt_date_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_register_date_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_register_date_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_test_system_name_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_test_system_name_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_expiration_date_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_expiration_date_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_series_number_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_series_number_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_result_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_result_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_responsible_person_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_responsible_person_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_pcr_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_pcr_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_pcr_modal()
+
+    @pytest.mark.skipif(test_save_button_hiv_ogc_modal == "FAILED", reason="patient id wasn't taken")
+    def test_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_result_modal()
+
+    @pytest.mark.skipif(test_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_add_button_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_result_number_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_result_number_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_result_date_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_result_date_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_responsible_person_in_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_responsible_person_in_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_labaratory_superviser_in_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_labaratory_superviser_in_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_analysis_result_in_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_analysis_result_in_result_modal()
+
+    @pytest.mark.skipif(test_save_button_result_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cansel_button_result_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cansel_button_result_modal()
 
 @allure.severity(allure.severity_level.NORMAL)
 class TestHomelessCase():
-    @pytest.mark.smoke
     def test_registration_of_homeless(self, browser):
         try:
             login(browser)
@@ -1465,7 +1438,6 @@ class TestHomelessCase():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_patient_id_homeless()
 
-    @pytest.mark.smoke
     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
     def test_family_members_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
@@ -2227,13 +2199,11 @@ class TestHomelessCase():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_cancel_button_emergencies_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
     def test_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.fill_departure_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_emergencies_modal == "FAILED", reason="patient id wasn't taken")
     def test_save_button_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
@@ -2249,67 +2219,56 @@ class TestHomelessCase():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_add_button_departure_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_edit_button_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_edit_button_departure_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_departure_start_date_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_departure_start_date_departure_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_departure_end_date_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_departure_end_date_departure_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_departure_country_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_departure_country_departure_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_departure_purpose_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_departure_purpose_departure_modal()
 
-    # @pytest.mark.xfail(reason="clicking edit button form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_cancel_button_departure_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_cancel_button_departure_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
     def test_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.fill_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_emergencies_modal == "FAILED", reason="patient id wasn't taken")
     def test_save_button_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_save_button_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_infection_source_existence_checkbox_departure_source_tab(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_infection_source_existence_checkbox_departure_source_tab()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_add_button_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_add_button_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_edit_button_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
@@ -2321,31 +2280,26 @@ class TestHomelessCase():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_ib_number_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_ib_date_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_ib_date_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_surname_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_surname_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_name_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_name_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_save_button_manipulations_modal == "FAILED", reason="patient id wasn't taken")
     def test_midname_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_midname_source_modal()
 
-    # @pytest.mark.xfail(reason="after saving form it shows 500 error")
     @pytest.mark.skipif(test_registration_of_homeless == "FAILED", reason="patient id wasn't taken")
     def test_cancel_button_source_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
@@ -2550,6 +2504,7 @@ class TestForeignerCase():
     @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
     def test_dispensary_observation_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
+        patient_card.get_refferal_for_dispansery_observation()
         # patient_card.fill_hiv_antibody_testing_ogc_modal()
         # patient_card.check_save_button_hiv_ogc_modal()
         patient_card.fill_dispensary_observation_modal()
@@ -2620,329 +2575,287 @@ class TestForeignerCase():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_doctor_name()
 
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_result_modal_in_additional_analysis_tab(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_result_modal_in_additional_analysis_tab()
-    #     print(f"test_result_modal passed")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_cd4_modal()
 
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_referral_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_referral_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_cd4_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_cd4_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_cd4_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_cd4_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_cd4_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_cd4_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_cd4_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_cd4_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_registration_num(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_registration_num()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_blood_donor_medical_org(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_blood_donor_medical_org()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_material_receipt_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_material_receipt_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_sample_receipt_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_sample_receipt_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_registering_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_registering_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd3(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd3()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd8(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd8()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_cd8(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_cd8()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_rate(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_rate()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_medical_org_provided_analysis(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_medical_org_provided_analysis()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_note(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_note()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_services(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_services()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cancel_button_cd4_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cancel_button_cd4_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_viral_load_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_viral_load_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_cd4_vl_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_cd4_vl_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_cd4_vl_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_cd4_vl_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_cd4_vl_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_cd4_vl_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vl_analysis_num(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vl_analysis_num()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_blood_donor_medical_org(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_donor_medical_org()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_material_receipt_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_material_receipt_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_material_sampling_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_material_sampling_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_registering_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_registering_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_result(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_result()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_result_ml(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_result_ml()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_log(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_log()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_medical_org_provided_analysis(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_medical_org_provided_analysis()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_note(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_note()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cd4_vl_services(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cd4_vl_services()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cancel_button_cd4_vl_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cancel_button_cd4_vl_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_vgv_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_vgv_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_vgv_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_vgv_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_vgv_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_vgv_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_vgv_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_registration_num(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgv_registration_num()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_blood_donor_medical_org(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgv_donor_medical_org()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_material_receipt_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgv_material_receipt_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_registering_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgv_registering_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_marker(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_marker()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_result(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgv_result()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_medical_org_provided_analysis(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgv_medical_org_provided_analysis()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_note(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgv_note()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cancel_button_vgv_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cancel_button_vgv_modal()
-    #
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_vgs_modal()
-    #     print(f"test_vgs_modal passed")
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_save_button_vgs_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_save_button_vgs_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_add_button_vgs_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_add_button_vgs_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_edit_button_vgs_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_edit_button_vgs_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_registration_num(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_registration_num()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_donor_medical_org(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_donor_medical_org()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_material_receipt_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_material_receipt_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgv_registering_date(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_registering_date()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_analysis_type(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_analysis_type()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_result(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_result()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_medical_org_provided_analysis(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_medical_org_provided_analysis()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_note(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_vgs_note()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_cancel_button_vgs_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.check_cancel_button_vgs_modal()
-    #
-    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    # def test_vgs_vac_modal(self, browser):
-    #     patient_card = PatientCard(browser, browser.current_url)
-    #     patient_card.fill_vgv_vac_modal()
-    #     print(f"test_vgv_vac_modal passed")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_cd4_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_cd4_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_cd4_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_cd4_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_registration_num(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_registration_num()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_blood_donor_medical_org(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_blood_donor_medical_org()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_material_receipt_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_material_receipt_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_sample_receipt_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_sample_receipt_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_registering_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_registering_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd3(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd3()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd8(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd8()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_cd8(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_cd8()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_rate(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_rate()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_medical_org_provided_analysis(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_medical_org_provided_analysis()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_note(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_note()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_cd4_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_cd4_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_viral_load_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_viral_load_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_cd4_vl_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_cd4_vl_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_cd4_vl_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_cd4_vl_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vl_analysis_num(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vl_analysis_num()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_blood_donor_medical_org(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_donor_medical_org()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_material_receipt_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_material_receipt_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_material_sampling_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_material_sampling_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_registering_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_registering_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_result(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_result()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_result_ml(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_result_ml()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_log(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_log()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_medical_org_provided_analysis(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_medical_org_provided_analysis()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cd4_vl_note(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cd4_vl_note()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_cd4_vl_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_cd4_vl_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_vgv_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_vgv_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_vgv_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_vgv_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_vgv_modal()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_registration_num(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgv_registration_num()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_donor_medical_org(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgv_donor_medical_org()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_material_receipt_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgv_material_receipt_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_registering_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgv_registering_date()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_marker(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_marker()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_result(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgv_result()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_medical_org_provided_analysis(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgv_medical_org_provided_analysis()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgv_note(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgv_note()
+
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_vgv_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_vgv_modal()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_vgs_modal()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_vgs_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_vgs_modal()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_vgs_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_vgs_modal()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_registration_num(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_registration_num()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_donor_medical_org(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_donor_medical_org()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_material_receipt_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_material_receipt_date()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_registering_date(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_registering_date()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_analysis_type(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_analysis_type()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_result(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_result()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_medical_org_provided_analysis(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_medical_org_provided_analysis()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_vgs_note(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_vgs_note()
+
+    @pytest.mark.xfail(reason="it's bag")
+    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_vgs_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_vgs_modal()
 
     @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
     def test_preventive_therapy_modal(self, browser):
@@ -3130,181 +3043,10 @@ class TestForeignerCase():
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_cancel_button_d_screening_hospitalization_modal()
 
-    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    def test_visits_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.fill_visits_modal()
-
-    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    def test_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.fill_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_save_button_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_save_button_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_blood_recipient_last_5years_checkbox_recipient_tab(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_blood_recipient_last_5years_checkbox_recipient_tab()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_add_button_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_add_button_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_edit_button_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_edit_button_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_place_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_place_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_area_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_area_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_unit_area_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_unit_area_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_locality_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_locality_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_date_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_date_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_medical_organization_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_medical_organization_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_epid_history_number_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_epid_history_number_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_donor_code_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_donor_code_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_blood_component_code_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_blood_component_code_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_hiv_status_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_hiv_status_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_cancel_button_blood_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_cancel_button_blood_recipient_modal()
-
-    @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
-    def test_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.fill_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_save_button_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_save_button_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_organ_recipient_last_5years_checkbox_recipient_tab(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_organ_recipient_last_5years_checkbox_recipient_tab()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_add_button_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_add_button_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_edit_button_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_edit_button_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_place_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_place_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_area_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_area_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_unit_area_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_unit_area_organ_recipient_modal()
-
-    # @pytest.mark.xfail(reason="it's bag, locality object doesn't save value")
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_locality_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_locality_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_transfusion_date_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_transfusion_date_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_donor_medical_organization_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_donor_medical_organization_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_recipient_medical_organization_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_recipient_medical_organization_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_organ_material_type_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_organ_material_type_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_organ_material_number_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_organ_material_number_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_organ_material_type_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_organ_material_type_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_organ_donor_name_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_organ_donor_name_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_hiv_status_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_hiv_status_organ_recipient_modal()
-
-    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
-    def test_cancel_button_organ_recipient_modal(self, browser):
-        patient_card = PatientCard(browser, browser.current_url)
-        patient_card.check_cancel_button_organ_recipient_modal()
+    # @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
+    # def test_visits_modal(self, browser):
+    #     patient_card = PatientCard(browser, browser.current_url)
+    #     patient_card.fill_visits_modal()
 
     @pytest.mark.skipif(test_registration_of_foreigner == "FAILED", reason="patient id wasn't taken")
     def test_patient_left_rk_case_dispensary_observation_modal(self, browser):
@@ -3809,6 +3551,177 @@ class TestWomanCase():
     def test_cancel_button_tb_treatment_modal(self, browser):
         patient_card = PatientCard(browser, browser.current_url)
         patient_card.check_cancel_button_tb_treatment_modal()
+
+    @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
+    def test_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_blood_recipient_last_5years_checkbox_recipient_tab(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_blood_recipient_last_5years_checkbox_recipient_tab()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_add_button_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_place_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_place_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_area_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_area_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_unit_area_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_unit_area_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_locality_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_locality_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_date_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_date_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_medical_organization_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_medical_organization_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_epid_history_number_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_epid_history_number_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donor_code_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_donor_code_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_blood_component_code_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_blood_component_code_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_hiv_status_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_hiv_status_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_blood_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_blood_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_blood_recipient_modal()
+
+    @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
+    def test_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.fill_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_save_button_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_save_button_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_organ_recipient_last_5years_checkbox_recipient_tab(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_organ_recipient_last_5years_checkbox_recipient_tab()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_add_button_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_add_button_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_edit_button_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_edit_button_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_place_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_place_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_area_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_area_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_unit_area_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_unit_area_organ_recipient_modal()
+
+    # @pytest.mark.xfail(reason="it's bag, locality object doesn't save value")
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_locality_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_locality_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_transfusion_date_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_transfusion_date_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_donor_medical_organization_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_donor_medical_organization_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_recipient_medical_organization_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_recipient_medical_organization_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_organ_material_type_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_organ_material_type_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_organ_material_number_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_organ_material_number_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_organ_material_type_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_organ_material_type_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_organ_donor_name_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_organ_donor_name_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_hiv_status_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_hiv_status_organ_recipient_modal()
+
+    @pytest.mark.skipif(test_save_button_organ_recipient_modal == "FAILED", reason="patient id wasn't taken")
+    def test_cancel_button_organ_recipient_modal(self, browser):
+        patient_card = PatientCard(browser, browser.current_url)
+        patient_card.check_cancel_button_organ_recipient_modal()
 
     @pytest.mark.skipif(test_registration_of_woman == "FAILED", reason="patient id wasn't taken")
     def test_patient_left_region_case_dispensary_observation_modal(self, browser):

@@ -37,6 +37,9 @@ class WorkPage(BasePage):
         sleep(5)
         self.make(f"{WorkJournalLocators.LIST_BUTTON}.click()")
         self.make(f"{WorkJournalLocators.EDIT_CARD}.click()")
+        new_window = self.browser.window_handles[1]
+        self.browser.switch_to.window(new_window)
+
         # assert self.browser.current_url == f"https://plhiv-demo.dec.kz/visits/patient_card/{register_page.patient_id_child}?new=1&in_rk=1", "Patient card of child hasn't opened"
 
     def open_card_of_woman(self):
